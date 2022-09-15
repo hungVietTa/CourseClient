@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import  router from '../router'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
+    // VALIDATOR
     validator(context,[type,value,givenValue]){
       if (value=="")
         return [false,"Vui lòng không bỏ trống mục này"]
@@ -50,7 +52,58 @@ export default new Vuex.Store({
       if (regEx.test(value))
           return [true,'',opt,message2]
       return [false,message];
-    }
+    },
+    // REGISTER 
+    async register(context,form){
+        let result = await fetch("http://localhost:2000/l",{
+          method:'POST',
+          mode:"cors",
+          cache:'no-cache',
+          credentials:'same-origin',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          redirect:'follow',
+          referrerPolicy:'no-referrer',
+          body:JSON.stringify({
+            'fullName':form.fullName.value,
+            'email':form.email.value,
+            'password':form.password.value
+          })
+        })
+        .then(res=>res,err=>err)
+        if (result.ok)
+          this.$router.push('/')
+        else
+          alert("Oops something wrong with server")
+    },
+    async login(context,form){
+      try {
+        let result = await fetch("http://localhost:3000/use",{
+        method:'POST',
+        mode:"cors",
+        cache:'no-cache',
+        credentials:'same-origin',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        redirect:'follow',
+        referrerPolicy:'no-referrer',
+        body:JSON.stringify({
+          'email':form.email.value,
+          'password':form.password.value
+        })
+      })
+      .then(res=>res)
+      if (result.ok)
+        router.push( '/' )
+      else
+        alert("Oops something wrong with server")
+      }
+      catch (err){
+        console.log(err)
+      }
+  }
   },
   modules: {
   }

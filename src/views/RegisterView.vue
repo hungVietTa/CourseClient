@@ -4,9 +4,8 @@
     <section class="register-section mt-5">
       <h3>
         Bắt đầu hành trình của bạn
-        {{ form.fullName.valid }}
       </h3>
-      <form class="register-form">
+      <form @submit.prevent="register(form)" class="register-form">
         <div class="form-item" :class="{ invalid: !form.fullName.valid }">
           <label for="fullName">Tên của bạn ?</label>
           <div class="input-field">
@@ -23,7 +22,7 @@
               "
             />
           </div>
-          <span v-if="!form.fullName.valid">{{ form.fullName.message }}</span>
+          <span :class="{invisible:form.fullName.valid}">{{ form.fullName.message }}</span>
         </div>
         <div class="form-item" :class="{ invalid: !form.email.valid }">
           <label for="email">Email</label>
@@ -41,13 +40,13 @@
               "
             />
           </div>
-          <span v-if="!form.email.valid">{{ form.email.message }}</span>
+          <span :class="{invisible:form.email.valid}">{{ form.email.message }}</span>
         </div>
         <div class="form-item" :class="{ invalid: !form.password.valid }">
           <label for="password">Mật khẩu</label>
           <div class="input-field">
             <input
-              type="password"
+              :type="showPassword?'text':'password'"
               name="password"
               placeholder="Mật khẩu của bạn"
               v-model="form.password.value"
@@ -64,9 +63,10 @@
                 })
               "
             />
-            <font-awesome-icon icon="fa-solid fa-eye" />
+            <span @click="showPassword=!showPassword" v-if="!showPassword"><font-awesome-icon icon="fa-solid fa-eye" /></span>
+            <span @click="showPassword=!showPassword" v-else><font-awesome-icon icon="fa-solid fa-eye-slash" /></span>
           </div>
-          <span v-if="!form.password.valid">{{ form.password.message }}</span>
+          <span :class="{invisible:form.password.valid}">{{ form.password.message }}</span>
         </div>
         <div
           class="form-item"
@@ -75,7 +75,7 @@
           <label for="confirmPassword">Xác nhận mật khẩu</label>
           <div class="input-field">
             <input
-              type="password"
+              :type="showConfirmPassword?'text':'password'"
               name="confirmPassword"
               placeholder="Xác nhận mật khẩu"
               v-model="form.confirmPassword.value"
@@ -91,14 +91,15 @@
                 })
               "
             />
-            <font-awesome-icon icon="fa-solid fa-eye" />
+            <span @click="showConfirmPassword=!showConfirmPassword" v-if="!showConfirmPassword"><font-awesome-icon icon="fa-solid fa-eye" /></span>
+            <span @click="showConfirmPassword=!showConfirmPassword" v-else><font-awesome-icon icon="fa-solid fa-eye-slash" /></span>
           </div>
-          <span v-if="!form.confirmPassword.valid">{{
+          <span :class="{invisible:form.confirmPassword.valid}">{{
             form.confirmPassword.message
           }}</span>
         </div>
+        <input type="submit"  class="btn btn-primary" value="Đăng ký">
       </form>
-      <button @click="print">CLICK</button>
     </section>
   </div>
 </template>
@@ -131,13 +132,13 @@ export default {
         confirmPassword: {
           value: "",
           valid: true,
-          message: "",
+          message: "a",
         },
       },
     };
   },
   methods: {
-    ...mapActions(["validator"]),
+    ...mapActions(["validator",'register']),
     print() {
       console.log(this.form.password.valid);
     },
@@ -167,12 +168,25 @@ export default {
           display: flex;
           justify-content: space-between;
           padding: 5px 10px;
+          align-items: center;
 
           input {
             border: none;
             outline: none;
             flex-grow: 4;
+            background-color: transparent;
           }
+          span {
+            cursor: pointer;
+          }
+        }
+
+        span {
+          display: block;
+          height: 20px;  
+        }
+        span.invisible {
+          visibility: hidden;
         }
       }
       .form-item.invalid {
@@ -189,4 +203,5 @@ export default {
     }
   }
 }
+
 </style>
