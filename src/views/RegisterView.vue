@@ -64,7 +64,7 @@
                 })
               "
             />
-            <font-awesome-icon icon="fa-solid fa-eyes" />
+            <font-awesome-icon icon="fa-solid fa-eye" />
           </div>
           <span v-if="!form.password.valid">{{ form.password.message }}</span>
         </div>
@@ -91,7 +91,7 @@
                 })
               "
             />
-            <font-awesome-icon icon="fa-solid fa-user-secret" />
+            <font-awesome-icon icon="fa-solid fa-eye" />
           </div>
           <span v-if="!form.confirmPassword.valid">{{
             form.confirmPassword.message
