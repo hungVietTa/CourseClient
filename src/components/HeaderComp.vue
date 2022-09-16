@@ -2,7 +2,7 @@
   <header id="header">
     <nav class="navbar">
       <div class="container-fluid flex-nowrap">
-        <a class="navbar-brand" href="#">
+        <router-link to="/" class="navbar-brand" href="#">
           <svg
             role="img"
             height="50px"
@@ -17,7 +17,7 @@
             />
           </svg>
           <span class="ms-2">MUFASA</span>
-        </a>
+        </router-link>
         <div class="navbar-collapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -73,9 +73,42 @@
           </form>
         </div>
         <div class="nav-interact">
-          <router-link to="/login" class="btn btn-primary me-3">Login</router-link>
-          <router-link to="/register" class="btn btn-primary">Register</router-link>
-          <button v-if="false" class="btn btn-primary">Logout</button>
+          <router-link
+            v-if="!$store.state.isLogin"
+            to="/login"
+            class="btn btn-primary me-3"
+            >Login</router-link
+          >
+          <router-link
+            v-if="!$store.state.isLogin"
+            to="/register"
+            class="btn btn-primary"
+            >Register</router-link
+          >
+          <div class="dropdown me-2" v-if="$store.state.isLogin">
+            <button
+              class="btn btn-primary dropdown-toggle"
+              @click="userToggle = !userToggle"
+              type="button"
+            >
+              <font-awesome-icon icon="fa-solid fa-user-graduate" />
+            </button>
+            <ul class="dropdown-menu" v-if="userToggle">
+              <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li>
+                <button
+                  v-if="$store.state.isLogin"
+                  @click="logout"
+                  class="btn btn-primary"
+                >
+                  Logout
+                </button>
+              </li>
+
+              <li />
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
@@ -83,24 +116,34 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "HeaderView",
+  data() {
+    return {
+      userToggle: false,
+    };
+  },
+  methods: {
+    ...mapActions(["logout"]),
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-#header {
+header {
   padding-top: 5px;
   padding-bottom: 5px;
-  box-shadow: 2px 0px 0px 2px rgba(9,9,9,0.1);
+  box-shadow: 2px 0px 0px 2px rgba(9, 9, 9, 0.1);
 
   .navbar {
     display: flex;
     padding: 0;
 
     .navbar-brand {
-      color:#02424f ;
+      color: #02424f;
       padding: 0;
 
       span {
@@ -119,9 +162,9 @@ export default {
           padding: 0 10px;
         }
 
-          .nav-link {
-            margin: 0;
-          }
+        .nav-link {
+          margin: 0;
+        }
       }
       .nav-form {
         margin-left: auto;
@@ -129,6 +172,12 @@ export default {
       }
     }
     .nav-interact {
+      .dropdown {
+        .dropdown-menu {
+          display: block;
+          right: 0;
+        }
+      }
       display: flex;
     }
   }

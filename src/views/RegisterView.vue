@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <HeaderView />
+    <HeaderComp />
     <section class="register-section mt-5">
       <h3>
         Bắt đầu hành trình của bạn
@@ -105,7 +105,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import HeaderView from "../components/HeaderView.vue";
+import HeaderComp from "../components/HeaderComp.vue";
 
 export default {
   data() {
@@ -144,7 +144,7 @@ export default {
     },
   },
   components: {
-    HeaderView,
+    HeaderComp,
   },
 };
 </script>
@@ -174,6 +174,9 @@ export default {
             border: none;
             outline: none;
             flex-grow: 4;
+            background-color: transparent;
+          }
+          input:focus {
             background-color: transparent;
           }
           span {

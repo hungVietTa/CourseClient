@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import  router from '../router'
+import VuexPersistence from 'vuex-persist'
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
 
 Vue.use(Vuex)
 
@@ -11,6 +16,9 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
+    toggleLogin(state){
+      state.isLogin = !state.isLogin
+    }
   },
   actions: {
     // VALIDATOR
@@ -55,7 +63,7 @@ export default new Vuex.Store({
     },
     // REGISTER 
     async register(context,form){
-        let result = await fetch("http://localhost:2000/l",{
+        let result = await fetch("http://localhost:3000/users",{
           method:'POST',
           mode:"cors",
           cache:'no-cache',
@@ -73,38 +81,51 @@ export default new Vuex.Store({
         })
         .then(res=>res,err=>err)
         if (result.ok)
-          this.$router.push('/')
+          router.push('/')
         else
           alert("Oops something wrong with server")
     },
     async login(context,form){
-      try {
-        let result = await fetch("http://localhost:3000/use",{
-        method:'POST',
-        mode:"cors",
-        cache:'no-cache',
-        credentials:'same-origin',
-        headers:{
-          'Content-Type':'application/json'
-        },
-        redirect:'follow',
-        referrerPolicy:'no-referrer',
-        body:JSON.stringify({
-          'email':form.email.value,
-          'password':form.password.value
-        })
-      })
-      .then(res=>res)
-      if (result.ok)
-        router.push( '/' )
-      else
-        alert("Oops something wrong with server")
+      if (form){
+        1+1
       }
-      catch (err){
-        console.log(err)
-      }
-  }
+      router.push( '/' )
+      context.commit('toggleLogin')
+      // try {
+      //   let result = await fetch("http://localhost:3000/users",{
+      //   method:'POST',
+      //   mode:"cors",
+      //   cache:'no-cache',
+      //   credentials:'same-origin',
+      //   headers:{
+      //     'Content-Type':'application/json'
+      //   },
+      //   redirect:'follow',
+      //   referrerPolicy:'no-referrer',
+      //   body:JSON.stringify({
+      //     'email':form.email.value,
+      //     'password':form.password.value
+      //   })
+      // })
+      // .then(res=>res)
+      // if (result.ok)
+      //   {
+      //     router.push( '/' )
+      //     context.commit('toggleLogin')
+      //   }
+      // else
+      //   alert("Oops something wrong with server")
+      // }
+      // catch (err){
+      //   console.log(err)
+      // }
+    },
+    logout(context){
+      context.commit('toggleLogin')
+    }
   },
   modules: {
-  }
+  },
+  plugins: [vuexLocal.plugin]
 })
+

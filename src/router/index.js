@@ -11,6 +11,30 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/admin',
+    name: 'admin',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
+  },
+  {
+    path: '/admin/login',
+    name: 'admin-login',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminLoginView.vue')
+  },
+  {
+    path: '/user',
+    name: 'user',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/UserView.vue')
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting

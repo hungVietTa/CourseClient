@@ -95,6 +95,16 @@
       "email": "el_nino_Hero96@yahoo.com",
       "password": "12345678@A",
       "id": 17
+    },
+    {
+      "email": "sdf@gmail.com",
+      "password": "123456@A",
+      "id": 18
+    },
+    {
+      "email": "viethunglpt@gmail.com",
+      "password": "12345678@A",
+      "id": 19
     }
   ]
 }

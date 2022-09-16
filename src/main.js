@@ -21,10 +21,19 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
+
+
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+router.beforeEach((to,from,next) => {
+  if ( ( store.state.isLogin == true && to.name == 'login' ) || ( store.state.isLogin == true && to.name == 'register' ))
+    next({name:'home'})
+  else next()
+})
+
 
 
