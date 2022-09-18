@@ -5,41 +5,17 @@ import HomeView from '../views/HomeView.vue'
 Vue.use(VueRouter)
 
 const routes = [
+
+  // HOME
+
   {
     path: '/',
     name: 'home',
     component: HomeView
   },
   {
-    path: '/admin',
-    name: 'admin',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
-  },
-  {
-    path: '/admin/login',
-    name: 'admin-login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AdminLoginView.vue')
-  },
-  {
-    path: '/user',
-    name: 'user',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/UserView.vue')
-  },
-  {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
@@ -57,7 +33,52 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/RegisterView.vue')
+  },
+
+  // ADMIN
+
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue'),
+    children:[
+      {
+        path: 'login',
+        component: () => import(/* webpackChunkName: "about" */ '../components/LoginComp.vue'),
+      },
+    ]
+  },
+
+  // USER
+
+  {
+    path: '/user',
+    name: 'user',
+    component: () => import(/* webpackChunkName: "about" */ '../views/UserView.vue'),
+    children:[
+      {
+        path: 'profile',
+        component: () => import(/* webpackChunkName: "about" */ '../components/UserProfileComp.vue'),
+      },
+      {
+        path: 'progress',
+        component: () => import(/* webpackChunkName: "about" */ '../components/UserProgressComp.vue'),
+      },
+      {
+        path: 'timtable',
+        component: () => import(/* webpackChunkName: "about" */ '../components/UserTimetableComp.vue'),
+      },
+      {
+        path: 'courses',
+        component: () => import(/* webpackChunkName: "about" */ '../components/UserCoursesComp.vue'),
+      },
+      {
+        path: 'blog',
+        component: () => import(/* webpackChunkName: "about" */ '../components/UserBlogComp.vue'),
+      },
+    ]
   }
+ 
 ]
 
 const router = new VueRouter({

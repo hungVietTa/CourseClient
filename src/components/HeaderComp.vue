@@ -21,10 +21,7 @@
         <div class="navbar-collapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Giới thiệu</a>
+              <router-link class="nav-link active" aria-current="page" to="/about">Giới thiệu</router-link>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -72,6 +69,15 @@
             </button>
           </form>
         </div>
+        <router-link to="/" class="navbar-brand" href="#">
+          <span>Home page</span>
+        </router-link>
+        <router-link to="/admin" class="navbar-brand me-auto" href="#">
+          <span>Admin page</span>
+        </router-link>
+        <router-link to="/user" class="navbar-brand me-auto" href="#">
+          <span>User page</span>
+        </router-link>
         <div class="nav-interact">
           <router-link
             v-if="!$store.state.isLogin"
@@ -106,7 +112,6 @@
                 </button>
               </li>
 
-              <li />
             </ul>
           </div>
         </div>
@@ -119,7 +124,7 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "HeaderView",
+  name: "HeaderComp",
   data() {
     return {
       userToggle: false,
@@ -128,12 +133,19 @@ export default {
   methods: {
     ...mapActions(["logout"]),
   },
+  mounted(){
+    console.log(this.$route)
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 header {
+  position: sticky;
+  background-color: white;
+  z-index: 2;
+  top: 0;
   padding-top: 5px;
   padding-bottom: 5px;
   box-shadow: 2px 0px 0px 2px rgba(9, 9, 9, 0.1);
