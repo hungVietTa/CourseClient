@@ -4,7 +4,34 @@
       "fullName": "yasuo",
       "email": "yasuo@gmail.com",
       "password": "123456",
-      "id": 1
+      "id": 1,
+      "courses": [
+        {
+          "id": 1,
+          "courseID": 1,
+          "lessons": [
+            {
+              "id": 1,
+              "lesson_id": 1,
+              "count": 792,
+              "state": true
+            },
+            {
+              "id": 2,
+              "lesson_id": 2,
+              "count": 0,
+              "state": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "talon",
+      "email": "talon@gmail.com",
+      "password": "123456",
+      "confirmPassword": "12gg6",
+      "id": 2
     }
   ],
   "courses": [
@@ -123,17 +150,6 @@
       "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
       "video": "lKUR4mu1M-U",
       "course_id": "1"
-    }
-  ],
-  "userCourses": [
-    {
-      "id": 1,
-      "courseId": 1,
-      "count": 0
-    },
-    {
-      "count": 1214,
-      "id": 2
     }
   ]
 }
