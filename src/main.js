@@ -5,6 +5,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
+import VueYoutube from 'vue-youtube'
+ 
+
 
 // import the fontawesome core 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -22,6 +25,7 @@ library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
+Vue.use(VueYoutube)
 
 
 

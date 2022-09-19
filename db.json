@@ -2,194 +2,138 @@
   "users": [
     {
       "fullName": "yasuo",
-      "email": "el_nino_Hero96@yahoo.com",
-      "password": "123456@Abc",
+      "email": "yasuo@gmail.com",
+      "password": "123456",
       "id": 1
-    },
-    {
-      "fullName": "yasuo",
-      "email": "hung@gmail.com",
-      "password": "123456@Abc",
-      "id": 2
-    },
-    {
-      "fullName": "yasuo",
-      "email": "hung@gmail.com",
-      "password": "123456@Abc",
-      "id": 3
-    },
-    {
-      "fullName": "yasuo",
-      "email": "hung@gmail.com",
-      "password": "123456@Abc",
-      "id": 4
-    },
-    {
-      "fullName": "sdfsd",
-      "email": "el_nino_Hero96@yahoo.com",
-      "password": "12345678@A",
-      "id": 5
-    },
-    {
-      "fullName": "dfgfd",
-      "email": "hung@gmail.com",
-      "password": "12345678A@",
-      "id": 6
-    },
-    {
-      "fullName": "sdfsdfds",
-      "email": "hung@gmail.com",
-      "password": "12345678@A",
-      "id": 7
-    },
-    {
-      "fullName": "sdfsd",
-      "email": "hung@gmail.com",
-      "password": "12345678@A",
-      "id": 8
-    },
-    {
-      "fullName": "fhg",
-      "email": "hung@gmail.com",
-      "password": "12345678@A",
-      "id": 9
-    },
-    {
-      "fullName": "sdfsd",
-      "email": "el_nino_Hero96@yahoo.com",
-      "password": "12345678@A",
-      "id": 10
-    },
-    {
-      "fullName": "sdfsdfds",
-      "email": "sdf@gdf.kil",
-      "password": "12345678@A",
-      "id": 11
-    },
-    {
-      "email": "el_nino_Hero96@yahoo.com",
-      "password": "12345678@A",
-      "id": 12
-    },
-    {
-      "email": "hung@gmail.com",
-      "password": "12345678@A",
-      "id": 13
-    },
-    {
-      "email": "el_nino_Hero96@yahoo.com",
-      "password": "12345678@A",
-      "id": 14
-    },
-    {
-      "email": "hung@gmail.com",
-      "password": "12345678@A",
-      "id": 15
-    },
-    {
-      "email": "sdf@gd.com",
-      "password": "12345678@A",
-      "id": 16
-    },
-    {
-      "email": "el_nino_Hero96@yahoo.com",
-      "password": "12345678@A",
-      "id": 17
-    },
-    {
-      "email": "sdf@gmail.com",
-      "password": "123456@A",
-      "id": 18
-    },
-    {
-      "email": "viethunglpt@gmail.com",
-      "password": "12345678@A",
-      "id": 19
     }
   ],
   "courses": [
     {
-        "id": "1",
-        "name": "HTML",
-        "des": "HTML là gì? ... HTML viết tắt của Hypertext Markup Language là ngôn ngữ lập trình dùng để xây dựng và cấu trúc lại các thành phần có trong Website. HTML tạm dịch ...",
-        "img": "https://i.ytimg.com/vi/pQN-pnXPaVg/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCTalVlG2xP7ZJkkNfRgYnhPEIhXg",
-        "category": "front-end"
+      "id": 1,
+      "name": "HTML",
+      "des": "HTML là gì? ... HTML viết tắt của Hypertext Markup Language là ngôn ngữ lập trình dùng để xây dựng và cấu trúc lại các thành phần có trong Website. HTML tạm dịch ...",
+      "img": "https://i.ytimg.com/vi/pQN-pnXPaVg/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCTalVlG2xP7ZJkkNfRgYnhPEIhXg",
+      "category": "front-end"
     },
     {
-        "id": "2",
-        "name": "CSS",
-        "des": "CSS là gì? ... CSS là chữ viết tắt của Cascading Style Sheets, nó là một ngôn ngữ được sử dụng để tìm và định dạng lại các phần tử được tạo ra bởi các ngôn ngữ ...",
-        "img": "https://i.ytimg.com/vi/1Rs2ND1ryYc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA2kAs151asfndUB6vMP8UUi6bTug",
-        "category": "front-end"
+      "id": 2,
+      "name": "CSS",
+      "des": "CSS là gì? ... CSS là chữ viết tắt của Cascading Style Sheets, nó là một ngôn ngữ được sử dụng để tìm và định dạng lại các phần tử được tạo ra bởi các ngôn ngữ ...",
+      "img": "https://i.ytimg.com/vi/1Rs2ND1ryYc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA2kAs151asfndUB6vMP8UUi6bTug",
+      "category": "front-end"
     },
     {
-        "id": "3",
-        "name": "Boodtrap 4",
-        "des": "Bootstrap là một framework bao gồm các HTML, CSS và JavaScript template dùng để phát triển website chuẩn responsive.",
-        "img": "https://i.ytimg.com/vi/-qfEOE4vtxE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD3xc7-gQuo-ru9gbtfdQnlmVnKjg",
-        "category": "front-end"
+      "id": 3,
+      "name": "Boodtrap 4",
+      "des": "Bootstrap là một framework bao gồm các HTML, CSS và JavaScript template dùng để phát triển website chuẩn responsive.",
+      "img": "https://i.ytimg.com/vi/-qfEOE4vtxE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD3xc7-gQuo-ru9gbtfdQnlmVnKjg",
+      "category": "front-end"
     },
     {
-        "id": "4",
-        "name": "Tailwind",
-        "des": "Tailwind CSS là gì ? ... Thì nó là một utility-first CSS framework, nó cũng giống như Bootstrap, nó có những class built-in mà chúng ta có thể dùng. Tailwind CSS ...",
-        "img": "https://i.ytimg.com/vi/-VQhSM77_HA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLClX8lFY0T_TGnFgurbmgkujJO61w",
-        "category": "front-end"
+      "id": 4,
+      "name": "Tailwind",
+      "des": "Tailwind CSS là gì ? ... Thì nó là một utility-first CSS framework, nó cũng giống như Bootstrap, nó có những class built-in mà chúng ta có thể dùng. Tailwind CSS ...",
+      "img": "https://i.ytimg.com/vi/-VQhSM77_HA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLClX8lFY0T_TGnFgurbmgkujJO61w",
+      "category": "front-end"
     },
     {
-        "id": "5",
-        "name": "Node JS",
-        "des": "“Node.js là một JavaScript runtime được build dựa trên engine JavaScript V8 của Chrome. Node.js sử dụng kiến trúc hướng sự kiện event-driven, mô ...",
-        "img": "https://i.ytimg.com/vi/Oe421EPjeBE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCXCkN1Cu4rFO_0Z0kFmQTe1-xRJQ",
-        "category": "back-end"
+      "id": 5,
+      "name": "Node JS",
+      "des": "“Node.js là một JavaScript runtime được build dựa trên engine JavaScript V8 của Chrome. Node.js sử dụng kiến trúc hướng sự kiện event-driven, mô ...",
+      "img": "https://i.ytimg.com/vi/Oe421EPjeBE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCXCkN1Cu4rFO_0Z0kFmQTe1-xRJQ",
+      "category": "back-end"
     },
     {
-        "id": "6",
-        "name": "Ruby",
-        "des": "Ruby là ngôn ngữ lập trình kịch bản bởi mã lệnh của Ruby có thể chạy trực tiếp bởi máy tính mà không cần phải biên soạn thành một tệp thực thi tệp tin .exe trên ...",
-        "img": "https://i.ytimg.com/vi/t_ispmWmdjY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA5FKlz__Yuq1PPEW33Ryvf4kpnHA",
-        "category": "back-end"
+      "id": 6,
+      "name": "Ruby",
+      "des": "Ruby là ngôn ngữ lập trình kịch bản bởi mã lệnh của Ruby có thể chạy trực tiếp bởi máy tính mà không cần phải biên soạn thành một tệp thực thi tệp tin .exe trên ...",
+      "img": "https://i.ytimg.com/vi/t_ispmWmdjY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA5FKlz__Yuq1PPEW33Ryvf4kpnHA",
+      "category": "back-end"
     },
     {
-        "id": "7",
-        "name": "PHP",
-        "des": " PHP là viết tắt của cụm từ Personal Home Page nay đã được chuyển thành Hypertext Preprocessor. Hiểu đơn giản thì PHP là một ngôn ngữ lập trình ...",
-        "img": "https://i.ytimg.com/vi/OK_JCtrrv-c/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBvAzjyO06ZHMR1cdvagNJZt88rOw",
-        "category": "back-end"
+      "id": 7,
+      "name": "PHP",
+      "des": " PHP là viết tắt của cụm từ Personal Home Page nay đã được chuyển thành Hypertext Preprocessor. Hiểu đơn giản thì PHP là một ngôn ngữ lập trình ...",
+      "img": "https://i.ytimg.com/vi/OK_JCtrrv-c/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBvAzjyO06ZHMR1cdvagNJZt88rOw",
+      "category": "back-end"
     },
     {
-        "id": "8",
-        "name": "Ruby On Rails",
-        "des": "Ruby on Rails là một web framework mã nguồn mở được thiết kế để phát triển các ứng dụng Ruby và cho phép chúng chạy như một trang web thực sự. Rails là cách gọi ...",
-        "img": "https://i.ytimg.com/vi/t_ispmWmdjY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA5FKlz__Yuq1PPEW33Ryvf4kpnHA",
-        "category": "back-end"
+      "id": 8,
+      "name": "Ruby On Rails",
+      "des": "Ruby on Rails là một web framework mã nguồn mở được thiết kế để phát triển các ứng dụng Ruby và cho phép chúng chạy như một trang web thực sự. Rails là cách gọi ...",
+      "img": "https://i.ytimg.com/vi/t_ispmWmdjY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA5FKlz__Yuq1PPEW33Ryvf4kpnHA",
+      "category": "back-end"
     }
-],
-  "tiptrick":[
+  ],
+  "tiptrick": [
     {
-        "id": "1",
-        "name": "Vue JS",
-        "des": "Vue has become a popular framework for web development and with the recent changes made in Vue 3, I've decided to create ...",
-        "img": "https://i.ytimg.com/vi/iVnn21cAa3M/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDqRzpPxuod0Bj2YDqhAsteYMkLuQ"
+      "id": 1,
+      "name": "Vue JS",
+      "des": "Vue has become a popular framework for web development and with the recent changes made in Vue 3, I've decided to create ...",
+      "img": "https://i.ytimg.com/vi/iVnn21cAa3M/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDqRzpPxuod0Bj2YDqhAsteYMkLuQ"
     },
     {
-        "id": "2",
-        "name": "React",
-        "des": "In this video I will go over 3 tips and tricks that will improve your react skills by a lot. At the end I also go on a tangent about ...",
-        "img": "https://i.ytimg.com/vi/8jx96lzHNJE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBqsed3P4L1pzbj3jCbMKN4c1Pjsg"
+      "id": 2,
+      "name": "React",
+      "des": "In this video I will go over 3 tips and tricks that will improve your react skills by a lot. At the end I also go on a tangent about ...",
+      "img": "https://i.ytimg.com/vi/8jx96lzHNJE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBqsed3P4L1pzbj3jCbMKN4c1Pjsg"
     },
     {
-        "id": "3",
-        "name": "CSS",
-        "des": "In this episode we are going to take a look at 10 awesome css tricks that you probably didn't know! Also excited to announce my .",
-        "img": "https://i.ytimg.com/vi/l_AUK0Z6D68/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB1Z0pEOTOV2vb5ovnA5A35abTPtw"
+      "id": 3,
+      "name": "CSS",
+      "des": "In this episode we are going to take a look at 10 awesome css tricks that you probably didn't know! Also excited to announce my .",
+      "img": "https://i.ytimg.com/vi/l_AUK0Z6D68/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB1Z0pEOTOV2vb5ovnA5A35abTPtw"
     },
     {
-        "id": "4",
-        "name": "Ruby On Rails",
-        "des": "In this episode, we will go through some of the tips and tricks that we often take for granted. We will be looking at nested routes, ...",
-        "img": "https://i.ytimg.com/vi/j9bYzwqNHF0/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBGKj78ddYRgNwg-gfiXS-ErGgyqg"
+      "id": 4,
+      "name": "Ruby On Rails",
+      "des": "In this episode, we will go through some of the tips and tricks that we often take for granted. We will be looking at nested routes, ...",
+      "img": "https://i.ytimg.com/vi/j9bYzwqNHF0/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBGKj78ddYRgNwg-gfiXS-ErGgyqg"
     }
-   
-]
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "name": "Ruby - Part 1",
+      "des": "This is description",
+      "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
+      "video": "wkNR1hG4yOk",
+      "course_id": "1"
+    },
+    {
+      "id": 2,
+      "name": "Ruby - Part 1",
+      "des": "This is description",
+      "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
+      "video": "4PLg-Oe3MfA",
+      "course_id": "1"
+    },
+    {
+      "id": 3,
+      "name": "Ruby - Part 1",
+      "des": "This is description",
+      "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
+      "video": "Bx2mFSsrucM",
+      "course_id": "1"
+    },
+    {
+      "id": 4,
+      "name": "Ruby - Part 1",
+      "des": "This is description",
+      "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
+      "video": "lKUR4mu1M-U",
+      "course_id": "1"
+    }
+  ],
+  "userCourses": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "count": 0
+    },
+    {
+      "count": 1214,
+      "id": 2
+    }
+  ]
 }

@@ -93,12 +93,12 @@ export default {
   },
   methods:{
       getCourses:async function(){
+        
       this.courses =await this.axios.get("http://localhost:3000/courses").then(res=>res.data)
-      console.log(this.courses)
     },
       getTip:async function(){
       this.tiptrick =await this.axios.get("http://localhost:3000/tiptrick").then(res=>res.data)
-      console.log(this.courses)
+              
     }
   },
   components: {
