@@ -3,7 +3,6 @@
     <HeaderLearningComp />
     <main>
       <youtube
-        @ready="playing"
         :video-id="
           lessons[currentId] ? lessons[currentId].video : lessons[0].video
         "
@@ -32,13 +31,14 @@ import HeaderLearningComp from "../components/HeaderLearningComp.vue";
 export default {
   data() {
     return {
+      flag:false,
       currrentTime: 0,
       count: 0,
       duration: 0,
-      lessonsStatus: {},
+      lessonsStatus: [],
       user: [],
       time: 0,
-      intervalID: 2,
+      intervalID: 0,
       test: false,
       lessons: [
         {
@@ -55,78 +55,86 @@ export default {
   },
   computed: {
     currentQualified() {
-      if (!this.lessonsStatus.length) return 999;
       let tmp = this.lessonsStatus.findIndex((item) => item.qualified == false);
       if (tmp == -1) return 999;
       return tmp;
     },
   },
   methods: {
-    async getDuration() {
-      await this.$refs.youtube.player
+    getDuration() {
+      this.$refs.youtube.player
         .getDuration()
         .then((res) => (this.duration = res));
     },
     //
     counter() {
-      let el = this;
-      el.intervalID = setInterval(function () {
-        el.checking()
-        el.$refs.youtube.player
-          .getCurrentTime()
-          .then((res) => (el.currrentTime = res));
-      }, 2000);
+      this.intervalID = setInterval(this.checking, 2000);
     },
     //
     checking() {
-      console.log(this.count[0]*this.duration)
-
-      if (this.count.length == 0) {
-        this.$refs.youtube.player.removeEventListener(
-          "onStateChange",
-          this.handler
-        );
-              console.log(2)
-        clearInterval(this.intervalID);
-        return
-      }
-      let tmp = this.count.findIndex((item) => Math.abs(item * this.duration - this.currrentTime) <= 3);
+      console.log(this.duration * this.count[0]);
+      this.$refs.youtube.player
+        .getCurrentTime()
+        .then((res) => (this.currrentTime = res));
+      let tmp = this.count.findIndex(
+        (item) => Math.abs(item * this.duration - this.currrentTime) <= 3
+      );
       if (tmp != -1) {
         this.count.splice(tmp, 1);
-        this.updateCount();
+
+        if (this.count.length == 0) {
+          this.lessonsStatus[this.currentId + 1].qualified = true;
+          this.lessonsStatus[this.currentId].count = this.count;
+          this.axios.put(`http://localhost:3000/users/1`, this.user);
+          this.unsetHandler();
+          return;
         }
-    },
-    //
-    updateCount() {
-      this.lessonsStatus[this.currentId].count= this.count;
-      this.axios.put(`http://localhost:3000/users/1`, this.user);
-    },
-    //
-    handler: function (e) {
-      if (e.data == 1) this.counter();
-      if (e.data == 2) clearInterval(this.intervalID);
+        this.lessonsStatus[this.currentId].count = this.count;
+        this.axios.put(`http://localhost:3000/users/1`, this.user);
+      }
     },
     //
     selection(index) {
       if (index == this.currentId) return;
-      else if (index >= this.currentQualified)
-        alert("you need to study carefully the previous video");
+      if (index >= this.currentQualified)
+        alert("Please see carefully previous video");
       else {
-        clearInterval(this.intervalID);
         this.currentId = index;
-        this.count = this.lessonsStatus[this.currentId].count;
-        if (this.count.length > 0) {
-          this.$refs.youtube.player.addEventListener(
-            "onStateChange",
-            this.handler
-          );
-        }
-        setTimeout(this.getDuration, 2000);
+        this.doAll(index);
       }
     },
+    setHandler() {
+      let el = this;
+      window.learningTrackHandler = function (e) {
+        if (e.data == -1) el.getDuration();
+        if (e.data == 1) el.counter();
+        if (e.data == 2 || e.data == 0) clearInterval(el.intervalID);
+      };
+    },
     //
-    playing() {
-      console.log(2);
+    unsetHandler() {
+      let el = this;
+      clearInterval(this.intervalID);
+      window.learningTrackHandler = function (e) {
+        if (e.data == -1) el.getDuration();
+      };
+    },
+    //
+    doAll(index) {
+      // Whether all stages reached
+      this.count = this.lessonsStatus[index].count;
+      //
+      if (!this.count.length) this.unsetHandler();
+      else {
+        this.setHandler();
+        if  ( this.flag )
+            return
+        this.flag = false
+        this.$refs.youtube.player.addEventListener(
+        "onStateChange",
+        "learningTrackHandler"
+      );
+      }
     },
     getLessons: async function () {
       this.lessons = await this.axios
@@ -140,15 +148,8 @@ export default {
       //
       this.lessonsStatus = this.user.courses[0].lessons;
       //
-      this.count = this.lessonsStatus[this.currentId].count;
-      if (this.count.length > 0) {
-        this.$refs.youtube.player.addEventListener(
-          "onStateChange",
-          this.handler
-        );
-      }
-      setTimeout(this.getDuration, 2000);
-    },
+      this.doAll(this.currentId);
+    }
   },
   components: {
     HeaderLearningComp,
@@ -157,7 +158,9 @@ export default {
     this.getLessons();
     this.getStatus();
   },
-  mounted() {},
+  mounted() {
+    this.setHandler();
+  }
 };
 </script>
 
