@@ -3,20 +3,21 @@
     <HeaderLearningComp />
     <main>
       <youtube
+        @ready="playing"
         :video-id="
           lessons[currentId] ? lessons[currentId].video : lessons[0].video
         "
         ref="youtube"
-        @playing="counter"
-        @paused="reset"
-        @ended="reset"
       ></youtube>
       <section class="list">
         <ul
           v-for="(lesson, index) in lessons"
           :key="lesson.id"
-          @click="currentId = index"
-          :class="{ active: index == currentId }"
+          @click="selection(index)"
+          :class="{
+            active: index == currentId,
+            'bg-salmon': index >= currentQualified,
+          }"
         >
           <li>{{ lesson.name }}</li>
           <li><img :src="lesson.img" alt="" /></li>
@@ -31,6 +32,7 @@ import HeaderLearningComp from "../components/HeaderLearningComp.vue";
 export default {
   data() {
     return {
+      currrentTime: 0,
       count: 0,
       duration: 0,
       lessonsStatus: {},
@@ -51,52 +53,79 @@ export default {
       currentId: 0,
     };
   },
-  computed: {},
+  computed: {
+    currentQualified() {
+      if (!this.lessonsStatus.length) return 999;
+      let tmp = this.lessonsStatus.findIndex((item) => item.qualified == false);
+      if (tmp == -1) return 999;
+      return tmp;
+    },
+  },
   methods: {
     async getDuration() {
       await this.$refs.youtube.player
         .getDuration()
         .then((res) => (this.duration = res));
     },
-    async times() {
-      await this.$refs.youtube.player
-        .getDuration()
-        .then((res) => (this.time = res));
-    },
+    //
     counter() {
       let el = this;
-      this.intervalID = setInterval(function () {
-        el.count += 3;
-        console.log(el.count);
-        if (
-          el.lessonsStatus.filter(
-            (item) => item.lesson_id == el.lessons[el.currentId].id)[0].count/el.duration >=0.9) {
-          el.lessonsStatus.filter(
-            (item) => item.lesson_id == el.lessons[el.currentId].id
-          )[0].state = true;
-          clearInterval(this.intervalID);
-          let tmp = el.lessonsStatus.filter(
-            (item) => item.lesson_id == el.lessons[el.currentId].id
-          );
-          tmp[0].count = el.count;
-          el.axios.put(`http://localhost:3000/users/1`, el.user);
-          return;
-        }
-      }, 3000);
+      el.intervalID = setInterval(function () {
+        el.checking()
+        el.$refs.youtube.player
+          .getCurrentTime()
+          .then((res) => (el.currrentTime = res));
+      }, 2000);
     },
-    reset() {
-      if ( this.lessonsStatus.filter(
-            (item) => item.lesson_id == el.lessons[el.currentId].id)[0].state == true)
+    //
+    checking() {
+      console.log(this.count[0]*this.duration)
+
+      if (this.count.length == 0) {
+        this.$refs.youtube.player.removeEventListener(
+          "onStateChange",
+          this.handler
+        );
+              console.log(2)
+        clearInterval(this.intervalID);
         return
-      let el = this;
-      clearInterval(this.intervalID);
-      let tmp = el.lessonsStatus.filter(
-        (item) => item.lesson_id == el.lessons[el.currentId].id
-      );
-      tmp[0].count = el.count;
-      this.axios.put(`http://localhost:3000/users/1`, el.user);
+      }
+      let tmp = this.count.findIndex((item) => Math.abs(item * this.duration - this.currrentTime) <= 3);
+      if (tmp != -1) {
+        this.count.splice(tmp, 1);
+        this.updateCount();
+        }
     },
-    playing: function () {
+    //
+    updateCount() {
+      this.lessonsStatus[this.currentId].count= this.count;
+      this.axios.put(`http://localhost:3000/users/1`, this.user);
+    },
+    //
+    handler: function (e) {
+      if (e.data == 1) this.counter();
+      if (e.data == 2) clearInterval(this.intervalID);
+    },
+    //
+    selection(index) {
+      if (index == this.currentId) return;
+      else if (index >= this.currentQualified)
+        alert("you need to study carefully the previous video");
+      else {
+        clearInterval(this.intervalID);
+        this.currentId = index;
+        this.count = this.lessonsStatus[this.currentId].count;
+        if (this.count.length > 0) {
+          this.$refs.youtube.player.addEventListener(
+            "onStateChange",
+            this.handler
+          );
+        }
+        setTimeout(this.getDuration, 2000);
+      }
+    },
+    //
+    playing() {
       console.log(2);
     },
     getLessons: async function () {
@@ -104,27 +133,31 @@ export default {
         .get("http://localhost:3000/lessons")
         .then((res) => res.data);
     },
-    getUser: async function () {
+    getStatus: async function () {
       this.user = await this.axios
         .get("http://localhost:3000/users/1")
         .then((res) => res.data);
+      //
       this.lessonsStatus = this.user.courses[0].lessons;
-      this.count = this.lessonsStatus.filter(
-        (item) => item.lesson_id == this.lessons[this.currentId].id
-      )[0].count;
-      console.log(this.lessonsStatus);
+      //
+      this.count = this.lessonsStatus[this.currentId].count;
+      if (this.count.length > 0) {
+        this.$refs.youtube.player.addEventListener(
+          "onStateChange",
+          this.handler
+        );
+      }
+      setTimeout(this.getDuration, 2000);
     },
   },
   components: {
     HeaderLearningComp,
   },
   created() {
-    this.getUser();
     this.getLessons();
+    this.getStatus();
   },
-  mounted() {
-    this.getDuration();
-  },
+  mounted() {},
 };
 </script>
 
@@ -134,5 +167,9 @@ ul {
 }
 ul.active {
   background-color: rgb(240, 240, 240);
+}
+.bg-salmon {
+  background-color: rgba(243, 119, 119, 0.514);
+  cursor: not-allowed;
 }
 </style>

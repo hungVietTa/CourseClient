@@ -13,14 +13,35 @@
             {
               "id": 1,
               "lesson_id": 1,
-              "count": 792,
-              "state": true
+              "count": [],
+              "qualified": false
             },
             {
               "id": 2,
               "lesson_id": 2,
-              "count": 0,
-              "state": false
+              "count": [
+                0.3,
+                0.7
+              ],
+              "qualified": false
+            },
+            {
+              "id": 3,
+              "lesson_id": 3,
+              "count": [
+                0.1,
+                0.9
+              ],
+              "qualified": false
+            },
+            {
+              "id": 4,
+              "lesson_id": 4,
+              "count": [
+                0.4,
+                0.7
+              ],
+              "qualified": false
             }
           ]
         }
@@ -125,7 +146,7 @@
       "des": "This is description",
       "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
       "video": "wkNR1hG4yOk",
-      "course_id": "1"
+      "course_id": 1
     },
     {
       "id": 2,
@@ -133,7 +154,7 @@
       "des": "This is description",
       "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
       "video": "4PLg-Oe3MfA",
-      "course_id": "1"
+      "course_id": 2
     },
     {
       "id": 3,
@@ -141,7 +162,7 @@
       "des": "This is description",
       "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
       "video": "Bx2mFSsrucM",
-      "course_id": "1"
+      "course_id": 3
     },
     {
       "id": 4,
@@ -149,7 +170,7 @@
       "des": "This is description",
       "img": "https://i.ytimg.com/vi/4PLg-Oe3MfA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBuYdpe5BCIlLB4o68i8tiOgZIzcQ",
       "video": "lKUR4mu1M-U",
-      "course_id": "1"
+      "course_id": 4
     }
   ]
 }
