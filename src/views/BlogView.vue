@@ -24,8 +24,8 @@
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-arrow-rotate-left" /></button>
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-keyboard" /></button>
                     </div>
-                    <div width="400" height="400" id="draft-content" ref="draft">
-                        <h1>Hello world <b>Yasuo</b> <i>Riven</i> </h1>
+                    <div  width="400" height="400" id="draft-content" ref="draft">
+                        <h1>Hello world <b>Yasuo </b><i>Riven</i>   </h1>
                         <p>Atcalata</p>
                     </div>
                 </div>
@@ -38,10 +38,6 @@
 import HeaderComp from "../components/HeaderComp.vue"
 
 export default {
-    name:"BlogView",
-    components:{
-        HeaderComp
-    },
     methods:{
         play(){
             let selection = window.getSelection()
@@ -52,11 +48,25 @@ export default {
             range.surroundContents(newNode)
         },
         check(){
-            console.log(window.getSelection().getRangeAt(0))
+            // let menNode
+            // let newNode = document.createElement("p")
+            let range = window.getSelection().getRangeAt(0)
+            console.log(range.commonAncestorContainer)
+            // if ( ['P','H1','H2'].includes(range.commonAncestorContainer.nodeName) )
+            //     menNode = range.commonAncestorContainer
+            // else
+            //     menNode = range.commonAncestorContainer
+            // console.log(range)
+            // console.log(range.extractContents().childNodes)
         }
     },
+    name:"BlogView",
+    components:{
+        HeaderComp
+    },
+    
     mounted(){
-       this.$refs.draft.contentEditable="true"
+       this.$refs.draft.contentEditable="plaintext-only"
        
     }    
 }
