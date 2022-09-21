@@ -89,7 +89,6 @@ export default new Vuex.Store({
       if (form){
         1+1
       }
-      console.log(router.currentRoute.path.replace('/login',''))
       router.push(router.currentRoute.path.replace('/login','/'))
       context.commit('toggleLogin')
       // try {

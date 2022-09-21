@@ -134,7 +134,6 @@ export default {
     ...mapActions(["logout"]),
   },
   mounted(){
-    console.log(this.$route)
   }
 };
 </script>
