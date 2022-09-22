@@ -81,7 +81,7 @@ export default new Vuex.Store({
         })
         .then(res=>res,err=>err)
         if (result.ok)
-          router.push('/')
+          router.push('/login')
         else
           alert("Oops something wrong with server")
     },
@@ -91,34 +91,34 @@ export default new Vuex.Store({
       }
       router.push(router.currentRoute.path.replace('/login','/'))
       context.commit('toggleLogin')
-      try {
-        let result = await fetch("http://localhost:3000/users",{
-        method:'POST',
-        mode:"cors",
-        cache:'no-cache',
-        credentials:'same-origin',
-        headers:{
-          'Content-Type':'application/json'
-        },
-        redirect:'follow',
-        referrerPolicy:'no-referrer',
-        body:JSON.stringify({
-          'email':form.email.value,
-          'password':form.password.value
-        })
-      })
-      .then(res=>res)
-      if (result.ok)
-        {
-          router.push( '/' )
-          context.commit('toggleLogin')
-        }
-      else
-        alert("Oops something wrong with server")
-      }
-      catch (err){
-        console.log(err)
-      }
+      // try {
+      //   let result = await fetch("http://localhost:3000/users",{
+      //   method:'POST',
+      //   mode:"cors",
+      //   cache:'no-cache',
+      //   credentials:'same-origin',
+      //   headers:{
+      //     'Content-Type':'application/json'
+      //   },
+      //   redirect:'follow',
+      //   referrerPolicy:'no-referrer',
+      //   body:JSON.stringify({
+      //     'email':form.email.value,
+      //     'password':form.password.value
+      //   })
+      // })
+      // .then(res=>res)
+      // if (result.ok)
+      //   {
+      //     router.push( '/' )
+      //     context.commit('toggleLogin')
+      //   }
+      // else
+      //   alert("Oops something wrong with server")
+      // }
+      // catch (err){
+      //   console.log(err)
+      // }
     },
     logout(context){
       context.commit('toggleLogin')

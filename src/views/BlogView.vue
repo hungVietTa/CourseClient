@@ -4,7 +4,7 @@
         <main class="text-start">
             <input class="title" placeholder="Title" type="text">
             <div class="row">
-                <div class="col-6 draft">
+                <div class="draft">
                     <div class="toolbar">
                         <button class="my-btn" @click="check()"><font-awesome-icon icon="fa-solid fa-font" /></button>
                         <button class="my-btn" @click="play('strong')"><font-awesome-icon icon="fa-solid fa-bold" /></button>
@@ -25,11 +25,10 @@
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-keyboard" /></button>
                     </div>
                     <div width="400" height="400" id="draft-content" ref="draft">
-                        <h1>Hello world Yasuo Riven </h1>
+                        <h1>Hello world</h1>
                         <p>Atcalata</p>
                     </div>
                 </div>
-                <div class="col-6 view">Thurst</div>
             </div>
         </main>
     </div>
