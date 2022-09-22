@@ -24,37 +24,37 @@
               <router-link class="nav-link active" aria-current="page" to="/about">Giới thiệu</router-link>
             </li>
             <li class="nav-item dropdown">
-              <a
+              <router-link
                 class="nav-link dropdown-toggle"
-                href="#"
+                to="/schedule"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Lộ trình
-              </a>
+              </router-link>
             </li>
             <li class="nav-item dropdown">
-              <a
+              <router-link
                 class="nav-link dropdown-toggle"
-                href="#"
+                to="/courses"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Khóa học
-              </a>
+              </router-link>
             </li>
             <li class="nav-item dropdown">
-              <a
+              <router-link
                 class="nav-link dropdown-toggle"
-                href="#"
+                to="/blog"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Trao đổi chiêu thức
-              </a>
+                Blog
+              </router-link>
             </li>
           </ul>
           <form class="d-flex nav-form" role="search">
@@ -69,15 +69,6 @@
             </button>
           </form>
         </div>
-        <router-link to="/" class="navbar-brand" href="#">
-          <span>Home page</span>
-        </router-link>
-        <router-link to="/admin" class="navbar-brand me-auto" href="#">
-          <span>Admin page</span>
-        </router-link>
-        <router-link to="/user" class="navbar-brand me-auto" href="#">
-          <span>User page</span>
-        </router-link>
         <div class="nav-interact">
           <router-link
             v-if="!$store.state.isLogin"
@@ -117,6 +108,20 @@
         </div>
       </div>
     </nav>
+    <div class="text-start p-4">
+       <router-link to="/" class="navbar-brand me-5" href="#">
+          <span>Home page</span>
+        </router-link>
+        <router-link to="/admin" class="navbar-brand me-5" href="#">
+          <span>Admin page</span>
+        </router-link>
+        <router-link to="/user" class="navbar-brand me-5" href="#">
+          <span>User page</span>
+        </router-link>
+        <router-link to="/learning" class="navbar-brand me-5" href="#">
+          <span>Learning</span>
+        </router-link>
+    </div>
   </header>
 </template>
 

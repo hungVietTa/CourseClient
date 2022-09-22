@@ -19,16 +19,20 @@
             {
               "id": 2,
               "lesson_id": 2,
-              "count": [],
-              "qualified": true
+              "count": [
+                0.3,
+                0.5
+              ],
+              "qualified": false
             },
             {
               "id": 3,
               "lesson_id": 3,
               "count": [
-                0.5
+                0.5,
+                0.7
               ],
-              "qualified": true
+              "qualified": false
             },
             {
               "id": 4,
@@ -49,6 +53,32 @@
       "password": "123456",
       "confirmPassword": "12gg6",
       "id": 2
+    },
+    {
+      "email": "",
+      "password": "",
+      "id": 3
+    },
+    {
+      "email": "",
+      "password": "",
+      "id": 4
+    },
+    {
+      "email": "sdf@gmail.com",
+      "password": "12345678",
+      "id": 5
+    },
+    {
+      "email": "",
+      "password": "",
+      "id": 6
+    },
+    {
+      "fullName": "kata",
+      "email": "kata@gmail.com",
+      "password": "12345678@A",
+      "id": 7
     }
   ],
   "courses": [

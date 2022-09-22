@@ -6,10 +6,10 @@
             <div class="row">
                 <div class="col-6 draft">
                     <div class="toolbar">
-                        <button class="my-btn" @click="play"><font-awesome-icon icon="fa-solid fa-font" /></button>
-                        <button class="my-btn" @click="check"><font-awesome-icon icon="fa-solid fa-bold" /></button>
-                        <button class="my-btn"><font-awesome-icon icon="fa-solid fa-italic" /></button>
-                        <button class="my-btn"><font-awesome-icon icon="fa-solid fa-underline" /></button>
+                        <button class="my-btn" @click="check()"><font-awesome-icon icon="fa-solid fa-font" /></button>
+                        <button class="my-btn" @click="play('strong')"><font-awesome-icon icon="fa-solid fa-bold" /></button>
+                        <button class="my-btn" @click="play('i')"> <font-awesome-icon icon="fa-solid fa-italic" /></button>
+                        <button class="my-btn" @click="play('u')"><font-awesome-icon icon="fa-solid fa-underline" /></button>
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-strikethrough" /></button>
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-list" /></button>
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-list-ol" /></button>
@@ -24,8 +24,8 @@
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-arrow-rotate-left" /></button>
                         <button class="my-btn"><font-awesome-icon icon="fa-solid fa-keyboard" /></button>
                     </div>
-                    <div  width="400" height="400" id="draft-content" ref="draft">
-                        <h1>Hello world <b>Yasuo </b><i>Riven</i>   </h1>
+                    <div width="400" height="400" id="draft-content" ref="draft">
+                        <h1>Hello world Yasuo Riven </h1>
                         <p>Atcalata</p>
                     </div>
                 </div>
@@ -38,35 +38,28 @@
 import HeaderComp from "../components/HeaderComp.vue"
 
 export default {
-    methods:{
-        play(){
-            let selection = window.getSelection()
-            let range = selection.getRangeAt(0)
-            let newNode = document.createElement("strong")
-            let textNode = document.createTextNode(selection.toString())
-            newNode.appendChild(textNode)
-            range.surroundContents(newNode)
-        },
-        check(){
-            // let menNode
-            // let newNode = document.createElement("p")
-            let range = window.getSelection().getRangeAt(0)
-            console.log(range.commonAncestorContainer)
-            // if ( ['P','H1','H2'].includes(range.commonAncestorContainer.nodeName) )
-            //     menNode = range.commonAncestorContainer
-            // else
-            //     menNode = range.commonAncestorContainer
-            // console.log(range)
-            // console.log(range.extractContents().childNodes)
-        }
-    },
     name:"BlogView",
     components:{
         HeaderComp
     },
-    
+    methods:{
+        play(type){
+            let newNode = document.createElement(type)
+            let selection = window.getSelection()
+            let range = selection.getRangeAt(0)
+            // const documentFragment = range.extractContents();
+            // console.log(documentFragment)
+            
+            // let textNode = document.createTextNode(selection.toString())
+            // newNode.appendChild(textNode)
+            range.surroundContents(newNode)
+        },
+        check(){
+            
+        }
+    },
     mounted(){
-       this.$refs.draft.contentEditable="plaintext-only"
+       this.$refs.draft.contentEditable="true"
        
     }    
 }

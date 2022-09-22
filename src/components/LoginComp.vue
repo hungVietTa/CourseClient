@@ -33,9 +33,9 @@
                             <font-awesome-icon icon="fa-solid fa-eye" />
                         </span>
                     </div>
-                    <span :class="{invisible:form.password.valid}">{{ form.password.message }}</span>
+                    <span :class="{invisible:form.password.valid}">{{ form.password.message }}</span>{{qualified}}
                 </div>
-                <input type="submit" class="btn btn-primary" value="Đăng nhập" />
+                <input type="submit" class="btn btn-submit btn-primary" :class="{'non-click':!qualified}" value="Đăng nhập" />
             </form>
         </section>
     </div>
@@ -61,6 +61,19 @@ export default {
         }
       },
     };
+  },
+  computed:{
+    qualified(){
+      let flag = true
+      for (const prop in this.form) {
+        console.log(this.form[prop].valid )
+        if ( this.form[prop].valid == false ) {
+              flag = false
+              break
+        }
+      }
+      return this.form.email.value&&flag
+    }
   },
   methods: {
     ...mapActions(["validator",'login']),
@@ -122,5 +135,9 @@ export default {
       }
     }
   }
+}
+.btn-submit.non-click {
+  // pointer-events: none;
+  cursor: not-allowed;
 }
 </style>
