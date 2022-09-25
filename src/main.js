@@ -6,7 +6,6 @@ import router from './router'
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import VueYoutube from 'vue-youtube'
- 
 
 
 // import the fontawesome core 
@@ -17,9 +16,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // import specific icons
 // import { fas } from '@fortawesome/free-solid-svg-icons'
-import { fas} from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret,faUserGraduate,faEye,faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 // add icons to the library
-library.add(fas)
+library.add(faUserSecret,faUserGraduate,faEye,faEyeSlash)
 
 // add font awesome icon component
 Vue.component('font-awesome-icon', FontAwesomeIcon)

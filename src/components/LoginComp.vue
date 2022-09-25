@@ -29,9 +29,10 @@
                                 form.password.message = res[1];
                               })
                             " />
-                        <span @click="showPassword=!showPassword">
+                        <span @click="showPassword=!showPassword" v-if="!showPassword">
                             <font-awesome-icon icon="fa-solid fa-eye" />
                         </span>
+                        <span @click="showPassword=!showPassword" v-else><font-awesome-icon icon="fa-solid fa-eye-slash" /></span>
                     </div>
                     <span :class="{invisible:form.password.valid}">{{ form.password.message }}</span>{{qualified}}
                 </div>

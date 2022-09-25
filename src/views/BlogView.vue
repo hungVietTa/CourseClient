@@ -1,247 +1,102 @@
 <template>
   <div class="blog-view">
     <header-comp />
+    <span class="ql-formats ql-save" ref="save">
+      <button class="save-btn" >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 18 18"> <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/> </svg>
+    </button>
+    </span>
+    <span class="slider" ref="slider" v-show="true">
+      <input
+        @input="resize($event.target)"
+        class="range blue"
+        min="300"
+        max="2000"
+        type="range"
+        v-model="size"
+      /> 
+      <input
+      class="size-input" @input="resize($event.target)" type="number" v-model="size"> pixel
+    </span>
     <main class="text-start">
-      <input class="title" placeholder="Title" type="text" />
-      <div class="row">
-        <div class="draft">
-          <div class="toolbar">
-            <button class="my-btn" @click="check()">
-              <font-awesome-icon icon="fa-solid fa-font" />
-            </button>
-            <button class="my-btn" @click="strongMulti()">
-              <font-awesome-icon icon="fa-solid fa-bold" />
-            </button>
-            <button class="my-btn" @click="play('i')">
-              <font-awesome-icon icon="fa-solid fa-italic" />
-            </button>
-            <button class="my-btn" @click="play('u')">
-              <font-awesome-icon icon="fa-solid fa-underline" />
-            </button>
-            <button class="my-btn" @click="heading('h1')">
-              H1
-              <!-- <font-awesome-icon icon="fa-solid fa-strikethrough" /> -->
-            </button>
-            <button class="my-btn" @click="heading('h3')">
-              H3
-              <!-- <font-awesome-icon icon="fa-solid fa-list" /> -->
-            </button>
-            <button class="my-btn" @click="heading('p')">
-              P
-              <!-- <font-awesome-icon icon="fa-solid fa-list-ol" /> -->
-            </button>
-            <button @click="fade()" class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-quote-right" />
-            </button>
-            <button @click="removeMutilStrong()" class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-arrow-down" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-code-compare" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-code" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-table-cells" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-image" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-link" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-trash" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-arrow-rotate-left" />
-            </button>
-            <button class="my-btn">
-              <font-awesome-icon icon="fa-solid fa-keyboard" />
-            </button>
-          </div>
-          <div width="400" height="400" id="draft-content" ref="draft">
-            <h1>
-              Hello world <strong>Ahris</strong>
-               <i>Garen <strong>Maokai</strong> </i> Death is like <i>the wind</i>
-            </h1>
-            <p>Atcalata</p>
-          </div>
-        </div>
+      <div class="text-editor">
+        <vue-editor :option="options" ref="textEditor" />
       </div>
     </main>
   </div>
 </template>
 <script>
 import HeaderComp from "../components/HeaderComp.vue";
+import { VueEditor } from "vue2-editor";
+
 
 export default {
+  data() {
+    return {
+      size:0,
+      imgSizes: [],
+      img: {},
+      inputResize: false,
+      textEditor: {},
+      options: {
+        modules: {
+          toolbar: false,
+        },
+      },
+      content: "",
+      node: {},
+    };
+  },
   name: "BlogView",
   components: {
     HeaderComp,
+    VueEditor,
   },
   methods: {
-    addStrong(node){
-        let newNode = document.createElement("strong")
-        newNode.appendChild(node)
-        return newNode
+    resize(target) {
+      console.log(target.value);
+      this.img.width = this.size;
     },
-    unwrapStrong(node){
-        let newNode = node.parentElement
-        while (node.firstChild) {
-            newNode.insertBefore(node.firstChild,node)
-        }
-        node.remove()
-        return newNode
-    },
-    removeMutilStrong() {
-        let el = this
-        let selection = window.getSelection();
-        let range = selection.getRangeAt(0);
-        let ancestor = range.commonAncestorContainer
-        let nodeList = ancestor.querySelectorAll("strong")
-        for ( let i = 0; i < nodeList.length; i){
-            console.log(2)
-            el.unwrapStrong(nodeList[i])
-        }
-    },
-    play(type) {
-      let newNode = document.createElement(type);
-      let selection = window.getSelection();
-      let range = selection.getRangeAt(0);
-      // const documentFragment = range.extractContents();
-      // console.log(documentFragment)
-
-      // let textNode = document.createTextNode(selection.toString())
-      // newNode.appendChild(textNode)
-      range.surroundContents(newNode);
-    },
-    strongMulti() {
-        // let el = this
-        let newNode = document.createElement("strong")
-        let selection = window.getSelection();
-        let range = selection.getRangeAt(0);
-        let fragment = range.extractContents()
-        let nodeList = fragment.childNodes
-        // console.log(nodeList[1])
-        for ( let i = 0;i< nodeList.length ;i){
-            newNode.appendChild(nodeList[i])
-        }
-        // fragment.childNodes.forEach(item=>item=el.addStrong(item))
-        range.insertNode(newNode)
-        range.selectNodeContents(newNode)
-    },
-    fade() {
-    //   let newNode = document.createElement(type);
-      let selection = window.getSelection();
-      let range = selection.getRangeAt(0);
-    //   let startNode = range.startContainer;
-    //   let startOffset = range.startOffset;
-    //   let endNode = range.endContainer;
-    //   let endOffset = range.endOffset;
-      let anchorRange = range.cloneRange(true);
-      console.log(anchorRange);
-      let oldNode = range.startContainer;
-      // let anchorRange = range.cloneRange()
-
-      // console.log(anchorRange)
-      // console.log(oldNode)
-      while (["STRONG"].includes(oldNode.nodeName) == false) {
-        oldNode = oldNode.parentElement;
-      }
-      range.selectNode(oldNode);
-      console.log(oldNode);
-      console.log(range);
-    //   let oldNodeList = oldNode.childNodes;
-      // range.selectNode(oldNode)
-      console.log(oldNode.nodeName);
-      // range.surroundContents(newNode)
-      // console.log(anchorRange)
-      // range = range.cloneRange()
-      // console.log(oldNodeList)
-      // newNode.innerHTML = oldNode.innerHTML
-      while ( oldNode.firstChild ) {
-        oldNode.parentNode.insertBefore(oldNode.firstChild,oldNode);
-      }
-      oldNode.remove()
-
-    //range.insertNode(newNode);
-    //oldNode.remove();
-    //   console.log(type);
-    //   console.log(anchorRange);
-      // anchorRange = JSON.parse(localStorage.getItem('test'))
-    //   console.log(anchorRange);
-    //   range.setStart(startNode, startOffset);
-    //   range.setEnd(endNode, endOffset);
-      // console.log(oldNode)
-      // console.log(newNode)
-      // const documentFragment = range.extractContents();
-      // console.log(documentFragment)
-
-      // let textNode = document.createTextNode(selection.toString())
-      // newNode.appendChild(textNode)
-    },
-    heading(type) {
-      let newNode = document.createElement(type);
-      let selection = window.getSelection();
-      let range = selection.getRangeAt(0);
-      let startNode = range.startContainer;
-      let startOffset = range.startOffset;
-      let endNode = range.endContainer;
-      let endOffset = range.endOffset;
-      let anchorRange = range.cloneRange(true);
-      console.log(anchorRange);
-      let oldNode = range.startContainer;
-      // let anchorRange = range.cloneRange()
-
-      // console.log(anchorRange)
-      // console.log(oldNode)
-      while (["H1", "H3", "P"].includes(oldNode.nodeName) == false) {
-        oldNode = oldNode.parentElement;
-      }
-      range.selectNode(oldNode);
-      console.log(oldNode);
-      console.log(range);
-      let oldNodeList = oldNode.childNodes;
-      // range.selectNode(oldNode)
-      console.log(oldNode.nodeName);
-      // range.surroundContents(newNode)
-      // console.log(anchorRange)
-      // range = range.cloneRange()
-      // console.log(oldNodeList)
-      // newNode.innerHTML = oldNode.innerHTML
-      for (let i = 0; i < oldNodeList.length; i) {
-        // console.log(oldNodeList)
-        newNode.appendChild(oldNodeList[0]);
-      }
-
-      range.insertNode(newNode);
-      oldNode.remove();
-      console.log(type);
-      console.log(anchorRange);
-      // anchorRange = JSON.parse(localStorage.getItem('test'))
-      console.log(anchorRange);
-      range.setStart(startNode, startOffset);
-      range.setEnd(endNode, endOffset);
-      // console.log(oldNode)
-      // console.log(newNode)
-      // const documentFragment = range.extractContents();
-      // console.log(documentFragment)
-
-      // let textNode = document.createTextNode(selection.toString())
-      // newNode.appendChild(textNode)
-    },
-    check() {
-        let selection = window.getSelection();
-        let range = selection.getRangeAt(0);
-        console.log(range)
-        let fragment = range.extractContents()
-        console.log(fragment.nodeName)
+    addSaveBtn() {
+      let el = this;
+      let temp = this.textEditor.$el.querySelector(".ql-toolbar");
+      temp.appendChild(this.$refs.save);
+      temp.appendChild(this.$refs.slider);
+      this.textEditor.$el.querySelector(".save-btn").onclick = function () {
+        // let imgList = this.textEditor.$el.querySelectorAll("img");
+        // console.log(imgList.length);
+        // for (let i = 0; i < imgList.length; i++) {
+        //   imgList.style.width = el.imgSizes[i];
+        //   imgList[i].ondblclick = function () {
+        //     el.img = imgList[i];
+        //     el.inputResize = true;
+        //   };
+        // }
+        // localStorage.setItem("imgSize", JSON.stringify(el.imgSizes));
+        localStorage.setItem(
+          "main",
+          JSON.stringify(el.textEditor.quill.getContents())
+        );
+      };
     },
   },
   mounted() {
-    this.$refs.draft.contentEditable = "plaintext-only";
+    let el = this;
+    this.textEditor = this.$refs.textEditor;
+    this.addSaveBtn();
+    this.content = JSON.parse(localStorage.getItem("main"));
+    if (this.content) this.textEditor.quill.setContents(this.content);
+    this.imgSizes = JSON.parse(localStorage.getItem("imgSizes"));
+    if (this.imgSizes) this.textEditor.quill.setContents(this.imgSizes);
+    let imgList = this.textEditor.$el.querySelectorAll("img");
+    console.log(imgList.length);
+    for (let i = 0; i < imgList.length; i++) {
+      imgList[i].ondblclick = function () {
+        el.img = imgList[i];
+        el.size = imgList[i].offsetWidth
+        el.inputResize = true;
+      };
+    }
   },
 };
 </script>
@@ -250,7 +105,27 @@ export default {
   border: none;
   outline: none;
 }
-.draft,
+.text-editor img {
+  width: 300px;
+  display: block !important;
+}
+.range {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.slider {
+  margin-left: 20px;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+}
+.size-input {
+  border: none;
+  outline: none;
+  margin-left: 5px;
+  width: 50px;
+  text-align: right;
+}
 .view {
   border: 1px solid #ccc;
 }
@@ -266,5 +141,190 @@ export default {
 }
 #draft-content {
   outline: none;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  background: rgba(59, 173, 227, 1);
+  background: -moz-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -webkit-gradient(
+    left bottom,
+    right top,
+    color-stop(0%, rgba(59, 173, 227, 1)),
+    color-stop(25%, rgba(87, 111, 230, 1)),
+    color-stop(51%, rgba(152, 68, 183, 1)),
+    color-stop(100%, rgba(255, 53, 127, 1))
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bade3 ', endColorstr='#ff357f ', GradientType=1 );
+  height: 2px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-moz-range-track {
+  -moz-appearance: none;
+  background: rgba(59, 173, 227, 1);
+  background: -moz-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -webkit-gradient(
+    left bottom,
+    right top,
+    color-stop(0%, rgba(59, 173, 227, 1)),
+    color-stop(25%, rgba(87, 111, 230, 1)),
+    color-stop(51%, rgba(152, 68, 183, 1)),
+    color-stop(100%, rgba(255, 53, 127, 1))
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bade3 ', endColorstr='#ff357f ', GradientType=1 );
+  height: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 2px solid;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  max-width: 80px;
+  position: relative;
+  bottom: 5px;
+  background-color: #1d1c25;
+  cursor: -webkit-grab;
+
+  -webkit-transition: border 1000ms ease;
+  transition: border 1000ms ease;
+}
+
+input[type="range"]::-moz-range-thumb {
+  -moz-appearance: none;
+  border: 2px solid;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  max-width: 80px;
+  position: relative;
+  bottom: 11px;
+  background-color: #1d1c25;
+  cursor: -moz-grab;
+  -moz-transition: border 1000ms ease;
+  transition: border 1000ms ease;
+}
+
+.range.blue::-webkit-slider-thumb {
+  border-color: rgb(59, 173, 227);
+}
+
+.range.ltpurple::-webkit-slider-thumb {
+  border-color: rgb(87, 111, 230);
+}
+
+.range.purple::-webkit-slider-thumb {
+  border-color: rgb(152, 68, 183);
+}
+
+.range.pink::-webkit-slider-thumb {
+  border-color: rgb(255, 53, 127);
+}
+
+.range.blue::-moz-range-thumb {
+  border-color: rgb(59, 173, 227);
+}
+
+.range.ltpurple::-moz-range-thumb {
+  border-color: rgb(87, 111, 230);
+}
+
+.range.purple::-moz-range-thumb {
+  border-color: rgb(152, 68, 183);
+}
+
+.range.pink::-moz-range-thumb {
+  border-color: rgb(255, 53, 127);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: -webkit-grabbing;
+}
+
+input[type="range"]::-moz-range-thumb:active {
+  cursor: -moz-grabbing;
 }
 </style>

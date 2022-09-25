@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderComp />
+    <HeaderComp ref="header" />
     <main>
       <div class="billboard">
         <h1>Title</h1>
@@ -107,6 +107,9 @@ export default {
   mounted(){
     this.getCourses()
     this.getTip()
+    this.$refs.header.$el.querySelector('input').onclick = function(){
+      console.log(2)
+    }
   }
 };
 </script>
