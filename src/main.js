@@ -7,7 +7,6 @@ import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import VueYoutube from 'vue-youtube'
 
-
 // import the fontawesome core 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
