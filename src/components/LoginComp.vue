@@ -1,52 +1,73 @@
 <template>
-    <div class="login">
-        <section class="login-section mt-5">
-            <h3>Đăng nhập</h3>
-            <form @submit.prevent="login(form)" class="login-form">
-                <div class="form-item" :class="{ invalid: !form.email.valid }">
-                    <label for="email">Email</label>
-                    <div class="input-field">
-                        <input type="text" name="email" placeholder="Email của bạn" v-model="form.email.value"
-                            @focusout="
-                              validator(['email', form.email.value]).then((res) => {
-                                form.email.valid = res[0];
-                                form.email.message = res[1];
-                              })
-                            " />
-                    </div>
-                    <span :class="{invisible:form.email.valid}">{{ form.password.message }}</span>
-                </div>
-                <div class="form-item" :class="{ invalid: !form.password.valid }">
-                    <label for="password">Mật khẩu</label>
-                    <div class="input-field">
-                        <input :type="showPassword?'text':'password'" name="password" placeholder="Mật khẩu của bạn"
-                            v-model="form.password.value" @focusout="
-                              validator([
-                                'password',
-                                form.password.value
-                              ]).then((res) => {
-                                form.password.valid = res[0];
-                                form.password.message = res[1];
-                              })
-                            " />
-                        <span @click="showPassword=!showPassword" v-if="!showPassword">
-                            <font-awesome-icon icon="fa-solid fa-eye" />
-                        </span>
-                        <span @click="showPassword=!showPassword" v-else><font-awesome-icon icon="fa-solid fa-eye-slash" /></span>
-                    </div>
-                    <span :class="{invisible:form.password.valid}">{{ form.password.message }}</span>{{qualified}}
-                </div>
-                <input type="submit" class="btn btn-submit btn-primary" :class="{'non-click':!qualified}" value="Đăng nhập" />
-            </form>
-        </section>
-    </div>
+  <div class="login">
+    <section class="login-section mt-5">
+      <h3>Đăng nhập</h3>
+      <form @submit.prevent="submit(form)" class="login-form">
+        <div class="form-item" :class="{ invalid: !form.email.valid }">
+          <label for="email">Email</label>
+          <div class="input-field">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email của bạn"
+              v-model="form.email.value"
+              v-keyup="
+                () =>
+                  (form.email.valid =
+                    validator.empty(form.email) && validator.email(form.email))
+              "
+            />
+          </div>
+          <span :class="{ invisible: form.email.valid }">{{
+            form.email.message
+          }}</span>
+        </div>
+        <div class="form-item" :class="{ invalid: !form.password.valid }">
+          <label for="password">Mật khẩu</label>
+          <div class="input-field">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              name="password"
+              placeholder="Mật khẩu của bạn"
+              v-model="form.password.value"
+              v-keyup="
+                () =>
+                  (form.password.valid =
+                    validator.empty(form.password) &&
+                    validator.password(form.password))
+              "
+            />
+            <span @click="showPassword = !showPassword" v-if="!showPassword">
+              <font-awesome-icon icon="fa-solid fa-eye" />
+            </span>
+            <span @click="showPassword = !showPassword" v-else
+              ><font-awesome-icon icon="fa-solid fa-eye-slash"
+            /></span>
+          </div>
+          <span :class="{ invisible: form.password.valid }">{{
+            form.password.message
+          }}</span>
+        </div>
+        <input
+          type="submit"
+          class="btn btn-submit btn-primary"
+          value="Đăng nhập"
+        />
+        <br /><span class="invalid" :class="{ invisible: formValid }"
+          >Hãy chắc rằng các mục đã được nhập đúng và không bị bỏ trống</span
+        >
+      </form>
+    </section>
+  </div>
 </template>
 <script>
 import { mapActions } from "vuex";
+import validator from "../mfsmodule/validator.js";
 
 export default {
-    data() {
+  data() {
     return {
+      formValid: true,
       showPassword: false,
       passwordToggle: false,
       form: {
@@ -59,30 +80,56 @@ export default {
           value: "",
           valid: true,
           message: "",
-        }
+        },
       },
     };
   },
-  computed:{
-    qualified(){
-      let flag = true
-      for (const prop in this.form) {
-        console.log(this.form[prop].valid )
-        if ( this.form[prop].valid == false ) {
-              flag = false
-              break
-        }
-      }
-      return this.form.email.value&&flag
-    }
+  computed: {
+    // qualified(){
+    //   let flag = true
+    //   for (const prop in this.form) {
+    //     console.log(this.form[prop].valid )
+    //     if ( this.form[prop].valid == false ) {
+    //           flag = false
+    //           break
+    //     }
+    //   }
+    //   return this.form.email.value&&flag
+    // }
   },
   methods: {
-    ...mapActions(["validator",'login']),
-    print() {
-      console.log(this.form.password.valid);
+    ...mapActions(["validator"]),
+    submit(form) {
+      if (!this.validator.general(form)) {
+        this.formValid = false;
+        return;
+      }
+      this.formValid = true;
     },
-  }
-}
+    debounce(func, timeout = 300) {
+      let timer;
+      return function () {
+        clearTimeout(timer);
+        setTimeout(func, timeout);
+      }
+    }
+  },
+  directives: {
+    keyup: {
+      // directive definition
+      inserted: function (el, binding, vNode) {
+        let process = vNode.context.debounce(binding.value);
+        el.addEventListener("keyup", process);
+        let process2 = vNode.context.debounce(binding.value, 0);
+        el.addEventListener("focusout", process2);
+      },
+    },
+  },
+
+  mounted() {
+    this.validator = validator;
+  },
+};
 </script>
 <style scoped lang="scss">
 .login {
@@ -115,14 +162,14 @@ export default {
             cursor: pointer;
           }
         }
-      } 
-        span {
-          display: block;
-          height: 20px;
-        }
-        span.invisible {
-          visibility: hidden;
-        }
+      }
+      span {
+        display: block;
+        height: 20px;
+      }
+      span.invisible {
+        visibility: hidden;
+      }
       .form-item.invalid {
         .input-field {
           border: 1px solid rgb(233, 93, 93);
@@ -141,4 +188,8 @@ export default {
   // pointer-events: none;
   cursor: not-allowed;
 }
+span.invalid {
+  color: rgb(218, 64, 47);
+}
+
 </style>

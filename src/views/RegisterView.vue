@@ -5,24 +5,19 @@
       <h3>
         Bắt đầu hành trình của bạn
       </h3>
-      <form @submit.prevent="register(form)" class="register-form">
-        <div class="form-item" :class="{ invalid: !form.fullName.valid }">
+      <form @submit.prevent="submit(form)" class="register-form">
+        <div class="form-item" :class="{ invalid: !form.name.valid }">
           <label for="fullName">Tên của bạn ?</label>
           <div class="input-field">
             <input
               type="text"
               name="fullName"
               placeholder="Họ và tên"
-              v-model="form.fullName.value"
-              @focusout="
-                validator(['name', form.fullName.value]).then((res) => {
-                  form.fullName.valid = res[0];
-                  form.fullName.message = res[1];
-                })
-              "
+              v-model="form.name.value"
+              v-keyup="() => form.name.valid = validator.empty(form.name) && validator.name(form.name)"
             />
           </div>
-          <span :class="{invisible:form.fullName.valid}">{{ form.fullName.message }}</span>
+          <span :class="{invisible:form.name.valid}">{{ form.name.message }}</span>
         </div>
         <div class="form-item" :class="{ invalid: !form.email.valid }">
           <label for="email">Email</label>
@@ -32,41 +27,33 @@
               name="email"
               placeholder="Email của bạn"
               v-model="form.email.value"
-              @focusout="
-                validator(['email', form.email.value]).then((res) => {
-                  form.email.valid = res[0];
-                  form.email.message = res[1];
-                })
-              "
+              v-keyup="()=> form.email.valid = validator.empty(form.email) && validator.email(form.email)"
             />
           </div>
-          <span :class="{invisible:form.email.valid}">{{ form.email.message }}</span>
+          <span :class="{ invisible: form.email.valid }">{{
+            form.email.message 
+          }}</span>
         </div>
         <div class="form-item" :class="{ invalid: !form.password.valid }">
           <label for="password">Mật khẩu</label>
           <div class="input-field">
             <input
-              :type="showPassword?'text':'password'"
+              :type="showPassword ? 'text' : 'password'"
               name="password"
               placeholder="Mật khẩu của bạn"
               v-model="form.password.value"
-              @focusout="
-                validator([
-                  'password',
-                  form.password.value,
-                  form.confirmPassword.value,
-                ]).then((res) => {
-                  form.password.valid = res[0];
-                  form.password.message = res[1];
-                  form.confirmPassword.valid = res[2] && passwordToggle;
-                  form.confirmPassword.message = res[3];
-                })
-              "
+              v-keyup="()=>{form.password.valid = validator.empty(form.password) && validator.password(form.password) ; validator.confirm(form.password,form.confirmPassword)}"
             />
-            <span @click="showPassword=!showPassword" v-if="!showPassword"><font-awesome-icon icon="fa-solid fa-eye" /></span>
-            <span @click="showPassword=!showPassword" v-else><font-awesome-icon icon="fa-solid fa-eye-slash" /></span>
+            <span @click="showPassword = !showPassword" v-if="!showPassword">
+              <font-awesome-icon icon="fa-solid fa-eye" />
+            </span>
+            <span @click="showPassword = !showPassword" v-else
+              ><font-awesome-icon icon="fa-solid fa-eye-slash"
+            /></span>
           </div>
-          <span :class="{invisible:form.password.valid}">{{ form.password.message }}</span>
+          <span :class="{ invisible:form.password.valid }">{{
+            form.password.message
+          }}</span>
         </div>
         <div
           class="form-item"
@@ -79,17 +66,7 @@
               name="confirmPassword"
               placeholder="Xác nhận mật khẩu"
               v-model="form.confirmPassword.value"
-              @focus="passwordToggle = true"
-              @focusout="
-                validator([
-                  'confirm',
-                  form.confirmPassword.value,
-                  form.password.value,
-                ]).then((res) => {
-                  form.confirmPassword.valid = res[0];
-                  form.confirmPassword.message = res[1];
-                })
-              "
+              v-keyup="()=>form.confirmPassword.valid = validator.empty(form.confirmPassword) && validator.password(form.confirmPassword)&& validator.confirm(form.password,form.confirmPassword)"
             />
             <span @click="showConfirmPassword=!showConfirmPassword" v-if="!showConfirmPassword"><font-awesome-icon icon="fa-solid fa-eye" /></span>
             <span @click="showConfirmPassword=!showConfirmPassword" v-else><font-awesome-icon icon="fa-solid fa-eye-slash" /></span>
@@ -99,6 +76,9 @@
           }}</span>
         </div>
         <input type="submit"  class="btn btn-primary" value="Đăng ký">
+         <br /><span class="invalid" :class="{ invisible: formValid }"
+          >Hãy chắc rằng các mục đã được nhập đúng và không bị bỏ trống</span
+        >
       </form>
     </section>
   </div>
@@ -106,15 +86,16 @@
 <script>
 import { mapActions } from "vuex";
 import HeaderComp from "../components/HeaderComp.vue";
+import validator from "../mfsmodule/validator.js";
 
 export default {
   data() {
     return {
+      formValid:true,
       showPassword: false,
       showConfirmPassword: false,
-      passwordToggle: false,
       form: {
-        fullName: {
+        name: {
           value: "",
           valid: true,
           message: "",
@@ -132,21 +113,46 @@ export default {
         confirmPassword: {
           value: "",
           valid: true,
-          message: "a",
+          message: "",
         },
       },
     };
   },
   methods: {
-    ...mapActions(["validator",'register']),
-    print() {
-      console.log(this.form.password.valid);
+     ...mapActions([]),
+    submit(form) {
+      if (!this.validator.general(form)) {
+        this.formValid = false;
+        return;
+      }
+      this.formValid = true
     },
+    debounce(func,timeout=500){
+      let timer;
+      return function(){
+        clearTimeout(timer)
+        setTimeout(func,timeout)
+      }
+    }
   },
   components: {
     HeaderComp,
   },
-};
+  directives: {
+  keyup: {
+    // directive definition
+    inserted: function (el,binding,vNode) {
+    let process = vNode.context.debounce(binding.value)
+    el.addEventListener('keyup',process)
+    let process2 =  vNode.context.debounce(binding.value,0)
+    el.addEventListener('focusout',process2)
+  } 
+  } 
+  },
+   mounted() {
+    this.validator = validator;
+  }
+}
 </script>
 <style scoped lang="scss">
 .register {
@@ -206,5 +212,7 @@ export default {
     }
   }
 }
-
+span.invalid {
+  color:  salmon;
+}
 </style>
