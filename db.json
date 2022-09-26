@@ -192,5 +192,64 @@
       "video": "lKUR4mu1M-U",
       "course_id": 4
     }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "content": "This is perfection.  One of the most beautiful EDM songs in the world.",
+      "children": [
+        {
+          "content": "Yup bro love it!"
+        },
+        {
+          "content": "Love it, Do you know another song like this bro?"
+        },
+        {
+          "content": "My opinion its same :')"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "content": "The build-up of the beats are awsome man, keep it up Xomu",
+      "children": [
+        {
+          "content": "you're the masterpiece"
+        },
+        {
+          "content": "This is perfection.  One of the most beautiful EDM songs in the world."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "content": "3:02 The rise in the pitch is fire 🔥",
+      "children": []
+    },
+    {
+      "id": 4,
+      "content": "I've heard it so many times, but I don't get bored, it's great. Thank the author very much. ",
+      "children": [
+        {
+          "content": "Chủ kênh là người Việt =)))"
+        },
+        {
+          "content": "Me he enamorado completamente de esta canción!!!"
+        },
+        {
+          "content": "I like that! :D"
+        }
+      ]
+    },
+    {
+      "content": "Thanks to the quarantine isolation I found this Drama.  and fell in love with this one. ",
+      "children":[],
+      "id": 5
+    },
+    { 
+      "content":"I Can't tell because I'm drunk",
+      "children":[],
+      "id": 6
+    }
   ]
 }
