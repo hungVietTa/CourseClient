@@ -21,7 +21,12 @@
         <div class="navbar-collapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link class="nav-link active" aria-current="page" to="/about">Giới thiệu</router-link>
+              <router-link
+                class="nav-link active"
+                aria-current="page"
+                to="/about"
+                >Giới thiệu</router-link
+              >
             </li>
             <li class="nav-item dropdown">
               <router-link
@@ -102,25 +107,25 @@
                   Logout
                 </button>
               </li>
-
             </ul>
           </div>
         </div>
       </div>
     </nav>
     <div class="text-start p-4">
-       <router-link to="/" class="navbar-brand me-5" href="#">
-          <span>Home page</span>
-        </router-link>
-        <router-link to="/admin" class="navbar-brand me-5" href="#">
-          <span>Admin page</span>
-        </router-link>
-        <router-link to="/user" class="navbar-brand me-5" href="#">
-          <span>User page</span>
-        </router-link>
-        <router-link to="/learning" class="navbar-brand me-5" href="#">
-          <span>Learning</span>
-        </router-link>
+      <router-link to="/" class="navbar-brand me-5" href="#">
+        <span>Home page</span>
+      </router-link>
+      <router-link to="/admin" class="navbar-brand me-5" href="#">
+        <span>Admin page</span>
+      </router-link>
+      <router-link to="/user" class="navbar-brand me-5" href="#">
+        <span>User page</span>
+      </router-link>
+      <router-link to="/learning" class="navbar-brand me-5" href="#">
+        <span>Learning</span>
+      </router-link>
+      <button @click="send">PROFILE</button>
     </div>
   </header>
 </template>
@@ -135,7 +140,11 @@ export default {
       userToggle: false,
     };
   },
-  methods: {
+  methods: {send(){
+    const header = {Authorization:"Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjY1NTY0ODg5fQ.-J3L-LkuGEU8kLP-uL95qmLDbmvDqqT_mB_CuNvoDMI"}
+      this.axios.get('http://127.0.0.1:3000/api/v1/users/profile',{headers:header}).then(res=>console.log(res.data)).catch(res=>console.log(res))
+      
+    },
     ...mapActions(["logout"]),
   },
   mounted(){

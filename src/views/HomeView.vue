@@ -105,8 +105,8 @@ export default {
     HeaderComp,
   },
   mounted(){
-    this.getCourses()
-    this.getTip()
+    // this.getCourses()
+    // this.getTip()
     this.$refs.header.$el.querySelector('input').onclick = function(){
       console.log(2)
     }

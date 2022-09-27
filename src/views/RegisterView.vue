@@ -119,13 +119,14 @@ export default {
     };
   },
   methods: {
-     ...mapActions([]),
+     ...mapActions(["register"]),
     submit(form) {
       if (!this.validator.general(form)) {
         this.formValid = false;
         return;
       }
       this.formValid = true
+      this.register(this.form)
     },
     debounce(func,timeout=500){
       let timer;

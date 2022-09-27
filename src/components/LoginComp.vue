@@ -98,13 +98,14 @@ export default {
     // }
   },
   methods: {
-    ...mapActions(["validator"]),
+    ...mapActions(["login"]),
     submit(form) {
       if (!this.validator.general(form)) {
         this.formValid = false;
         return;
       }
       this.formValid = true;
+      this.login(this.form)
     },
     debounce(func, timeout = 300) {
       let timer;
