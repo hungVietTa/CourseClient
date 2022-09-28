@@ -76,8 +76,8 @@
           }}</span>
         </div>
         <input type="submit"  class="btn btn-primary" value="Đăng ký">
-         <br /><span class="invalid" :class="{ invisible: formValid }"
-          >Hãy chắc rằng các mục đã được nhập đúng và không bị bỏ trống</span
+         <br /><span class="invalid" :class="{ invisible: form.server.validate }"
+          >{{form.server.message}}</span
         >
       </form>
     </section>
@@ -91,10 +91,14 @@ import validator from "../mfsmodule/validator.js";
 export default {
   data() {
     return {
-      formValid:true,
       showPassword: false,
       showConfirmPassword: false,
       form: {
+        server:{
+          value:true,
+          validate:true,
+          message:"Hãy chắc rằng các mục đã được nhập đúng và không bị bỏ trống"
+        },
         name: {
           value: "",
           valid: true,
@@ -122,10 +126,10 @@ export default {
      ...mapActions(["register"]),
     submit(form) {
       if (!this.validator.general(form)) {
-        this.formValid = false;
+        this.form.server.valid= false;
         return;
       }
-      this.formValid = true
+      this.form.server.valid= true
       this.register(this.form)
     },
     debounce(func,timeout=500){

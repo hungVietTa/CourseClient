@@ -33,11 +33,6 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-router.beforeEach((to,from,next) => {
-  if ( ( store.state.isLogin == true && to.name == 'login' ) || ( store.state.isLogin == true && to.name == 'register' ))
-    next({name:'home'})
-  else next()
-})
 
 
 

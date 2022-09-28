@@ -12,8 +12,8 @@
           <h3>User page</h3>
         </router-link>
         <div class="nav-interact">
-          <router-link v-if="!$store.state.isLogin" to="/admin/login" class="btn btn-primary me-3">Login</router-link>
-          <button v-if="$store.state.isLogin" @click="logout" class="btn btn-primary">Logout</button>
+          <router-link v-if="!$store.state.isAdminLogin&&$route.path!='/admin/login'" to="/admin/login" class="btn btn-primary me-3">Login</router-link>
+          <button v-if="$store.state.isAdminLogin" @click="logout" class="btn btn-primary">Logout</button>
         </div>
       </div>
     </nav>

@@ -53,8 +53,8 @@
           class="btn btn-submit btn-primary"
           value="Đăng nhập"
         />
-        <br /><span class="invalid" :class="{ invisible: formValid }"
-          >Hãy chắc rằng các mục đã được nhập đúng và không bị bỏ trống</span
+        <br /><span class="invalid" :class="{ invisible: form.server.validate }"
+          >{{form.server.message}}</span
         >
       </form>
     </section>
@@ -65,12 +65,22 @@ import { mapActions } from "vuex";
 import validator from "../mfsmodule/validator.js";
 
 export default {
+  props:{
+    role:{
+      type:String,
+      default:"user"
+    }
+  },
   data() {
     return {
-      formValid: true,
       showPassword: false,
       passwordToggle: false,
       form: {
+        server:{
+          value:true,
+          validate:true,
+          message:"Hãy chắc rằng các mục đã được nhập đúng và không bị bỏ trống"
+        },
         email: {
           value: "",
           valid: true,
@@ -101,11 +111,11 @@ export default {
     ...mapActions(["login"]),
     submit(form) {
       if (!this.validator.general(form)) {
-        this.formValid = false;
+        this.form.server.validate = false;
         return;
       }
-      this.formValid = true;
-      this.login(this.form)
+      this.form.server.validate = true;
+      this.login([this.form,this.role])
     },
     debounce(func, timeout = 300) {
       let timer;

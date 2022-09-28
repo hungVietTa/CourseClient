@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import store from '../store/index.js'
 
 Vue.use(VueRouter)
 
@@ -72,10 +73,16 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue'),
-    children:[
+    children: [
       {
         path: 'login',
+        name: 'admin.login',
         component: () => import(/* webpackChunkName: "about" */ '../components/LoginComp.vue'),
+      },
+      {
+        path: 'courses-management',
+        name: 'admin.courses.management',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminCoursesManagementComp.vue'),
       },
     ]
   },
@@ -86,7 +93,7 @@ const routes = [
     path: '/user',
     name: 'user',
     component: () => import(/* webpackChunkName: "about" */ '../views/UserView.vue'),
-    children:[
+    children: [
       {
         path: 'profile',
         component: () => import(/* webpackChunkName: "about" */ '../components/UserProfileComp.vue'),
@@ -109,7 +116,7 @@ const routes = [
       },
     ]
   }
- 
+
 ]
 
 const router = new VueRouter({
@@ -117,5 +124,22 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if ((store.state.isUserLogin == true && to.name == 'login') || (store.state.isUserLogin == true && to.name == 'register'))
+    next({ name: 'home' })
+  else if ((store.state.isAdminLogin == true && to.path == '/admin/login'))
+    next({ name: 'admin' })
+  else if (store.state.isAdminLogin == false && store.state.isUserLogin == true && (to.path == '/admin/login' || to.path == '/admin'))
+    {
+      alert("tai khoan cua ban khong du quyen truy cap trang nay")
+      next({ name:from.name })
+    }
+  else if (store.state.isAdminLogin == false && store.state.isUserLogin == false && to.path == '/admin')
+      next({ name: 'admin.login' })
+  else 
+    next()
+  }
+)
 
 export default router

@@ -76,18 +76,18 @@
         </div>
         <div class="nav-interact">
           <router-link
-            v-if="!$store.state.isLogin"
+            v-if="!$store.state.isUserLogin"
             to="/login"
             class="btn btn-primary me-3"
             >Login</router-link
           >
           <router-link
-            v-if="!$store.state.isLogin"
+            v-if="!$store.state.isUserLogin"
             to="/register"
             class="btn btn-primary"
             >Register</router-link
           >
-          <div class="dropdown me-2" v-if="$store.state.isLogin">
+          <div class="dropdown me-2" v-if="$store.state.isUserLogin">
             <button
               class="btn btn-primary dropdown-toggle"
               @click="userToggle = !userToggle"
@@ -100,7 +100,7 @@
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li>
                 <button
-                  v-if="$store.state.isLogin"
+                  v-if="$store.state.isUserLogin"
                   @click="logout"
                   class="btn btn-primary"
                 >
@@ -131,23 +131,26 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions,mapState } from "vuex";
 
 export default {
   name: "HeaderComp",
   data() {
     return {
-      userToggle: false,
-    };
+      userToggle: false
+    }
   },
+  computed:mapState({
+    token: state =>state.token
+  }),
   methods: {send(){
-    const header = {Authorization:"Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjY1NTY0ODg5fQ.-J3L-LkuGEU8kLP-uL95qmLDbmvDqqT_mB_CuNvoDMI"}
+    const header = {Authorization:`Bearer ${this.token}`}
       this.axios.get('http://127.0.0.1:3000/api/v1/users/profile',{headers:header}).then(res=>console.log(res.data)).catch(res=>console.log(res))
-      
     },
     ...mapActions(["logout"]),
   },
   mounted(){
+    
   }
 };
 </script>

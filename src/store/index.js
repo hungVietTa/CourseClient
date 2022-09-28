@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-// import router from '../router'
+import router from '../router'
 import VuexPersistence from 'vuex-persist'
 
 const vuexLocal = new VuexPersistence({
@@ -12,28 +12,70 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isUserLogin:false,
+    isAdminLogin:false,
+    token:""
   },
   getters: {
   },
   mutations: {
-    toggleLogin(state) {
-      state.isLogin = !state.isLogin
+    toggleUserLogin(state) {
+      state.isUserLogin = !state.isUserLogin
+    },
+    toggleAdminLogin(state){
+      state.isAdminLogin = !state.isAdminLogin
+      state.isUserLogin = !state.isUserLogin
+    },
+    setToken(state,token){
+      state.token = token
     }
   },
   actions: {
-    login(context,form){
+    login(context,[form,role]) {
       {
         axios.post("http://127.0.0.1:3000/api/v1/users/login",
-        {
-          'email': form.email.value,
-          'password': form.password.value,
-        }
-      ).then(res=>console.log(res)).catch(err=>console.log(err))
-    }
-  },
+          {
+            'email': form.email.value,
+            'password': form.password.value,
+          }
+        )
+        .then(res => {
+          context.commit('setToken',res.data.token)
+          if ( role == "admin")
+            {
+              context.commit('toggleAdminLogin')
+              router.push('/admin')
+            }
+          else 
+            {
+              context.commit('toggleUserLogin')
+              router.push('/')
+            } 
+        })
+        .catch(error => {
+          if (error.response) {
+            form.server.validate = false
+            if (error.response.data)
+            {
+            form.server.message = error.response.data.message
+            form.password.value = ""
+            }
+            else
+              form.server.message = "Vui lòng kiểm tra lại kết nối của bạn"
+          }
+          else if (error.request) {
+            form.server.validate = false
+            form.server.message = "Vui lòng kiểm tra lại kết nối của bạn"
+          }
+          else
+            { form.server.validate = false
+              form.server.message = "Lỗi không xác định, vui lòng thử lại sau giây lát" }
+        })
+      }
+    },
     // REGISTER 
-     register(context, form) {
-        axios.post("http://127.0.0.1:3000/api/v1/users/register",
+    register(context, form) {
+      axios.post("http://127.0.0.1:3000/api/v1/users/register",
         {
           'name': form.name.value,
           'email': form.email.value,
@@ -41,53 +83,45 @@ export default new Vuex.Store({
           'password_confirmation': form.confirmPassword.value
         }
       )
-      .then(res => console.log(res)).catch(err =>console.log(err))
-// if (result.ok)
-//   router.push('/login')
-// else
-//   alert("Oops something wrong with server")
-//     },
-//     async login(context, form) {
-//   if (form) {
-//     1 + 1
-//   }
-  // router.push(router.currentRoute.path.replace('/login', '/'))
-  // context.commit('toggleLogin')
-  // try {
-  //   let result = await fetch("http://localhost:3000/users",{
-  //   method:'POST',
-  //   mode:"cors",
-  //   cache:'no-cache',
-  //   credentials:'same-origin',
-  //   headers:{
-  //     'Content-Type':'application/json'
-  //   },
-  //   redirect:'follow',
-  //   referrerPolicy:'no-referrer',
-  //   body:JSON.stringify({
-  //     'email':form.email.value,
-  //     'password':form.password.value
-  //   })
-  // })
-  // .then(res=>res)
-  // if (result.ok)
-  //   {
-  //     router.push( '/' )
-  //     context.commit('toggleLogin')
-  //   }
-  // else
-  //   alert("Oops something wrong with server")
-  // }
-  // catch (err){
-  //   console.log(err)
-  // }
-},
-logout(context) {
-  context.commit('toggleLogin')
-}
+      .then(() => {
+        alert("Register succesfully !")
+        router.push('/login')
+      })
+      .catch(error => {
+        if (error.response) {
+          form.server.validate = false
+          if (error.response.data)
+          {
+          form.server.message = error.response.data.message
+          form.password.value = ""
+          }
+          else
+          form.server.message = "Vui lòng kiểm tra lại kết nối của bạn"
+        }
+        else if (error.request) {
+          form.server.validate = false
+          form.server.message = "Vui lòng kiểm tra lại kết nối của bạn"
+        }
+        else
+          { form.server.validate = false
+            form.server.message = "Lỗi không xác định, vui lòng thử lại sau giây lát" }
+      })
+    },
+      logout(context) {
+      if ( context.state.isAdminLogin == true)
+        {
+          context.commit('toggleAdminLogin')
+          router.push("/admin/login")
+        }
+      else 
+        {
+          context.commit('toggleUserLogin')
+          router.push("/login")
+        }
+    }
   },
-modules: {
-},
-plugins: [vuexLocal.plugin]
+  modules: {
+  },
+  plugins: [vuexLocal.plugin]
 })
 
