@@ -3,8 +3,9 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{modaltitle}}</h5>
+          <h5 class="modal-title">{{ modaltitle }}</h5>
           <button
+            @click="cancel"
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
@@ -12,47 +13,62 @@
           ></button>
         </div>
         <div class="modal-body">
-          <p>{{modalbody}}</p>
+          <p>{{ modalbody }}</p>
         </div>
         <div class="modal-footer">
           <button
+            @click="cancel"
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
-            {{modalcancel}}
+            {{ modalcancel }}
           </button>
-          <button type="button" class="btn btn-primary">{{modalconsent}}</button>
+          <button type="button" @click="process" class="btn btn-primary">
+            {{ modalconsent }}
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-
 export default {
-    props:{
-        modaltitle:{
-            type:String,
-            default:''
-        },
-        modalbody:{
-            type:String,
-             default:''
-        },
-        modalcancel:{
-            type:String,
-             default:''
-        },
-        modalconsent:{
-            type:String,
-             default:''
-        }
+  data() {
+    return {
+      show:false
     }
-}
+  },
+  methods:{
+    cancel(){
+      this.$emit('cancel')
+    },
+    process(){
+      this.$emit('process')
+    }
+  },
+  props: {
+    modaltitle: {
+      type: String,
+      default: "",
+    },
+    modalbody: {
+      type: String,
+      default: "",
+    },
+    modalcancel: {
+      type: String,
+      default: "",
+    },
+    modalconsent: {
+      type: String,
+      default: "",
+    },
+  },
+};
 </script>
 <style scoped>
 .modal {
-    display: block;
+  display: block;
 }
 </style>

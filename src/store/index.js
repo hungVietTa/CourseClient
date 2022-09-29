@@ -111,11 +111,13 @@ export default new Vuex.Store({
       if ( context.state.isAdminLogin == true)
         { 
           context.commit('toggleAdminLogin')
+          context.commit('setToken','')
           router.push("/admin/login")
         }
       else 
         {
           context.commit('toggleUserLogin')
+          context.commit('setToken','')
           router.push("/login")
         }
     }

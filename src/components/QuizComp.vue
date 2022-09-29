@@ -2,10 +2,17 @@
   <div>
     <header-comp />
     <main>
-      <h1 v-show="done">
-        You are finished with score {{ score }}/{{ 10 * list.length }}
-      </h1>
-      <ul v-show="!done">
+      <div v-if="enrolling">
+        <h1>{{ examTitle }}</h1>
+        <p>
+          The exam including {{ list.length }} questions with the time limit of
+          15 minutes. You will pass the test by correcting at least
+          {{ minimum }}/{{ list.length }} of them
+        </p>
+        <p>Are you ready</p>
+        <button @click="start">Ready</button>
+      </div>
+      <ul >
         <div class="btn-group">
           <button
             @click="currentId = currentId - 1"
@@ -34,7 +41,7 @@
           <div class="content" v-show="currentId == item.id">
             <p>{{ item.question }}</p>
             <div v-for="(value, key) in item.answers" :key="key" class="mt-2">
-              <label v-if="value != null">
+              <label v-if="value != null" :class="{incorrect:key==item.choice && key!=solutions[index]&&solutions.length,correct:key==solutions[index]}">
                 <input
                   type="radio"
                   :value="key"
@@ -46,10 +53,34 @@
             </div>
           </div>
         </li>
-        <button @click="unfinishedCheck" class="btn btn-primary mt-4">Submit</button>
+        <p>{{ countDown }}</p>
+        <button
+          @click="unfinishedCheck"
+          v-show="processing"
+          class="btn btn-primary mt-4"
+        >
+          Submit
+        </button>
       </ul>
+      <div v-if="done">
+        <p v-if="timeout">
+          Thời gian làm bài đã kết thúc, kết quả của bạn đã tự động được nộp
+        </p>
+        <h2>You are finished with score {{ score }}/{{ 10 * list.length }}</h2>
+        <button>Show result</button>
+        <div v-if="pass">
+          <p>Congratulation !</p>
+          <button>Explore next lesson</button>
+        </div>
+        <div v-if="!pass">
+          <p>We was so sorry but ...</p>
+          <button @click="tryAgain">Try again</button>
+        </div>
+      </div>
     </main>
     <modal-comp
+      @cancel="callOf"
+      @process="keepUp"
       :modaltitle="''"
       :modalbody="
         'Bạn vẫn chưa chọn đáp án cho các câu : ' +
@@ -65,16 +96,27 @@
 <script>
 import HeaderComp from "./HeaderComp.vue";
 import ModalComp from "./ModalComp.vue";
+import { startTimer } from "../mfsmodule/timer.js";
 
 export default {
   data() {
     return {
+      solutions: [],
+      timeout: false,
+      interval: 0,
+      countDown: "",
+      examTitle: "Challenger",
+      pass: false,
+      enrolling: true,
+      done: false,
+      processing: false,
+      time: 15,
+      minimum: 5,
       list: [],
       currentId: 1,
       score: 0,
-      done: false,
       modal: false,
-      remains:''
+      remains: "",
     };
   },
   computed: {
@@ -92,23 +134,46 @@ export default {
     ModalComp,
   },
   methods: {
-    unfinishedCheck(){
-        console.log(2)
-        this.list.forEach(item => {
-        if (item.choice == "") 
-          this.remains+=item.id+' ';
-        })
-        if ( this.remains == '')
-            this.submit()
-        else 
-            this.modal = true
+    startTimer() {},
+    start() {
+      this.processing = true;
+      this.enrolling = false;
+      this.interval = this.startTimer(this.time, this.submit, this);
     },
-    submit(){
-        this.list.forEach((item)=>{
-        if (item.choice == item.correct_answer) 
-            this.score += 10;})
+    unfinishedCheck() {
+      console.log(2);
+      this.list.forEach((item) => {
+        if (item.choice == "") this.remains += item.id + " ";
+      });
+      if (this.remains == "") this.submit();
+      else this.modal = true;
+    },
+    submit() {
+      if (this.interval) clearInterval(this.interval);
+      this.list.forEach((item) => {
+        this.solutions.push(item.correct_answer)
+      });
+      console.log(this.solutions)
+      this.list.forEach((item) => {
+        if (item.choice == item.correct_answer) this.score += 10;
+      });
+      if (this.score >= 10 * this.minimum) this.pass = true;
+      else this.pass = false;
       this.done = true;
-      this.modal = false
+      this.processing = false;
+      this.modal = false;
+    },
+    keepUp() {
+      this.submit();
+      this.modal = false;
+    },
+    callOf() {
+      this.modal = false;
+    },
+    tryAgain() {
+      this.enrolling = true;
+      this.done = false;
+      this.timeout = false;
     },
     async post(list) {
       for (let i = 0; i < this.list.length; i++) {
@@ -118,12 +183,15 @@ export default {
         delete list[i].id;
         await this.axios.post("http://localhost:4000/quiz", list[i]);
       }
-    }
+    },
   },
   mounted() {
+    this.startTimer = startTimer;
     this.axios.get("http://localhost:4000/quiz").then((res) => {
       this.list = res.data;
-      this.list.forEach((item) => (item.choice = ""));
+      this.list.forEach((item) => {
+        item.choice = "";
+      });
     });
   },
 };
@@ -152,5 +220,11 @@ li {
 }
 .btn.active {
   background-color: #bbb;
+}
+.correct {
+  color: green;
+}
+.incorrect {
+  color: salmon;
 }
 </style>
