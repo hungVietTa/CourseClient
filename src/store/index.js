@@ -109,7 +109,7 @@ export default new Vuex.Store({
     },
       logout(context) {
       if ( context.state.isAdminLogin == true)
-        {
+        { 
           context.commit('toggleAdminLogin')
           router.push("/admin/login")
         }

@@ -125,6 +125,12 @@
       <router-link to="/learning" class="navbar-brand me-5" href="#">
         <span>Learning</span>
       </router-link>
+       <router-link to="/admin/courses-management" class="navbar-brand me-5" href="#">
+        <span>Courses management</span>
+      </router-link>
+      <router-link to="/quiz" class="navbar-brand me-5" href="#">
+        <span>Quiz</span>
+      </router-link>
       <button @click="send">PROFILE</button>
     </div>
   </header>
@@ -150,7 +156,7 @@ export default {
     ...mapActions(["logout"]),
   },
   mounted(){
-    
+    this.send()
   }
 };
 </script>

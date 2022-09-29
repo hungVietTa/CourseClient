@@ -243,13 +243,315 @@
     },
     {
       "content": "Thanks to the quarantine isolation I found this Drama.  and fell in love with this one. ",
-      "children":[],
+      "children": [],
       "id": 5
     },
-    { 
-      "content":"I Can't tell because I'm drunk",
-      "children":[],
+    {
+      "content": "I Can't tell because I'm drunk",
+      "children": [],
       "id": 6
+    }
+  ],
+  "quiz": [
+    {
+      "question": "How are links defined in an <a> tag?",
+      "answers": {
+        "answer_a": "Href",
+        "answer_b": "Src-link",
+        "answer_c": "Src",
+        "answer_d": "Hlink",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "true",
+        "answer_b_correct": "false",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 1
+    },
+    {
+      "question": "There are ____ different heading tags in HTML",
+      "answers": {
+        "answer_a": "4",
+        "answer_b": "7",
+        "answer_c": "6",
+        "answer_d": "5",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 2
+    },
+    {
+      "question": "All elements are identified by their __________ and are marked up using either start tags and end tags or self-closing tags",
+      "answers": {
+        "answer_a": "Attribute Names",
+        "answer_b": "Tag Names",
+        "answer_c": "Class Names",
+        "answer_d": "None of the mentioned",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "true",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 3
+    },
+    {
+      "question": "Which of the following is not a style tag?",
+      "answers": {
+        "answer_a": "<b>",
+        "answer_b": "All are style tags",
+        "answer_c": "<i>",
+        "answer_d": "<tt>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "true",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 4
+    },
+    {
+      "question": "Which of the following is true about HTML 5?",
+      "answers": {
+        "answer_a": "HTML5 is the next major revision of the HTML standard superseding HTML 4.01, XHTML 1.0, and XHTML 1.1.",
+        "answer_b": "HTML5 is a cooperation between the World Wide Web Consortium (W3C) and the Web Hypertext Application Technology Working Group (WHATWG).",
+        "answer_c": "HTML5 is a standard for structuring and presenting content on the World Wide Web",
+        "answer_d": "All of These",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "false",
+        "answer_d_correct": "true",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 5
+    },
+    {
+      "question": "A homepage is __________",
+      "answers": {
+        "answer_a": "an index of encyclopedia articles",
+        "answer_b": "the first page of a website",
+        "answer_c": "required for access to the Internet",
+        "answer_d": "where all Internet data is stored",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "true",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 6
+    },
+    {
+      "question": "How can you make A bulleted list with numbers?",
+      "answers": {
+        "answer_a": "<dl>",
+        "answer_b": "<ul>",
+        "answer_c": "<ol>",
+        "answer_d": "<list>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 7
+    },
+    {
+      "question": "Which tag inserts a line horizontally on your web page?",
+      "answers": {
+        "answer_a": "<hr>",
+        "answer_b": "<line direction=\"horizontal\">",
+        "answer_c": "<tr>",
+        "answer_d": "<line>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "true",
+        "answer_b_correct": "false",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 8
+    },
+    {
+      "question": "What is cite tag in HTML5?",
+      "answers": {
+        "answer_a": "<cite title\"value\">Some Text Here</cite>",
+        "answer_b": "<cite title:\"value\">Some Text Here</cite>",
+        "answer_c": "<cite title=\"value\">Some Text Here</cite>",
+        "answer_d": null,
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 9
+    },
+    {
+      "question": "What is the HTML Tag for the largest heading",
+      "answers": {
+        "answer_a": "<h6>",
+        "answer_b": "<head>",
+        "answer_c": "<h1>",
+        "answer_d": "<heading>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 10
     }
   ]
 }
