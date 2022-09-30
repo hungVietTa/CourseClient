@@ -88,10 +88,35 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../components/LoginComp.vue'),
       },
       {
-        path: 'courses-management',
-        name: 'admin.courses.management',
-        component: () => import(/* webpackChunkName: "about" */ '../components/AdminCoursesManagementComp.vue'),
+        path: 'resources',
+        name: 'admin.resources',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminResourcesComp.vue'),
       },
+      {
+        path: 'schedules',
+        name: 'admin.schedules',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminSchedulesComp.vue'),
+      },
+      {
+        path: 'courses',
+        name: 'admin.courses',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminCoursesComp.vue'),
+      },
+      {
+        path: 'lessons',
+        name: 'admin.lessons',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminLessonsComp.vue'),
+      },
+      {
+        path: 'quizs',
+        name: 'admin.quizs',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminQuizsComp.vue'),
+      },
+      {
+        path: 'blogs',
+        name: 'admin.blogs',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminBlogsComp.vue'),
+      }
     ]
   },
 

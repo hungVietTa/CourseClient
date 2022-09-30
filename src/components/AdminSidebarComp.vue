@@ -4,7 +4,11 @@
       <div class="container-fluid flex-nowrap">
             <ul class="main-list">
                 <li>Dashboard</li>
-                <li>Danh sách khóa học</li>
+                <li><router-link to="/admin/schedules">schedules</router-link></li>
+                <li><router-link to="/admin/courses">courses</router-link></li>
+                <li><router-link to="/admin/lessons">lessons</router-link></li>
+                <li><router-link to="/admin/quizs">quizs</router-link></li>
+                <li><router-link to="/admin/blogs">blogs</router-link></li>       
             </ul>
       </div>
     </nav>

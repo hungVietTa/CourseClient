@@ -1,8 +1,9 @@
 <template>
   <header id="header">
+     <FadedNotifyComp v-if="fadedMessage!=''" :fadedMessage="fadedMessage"/>
     <nav class="navbar">
       <div class="container-fluid flex-nowrap">
-        <router-link to="/" class="navbar-brand" href="#">
+        <a to="/" class="navbar-brand" href="#">
           <svg
             role="img"
             height="50px"
@@ -17,19 +18,19 @@
             />
           </svg>
           <span class="ms-2">MUFASA</span>
-        </router-link>
+        </a>
         <div class="navbar-collapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link
+              <a
                 class="nav-link active"
                 aria-current="page"
                 to="/about"
-                >Giới thiệu</router-link
+                >Giới thiệu</a
               >
             </li>
             <li class="nav-item dropdown">
-              <router-link
+              <a
                 class="nav-link dropdown-toggle"
                 to="/schedule"
                 role="button"
@@ -37,10 +38,10 @@
                 aria-expanded="false"
               >
                 Lộ trình
-              </router-link>
+              </a>
             </li>
             <li class="nav-item dropdown">
-              <router-link
+              <a
                 class="nav-link dropdown-toggle"
                 to="/courses"
                 role="button"
@@ -48,10 +49,10 @@
                 aria-expanded="false"
               >
                 Khóa học
-              </router-link>
+              </a>
             </li>
             <li class="nav-item dropdown">
-              <router-link
+              <a
                 class="nav-link dropdown-toggle"
                 to="/blog"
                 role="button"
@@ -59,7 +60,7 @@
                 aria-expanded="false"
               >
                 Blog
-              </router-link>
+              </a>
             </li>
           </ul>
           <form class="d-flex nav-form" role="search">
@@ -75,17 +76,17 @@
           </form>
         </div>
         <div class="nav-interact">
-          <router-link
+          <a
             v-if="!$store.state.isUserLogin"
             to="/login"
             class="btn btn-primary me-3"
-            >Login</router-link
+            >Login</a
           >
-          <router-link
+          <a
             v-if="!$store.state.isUserLogin"
             to="/register"
             class="btn btn-primary"
-            >Register</router-link
+            >Register</a
           >
           <div class="dropdown me-2" v-if="$store.state.isUserLogin">
             <button
@@ -113,24 +114,24 @@
       </div>
     </nav>
     <div class="text-start p-4">
-      <router-link to="/" class="navbar-brand me-5" href="#">
+      <a href="/" class="navbar-brand me-5">
         <span>Home page</span>
-      </router-link>
-      <router-link to="/admin" class="navbar-brand me-5" href="#">
+      </a>
+      <a href="/admin" class="navbar-brand me-5">
         <span>Admin page</span>
-      </router-link>
-      <router-link to="/user" class="navbar-brand me-5" href="#">
+      </a>
+      <a href="/user" class="navbar-brand me-5">
         <span>User page</span>
-      </router-link>
-      <router-link to="/learning" class="navbar-brand me-5" href="#">
+      </a>
+      <a href="/learning" class="navbar-brand me-5">
         <span>Learning</span>
-      </router-link>
-       <router-link to="/admin/courses-management" class="navbar-brand me-5" href="#">
+      </a>
+       <a href="/admin/courses-management" class="navbar-brand me-5">
         <span>Courses management</span>
-      </router-link>
-      <router-link to="/quiz" class="navbar-brand me-5" href="#">
+      </a>
+      <a href="/quiz"  class="navbar-brand me-5">
         <span>Quiz</span>
-      </router-link>
+      </a>
       <button @click="send">PROFILE</button>
     </div>
   </header>
@@ -138,12 +139,13 @@
 
 <script>
 import { mapActions,mapState } from "vuex";
-
+import  FadedNotifyComp  from "./FadedNotifyComp.vue"
 export default {
   name: "HeaderComp",
   data() {
     return {
-      userToggle: false
+      userToggle: false,
+      fadedMessage:''
     }
   },
   computed:mapState({
@@ -153,7 +155,10 @@ export default {
     const header = {Authorization:`Bearer ${this.token}`}
       this.axios.get('http://127.0.0.1:3000/api/v1/users/profile',{headers:header}).then(res=>console.log(res.data)).catch(res=>console.log(res))
     },
-    ...mapActions(["logout"]),
+    ...mapActions(["logout"])
+  },
+  components:{
+    FadedNotifyComp
   },
   mounted(){
     this.send()

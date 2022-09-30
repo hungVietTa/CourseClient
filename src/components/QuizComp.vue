@@ -12,14 +12,14 @@
         <p>Are you ready</p>
         <button @click="start">Ready</button>
       </div>
-      <ul >
+      <ul v-show="processing||reviewing">
         <div class="btn-group">
           <button
             @click="currentId = currentId - 1"
             :style="{ visibility: prevVisibility }"
             class="btn btn-primary"
           >
-            Previous quenstion
+            Previous question
           </button>
           <span
             class="btn btn-danger me-2 ms-2"
@@ -51,25 +51,27 @@
                 {{ value }}</label
               >
             </div>
+              <p v-show="reviewing"> The solution for this question should be found in the lesson : <a href="facebook.com" target=”_blank”> {{hintLessons[index]}} </a> </p>
           </div>
         </li>
-        <p>{{ countDown }}</p>
+          <p v-show="!reviewing&&processing">{{ countDown }}</p>
         <button
           @click="unfinishedCheck"
-          v-show="processing"
+          v-if="!reviewing&&processing"
           class="btn btn-primary mt-4"
         >
           Submit
         </button>
       </ul>
+      <button v-if="reviewing&&!done" @click="reviewing=false;done=true">Quay lại</button>
       <div v-if="done">
         <p v-if="timeout">
           Thời gian làm bài đã kết thúc, kết quả của bạn đã tự động được nộp
         </p>
-        <h2>You are finished with score {{ score }}/{{ 10 * list.length }}</h2>
-        <button>Show result</button>
+        <h2>You are finished with score {{ score }}/{{ 10 * list.length }} {{processing}}</h2>
+        <button @click="showResult">Show result</button>
         <div v-if="pass">
-          <p>Congratulation !</p>
+          <p>Congratulation ! </p>
           <button>Explore next lesson</button>
         </div>
         <div v-if="!pass">
@@ -101,6 +103,7 @@ import { startTimer } from "../mfsmodule/timer.js";
 export default {
   data() {
     return {
+      hintLessons:["Basic Javascript"],
       solutions: [],
       timeout: false,
       interval: 0,
@@ -110,7 +113,8 @@ export default {
       enrolling: true,
       done: false,
       processing: false,
-      time: 15,
+      reviewing:false,
+      time: 15*60,
       minimum: 5,
       list: [],
       currentId: 1,
@@ -131,7 +135,7 @@ export default {
   },
   components: {
     HeaderComp,
-    ModalComp,
+    ModalComp
   },
   methods: {
     startTimer() {},
@@ -141,7 +145,6 @@ export default {
       this.interval = this.startTimer(this.time, this.submit, this);
     },
     unfinishedCheck() {
-      console.log(2);
       this.list.forEach((item) => {
         if (item.choice == "") this.remains += item.id + " ";
       });
@@ -153,7 +156,6 @@ export default {
       this.list.forEach((item) => {
         this.solutions.push(item.correct_answer)
       });
-      console.log(this.solutions)
       this.list.forEach((item) => {
         if (item.choice == item.correct_answer) this.score += 10;
       });
@@ -162,6 +164,11 @@ export default {
       this.done = true;
       this.processing = false;
       this.modal = false;
+    },
+    showResult(){
+      this.reviewing = true
+      this.done = false
+      this.timeout = false
     },
     keepUp() {
       this.submit();

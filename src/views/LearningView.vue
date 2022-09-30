@@ -96,7 +96,7 @@ export default {
     //
     updateCount() {
       this.lessonsStatus[this.currentId].count= this.count;
-      this.axios.put(`http://localhost:3000/users/1`, this.user);
+      this.axios.put(`http://localhost:4000/users/1`, this.user);
     },
     //
     handler: function (e) {
@@ -128,12 +128,12 @@ export default {
     },
     getLessons: async function () {
       this.lessons = await this.axios
-        .get("http://localhost:3000/lessons")
+        .get("http://localhost:4000/lessons")
         .then((res) => res.data);
     },
     getStatus: async function () {
       this.user = await this.axios
-        .get("http://localhost:3000/users/1")
+        .get("http://localhost:4000/users/1")
         .then((res) => res.data);
       //
       this.lessonsStatus = this.user.courses[0].lessons;
