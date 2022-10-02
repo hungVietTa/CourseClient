@@ -76,17 +76,17 @@
           </form>
         </div>
         <div class="nav-interact">
-          <a
+          <router-link
             v-if="!$store.state.isUserLogin"
             to="/login"
             class="btn btn-primary me-3"
-            >Login</a
+            >Login</router-link
           >
-          <a
+          <router-link
             v-if="!$store.state.isUserLogin"
             to="/register"
             class="btn btn-primary"
-            >Register</a
+            >Register</router-link 
           >
           <div class="dropdown me-2" v-if="$store.state.isUserLogin">
             <button

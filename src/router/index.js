@@ -98,9 +98,19 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../components/AdminSchedulesComp.vue'),
       },
       {
+        path: 'schedules/:id',
+        name: 'admin.schedules.id',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminScheduleModifyComp.vue'),
+      },
+      {
         path: 'courses',
         name: 'admin.courses',
         component: () => import(/* webpackChunkName: "about" */ '../components/AdminCoursesComp.vue'),
+      },
+      {
+        path: 'courses/:id',
+        name: 'admin.courses.id',
+        component: () => import(/* webpackChunkName: "about" */ '../components/AdminCourseModifyComp.vue'),
       },
       {
         path: 'lessons',
