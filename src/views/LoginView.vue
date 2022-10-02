@@ -1,11 +1,9 @@
 <template>
     <div class="login">
-        <HeaderComp />
         <LoginComp />
     </div>
 </template>
 <script>
-import HeaderComp from "../components/HeaderComp.vue"
 import LoginComp from "../components/LoginComp.vue"
 import { mapActions } from "vuex";
 
@@ -35,8 +33,8 @@ export default {
     },
   },
   components: {
-    HeaderComp,LoginComp
-  },
+    LoginComp
+  }
 }
 </script>
 <style scoped lang="scss">

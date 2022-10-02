@@ -1,6 +1,5 @@
 <template>
   <div class="register">
-    <HeaderComp />
     <section class="register-section mt-5">
       <h3>
         Bắt đầu hành trình của bạn
@@ -85,7 +84,6 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import HeaderComp from "../components/HeaderComp.vue";
 import validator from "../mfsmodule/validator.js";
 
 export default {
@@ -139,9 +137,6 @@ export default {
         setTimeout(func,timeout)
       }
     }
-  },
-  components: {
-    HeaderComp,
   },
   directives: {
   keyup: {

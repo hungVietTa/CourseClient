@@ -51,7 +51,7 @@
                 {{ value }}</label
               >
             </div>
-              <p v-show="reviewing"> The solution for this question should be found in the lesson : <a href="facebook.com" target=”_blank”> {{hintLessons[index]}} </a> </p>
+              <p v-show="reviewing"> The solution for this question should be found in the lesson : <a href="facebook.com" target=”_blank”> {{hintLesson[index]}} </a> </p>
           </div>
         </li>
           <p v-show="!reviewing&&processing">{{ countDown }}</p>
@@ -103,7 +103,7 @@ import { startTimer } from "../mfsmodule/timer.js";
 export default {
   data() {
     return {
-      hintLessons:["Basic Javascript"],
+      hintLesson:["Basic Javascript"],
       solutions: [],
       timeout: false,
       interval: 0,

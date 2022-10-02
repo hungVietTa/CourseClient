@@ -33,6 +33,7 @@ export default {
     width: 300px;
     left: 0;
     top: 50px;
-    bottom: 0;    
+    bottom: 0;   
+    z-index: 9; 
 }
 </style>
