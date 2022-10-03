@@ -28,19 +28,13 @@
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputFirstName">Họ và tên đệm</label>
                                     <input class="form-control" id="inputFirstName" type="text"
-                                        placeholder="Enter your first name" value="Valerie">
-                                </div>
-                                <!-- Form Group (last name)-->
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="inputLastName">Tên</label>
-                                    <input class="form-control" id="inputLastName" type="text"
-                                        placeholder="Enter your last name" value="Luna">
+                                        placeholder="Enter your name" v-model="user.name">
                                 </div>
                             </div>           
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Email address</label>
                                 <input class="form-control" id="inputEmailAddress" type="email"
-                                    placeholder="Enter your email address" value="name@example.com">
+                                    placeholder="Enter your email address" v-model="user.email">
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -48,13 +42,13 @@
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputPhone">Phone number</label>
                                     <input class="form-control" id="inputPhone" type="tel"
-                                        placeholder="Enter your phone number" value="555-123-4567">
+                                        placeholder="Enter your phone number" v-model="user.phone">
                                 </div>
                                 <!-- Form Group (birthday)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputBirthday">Birthday</label>
                                     <input class="form-control" id="inputBirthday" type="text" name="birthday"
-                                        placeholder="Enter your birthday" value="06/10/1988">
+                                        placeholder="Enter your birthday" v-model="user.birthday">
                                 </div>
                             </div>
                             <!-- Save changes button-->
@@ -69,7 +63,20 @@
 <script>
 
 export default {
-    name:"UserProfileComp"
+    name:"UserProfileComp",
+    data(){
+        return {
+            user:{}
+        }
+    },
+    mounted(){
+        this.user = {
+            name:"Hung",
+            email:"nidalaee@yasuo.com",
+            phone:"097231345",
+            birthday:"01-02-1996"
+        }
+    }
 }
 
 </script>

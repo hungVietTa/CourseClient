@@ -124,12 +124,13 @@ export default {
     for (let i = 0; i < 10; i++) {
       this.questions.push({
         id:100+1,
-        hint_lesson:"youtube",
+        lesson_id:12,
         question: "How are links defined in an <a> tag?",
-        answers: ["Href", "Src-link", "Src", "Hlink"],
-        correct_answer:"Href",
-        tag:"framework",
-        category:"Backend",
+        answers: [{
+          id: 1,
+          content: "Href",
+          is_correct: true,
+          }],
         quizs_id:[23,24],
         date_created:"22-12-2021",
         date_modified:"29-02-2022"

@@ -1,5 +1,6 @@
 <template>
   <div class="register">
+    <HomeHeaderComp ref="header" />
     <section class="register-section mt-5">
       <h3>
         Bắt đầu hành trình của bạn
@@ -85,6 +86,7 @@
 <script>
 import { mapActions } from "vuex";
 import validator from "../mfsmodule/validator.js";
+import HomeHeaderComp from "@/components/HomeHeaderComp.vue";
 
 export default {
   data() {
@@ -124,10 +126,10 @@ export default {
      ...mapActions(["register"]),
     submit(form) {
       if (!this.validator.general(form)) {
-        this.form.server.valid= false;
+        this.form.server.validate= false;
         return;
       }
-      this.form.server.valid= true
+      this.form.server.validate= true
       this.register(this.form)
     },
     debounce(func,timeout=500){
@@ -137,6 +139,9 @@ export default {
         setTimeout(func,timeout)
       }
     }
+  },
+  components: {
+    HomeHeaderComp
   },
   directives: {
   keyup: {

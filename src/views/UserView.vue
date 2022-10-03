@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderComp/>
+    <HomeHeaderComp/>
     <main>
       <UserSidebarComp/>
       <router-view></router-view>
@@ -10,13 +10,13 @@
 
 <script>
 // @ is an alias to /src
-import HeaderComp from '@/components/HeaderComp.vue';
+import HomeHeaderComp from '@/components/HomeHeaderComp.vue';
 import UserSidebarComp from '@/components/UserSidebarComp.vue';
 
 export default {
   name: 'HomeView',
   components: {
-    HeaderComp,UserSidebarComp
+    HomeHeaderComp,UserSidebarComp
 }
 }
 </script>

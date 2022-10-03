@@ -56,6 +56,7 @@
         <br /><span class="invalid" :class="{ invisible: form.server.validate }"
           >{{form.server.message}}</span
         >
+        <router-link to='/forgot'>Forgot password ?</router-link>
       </form>
     </section>
   </div>

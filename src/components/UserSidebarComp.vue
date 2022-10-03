@@ -6,13 +6,13 @@
           <router-link to="/user/profile">Profile</router-link>
         </li>
         <li>
-          <router-link to="/user/progress">Tiến trình</router-link>
+          <router-link to="/user/schedules">Schedules</router-link>
         </li>
         <li>
-          <router-link to="/user/courses">Danh sách khóa học</router-link>
+          <router-link to="/user/courses">Courses</router-link>
         </li>
         <li>
-          <router-link to="/user/timetable">Thời khóa biểu</router-link>
+          <router-link to="/user/timetable">Timetable</router-link>
         </li>
         <li>
           <router-link to="/user/blog">Blog</router-link>

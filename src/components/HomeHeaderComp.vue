@@ -1,9 +1,9 @@
 <template>
-  <header id="header">
+  <header >
      <FadedNotifyComp v-if="fadedMessage!=''" :fadedMessage="fadedMessage"/>
     <nav class="navbar">
       <div class="container-fluid flex-nowrap">
-        <a to="/" class="navbar-brand" href="#">
+        <router-link to="/" class="navbar-brand" href="#">
           <svg
             role="img"
             height="50px"
@@ -18,30 +18,30 @@
             />
           </svg>
           <span class="ms-2">MUFASA</span>
-        </a>
+        </router-link>
         <div class="navbar-collapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a
+              <router-link
                 class="nav-link active"
                 aria-current="page"
                 to="/about"
-                >Giới thiệu</a
+                >Giới thiệu</router-link
               >
             </li>
             <li class="nav-item dropdown">
-              <a
+              <router-link
                 class="nav-link dropdown-toggle"
-                to="/schedule"
+                to="/schedules"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Lộ trình
-              </a>
+              </router-link>
             </li>
             <li class="nav-item dropdown">
-              <a
+              <router-link
                 class="nav-link dropdown-toggle"
                 to="/courses"
                 role="button"
@@ -49,18 +49,18 @@
                 aria-expanded="false"
               >
                 Khóa học
-              </a>
+              </router-link>
             </li>
             <li class="nav-item dropdown">
-              <a
+              <router-link
                 class="nav-link dropdown-toggle"
-                to="/blog"
+                to="/blogs"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Blog
-              </a>
+              </router-link>
             </li>
           </ul>
           <form class="d-flex nav-form" role="search">
@@ -113,55 +113,27 @@
         </div>
       </div>
     </nav>
-    <div class="text-start p-4">
-      <a href="/" class="navbar-brand me-5">
-        <span>Home page</span>
-      </a>
-      <a href="/admin" class="navbar-brand me-5">
-        <span>Admin page</span>
-      </a>
-      <a href="/user" class="navbar-brand me-5">
-        <span>User page</span>
-      </a>
-      <a href="/learning" class="navbar-brand me-5">
-        <span>Learning</span>
-      </a>
-       <a href="/admin/courses-management" class="navbar-brand me-5">
-        <span>Courses management</span>
-      </a>
-      <a href="/quiz"  class="navbar-brand me-5">
-        <span>Quiz</span>
-      </a>
-      <button @click="send">PROFILE</button>
-    </div>
   </header>
 </template>
 
 <script>
-import { mapActions,mapState } from "vuex";
+import { mapActions} from "vuex";
 import  FadedNotifyComp  from "./FadedNotifyComp.vue"
 export default {
-  name: "HeaderComp",
+  name: "HomeHeaderComp",
   data() {
     return {
       userToggle: false,
       fadedMessage:''
     }
   },
-  computed:mapState({
-    token: state =>state.token
-  }),
-  methods: {send(){
-    const header = {Authorization:`Bearer ${this.token}`}
-      this.axios.get('http://127.0.0.1:3000/api/v1/users/profile',{headers:header}).then(res=>console.log(res.data)).catch(res=>console.log(res))
-    },
+  methods: {
     ...mapActions(["logout"])
   },
   components:{
     FadedNotifyComp
   },
   mounted(){
-    this.send()
   }
 };
 </script>
@@ -176,10 +148,13 @@ header {
   padding-top: 5px;
   padding-bottom: 5px;
   box-shadow: 2px 0px 0px 2px rgba(9, 9, 9, 0.1);
+  margin: auto;
 
   .navbar {
+    max-width: 1300px;
     display: flex;
     padding: 0;
+    margin: auto;
 
     .navbar-brand {
       color: #02424f;

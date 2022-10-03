@@ -1,6 +1,6 @@
 <template>
   <div class="admin">
-    <HeaderAdminComp/>
+    <AdminHeaderComp/>
     <AdminSidebarComp v-if="!($route.path=='/admin/login')"/>
     <router-view :role="adminRole"></router-view>
   </div>
@@ -8,7 +8,7 @@
 
 <script>
 // @ is an alias to /src
-import HeaderAdminComp from '@/components/HeaderAdminComp.vue';
+import AdminHeaderComp from '@/components/AdminHeaderComp.vue';
 import AdminSidebarComp from '@/components/AdminSidebarComp.vue';
 
 export default {
@@ -19,11 +19,10 @@ export default {
   },
   name: 'HomeView',
   components: {
-    HeaderAdminComp,AdminSidebarComp
+    AdminHeaderComp,AdminSidebarComp
 },
 mounted(){
-  console.log(this.$route)
-  console.log(this.$store.state.isAdminLogin)
+  
 }
 }
 </script>

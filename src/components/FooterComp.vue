@@ -29,6 +29,5 @@
 footer {
     border-top: 1px solid #ccc;
     margin: auto;
-  margin-top: 40px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderComp />
+    <HomeHeaderComp />
     <div class="about">
       <section class="slogan">
         <div class="row">
@@ -96,21 +96,21 @@
   </div>
 </template>
 <script>
-import HeaderComp from "@/components/HeaderComp.vue";
+import HomeHeaderComp from "@/components/HomeHeaderComp.vue";
 
 export default {
   name: "HomeView",
   components: {
-    HeaderComp,
+    HomeHeaderComp,
   },
   mounted() {},
 };
 </script>
 <style scoped lang="scss">
 .about {
+  padding: 40px 20px 30px 20px;
   margin: auto;
-  margin-top: 20px;
-  max-width: 1300px;
+  max-width: 1200px;
 }
 .under-slash {
   position: absolute;

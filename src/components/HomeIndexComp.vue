@@ -130,6 +130,15 @@ export default {
         views: 464,
         description: "content" + i,
       });
+      this.courses.push({
+        id: 315 + i,
+        title: "new" + i,
+        img: "link",
+        subscribes: 445,
+        views: 464,
+        description: "content" + i,
+
+      });
       this.tiptricks.push({
         id: 215 + i,
         title: "new" + i,

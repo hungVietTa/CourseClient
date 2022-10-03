@@ -1,85 +1,60 @@
 <template>
-    <div class="shop-items">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <!-- Restaurant Item -->
-                    <div class="item">
-                        <!-- Item's image -->
-                        <img class="img-responsive" :src="course.img" alt="">
-                        <!-- Item details -->
-                        <div class="item-dtls">
-                            <!-- product title -->
-                            <h4><a href="#">{{course.name}}</a></h4>
-                            <p class="course-progress">Tiến độ : {{course.currentStage}}/{{course.allStage}}</p>
-                            <!-- price -->
-                            <span class="price lblue">{{course.price | moneyDelimit}} VND</span>
-                        </div>
-                    </div>
-                </div>
+   <section>
+        <h1>Course</h1>
+        <div class="row">
+          <div class="col-4" v-for="(item, index) in courses" :key="index">
+            <div class="course-card">
+                <p>ID:{{item.id}}</p>
+                <p>Title:{{item.title}}</p>
+                <p>Des: {{item.description}}</p>
+                <p>IMG: {{item.img}}</p>
+                <p>SUBS: {{item.subscribes}}</p>
+                <p>VIEWS: {{item.views}}</p>
             </div>
+          </div>
         </div>
-    </div>
+      </section>
 </template>
 <script>
 export default {
-    name: 'UserCoursesComp',
-    data() {
-        return {
-            courses: []
-            //     name: "Ruby On Rail",
-            //     img: "https://via.placeholder.com/200x200/5F9EA0/000000",
-            //     currentStage: 5,
-            //     allStage: 10,
-            //     price: 1500000,
-            //     type: "BackEnd"
-            // }
-        }
+  name: "HomeCoursesView",
+  data() {
+    return {
+      courses: []
+    };
+  },
+  methods: {
+    getCourses: async function () {
+      this.courses = await this.axios
+        .get("http://localhost:3000/courses")
+        .then((res) => res.data);
     },
-    filters:{
-        moneyDelimit: function(number){
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
+    getTip: async function () {
+      this.tiptrick = await this.axios
+        .get("http://localhost:3000/tiptrick")
+        .then((res) => res.data);
     },
-    // created(){
-    //     getCourses(){
-    //         this.courses = axios.get('http://localhost:3000/courses')
-    //     }
-    // }
-}
+  },
+  mounted() {
+    // this.$refs.header.$el.querySelector("input").onclick = function () {
+    //   console.log(2);
+    // };
+    for (let i = 0; i < 5; i++) {
+       this.courses.push({
+        id: 315 + i,
+        title: "new" + i,
+        img: "link",
+        subscribes: 445,
+        views: 464,
+        description:"Des"+i      
+        });
+    }
+  },
+};
 </script>
-<style scoped lang="scss">
-.shop-items {
-    flex-grow: 1;
-    margin-top: 40px;
-
-    // .container-fluid {
-
-    //     .row {
-
-    //         .col-md-3 {
-
-    //             .item {
-
-    //                 .img-responsive {}
-
-    //                 .item-dtls {
-
-    //                     h4 {
-
-    //                         a {}
-    //                     }
-
-    //                     .price {}
-    //                 }
-
-    //                 .ecom {
-
-    //                     .btn {}
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-}
+<style scoped>
+    section div,.billboard{
+        border: 1px solid #555;
+        margin: 5px;
+    }
 </style>

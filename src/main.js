@@ -25,7 +25,8 @@ Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 Vue.use(VueYoutube)
 
-
+axios.defaults.baseURL = 'http://127.0.0.1:3000';
+axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
 
 new Vue({
   router,

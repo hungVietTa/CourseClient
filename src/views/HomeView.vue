@@ -1,12 +1,14 @@
 <template>
   <div class="home">
-    <HeaderComp ref="header" />
-    <router-view></router-view>
+    <HomeHeaderComp ref="header" />
+    <main>
+       <router-view></router-view>
+    </main>
   </div>
 </template>
 
 <script>
-import HeaderComp from "@/components/HeaderComp.vue";
+import HomeHeaderComp from "@/components/HomeHeaderComp.vue";
 
   export default {
     data(){
@@ -15,9 +17,16 @@ import HeaderComp from "@/components/HeaderComp.vue";
       }
     },
   components: {
-    HeaderComp,
+    HomeHeaderComp,
   }
 
   }
 </script>
+<style>
+main {
+  width: 1200px;
+  margin: auto;
+  min-height: 400px;
+}
+</style>
 

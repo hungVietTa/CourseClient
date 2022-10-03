@@ -1,11 +1,13 @@
 <template>
     <div class="login">
+        <HomeHeaderComp ref="header" />
         <LoginComp />
     </div>
 </template>
 <script>
 import LoginComp from "../components/LoginComp.vue"
 import { mapActions } from "vuex";
+import HomeHeaderComp from "@/components/HomeHeaderComp.vue";
 
 export default {
     data() {
@@ -33,7 +35,7 @@ export default {
     },
   },
   components: {
-    LoginComp
+    LoginComp,HomeHeaderComp
   }
 }
 </script>

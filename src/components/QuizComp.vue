@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-comp />
+    <home-header-comp />
     <main>
       <div v-if="enrolling">
         <h1>{{ examTitle }}</h1>
@@ -96,7 +96,7 @@
   </div>
 </template>
 <script>
-import HeaderComp from "./HeaderComp.vue";
+import HomeHeaderComp from "./HomeHeaderComp.vue";
 import ModalComp from "./ModalComp.vue";
 import { startTimer } from "../mfsmodule/timer.js";
 
@@ -134,7 +134,7 @@ export default {
     },
   },
   components: {
-    HeaderComp,
+    HomeHeaderComp,
     ModalComp
   },
   methods: {

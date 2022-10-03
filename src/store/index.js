@@ -12,6 +12,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    username:undefined,
     isUserLogin:false,
     isAdminLogin:false,
     token:""
@@ -28,12 +29,14 @@ export default new Vuex.Store({
     },
     setToken(state,token){
       state.token = token
+    },
+    setUsername(state,username){
+      state.username = username
     }
   },
   actions: {
-    login(context,[form,role]) {
-      {
-        axios.post("http://127.0.0.1:3000/api/v1/users/login",
+    async login(context,[form,role]) {
+        await axios.post("api/v1/users/login",
           {
             'email': form.email.value,
             'password': form.password.value,
@@ -51,6 +54,7 @@ export default new Vuex.Store({
               context.commit('toggleUserLogin')
               router.push('/')
             } 
+          
         })
         .catch(error => {
           if (error.response) {
@@ -71,11 +75,14 @@ export default new Vuex.Store({
             { form.server.validate = false
               form.server.message = "Lỗi không xác định, vui lòng thử lại sau giây lát" }
         })
-      }
+        if ( context.state.isUserLogin == true || context.state.isAdminLogin )
+          {
+            axios.get('api/v1/users/profile').then(res=>console.log(res.data)).catch(res=>console.log(res))
+          }
     },
     // REGISTER 
     register(context, form) {
-      axios.post("http://127.0.0.1:3000/api/v1/users/register",
+      axios.post("api/v1/users/register",
         {
           'name': form.name.value,
           'email': form.email.value,
