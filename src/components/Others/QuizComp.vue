@@ -12,7 +12,7 @@
         <p>Are you ready</p>
         <button @click="start">Ready</button>
       </div>
-      <ul v-show="processing||reviewing">
+      <ul v-show="processing || reviewing">
         <div class="btn-group">
           <button
             @click="currentId = currentId - 1"
@@ -41,7 +41,16 @@
           <div class="content" v-show="currentId == item.id">
             <p>{{ item.question }}</p>
             <div v-for="(value, key) in item.answers" :key="key" class="mt-2">
-              <label v-if="value != null" :class="{incorrect:key==item.choice && key!=solutions[index]&&solutions.length,correct:key==solutions[index]}">
+              <label
+                v-if="value != null"
+                :class="{
+                  incorrect:
+                    key == item.choice &&
+                    key != solutions[index] &&
+                    solutions.length,
+                  correct: key == solutions[index],
+                }"
+              >
                 <input
                   type="radio"
                   :value="key"
@@ -51,27 +60,43 @@
                 {{ value }}</label
               >
             </div>
-              <p v-show="reviewing"> The solution for this question should be found in the lesson : <a href="facebook.com" target=”_blank”> {{hintLesson[index]}} </a> </p>
+            <p v-show="reviewing">
+              The solution for this question should be found in the lesson :
+              <a href="facebook.com" target="”_blank”">
+                {{ hintLesson[index] }}
+              </a>
+            </p>
           </div>
         </li>
-          <p v-show="!reviewing&&processing">{{ countDown }}</p>
+        <p v-show="!reviewing && processing">{{ countDown }}</p>
         <button
           @click="unfinishedCheck"
-          v-if="!reviewing&&processing"
+          v-if="!reviewing && processing"
           class="btn btn-primary mt-4"
         >
           Submit
         </button>
       </ul>
-      <button v-if="reviewing&&!done" @click="reviewing=false;done=true">Quay lại</button>
+      <button
+        v-if="reviewing && !done"
+        @click="
+          reviewing = false;
+          done = true;
+        "
+      >
+        Quay lại
+      </button>
       <div v-if="done">
         <p v-if="timeout">
           Thời gian làm bài đã kết thúc, kết quả của bạn đã tự động được nộp
         </p>
-        <h2>You are finished with score {{ score }}/{{ 10 * list.length }} {{processing}}</h2>
+        <h2>
+          You are finished with score {{ score }}/{{ 10 * list.length }}
+          {{ processing }}
+        </h2>
         <button @click="showResult">Show result</button>
         <div v-if="pass">
-          <p>Congratulation ! </p>
+          <p>Congratulation !</p>
           <button>Explore next lesson</button>
         </div>
         <div v-if="!pass">
@@ -96,14 +121,14 @@
   </div>
 </template>
 <script>
-import HomeHeaderComp from "./HomeHeaderComp.vue";
+import HomeHeaderComp from "../Home/HeaderComp.vue";
 import ModalComp from "./ModalComp.vue";
-import { startTimer } from "../mfsmodule/timer.js";
+import { startTimer } from "../../mfsmodule/timer.js";
 
 export default {
   data() {
     return {
-      hintLesson:["Basic Javascript"],
+      hintLesson: ["Basic Javascript"],
       solutions: [],
       timeout: false,
       interval: 0,
@@ -113,8 +138,8 @@ export default {
       enrolling: true,
       done: false,
       processing: false,
-      reviewing:false,
-      time: 15*60,
+      reviewing: false,
+      time: 15 * 60,
       minimum: 5,
       list: [],
       currentId: 1,
@@ -135,7 +160,7 @@ export default {
   },
   components: {
     HomeHeaderComp,
-    ModalComp
+    ModalComp,
   },
   methods: {
     startTimer() {},
@@ -154,7 +179,7 @@ export default {
     submit() {
       if (this.interval) clearInterval(this.interval);
       this.list.forEach((item) => {
-        this.solutions.push(item.correct_answer)
+        this.solutions.push(item.correct_answer);
       });
       this.list.forEach((item) => {
         if (item.choice == item.correct_answer) this.score += 10;
@@ -165,10 +190,10 @@ export default {
       this.processing = false;
       this.modal = false;
     },
-    showResult(){
-      this.reviewing = true
-      this.done = false
-      this.timeout = false
+    showResult() {
+      this.reviewing = true;
+      this.done = false;
+      this.timeout = false;
     },
     keepUp() {
       this.submit();
@@ -200,6 +225,18 @@ export default {
         item.choice = "";
       });
     });
+
+    // this.quiz = {
+    //   id: 12,
+    //   name: "Final test",
+    //   questions: [
+    //     {
+    //       id: 12,
+    //       question: "How are links defined in an <a> tag?",
+    //       answers: [{ id: 1, content: "Href", is_correct: true }],
+    //     },
+    //   ],
+    // };
   },
 };
 </script>

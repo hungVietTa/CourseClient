@@ -1,6 +1,6 @@
 <template>
   <div class="mfs-blog-view">
-    <header-comp />
+    <home-header-comp />
     <span class="ql-formats mfs-ql-save" ref="save">
       <button class="mfs-save-btn">
         <svg
@@ -74,7 +74,7 @@
   </div>
 </template>
 <script>
-import HeaderComp from "../components/HeaderComp.vue";
+import HomeHeaderComp from "../components/Home/HeaderComp.vue";
 import { VueEditor } from "vue2-editor";
 import { ImageDrop } from "quill-image-drop-module";
 import ImageResize from "quill-image-resize-vue";
@@ -95,13 +95,13 @@ export default {
         modules: {
           imageDrop: true,
           imageResize: {},
-        },
-      },
+        }
+      }
     };
   },
   name: "BlogView",
   components: {
-    HeaderComp,
+    HomeHeaderComp,
     VueEditor,
   },
   methods: {
@@ -120,19 +120,19 @@ export default {
     },
     postComment() {
       this.axios
-        .post("http://localhost:3000/comments", {
+        .post("http://localhost:4000/comments", {
           content: this.newComment,
           children: [],
         })
         .then(() => {
           this.newComment = "";
           this.axios
-            .get("http://localhost:3000/comments")
+            .get("http://localhost:4000/comments")
             .then((res) => (this.comments = res.data));
         });
     },
     reply(id) {
-      this.axios.put(`http://localhost:3000/comments/${id}`, {
+      this.axios.put(`http://localhost:4000/comments/${id}`, {
         children: [{}],
       });
     },
@@ -141,10 +141,22 @@ export default {
       let temp = this.textEditor.$el.querySelector(".ql-toolbar");
       temp.appendChild(this.$refs.save);
       this.textEditor.$el.querySelector(".mfs-save-btn").onclick = function () {
-        localStorage.setItem(
+        let imgs = el.textEditor.$el.querySelectorAll("img")
+        for(let i=0; i< imgs.length; i++){
+          console.log(imgs[i].parentNode)
+            if (imgs[i].style.float=="left")
+              imgs[i].parentNode.className =""
+            else if (imgs[i].style.margin=="auto")
+              imgs[i].parentNode.className = "ql-align-center"
+            else
+              imgs[i].parentNode.className = "ql-align-right"
+        }
+        setTimeout(()=>{
+          localStorage.setItem(
           "main",
           JSON.stringify(el.textEditor.quill.getContents())
         );
+        },200)
       };
     },
   },
@@ -153,7 +165,7 @@ export default {
     this.addSaveBtn();
     this.content = JSON.parse(localStorage.getItem("main"));
     if (this.content) this.textEditor.quill.setContents(this.content);
-    this.axios.get("http://localhost:3000/comments").then((res) => {
+    this.axios.get("http://localhost:4000/comments").then((res) => {
       this.comments = res.data;
       console.log(this.comments);
     });
@@ -182,7 +194,7 @@ export default {
 .ql-toolbar {
   text-align: left;
   position: sticky;
-  top: 132px;
+  top: 50px;
   z-index: 9999;
   background-color: white;
 }

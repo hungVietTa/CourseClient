@@ -5,9 +5,9 @@
     </div>
 </template>
 <script>
-import LoginComp from "../components/LoginComp.vue"
+import LoginComp from "../components/Others/LoginComp.vue"
 import { mapActions } from "vuex";
-import HomeHeaderComp from "@/components/HomeHeaderComp.vue";
+import HomeHeaderComp from "@/components/Home/HeaderComp.vue";
 
 export default {
     data() {

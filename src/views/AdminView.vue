@@ -8,8 +8,8 @@
 
 <script>
 // @ is an alias to /src
-import AdminHeaderComp from '@/components/AdminHeaderComp.vue';
-import AdminSidebarComp from '@/components/AdminSidebarComp.vue';
+import AdminHeaderComp from '@/components/Admin/HeaderComp.vue';
+import AdminSidebarComp from '@/components/Admin/SidebarComp.vue';
 
 export default {
   data(){

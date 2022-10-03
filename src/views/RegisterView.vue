@@ -86,7 +86,7 @@
 <script>
 import { mapActions } from "vuex";
 import validator from "../mfsmodule/validator.js";
-import HomeHeaderComp from "@/components/HomeHeaderComp.vue";
+import HomeHeaderComp from "@/components/Home/HeaderComp.vue";
 
 export default {
   data() {

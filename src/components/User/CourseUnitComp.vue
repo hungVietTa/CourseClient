@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import HeaderLearningComp from "./HeaderLearningComp.vue";
+import HeaderLearningComp from "../Others/HeaderLearningComp.vue";
 export default {
   data() {
     return {

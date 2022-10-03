@@ -1,5 +1,5 @@
 <template>
-  <aside id="aside">
+  <aside>
     <nav class="sidebar">
       <div class="container-fluid flex-nowrap">
             <ul class="main-list">
@@ -28,12 +28,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-#aside {
-    position: fixed;
-    width: 300px;
-    left: 0;
-    top: 50px;
-    bottom: 0;   
-    z-index: 9; 
+aside {
+    // position: fixed;
+    // width: 300px;
+    // left: 0;
+    // top: 50px;
+    // bottom: 0;   
+    // z-index: 9; 
 }
+aside ul {
+  display: flex;
+  gap: 30px;
+}
+
 </style>

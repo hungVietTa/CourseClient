@@ -18,9 +18,11 @@
     "bootstrap": "^5.2.1",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.25.1",
-    "json-server": "^0.4.2",
+    "json-server": "^0.17.0",
     "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize": "^3.0.9",
     "quill-image-resize-vue": "^1.0.4",
+    "remove": "^0.1.5",
     "vue": "^2.7.10",
     "vue-axios": "^3.4.1",
     "vue-loader": "^17.0.0",
@@ -44,6 +46,6 @@
     "eslint-plugin-vue": "^8.0.3",
     "sass": "^1.32.7",
     "sass-loader": "^12.6.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.7.10"
   }
 }

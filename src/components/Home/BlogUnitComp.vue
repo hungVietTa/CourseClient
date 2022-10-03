@@ -174,7 +174,6 @@ export default {
   top: 132px;
   z-index: 9999;
   background-color: white;
-  display: none;
 }
 .ql-container.ql-snow {
   border-bottom: none !important;

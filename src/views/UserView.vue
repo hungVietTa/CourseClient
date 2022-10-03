@@ -10,8 +10,8 @@
 
 <script>
 // @ is an alias to /src
-import HomeHeaderComp from '@/components/HomeHeaderComp.vue';
-import UserSidebarComp from '@/components/UserSidebarComp.vue';
+import HomeHeaderComp from '@/components/Home/HeaderComp.vue';
+import UserSidebarComp from '@/components/User/SidebarComp.vue';
 
 export default {
   name: 'HomeView',

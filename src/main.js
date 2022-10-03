@@ -7,6 +7,7 @@ import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import VueYoutube from 'vue-youtube'
 
+
 // import the fontawesome core 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -26,7 +27,7 @@ Vue.config.productionTip = false
 Vue.use(VueYoutube)
 
 axios.defaults.baseURL = 'http://127.0.0.1:3000';
-axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
+axios.defaults.headers.common= {'Authorization':`Bearer ${store.state.token}`}
 
 new Vue({
   router,

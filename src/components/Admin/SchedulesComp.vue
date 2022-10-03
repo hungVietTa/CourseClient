@@ -155,6 +155,9 @@
     right: 0;
     top: 0;
     bottom: 0;
+    border: 1px solid #333;
+  padding-left: 20px;
+  width: 300px;
   }
   .lesson {
     display: flex;

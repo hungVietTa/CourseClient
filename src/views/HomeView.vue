@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import HomeHeaderComp from "@/components/HomeHeaderComp.vue";
+import HomeHeaderComp from "@/components/Home/HeaderComp.vue";
 
   export default {
     data(){

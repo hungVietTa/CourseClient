@@ -1,6 +1,6 @@
 <template>
-  <header >
-     <FadedNotifyComp v-if="fadedMessage!=''" :fadedMessage="fadedMessage"/>
+  <header>
+    <FadedNotifyComp v-if="fadedMessage != ''" :fadedMessage="fadedMessage" />
     <nav class="navbar">
       <div class="container-fluid flex-nowrap">
         <router-link to="/" class="navbar-brand" href="#">
@@ -86,7 +86,7 @@
             v-if="!$store.state.isUserLogin"
             to="/register"
             class="btn btn-primary"
-            >Register</router-link 
+            >Register</router-link
           >
           <div class="dropdown me-2" v-if="$store.state.isUserLogin">
             <button
@@ -97,16 +97,27 @@
               <font-awesome-icon icon="fa-solid fa-user-graduate" />
             </button>
             <ul class="dropdown-menu" v-if="userToggle">
-              <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li class="text-center"><strong>Hi, {{ $store.state.username }}</strong></li>
               <li>
-                <button
-                  v-if="$store.state.isUserLogin"
-                  @click="logout"
-                  class="btn btn-primary"
+                <router-link class="dropdown-item" to="/user"
+                  >Trang cá nhân</router-link
                 >
-                  Logout
-                </button>
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/user/profile"
+                  >Profile</router-link
+                >
+              </li>
+              <li class="mt-2">
+                <div class="pe-1 text-center">
+                  <button 
+                    v-if="$store.state.isUserLogin"
+                    @click="logout"
+                    class="btn btn-primary ms-auto p-1"
+                  >
+                    Logout
+                  </button>
+                </div>
               </li>
             </ul>
           </div>
@@ -117,24 +128,23 @@
 </template>
 
 <script>
-import { mapActions} from "vuex";
-import  FadedNotifyComp  from "./FadedNotifyComp.vue"
+import { mapActions } from "vuex";
+import FadedNotifyComp from "../Others/FadedNotifyComp.vue";
 export default {
   name: "HomeHeaderComp",
   data() {
     return {
       userToggle: false,
-      fadedMessage:''
-    }
+      fadedMessage: "",
+    };
   },
   methods: {
-    ...mapActions(["logout"])
+    ...mapActions(["logout"]),
   },
-  components:{
-    FadedNotifyComp
+  components: {
+    FadedNotifyComp,
   },
-  mounted(){
-  }
+  mounted() {},
 };
 </script>
 

@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-  import FooterComp from "./components/FooterComp.vue"
+  import FooterComp from "./components/Others/FooterComp.vue"
 
   export default {
     components: {FooterComp}

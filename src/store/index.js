@@ -75,9 +75,11 @@ export default new Vuex.Store({
             { form.server.validate = false
               form.server.message = "Lỗi không xác định, vui lòng thử lại sau giây lát" }
         })
-        if ( context.state.isUserLogin == true || context.state.isAdminLogin )
+        if ( context.state.isUserLogin || context.state.isAdminLogin )
           {
-            axios.get('api/v1/users/profile').then(res=>console.log(res.data)).catch(res=>console.log(res))
+            axios.get('api/v1/users/profile').then(res=>{
+              context.commit('setUsername',res.data.name)
+            }).catch(()=>{})
           }
     },
     // REGISTER 

@@ -31,11 +31,11 @@
         <td>{{ question.tag }}</td>
         <td>{{ question.category }}</td>
         <td>
-          <span v-for="(id, index) in question.quizs_id" :key="index"
+          <span v-for="(id, index) in question.quiz_id" :key="index"
             >{{ id }}
           </span>
         </td>
-        <td>{{ question.hint_lesson }}</td>
+        <td>{{ question.lesson_id }}</td>
         <td>{{ question.date_created }}</td>
         <td>{{ question.date_modified }}</td>
         <td><button @click="modifyAction(index)">Modify</button></td>
@@ -55,7 +55,7 @@
         <button @click="newQuestion.answers.push('')">Add more answer</button>
         <!-- HINT LESSON -->
         <label
-        >Hint lesson: <input type="text" v-model="newQuestion.hint_lesson"
+        >Hint lesson: <input type="text" v-model="newQuestion.lesson_id"
         /></label>
         <!-- TAG -->
         <label
@@ -88,7 +88,7 @@ export default {
       currentIndex: 0,
       newQuestion: {
         id: 0,
-        hint_lesson: "youtube",
+        lesson_id: "",
         title: "",
         answers: ["",""],
         tag: "",
@@ -123,18 +123,30 @@ export default {
   mounted() {
     for (let i = 0; i < 10; i++) {
       this.questions.push({
-        id:100+1,
-        lesson_id:12,
-        question: "How are links defined in an <a> tag?",
-        answers: [{
-          id: 1,
-          content: "Href",
-          is_correct: true,
-          }],
-        quizs_id:[23,24],
-        date_created:"22-12-2021",
-        date_modified:"29-02-2022"
+        id: 0,
+        lesson_id: 111+i,
+        question: "What the heck ?",
+        answers: ["Term","Service"],
+        correct_answer:"Term",
+        quiz_id:[2,3],
+        tag: "Framework",
+        category: "Frontend",
+        date_created:"22-12-2020",
+        date_modified:"22-12-2021",
       });
+      // this.questions.push({
+      //   id:100+1,
+      //   lesson_id:12,
+      //   question: "How are links defined in an <a> tag?",
+      //   answers: [{
+      //     id: 1,
+      //     content: "Href",
+      //     is_correct: true,
+      //     }],
+      //   quizs_id:[23,24],
+      //   date_created:"22-12-2021",
+      //   date_modified:"29-02-2022"
+      // });
     }
     this.load = true;
   },
@@ -166,8 +178,10 @@ table img:hover {
   z-index: 2;
 }
 .form-wrapper {
+  border: 1px solid #333;
+  padding-left: 20px;
+  width: 300px;
   position: fixed;
-  width: 200px;
   right: 0;
   top: 0;
   bottom: 0;

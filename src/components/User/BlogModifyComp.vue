@@ -1,6 +1,5 @@
 <template>
   <div class="mfs-blog-view">
-    <header-comp />
     <span class="ql-formats mfs-ql-save" ref="save">
       <button class="mfs-save-btn">
         <svg
@@ -74,7 +73,6 @@
   </div>
 </template>
 <script>
-import HomeHeaderComp from "../components/HomeHeaderComp.vue";
 import { VueEditor } from "vue2-editor";
 import { ImageDrop } from "quill-image-drop-module";
 import ImageResize from "quill-image-resize-vue";
@@ -101,8 +99,7 @@ export default {
   },
   name: "BlogView",
   components: {
-    HomeHeaderComp,
-    VueEditor,
+    VueEditor
   },
   methods: {
     resize(target) {

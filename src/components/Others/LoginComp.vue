@@ -63,7 +63,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import validator from "../mfsmodule/validator.js";
+import validator from "../../mfsmodule/validator.js";
 
 export default {
   props:{
