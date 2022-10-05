@@ -3,12 +3,12 @@
     <nav class="sidebar">
       <div class="container-fluid flex-nowrap">
             <ul class="main-list">
-                <li>Dashboard</li>
-                <li><router-link to="/admin/schedules">schedules</router-link></li>
-                <li><router-link to="/admin/courses">courses</router-link></li>
-                <li><router-link to="/admin/lessons">lessons</router-link></li>
-                <li><router-link to="/admin/quizs">quizs</router-link></li>
-                <li><router-link to="/admin/blogs">blogs</router-link></li>       
+                <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
+                <li><router-link to="/admin/schedules">Schedules</router-link></li>
+                <li><router-link to="/admin/courses">Courses</router-link></li>
+                <li><router-link to="/admin/lessons">Lessons</router-link></li>
+                <li><router-link to="/admin/quizs">Quizs</router-link></li>
+                <li><router-link to="/admin/blogs">Blogs</router-link></li>       
             </ul>
       </div>
     </nav>
@@ -39,6 +39,14 @@ aside {
 aside ul {
   display: flex;
   gap: 30px;
+  list-style: none;
+  box-shadow: 1px 1px 1px 1px rgba(4,4,4,0.2);
+}
+a {
+  color: salmon;
+  text-decoration: none;
+  font-size: 26px;
+  font-weight: bold;
 }
 
 </style>

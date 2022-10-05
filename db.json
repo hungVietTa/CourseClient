@@ -13,19 +13,14 @@
             {
               "id": 1,
               "lesson_id": 1,
-              "count": [
-                0.6
-              ],
+              "count": [],
               "qualified": true
             },
             {
               "id": 2,
               "lesson_id": 2,
-              "count": [
-                0.4,
-                0.7
-              ],
-              "qualified": false
+              "count": [],
+              "qualified": true
             },
             {
               "id": 3,
