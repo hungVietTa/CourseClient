@@ -87,9 +87,9 @@
       <section class="recruit">
         <h3 class="mb-5">Tham gia hành trình của chúng tôi</h3>
           <div class="recruit-list">
-            <div class="badge text-bg-info"><font-awesome-icon class="recruit-icon" icon="fa-solid fa-check" /> Cộng tác viên : 2 vị trí</div>
+            <!-- <div class="badge text-bg-info"><font-awesome-icon class="recruit-icon" icon="fa-solid fa-check" /> Cộng tác viên : 2 vị trí</div>
             <div class="badge text-bg-info"><font-awesome-icon class="recruit-icon" icon="fa-solid fa-check" /> Giảng viên : 2 vị trí</div>
-            <div class="badge text-bg-info"><font-awesome-icon class="recruit-icon" icon="fa-solid fa-check" /> Thiết kế : 1 vị trí</div>
+            <div class="badge text-bg-info"><font-awesome-icon class="recruit-icon" icon="fa-solid fa-check" /> Thiết kế : 1 vị trí</div> -->
           </div>
       </section>
     </div>

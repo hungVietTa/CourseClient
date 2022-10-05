@@ -13,13 +13,14 @@
     <main>
       <router-view />
     </main>
+    <FooterComp/>
   </div>
 </template>
 <script>
-// import FooterComp from "./components/Others/FooterComp.vue";
+import FooterComp from "./components/Others/FooterComp.vue";
 
 export default {
-  // components: { FooterComp },
+  components: { FooterComp },
 };
 </script>
 <style lang="scss" scoped>

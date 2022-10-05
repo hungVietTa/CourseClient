@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HomeHeaderComp ref="header" />
+    <HeaderComp ref="header" />
     <main>
        <router-view></router-view>
     </main>
@@ -8,7 +8,8 @@
 </template>
 
 <script>
-import HomeHeaderComp from "@/components/Home/HeaderComp.vue";
+import HeaderComp from "@/components/Home/HeaderComp.vue";
+
 
   export default {
     data(){
@@ -17,16 +18,18 @@ import HomeHeaderComp from "@/components/Home/HeaderComp.vue";
       }
     },
   components: {
-    HomeHeaderComp,
+    HeaderComp
   }
 
   }
 </script>
 <style>
 main {
-  width: 1200px;
   margin: auto;
   min-height: 400px;
+}
+.header-container {
+  width: 100%;
 }
 </style>
 

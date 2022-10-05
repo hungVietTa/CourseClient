@@ -25,6 +25,7 @@
     "remove": "^0.1.5",
     "vue": "^2.7.10",
     "vue-axios": "^3.4.1",
+    "vue-carousel": "^0.18.0",
     "vue-loader": "^17.0.0",
     "vue-recaptcha": "^2.0.3",
     "vue-router": "^3.6.5",
