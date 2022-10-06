@@ -4,7 +4,7 @@
       <h3>Đăng nhập</h3>
       <form @submit.prevent="submit(form)" class="login-form">
         <div class="form-item" :class="{ invalid: !form.email.valid }">
-          <label for="email">Email</label>
+          <label class="mb-2" for="email">Email:</label>
           <div class="input-field">
             <input
               type="text"
@@ -23,7 +23,7 @@
           }}</span>
         </div>
         <div class="form-item" :class="{ invalid: !form.password.valid }">
-          <label for="password">Mật khẩu</label>
+          <label class="mb-2" for="password">Mật khẩu:</label>
           <div class="input-field">
             <input
               :type="showPassword ? 'text' : 'password'"
@@ -134,6 +134,9 @@ export default {
         el.addEventListener("keyup", process);
         let process2 = vNode.context.debounce(binding.value, 0);
         el.addEventListener("focusout", process2);
+         el.addEventListener('keyup',function(){
+      vNode.context.form.server.validate = true
+    })
       },
     },
   },
@@ -203,5 +206,8 @@ export default {
 span.invalid {
   color: rgb(218, 64, 47);
 }
-
+a {
+  text-decoration: none;
+  color:#06bbcc;
+}
 </style>

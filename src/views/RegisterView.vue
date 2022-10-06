@@ -2,12 +2,12 @@
   <div class="register">
     <HomeHeaderComp ref="header" />
     <section class="register-section mt-5">
-      <h3>
-        Bắt đầu hành trình của bạn
-      </h3>
+      <h2 class="mb-5">
+        Start your journey
+      </h2>
       <form @submit.prevent="submit(form)" class="register-form">
         <div class="form-item" :class="{ invalid: !form.name.valid }">
-          <label for="fullName">Tên của bạn ?</label>
+          <label class="mb-2" for="fullName">Your name: </label>
           <div class="input-field">
             <input
               type="text"
@@ -20,7 +20,7 @@
           <span :class="{invisible:form.name.valid}">{{ form.name.message }}</span>
         </div>
         <div class="form-item" :class="{ invalid: !form.email.valid }">
-          <label for="email">Email</label>
+          <label class="mb-2" for="email">Email:</label>
           <div class="input-field">
             <input
               type="text"
@@ -35,7 +35,7 @@
           }}</span>
         </div>
         <div class="form-item" :class="{ invalid: !form.password.valid }">
-          <label for="password">Mật khẩu</label>
+          <label class="mb-2" for="password">Password:</label>
           <div class="input-field">
             <input
               :type="showPassword ? 'text' : 'password'"
@@ -59,7 +59,7 @@
           class="form-item"
           :class="{ invalid: !form.confirmPassword.valid }"
         >
-          <label for="confirmPassword">Xác nhận mật khẩu</label>
+          <label class="mb-2" for="confirmPassword">Password confirmation:</label>
           <div class="input-field">
             <input
               :type="showConfirmPassword?'text':'password'"
@@ -151,6 +151,9 @@ export default {
     el.addEventListener('keyup',process)
     let process2 =  vNode.context.debounce(binding.value,0)
     el.addEventListener('focusout',process2)
+    el.addEventListener('keyup',function(){
+      vNode.context.form.server.validate = true
+    })
   } 
   } 
   },

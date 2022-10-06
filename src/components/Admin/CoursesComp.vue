@@ -18,7 +18,6 @@
             <th>Ord</th>
             <th>ID</th>
             <th>Name</th>
-            <th>Desription</th>
             <th>Publish</th>
             <th>Date Published</th>
             <th>Date Created</th>
@@ -30,7 +29,6 @@
             <td>{{ index + 1 }}</td>
             <td>{{ course.id }}</td>
             <td>{{ course.name }}</td>
-            <td>{{ course.description }}</td>
             <td>{{ course.is_publish == null ? "No" : "Yes" }}</td>
             <td>{{ course.published_at }}</td>
             <td>{{ course.created_at.split("T")[0] }}</td>

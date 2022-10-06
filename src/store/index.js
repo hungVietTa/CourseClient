@@ -4,6 +4,7 @@ import axios from 'axios'
 import router from '../router'
 import VuexPersistence from 'vuex-persist'
 import createPersistedState from "vuex-persistedstate"
+import adminStore from './admin'
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage
@@ -136,6 +137,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
+      ADMIN: adminStore
   },
   plugins: [vuexLocal.plugin, 
     createPersistedState({

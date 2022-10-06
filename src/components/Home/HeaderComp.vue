@@ -312,6 +312,7 @@ export default {
   .btn-primary {
     background-color: #06bbcc;
     border: none;
+    color: white;
   }
   .search-btn {
     background-color: transparent;

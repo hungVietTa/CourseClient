@@ -13,7 +13,7 @@
     <main>
       <router-view />
     </main>
-    <FooterComp/>
+    <FooterComp />
   </div>
 </template>
 <script>
@@ -23,13 +23,36 @@ export default {
   components: { FooterComp },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+:root {
+  --primary: #06bbcc;
+  --light: #f0fbfc;
+  --dark: #181d38;
+}
+.btn-primary {
+  --bs-btn-bg: #06bbcc !important;
+  --bs-btn-border-color: #06bbcc !important;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #06bbcc !important;
+    --bs-btn-hover-border-color: #06bbcc !important;
+    --bs-btn-focus-shadow-rgb: #06bbcc !important;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #06bbcc !important;
+    --bs-btn-active-border-color: #06bbcc !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+div .text-primary {
+  color: #06bbcc !important;
+}
+.btn-primary:hover {
+  opacity: 0.8;
 }
 nav {
   padding: 30px;
@@ -53,10 +76,10 @@ nav {
   background-color: white;
   z-index: 99;
   right: 0;
-    .btn {
-      display: block;
-      margin: auto;
-      margin-top: 300px;
-    }
+  .btn {
+    display: block;
+    margin: auto;
+    margin-top: 300px;
+  }
 }
 </style>
