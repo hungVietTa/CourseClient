@@ -1,11 +1,12 @@
 <template>
   <div>
     <!-- Sidebar Start -->
-    <div class="sidebar pe-4 pb-3" :class="{open:!showSideBar}">
+    <div class="sidebar pe-4 pb-3" :class="{ open: !showSideBar }">
       <nav class="navbar navbar-light">
         <router-link to="/admin" class="navbar-brand mx-4 mb-3">
           <h3 class="text-primary">
-            <i class="fa fa-hashtag me-2"></i># ADMIN  {{ this.$store.state.ADMIN.state.test }}
+            <i class="fa fa-hashtag me-2"></i># ADMIN
+            {{ $store.state.admin.showSidebar }}
           </h3>
         </router-link>
         <div class="d-flex align-items-center ms-4 mb-4">
@@ -17,15 +18,7 @@
               style="width: 40px; height: 40px"
             />
             <div
-              class="
-                bg-success
-                rounded-circle
-                border border-2 border-white
-                position-absolute
-                end-0
-                bottom-0
-                p-1
-              "
+              class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"
             ></div>
           </div>
           <div class="ms-3">
@@ -34,33 +27,42 @@
           </div>
         </div>
         <div class="navbar-nav sidebar-link w-100">
-          <router-link to="index.html" class="nav-item nav-link active"
+          <router-link
+            to="/admin"
+            class="nav-item nav-link"
+            :class="{ active: $route.path.split('/')[2] == undefined }"
             ><i><font-awesome-icon icon="fa-solid fa-gauge-simple" /></i>
-            Dashboard</router-link>
-          <div class="nav-item dropdown">
-            <router-link
-              to="/admin/schedules"
-              class="nav-link dropdown-toggle"
-              data-bs-toggle="dropdown"
-              ><i> <font-awesome-icon icon="fa-solid fa-calendar" /></i>
-              Schedules</router-link>
-          </div>
-          <router-link to="/admin/courses" class="nav-item nav-link"
+           Dashboard</router-link
+          >
+          <router-link :class="{active:$route.path.includes('schedules')}"
+            to="/admin/schedules"
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            ><i> <font-awesome-icon icon="fa-solid fa-calendar" /></i>
+            Schedules</router-link
+          >
+          <router-link to="/admin/courses" class="nav-item nav-link" :class="{active:$route.path.includes('courses')}"
             ><i> <font-awesome-icon icon="fa-solid fa-person-chalkboard" /></i>
-            Courses</router-link>
-          <router-link to="/admin/lessons" class="nav-item nav-link"
-            ><i> <font-awesome-icon icon="fa-solid fa-book" /></i> Lessons</router-link>
-          <router-link to="/admin/quizs" class="nav-item nav-link"
+            Courses</router-link
+          >
+          <router-link to="/admin/lessons" class="nav-item nav-link" :class="{active:$route.path.includes('lessons')}"
+            ><i> <font-awesome-icon icon="fa-solid fa-book" /></i>
+            Lessons</router-link
+          >
+          <router-link to="/admin/quizs" class="nav-item nav-link" :class="{active:$route.path.includes('quizs')}"
             ><i> <font-awesome-icon icon="fa-solid fa-puzzle-piece" /></i>
-            Quizs</router-link>
-          <router-link to="/admin/blogs" class="nav-item nav-link"
-            ><i><font-awesome-icon icon="fa-solid fa-blog" /></i> Blogs</router-link>
+            Quizs</router-link
+          >
+          <router-link to="/admin/blogs" class="nav-item nav-link" :class="{active:$route.path.includes('blogs')}"
+            ><i><font-awesome-icon icon="fa-solid fa-blog" /></i>
+            Blogs</router-link
+          >
         </div>
       </nav>
     </div>
     <!-- Sidebar End -->
     <!-- Content Start -->
-    <div class="content" :class="{open:!showSideBar}">
+    <div class="content" :class="{ open: !showSideBar }">
       <!-- Navbar Start -->
       <nav
         class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0"
@@ -68,7 +70,11 @@
         <router-link to="index.html" class="navbar-brand d-flex d-lg-none me-4">
           <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
         </router-link>
-        <a to="#" @click="test()" class="sidebar-toggler flex-shrink-0">
+        <a
+          to="#"
+          @click="$store.dispatch('toggleSidebar')"
+          class="sidebar-toggler flex-shrink-0"
+        >
           <i class="text-primary"
             ><font-awesome-icon icon="fa-solid fa-bars"
           /></i>
@@ -81,25 +87,19 @@
           />
         </form>
         <div class="navbar-nav align-items-center ms-auto">
-          <div class="nav-item dropdown" @click="showMessage=!showMessage">
+          <div class="nav-item dropdown" @click="showMessage = !showMessage">
             <router-link
               to="#"
               class="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
             >
               <i><font-awesome-icon icon="fa-solid fa-envelope" /></i>
-              <span class="d-none d-lg-inline-flex ms-1 me-1">Message</span>
+              <span class="d-none d-lg-inline-flex ms-1 me-1">Message </span>
               <font-awesome-icon icon="fa-solid fa-angle-down" />
             </router-link>
             <div
-            v-show="showMessage"
-              class="
-                dropdown-menu dropdown-menu-end
-                bg-light
-                border-0
-                rounded-0 rounded-bottom
-                m-0
-              "
+              v-show="showMessage"
+              class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
             >
               <router-link to="#" class="dropdown-item">
                 <div class="d-flex align-items-center">
@@ -146,11 +146,14 @@
                 </div>
               </router-link>
               <hr class="dropdown-divider" />
-              <router-link to="#" class="dropdown-item text-center">See all message</router-link>
+              <router-link to="#" class="dropdown-item text-center"
+                >See all message</router-link
+              >
             </div>
           </div>
-          <div  class="nav-item dropdown">
-            <a @click="showNoti=!showNoti"
+          <div class="nav-item dropdown">
+            <a
+              @click="showNoti = !showNoti"
               to="#"
               class="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
@@ -162,14 +165,8 @@
               <font-awesome-icon icon="fa-solid fa-angle-down" />
             </a>
             <div
-            v-show="showNoti"
-              class="
-                dropdown-menu dropdown-menu-end
-                bg-light
-                border-0
-                rounded-0 rounded-bottom
-                m-0
-              "
+              v-show="showNoti"
+              class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
             >
               <router-link to="#" class="dropdown-item">
                 <h6 class="fw-normal mb-0">Profile updated</h6>
@@ -187,10 +184,11 @@
               </router-link>
               <hr class="dropdown-divider" />
               <router-link to="#" class="dropdown-item text-center"
-                >See all notifications</router-link>
+                >See all notifications</router-link
+              >
             </div>
           </div>
-          <div @click="showUser=!showUser" class="nav-item dropdown">
+          <div @click="showUser = !showUser" class="nav-item dropdown">
             <a
               to="#"
               class="nav-link dropdown-toggle"
@@ -205,18 +203,12 @@
               <span class="d-none d-lg-inline-flex">John Doe</span>
             </a>
             <div
-            v-show="showUser"
-              class="
-                dropdown-menu dropdown-menu-end
-                bg-light
-                border-0
-                rounded-0 rounded-bottom
-                m-0
-              "
+              v-show="showUser"
+              class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
             >
               <router-link to="#" class="dropdown-item">My Profile</router-link>
               <router-link to="#" class="dropdown-item">Settings</router-link>
-              <router-link to="#" class="dropdown-item">Log Out</router-link>
+              <a to="#" @click="logout" class="dropdown-item">Log Out</a>
             </div>
           </div>
         </div>
@@ -227,35 +219,38 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "HeaderView",
-  data(){
+  data() {
     return {
-      showSideBar:true,
-      showNoti:false,
-      showMessage:false,
-      showUser:false
-    }
+      showNoti: false,
+      showMessage: false,
+      showUser: false,
+    };
+  },
+  computed: {
+    ...mapState({
+      showSideBar: (state) => state.admin.showSidebar,
+    }),
   },
   methods: {
     ...mapActions(["logout"]),
-
-    test(){
-      this.$store.dispatch("ADMIN/ttt")
-    }
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.content {
+  min-height: auto !important;
+}
 // Adjust bootstrap
 .dropdown-menu {
   display: block;
 }
-.nav-item{
+.nav-item {
   cursor: pointer;
 }
 a {
@@ -363,7 +358,7 @@ a {
   transition: 0.5s;
 }
 .navbar-expand {
-  background-color:  #f3f6f9 !important;
+  background-color: #f3f6f9 !important;
 }
 .sidebar .navbar .dropdown-toggle[aria-expanded="true"]::after {
   transform: rotate(-180deg);

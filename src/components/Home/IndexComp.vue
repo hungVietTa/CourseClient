@@ -14,7 +14,7 @@
       <slide>
         <div class="owl-carousel-item position-relative">
           <img
-            class="img-fluid"
+            class="img-fluid w-100"
             src="../../assets/img/carousel/carousel-1.jpg"
             alt=""
           />
@@ -76,7 +76,7 @@
       <slide>
         <div class="owl-carousel-item position-relative">
           <img
-            class="img-fluid"
+            class="img-fluid w-100"
             src="../../assets/img/carousel/carousel-2.jpg"
             alt=""
           />

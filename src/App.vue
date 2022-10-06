@@ -21,6 +21,11 @@ import FooterComp from "./components/Others/FooterComp.vue";
 
 export default {
   components: { FooterComp },
+  // mounted(){
+  //   this.axios.get('/api/v1/users/profile').then(res => {
+  //         console.log(res)
+  //       }).catch((res) => { console.log(res)})
+  // }
 };
 </script>
 <style lang="scss">
@@ -81,5 +86,8 @@ nav {
     margin: auto;
     margin-top: 300px;
   }
+}
+div input[type="radio"]:focus {
+  box-shadow: none;
 }
 </style>

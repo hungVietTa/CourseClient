@@ -1,37 +1,19 @@
-const state = {
-
-    state: {
-        showSidebar: "abc",
-        test: "asdf"
-    }};
-    const mutations = {
-        showSidebar(state, value) {
-            state.state.showSidebar = value
-        },
-        teee(state, value) {
-            state.state.test = value
+export default {
+    // namespaced:true,
+    state:{
+        showSidebar:true
+    },
+    mutations:{
+        changeSidebar(state){
+            state.showSidebar = !state.showSidebar
         }
-    };
-    const actions = {
-        toggleSidebar({ commit }) {
-            console.log('test')
-            commit("showSidebar", "asdfgh")
-        },
-        ttt({ commit }) {
-            console.log('test')
-            commit("teee", "asdfgh")
+    },
+    actions:{
+        toggleSidebar(context){
+            console.log(2)
+            context.commit('changeSidebar')
         }
     }
-
-
-
-export default {
-    namespaced: true,
-    state,
-    // getters,
-    mutations,
-    actions
-
 }
 
 

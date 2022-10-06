@@ -61,7 +61,7 @@ export default new Vuex.Store({
             context.commit('toggleUserLogin')
             router.push('/')
           }
-
+          console.log(1)
         })
         .catch(error => {
           if (error.response) {
@@ -69,7 +69,6 @@ export default new Vuex.Store({
             if (error.response.data) {
               form.server.message = error.response.data.message
               form.password.value = ""
-              form.confirmPassword.value = ""
             }
             else
               form.server.message = "Vui lòng kiểm tra lại kết nối của bạn"
@@ -83,10 +82,13 @@ export default new Vuex.Store({
             form.server.message = "Lỗi không xác định, vui lòng thử lại sau giây lát"
           }
         })
+
+      console.log(2)
       if (context.state.isUserLogin || context.state.isAdminLogin) {
-        axios.get('api/v1/users/profile').then(res => {
+        axios.get('/api/v1/users/profile').then(res => {
+          console.log(res)
           context.commit('setUsername', res.data.name)
-        }).catch(() => { })
+        }).catch((res) => { console.log(res)})
       }
     },
     // REGISTER 
@@ -127,17 +129,19 @@ export default new Vuex.Store({
       if (context.state.isAdminLogin == true) {
         context.commit('toggleAdminLogin')
         context.commit('setToken', '')
-        router.push("/admin/login")
       }
       else {
         context.commit('toggleUserLogin')
         context.commit('setToken', '')
-        router.push("/login")
       }
+      if ( router.currentRoute.path=="/")
+        return
+      else
+        router.push("/")
     }
   },
   modules: {
-      ADMIN: adminStore
+      admin: adminStore
   },
   plugins: [vuexLocal.plugin, 
     createPersistedState({

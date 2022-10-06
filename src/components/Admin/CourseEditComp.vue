@@ -1,45 +1,47 @@
 <template>
   <div class="wrapper">
-    <div class="form-wrapper">
-      <h2>{{ course.name }}</h2>
-      <form class="course-form" @submit.prevent="addCourse">
+    <div class="form-wrapper mb-4">
+      <h2 class="fw-bold">Course#{{ course.id }}</h2>
+      <h4 class="fw-bold text-start">Information</h4>
+      <form class="course-form" @submit.prevent="addCourse" v-if="load">
        <label class="w-100 mb-4"> <span >Name:</span> <input class="w-100" type="text" v-model="course.name" /></label>
      <div class="d-flex  mb-4">
-        <label class="col-6">  <span >Publish:</span><input type="text" v-model="course.is_publish" /></label>
-        <label class="col-6"><span >Date Published: </span><input type="text" v-model="course.published_at" /></label>
+      <div class="col-6">
+         <label class="mb-2"><span>Publish:</span></label>
+          <label class="ms-3">Yes: <input type="radio" :value="1" v-model="course.is_publish" /></label>
+          <label class="ms-3">No: <input type="radio" :value="0" v-model="course.is_publish" /></label><br>
+      </div>
+        <label class="col-6"><span >Date Published: </span><input type="text"  disabled :value="course.published_at?course.published_at.split('T')[0]:'N/A'" /></label>
      </div>
      <div class="d-flex  mb-4">
-         <label class="col-6"><span >Date Created: </span><input type="text" v-model="course.created_at" /></label>
-        <label class="col-6"><span >Date Modified: </span><input type="text" v-model="course.updated_at" /></label><br>
+         <label class="col-6"><span >Date Created: </span><input type="text"  disabled :value="course.created_at.split('T')[0]" /></label>
+        <label class="col-6"><span >Date Modified: </span><input type="text"  disabled :value="course.updated_at.split('T')[0]" /></label><br>
      </div>
      <div class="d-flex mb-4">
       <label
-          >Description: </label>
+          ><span>Description:</span> </label>
       <textarea type="text" rows="5" v-model="course.description"
         ></textarea>
      </div>
+     <div class="text-center"><button @click="updateInfo" class="btn btn-primary">Update</button></div>
       </form>
     </div>
-    <button @click="updateInfo">Update</button>
-    <div class="text-start mb-2">
-      <button @click="poolShow = !poolShow">Add new lesson</button>
-      <button @click="poolShow = !poolShow">Save</button>
+    
+    <div class="lessons-wrapper pt-3">
+      <h4 class="fw-bold text-start mb-4">Lessons</h4>
+      <div class="text-start mb-4">
+      <button class="btn btn-primary" @click="poolShow = !poolShow">Add new lesson from pool</button>
+      <button class="btn btn-primary ms-5">Add new lesson by ID</button>
+      <input type="text" class="py-1 ms-2">
     </div>
-    <div v-if="false" :class="{ shorten: poolShow }">
+    <div v-if="true" :class="{ shorten: poolShow }">
       <table>
         <tr>
           <th>ID</th>
-          <th>Position</th>
           <th>Title</th>
           <th>Description</th>
-          <th>Image</th>
-          <th>Tag</th>
-          <th>Category</th>
-          <th>Move up</th>
-          <th>Move down</th>
-          <th>Delete</th>
+          <th colspan="3">Action</th>
         </tr>
-        <tbody>
           <tr
             @keydown.prevent="keyPos($event, index)"
             v-for="(lesson, index) in lessons"
@@ -48,28 +50,26 @@
             class="lesson"
           >
             <td>{{ lesson.id }}</td>
-            <td>{{ lesson.position }}</td>
             <td>{{ lesson.name }}</td>
             <td>{{ lesson.des }}</td>
-            <td><img :src="lesson.img" alt="" /></td>
-            <td>{{ lesson.tag }}</td>
-            <td>{{ lesson.category }}</td>
             <td>
-              <button @click="up($event.target, index)">Up</button>
+              <button class="btn btn-secondary" @click="up($event.target, index)">Up</button>
             </td>
-            <td><button @click="down($event.target, index)">Down</button></td>
-            <td><button>Delete</button></td>
+            <td><button class="btn btn-secondary" @click="down($event.target, index)">Down</button></td>
+            <td><button class="btn btn-danger">Remove</button></td>
           </tr>
-        </tbody>
       </table>
     </div>
+    </div>
     <div class="lessons-pool" v-if="poolShow">
+      <div>
+        <label  class="me-1 mb-2 py-1 btn btn-secondary fw-bold">Search</label><span @click="poolShow = !poolShow" class="close-pool">&times;</span><input class="mb-3" type="search">
+      </div>
       <ul>
         <li v-for="(lesson, index) in lessonsPool" :key="index">
-          <img :src="lesson.img" alt="" />
+          <p class="fw-bold">{{ lesson.name }}</p>
           <p>ID: {{ lesson.id }}</p>
-          <p>Name: {{ lesson.name }}</p>
-          <button @click="addFromPool(index)">Add</button>
+          <button class="btn btn-primary" @click="addFromPool(index)">Add</button>
         </li>
       </ul>
     </div>
@@ -93,6 +93,7 @@ export default {
         category: "",
       },
       rawLessons: [],
+      load:false
     };
   },
   computed: {
@@ -153,19 +154,19 @@ export default {
       this.newCourse = this.courses[this.currentIndex];
     },
     // CALL API
-    fetching() {
-      console.log(2)
-      this.$store.dispatch("loadingFinishedFunc", false);
+    fetching(){
+      // console.log(this.$route.params)
+      // this.$store.dispatch("loadingFinishedFunc", false);
       let initialData = this.axios
-        .get(`/api/v1/admin/courses/9`)
+        .get(`/api/v1/admin/courses/${this.$route.params.id}`)
         .then((res) => {
           console.log(res.data);
           this.course = res.data;
-          this.$store.dispatch("loadingFinishedFunc", true);
+          this.load = true;
+          // this.$store.dispatch("loadingFinishedFunc", true);
         })
         .catch((res) => {
           alert(res.response.data.error);
-          this.$router.push("/");
         });
       return initialData;
     },
@@ -201,80 +202,101 @@ export default {
 
   },
   mounted() {
-    // for (let i = 0; i < 10; i++) {
-    //   this.lessons.push({
-    //     id: 100 + i,
-    //     position: i + 1,
-    //     name: "Default",
-    //     des: "HTML CSS TAILWIND",
-    //     img: "https://i.ytimg.com/vi/-VQhSM77_HA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLClX8lFY0T_TGnFgurbmgkujJO61w",
-    //     tag: "framework",
-    //     category: "frontEnd",
-    //   });
-    // }
-    // for (let i = 0; i < 10; i++) {
-    //   this.lessonsPool.push({
-    //     id: 300 + i,
-    //     name: "Pool",
-    //     des: "HTML CSS TAILWIND",
-    //     img: "https://i.ytimg.com/vi/jFfo23yIWac/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDsPN9vc9_VSLRbVrVcqZXxV4Ekig",
-    //     tag: "framework",
-    //     category: "frontEnd",
-    //   });
-    // }
-    this.load = true;
+    for (let i = 0; i < 10; i++) {
+      this.lessons.push({
+        id: 100 + i,
+        position: i + 1,
+        name: "Configure VueJS Application Tutorials  "+(i+1),
+        des: "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+        img: "https://i.ytimg.com/vi/-VQhSM77_HA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLClX8lFY0T_TGnFgurbmgkujJO61w",
+        tag: "framework",
+        category: "frontEnd",
+      });
+    }
+    for (let i = 0; i < 10; i++) {
+      this.lessonsPool.push({
+        id: 300 + i,
+        name: "Configure VueJS Application Tutorials "+(i+1),
+        des: "HTML CSS TAILWIND",
+        img: "https://i.ytimg.com/vi/jFfo23yIWac/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDsPN9vc9_VSLRbVrVcqZXxV4Ekig",
+        tag: "framework",
+        category: "frontEnd",
+      });
+    }
+
   },
 };
 </script>
   <style scoped>
 .wrapper {
-  width: 1200px;
+  padding: 20px;
   margin: auto;
+  background-color: #F3F6F9;
+  margin-top: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+.lessons-wrapper {
+  border-top: 1px solid #aaa;
+}
+input,textarea {
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  padding-left: 5px;
 }
 table {
-  width: 1200px;
   margin: auto;
+  width: 100%;
 }
-table td {
-  height: 80px;
-  position: relative;
+td,th {
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  padding: 10px 5px;
 }
-table img {
+/* table img {
   width: 80px;
-  height: 40px;
-  display: block;
-  overflow: scroll;
 }
 table img:hover {
+  display: block;
   position: absolute;
   width: 300px;
   height: 200px;
   top: 0;
   z-index: 2;
-}
+} */
 .lesson:focus {
-  border: 1px solid #333;
+  outline: 2px solid #06bbcc;
+  border-radius: 6px;
 }
 .lessons-pool {
   position: fixed;
   bottom: 0;
-  height: 300px;
-  left: 0;
   right: 0;
-  overflow-y: scroll;
+  top: 0;
+  width: 300px;
   background-color: white;
+  padding: 15px;
+  z-index: 2000;
+  overflow: scroll;
+}
+.lessons-pool input:focus {
+  outline: none;
 }
 .lessons-pool ul {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  list-style: none;
+  padding: 0;
+}
+.lessons-pool ul img {
+  width: 100%;
+}
+.lessons-pool p {
+  margin: 0;
 }
 .course-form {
   text-align: justify;
-}
-.shorten {
-  height: 400px;
-  overflow-y: scroll;
 }
 textarea {
   width: 100%;
@@ -282,5 +304,15 @@ textarea {
 label>span {
   display: inline-block;
   width: 150px;
+}
+.close-pool {
+  font-size: 26px;
+  font-weight: bold;
+  display: block;
+  margin-left: auto;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
 }
 </style>

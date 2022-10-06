@@ -2,7 +2,9 @@
   <div>
     <div class="admin">
       <NavbarComp v-if="!($route.path == '/admin/login')" />
-      <router-view :role="adminRole"></router-view>
+      <main :class="{open:!$store.state.admin.showSidebar||$route.path == '/admin/login'}">
+        <router-view :role="adminRole"></router-view>
+      </main>
     </div>
   </div>
 </template>
@@ -27,4 +29,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+  main {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 250px;
+    transition: 0.5s;
+  }
+  main.open{
+    margin-left: 0;
+  }
 </style>

@@ -1,9 +1,10 @@
 <template>
   <div class="wrapper">
     <main>
-      <div class="text-start mb-2 d-flex justify-content-between">
-        <h4>Courses Management</h4>
+      <div class="text-start mb-3 d-flex justify-content-between align-items-center">
+        <h4 class="fw-bold">Courses Management</h4>
         <button
+          class="btn btn-primary"
           @click="
             courseFormShow = true;
             action = 'Add';
@@ -12,30 +13,32 @@
           Add new course
         </button>
       </div>
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
-            <th>Ord</th>
+            <th><input type="checkbox"></th>
             <th>ID</th>
             <th>Name</th>
             <th>Publish</th>
             <th>Date Published</th>
             <th>Date Created</th>
             <th>Date Updated</th>
+            <th colspan="2">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(course, index) in courses" :key="index">
-            <td>{{ index + 1 }}</td>
+            <td><input type="checkbox"></td>
             <td>{{ course.id }}</td>
             <td>{{ course.name }}</td>
             <td>{{ course.is_publish == null ? "No" : "Yes" }}</td>
-            <td>{{ course.published_at }}</td>
+            <td>{{ course.published_at?course.published_at:"N/A" }}</td>
             <td>{{ course.created_at.split("T")[0] }}</td>
             <td>{{ course.updated_at.split("T")[0] }}</td>
             <td>
               <router-link
-                class="btn btn-success"
+              target=”_blank”
+                class="btn btn-primary"
                 :to="$route.path + `/${course.id}`"
               >
                 Edit 
@@ -56,14 +59,21 @@
         </tr> -->
         </tbody>
       </table>
-      <div class="form-wrapper" v-if="courseFormShow && load">
-        <p>{{ newCourse.title }}</p>
+      <div class ="overlay"  v-if="courseFormShow && load">
+        <div class="form-wrapper">
+        <h3 class="fw-bold">Add new course</h3>
         <form class="Course-form" @submit.prevent="add">
-          <label>Name: <input type="text" v-model="newCourse.name" /></label>
+          <label class="w-100">Name:</label>
+          <input class="w-100 mb-3 " type="text" v-model="newCourse.name" />
+          <label class="mb-2">Publish:</label>
+          <label class="ms-3">Yes: <input type="radio" :value="1" v-model="newCourse.is_publish" /></label>
+          <label class="ms-3">No: <input type="radio" :value="0" v-model="newCourse.is_publish" /></label><br>
           <label>Description: </label>
           <textarea
+          class="mb-2"
             type="text"
             col="5"
+            rows="5"
             v-model="newCourse.description"
           ></textarea>
           <!-- <label>Image: <input type="text" v-model="newCourse.img" /></label> -->
@@ -71,9 +81,12 @@
           <label
             >Category: <input type="text" v-model="newCourse.category"
           /></label> -->
-          <button type="submit">{{ action }}</button>
-          <button @click="courseFormShow = false">Cancel</button>
+         <div class="text-end">
+          <button class="btn btn-primary me-2" type="submit">{{ action }}</button>
+          <button class="btn btn-secondary" @click="courseFormShow = false">Cancel</button>
+         </div>
         </form>
+      </div>
       </div>
     </main>
   </div>
@@ -101,26 +114,27 @@ export default {
       this.newCourse = this.courses[this.currentIndex];
     },
     fetching() {
-      this.$store.dispatch("loadingFinishedFunc", false);
-      let initialData = this.axios
+      // this.$store.dispatch("loadingFinishedFunc", false);
+      this.axios
         .get("/api/v1/admin/courses")
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
           this.courses = res.data;
-          this.$store.dispatch("loadingFinishedFunc", true);
+          // this.$store.dispatch("loadingFinishedFunc", true);
         })
         .catch((res) => {
           alert(res.response.data.error);
-          this.$router.push("/");
+          // this.$router.push("/");
         });
-      return initialData
     },
     add() {
       this.axios
         .post("/api/v1/admin/courses", this.newCourse)
         .then(() => {
+          console.log(this.newCourse)
           this.newCourse.name = ""
           this.newCourse.description = ""
+          this.courseFormShow = false
           this.fetching()
         })
         .catch(() => {
@@ -140,7 +154,7 @@ export default {
     }
   },
   created(){
-    this.initialData = this.fetching()
+    this.fetching()
   },
   mounted() {
     this.load = true
@@ -148,19 +162,25 @@ export default {
 };
 </script>
 <style scoped>
-.wrapper {
-  width: 1200px;
-  margin: auto;
+main {
+  border-radius: 9px;
+  margin-top: 20px;
 }
-table {
-  width: 1200px;
-  margin: auto;
+.overlay {
+  background-color: rgba(3,3,3,0.2); 
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
 }
 tr {
   border-top: 1px solid #e9e9e9;
 }
-td {
+td,th {
   vertical-align: middle;
+  border: 1px solid #ddd;
 }
 table img {
   width: 80px;
@@ -175,15 +195,18 @@ table img:hover {
   z-index: 2;
 }
 .form-wrapper {
-  position: fixed;
-  width: 200px;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border: 1px solid #333;
-  padding-left: 20px;
-  width: 300px;
+  margin: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  width: 600px;
+  height: auto;
+  top: 30%;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  padding: 15px;
   background-color: white;
+  text-align: left;
 }
 .lesson {
   display: flex;

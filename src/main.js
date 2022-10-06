@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import VueYoutube from 'vue-youtube'
 import VueCarousel from 'vue-carousel';
 
-
 // import the fontawesome core 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -30,7 +29,18 @@ Vue.config.productionTip = false
 Vue.use(VueYoutube)
 
 axios.defaults.baseURL = 'http://127.0.0.1:3000';
-axios.defaults.headers.common= {'Authorization':`Bearer ${store.state.token}`}
+// axios.defaults.headers.common= {'Authorization':`Bearer ${store.state.token}`}
+
+axios.interceptors.request.use(
+  (config) => {
+    config.headers.Authorization = `Bearer ${store.state.token}`;
+    return config;
+  },
+  (error) => {
+    // console.log("request error", error);
+    return Promise.reject(error);
+  }
+);
 
 new Vue({
   router,
