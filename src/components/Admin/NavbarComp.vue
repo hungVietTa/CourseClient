@@ -6,7 +6,6 @@
         <router-link to="/admin" class="navbar-brand mx-4 mb-3">
           <h3 class="text-primary">
             <i class="fa fa-hashtag me-2"></i># ADMIN
-            {{ $store.state.admin.showSidebar }}
           </h3>
         </router-link>
         <div class="d-flex align-items-center ms-4 mb-4">

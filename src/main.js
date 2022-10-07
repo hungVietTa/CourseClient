@@ -17,9 +17,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import specific icons
 // import { fas } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter,faFacebook,faYoutube,faLinkedin } from '@fortawesome/free-brands-svg-icons'
-import { faUserSecret,faUserGraduate,faEye,faEyeSlash,faReply,faSquareUpRight,faEnvelope,faLocationDot,faPhone,faMagnifyingGlass,faLessThan,faGreaterThan,faUserTie,faUser,faClock,faStar,faSolarPanel,faGaugeSimple,faCalendar,faPersonChalkboard,faBook,faPuzzlePiece,faBlog,faBars,faBell,faAngleDown} from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret,faUserGraduate,faEye,faEyeSlash,faReply,faSquareUpRight,faEnvelope,faLocationDot,faPhone,faMagnifyingGlass,faLessThan,faGreaterThan,faUserTie,faUser,faClock,faStar,faSolarPanel,faGaugeSimple,faCalendar,faPersonChalkboard,faBook,faPuzzlePiece,faBlog,faBars,faBell,faAngleDown,faSort} from '@fortawesome/free-solid-svg-icons'
 // add icons to the library
-library.add(faUserSecret,faUserGraduate,faEye,faEyeSlash,faReply,faTwitter,faFacebook,faYoutube,faLinkedin,faSquareUpRight,faEnvelope,faLocationDot,faPhone,faMagnifyingGlass,faLessThan,faGreaterThan,faUserTie,faUser,faClock,faStar,faSolarPanel,faGaugeSimple,faCalendar,faPersonChalkboard,faBook,faPuzzlePiece,faBlog,faBars,faBell,faAngleDown)
+library.add(faUserSecret,faUserGraduate,faEye,faEyeSlash,faReply,faTwitter,faFacebook,faYoutube,faLinkedin,faSquareUpRight,faEnvelope,faLocationDot,faPhone,faMagnifyingGlass,faLessThan,faGreaterThan,faUserTie,faUser,faClock,faStar,faSolarPanel,faGaugeSimple,faCalendar,faPersonChalkboard,faBook,faPuzzlePiece,faBlog,faBars,faBell,faAngleDown,faSort)
 
 // add font awesome icon component
 Vue.component('font-awesome-icon', FontAwesomeIcon)

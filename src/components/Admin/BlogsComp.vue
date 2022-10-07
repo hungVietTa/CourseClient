@@ -118,7 +118,7 @@ export default {
       let initialData = this.axios
         .get("/api/v1/admin/courses")
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.courses = res.data;
           // this.$store.dispatch("loadingFinishedFunc", true);
         })
