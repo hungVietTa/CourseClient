@@ -1,28 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/home/index.vue'
 import store from '../store/index.js'
 
 Vue.use(VueRouter)
 
 const routes = [
 
-  // HOME
+  // GENERAL
   {
-    path: '/blog',
-    name: 'blog',
-    component: () => import(/* webpackChunkName: "about" */ '../views/BlogView.vue')
-  }
-,
-  {
-    path: '',
-    component: HomeView,
+    // INDEX
+    path: '/',
+    component:{
+    HomeView
+    },
     children:[
-      {
-        path: '/',
-        name: 'home',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Home/IndexComp.vue')
-      },
       {
         path: 'news/:id',
         name: 'news',
@@ -31,89 +23,56 @@ const routes = [
       {
         path: 'learning',
         name: 'learning',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/LearningView.vue')
       },
       {
         path: 'learning-path',
         name: 'learningpath',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/LearningPathComp.vue')
       },
       {
         path: 'schedules',
         name: 'schedules',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/SchedulesComp.vue')
       },
       {
         path: 'schedules/:id',
         name: 'schedules.id',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/ScheduleUnitComp.vue')
       },
       {
         path: 'courses',
         name: 'courses',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/CoursesComp.vue')
       },
       {
         path: 'courses/:id',
         name: 'courses.id',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/CourseUnitComp.vue')
       },
       {
         path: 'blogs',
         name: 'blogs',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/BlogsComp.vue')
       },
       {
         path: 'draft',
         name: 'draft',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/BlogDraftComp.vue')
       },
       {
         path: 'blogs/:id',
         name: 'blogs.id',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Home/BlogUnitComp.vue')
       },
       {
         path: 'quiz',
         name: 'quiz',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../components/Others/QuizComp.vue')
       },
       {
         path: 'forgot',
         name: 'forgot',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName:"about"*/ '../components/Others/ForgotPasswordComp.vue')
       }
     ]
@@ -154,62 +113,62 @@ const routes = [
       {
         path: 'schedules',
         name: 'admin.schedules',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/SchedulesComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/schedule/SchedulesComp.vue'),
       },
       {
         path: 'schedules/:id',
         name: 'admin.schedules.id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/ScheduleModifyComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/schedule/ScheduleModifyComp.vue'),
       },
       {
         path: 'courses',
         name: 'admin.courses',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/CoursesComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/course/CoursesComp.vue'),
       },
       {
         path: 'courses/:id',
         name: 'admin.courses.id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/CourseEditComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/course/CourseEditComp.vue'),
       },
       {
         path: 'lessons',
         name: 'admin.lessons',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/LessonsComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/lesson/LessonsComp.vue'),
       },
       {
         path: 'lessons/:id',
         name: 'admin.lessons.id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/LessonModifyComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/lesson/LessonModifyComp.vue'),
       },
       {
         path: 'quizs',
         name: 'admin.quizs',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/QuizsComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/quiz/QuizsComp.vue'),
       },
       {
         path: 'quizs/:id',
         name: 'admin.quizs.id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/QuizModifyComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/quiz/QuizModifyComp.vue'),
       },
       {
         path: 'questions',
         name: 'admin.questions',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/QuestionsComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/question/QuestionsComp.vue'),
       },
       {
         path: 'questions/:id',
         name: 'admin.questions.id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/QuestionModifyComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/question/QuestionModifyComp.vue'),
       },
       {
         path: 'blogs',
         name: 'admin.blogs',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/BlogsComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/blog/BlogsComp.vue'),
       },
       {
         path: 'blogs/:id',
         name: 'admin.blogs.id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/BlogModifyComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Admin/blog/BlogModifyComp.vue'),
       }
     ]
   },
@@ -223,31 +182,31 @@ const routes = [
     children: [
       {
         path: 'profile',
-        component: () => import(/* webpackChunkName: "about" */ '../components/User/ProfileComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/User/profile/ProfileComp.vue'),
       },
       {
         path: 'schedules',
-        component: () => import(/* webpackChunkName: "about" */ '../components/User/SchedulesComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/User/schedule/SchedulesComp.vue'),
       },
       {
         path: 'schedules/:id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/User/ScheduleUnitComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/User/schedule/ScheduleUnitComp.vue'),
       },
       {
         path: 'courses',
-        component: () => import(/* webpackChunkName: "about" */ '../components/User/CoursesComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/User/course/CoursesComp.vue'),
       },
       {
         path: 'courses/:id',
-        component: () => import(/* webpackChunkName: "about" */ '../components/User/CourseUnitComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/User/course/CourseUnitComp.vue'),
       },
       {
         path: 'blogs',
-        component: () => import(/* webpackChunkName: "about" */ '../components/User/BlogsComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/User/blog/BlogsComp.vue'),
       },
       {
         path: 'blogs/modify',
-        component: () => import(/* webpackChunkName: "about" */ '../components/User/BlogModifyComp.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/User/blog/BlogModifyComp.vue'),
       },
       {
         path: 'timetable',

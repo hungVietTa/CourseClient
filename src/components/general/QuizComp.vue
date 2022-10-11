@@ -1,7 +1,6 @@
 <template>
   <div>
-    <home-header-comp />
-    <main>
+    <main class="pt-5">
       <div v-if="enrolling">
         <h1>{{ examTitle }}</h1>
         <p>
@@ -10,7 +9,7 @@
           {{ minimum }}/{{ list.length }} of them
         </p>
         <p>Are you ready</p>
-        <button @click="start">Ready</button>
+        <button class="btn btn-primary" @click="start">Ready</button>
       </div>
       <ul v-show="processing || reviewing">
         <div class="btn-group">
@@ -69,7 +68,7 @@
           </div>
         </li>
         <p v-show="!reviewing && processing">{{ countDown }}</p>
-        <button
+        <button 
           @click="unfinishedCheck"
           v-if="!reviewing && processing"
           class="btn btn-primary mt-4"
@@ -77,7 +76,7 @@
           Submit
         </button>
       </ul>
-      <button
+      <button class="btn btn-primary"
         v-if="reviewing && !done"
         @click="
           reviewing = false;
@@ -94,14 +93,14 @@
           You are finished with score {{ score }}/{{ 10 * list.length }}
           {{ processing }}
         </h2>
-        <button @click="showResult">Show result</button>
+        <button class="btn btn-primary" @click="showResult">Show result</button>
         <div v-if="pass">
           <p>Congratulation !</p>
           <button>Explore next lesson</button>
         </div>
         <div v-if="!pass">
           <p>We was so sorry but ...</p>
-          <button @click="tryAgain">Try again</button>
+          <button class="btn btn-primary" @click="tryAgain">Try again</button>
         </div>
       </div>
     </main>
@@ -121,7 +120,6 @@
   </div>
 </template>
 <script>
-import HomeHeaderComp from "../Home/HeaderComp.vue";
 import ModalComp from "./ModalComp.vue";
 import { startTimer } from "../../mfsmodule/timer.js";
 
@@ -159,7 +157,6 @@ export default {
     },
   },
   components: {
-    HomeHeaderComp,
     ModalComp,
   },
   methods: {

@@ -20,12 +20,7 @@
 import FooterComp from "./components/Others/FooterComp.vue";
 
 export default {
-  components: { FooterComp },
-  // mounted(){
-  //   this.axios.get('/api/v1/users/profile').then(res => {
-  //         console.log(res)
-  //       }).catch((res) => { console.log(res)})
-  // }
+  components: { FooterComp }
 };
 </script>
 <style lang="scss">

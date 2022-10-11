@@ -1,4 +1,5 @@
 <template>
+  <!-- <router-view></router-view> -->
   <div class="wrapper">
     <h2 class="fw-bold">Course#{{ course.id }}</h2>
     <h4 class="fw-bold text-start">Information</h4>
@@ -222,6 +223,7 @@ export default {
         .then((res) => {
           this.course = res.data;
           this.load = true;
+          console.log(res.data)
           // this.$store.dispatch("loadingFinishedFunc", true);
         })
         .catch((res) => {

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <HeaderLearningComp />
     <main>
@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import HeaderLearningComp from "../Others/HeaderLearningComp.vue";
+import HeaderLearningComp from "../components/Others/HeaderLearningComp.vue";
 export default {
   data() {
     return {
@@ -170,4 +170,4 @@ ul.active {
   background-color: rgba(243, 119, 119, 0.514);
   cursor: not-allowed;
 }
-</style>
+</style> -->
