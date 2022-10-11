@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="admin">
-      <NavbarComp v-if="!($route.path == '/admin/login')" />
+      <NavbarComponent v-if="!($route.path == '/admin/login')" />
       <main :class="{open:!$store.state.admin.showSidebar||$route.path == '/admin/login'}">
         <router-view :role="adminRole"></router-view>
       </main>
@@ -11,7 +11,7 @@
 
 <script>
 // @ is an alias to /src
-import NavbarComp from "@/components/Admin/NavbarComp.vue";
+import NavbarComponent from "@/components/admin/navbar/NavbarComponent.vue";
 
 export default {
   data() {
@@ -21,7 +21,7 @@ export default {
   },
   name: "HomeView",
   components: {
-    NavbarComp,
+    NavbarComponent,
   },
   methods:{
   },

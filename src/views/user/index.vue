@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="home">
     <HomeHeaderComp/>
     <main>
@@ -26,4 +26,4 @@ main {
   margin: auto;
   display: flex;
 }
-</style>
+</style> -->

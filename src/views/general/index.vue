@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <HeaderComponent ref="header" />
-    <main>
-       <router-view></router-view>
-    </main>
+    <router-view></router-view>
+    <FooterComponent/>
   </div>
 </template>
 
 <script>
 import HeaderComponent from "@/components/general/header/HeaderComponent.vue";
+import FooterComponent from "@/components/others/FooterComponent.vue";
 
 
   export default {
@@ -18,7 +18,8 @@ import HeaderComponent from "@/components/general/header/HeaderComponent.vue";
       }
     },
   components: {
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
 }
 
   }

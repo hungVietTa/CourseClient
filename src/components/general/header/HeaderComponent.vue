@@ -103,9 +103,9 @@
            Courses</router-link
           >
           <router-link
-            to="/blog"
+            to="/blogs"
             class="nav-item nav-link"
-            :class="{active:$route.path.split('/')[1]== 'blog' }"
+            :class="{active:$route.path.split('/')[1]== 'blogs' }"
             >Blog </router-link
           >
           <button type="button" @click="showModal=true" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></button>
@@ -182,9 +182,9 @@
 
 <script>
 import { mapActions } from "vuex";
-import FadedNotifyComp from "../Others/FadedNotifyComp.vue";
+import FadedNotifyComp from "@/components/others/FadedNotifyComponent.vue";
 export default {
-  name: "HomeHeaderComp",
+  name: "HeaderComponent",
   data() {
     return {
       showModal:false,

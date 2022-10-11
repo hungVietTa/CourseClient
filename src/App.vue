@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="waiting" v-if="!$store.state.loadingFinished">
+    <div class="waiting" v-if="!$store.state.loadingFinished || false">
       <button class="btn btn-primary" type="button" disabled>
         <span
           class="spinner-border spinner-border-sm"
@@ -13,16 +13,8 @@
     <main>
       <router-view />
     </main>
-    <FooterComp />
   </div>
 </template>
-<script>
-import FooterComp from "./components/Others/FooterComp.vue";
-
-export default {
-  components: { FooterComp }
-};
-</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -39,14 +31,14 @@ export default {
 .btn-primary {
   --bs-btn-bg: #06bbcc !important;
   --bs-btn-border-color: #06bbcc !important;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #06bbcc !important;
-    --bs-btn-hover-border-color: #06bbcc !important;
-    --bs-btn-focus-shadow-rgb: #06bbcc !important;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #06bbcc !important;
-    --bs-btn-active-border-color: #06bbcc !important;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #06bbcc !important;
+  --bs-btn-hover-border-color: #06bbcc !important;
+  --bs-btn-focus-shadow-rgb: #06bbcc !important;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #06bbcc !important;
+  --bs-btn-active-border-color: #06bbcc !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 div .text-primary {
   color: #06bbcc !important;
