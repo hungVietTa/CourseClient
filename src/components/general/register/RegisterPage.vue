@@ -84,7 +84,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import validator from "@/mfsmodule/validator.js";
+import validator from "@/mymodules/validator.js";
 
 export default {
   data() {
@@ -121,7 +121,7 @@ export default {
     };
   },
   methods: {
-     ...mapActions(["register"]),
+     ...mapActions("authen",["register"]),
     submit(form) {
       if (!this.validator.general(form)) {
         this.form.server.validate= false;

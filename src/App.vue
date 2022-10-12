@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="waiting" v-if="!$store.state.loadingFinished || false">
+    <div class="waiting" v-if="false">
       <button class="btn btn-primary" type="button" disabled>
         <span
           class="spinner-border spinner-border-sm"

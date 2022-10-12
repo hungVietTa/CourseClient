@@ -58,10 +58,6 @@
             ><i> <font-awesome-icon icon="fa-solid fa-person-chalkboard" /></i>
             Courses</router-link
           >
-          <router-link to="/admin/lessons" class="nav-item nav-link" :class="{active:$route.path.includes('lessons')}"
-            ><i> <font-awesome-icon icon="fa-solid fa-book" /></i>
-            Lessons</router-link
-          >
           <router-link to="/admin/quizs" class="nav-item nav-link" :class="{active:$route.path.includes('quizs')}"
             ><i> <font-awesome-icon icon="fa-solid fa-puzzle-piece" /></i>
             Quizs</router-link
@@ -245,7 +241,7 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions("authen",["logout"]),
   },
 };
 </script>

@@ -63,7 +63,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import validator from "../../mfsmodule/validator.js";
+import validator from "../../mymodules/validator.js";
 
 export default {
   props:{
@@ -109,7 +109,7 @@ export default {
     // }
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions("authen",['login']),
     submit(form) {
       if (!this.validator.general(form)) {
         this.form.server.validate = false;

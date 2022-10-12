@@ -27,7 +27,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["validator",'login']),
+    ...mapActions(['login']),
     print() {
       console.log(this.form.password.valid);
     },

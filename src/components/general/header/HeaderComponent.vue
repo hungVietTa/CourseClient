@@ -106,18 +106,18 @@
         </div>
         <div class="nav-interact">
           <router-link
-            v-if="!$store.state.isUserLogin"
+            v-if="!isUserLogin"
             to="/login"
             class="btn btn-primary me-3"
             >Login</router-link
           >
           <router-link
-            v-if="!$store.state.isUserLogin"
+            v-if="!isUserLogin"
             to="/register"
             class="btn btn-primary"
             >Register</router-link
           >
-          <div class="dropdown me-2" v-if="$store.state.isUserLogin">
+          <div class="dropdown me-2" v-if="isUserLogin">
             <button
               class="btn btn-primary dropdown-toggle"
               @click="userToggle = !userToggle"
@@ -142,7 +142,7 @@
               <li class="mt-2">
                 <div class="pe-1 text-center">
                   <button
-                    v-if="$store.state.isUserLogin"
+                    v-if="isUserLogin"
                     @click="logout"
                     class="btn btn-primary ms-auto p-1"
                   >
@@ -175,7 +175,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions,mapState } from "vuex";
 import FadedNotifyComp from "@/components/others/FadedNotifyComponent.vue";
 export default {
   name: "HeaderComponent",
@@ -188,7 +188,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions("authen",["logout"]),
+  },
+  computed:{
+    ...mapState('authen', {
+    isUserLogin: state => state.isUserLogin,
+  }),
   },
   components: {
     FadedNotifyComp,

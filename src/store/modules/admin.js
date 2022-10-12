@@ -1,5 +1,5 @@
 export default {
-    // namespaced:true,
+    namespace:true,
     state:{
         showSidebar:true
     },

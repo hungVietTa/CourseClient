@@ -130,14 +130,9 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/_id.vue'),
       },
       {
-        path: 'lessons',
+        path: 'courses/:id/lessons/:number',
         name: 'admin.lessons',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/lessons/index.vue'),
-      },
-      {
-        path: 'lessons/:id',
-        name: 'admin.lessons.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/lessons/_id.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/lessons/index.vue'),
       },
       {
         path: 'quizs',
@@ -210,18 +205,18 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (store.state.isUserLogin == true && ( to.name == 'login' || to.name == 'register' ))
+  if (store.state.authen.isUserLogin == true && ( to.name == 'login' || to.name == 'register' ))
     {
       next({ name: 'home' })
     }
-  else if ((store.state.isAdminLogin == true && to.path == '/admin/login'))
+  else if ((store.state.authen.isAdminLogin == true && to.path == '/admin/login'))
     next({ name: 'admin' })
-  else if (store.state.isAdminLogin == false && store.state.isUserLogin == true && to.path.includes("/admin"))
+  else if (store.state.authen.isAdminLogin == false && store.state.authen.isUserLogin == true && to.path.includes("/admin"))
     { console.log(from.path)
       alert("Tài khoản của bạn không đủ quyền truy cập trang này")
       next({ path:from.path})
     }
-  else if (store.state.isAdminLogin == false && store.state.isUserLogin == false && to.path.includes("/admin")&&to.path!=("/admin/login"))
+  else if (store.state.authen.isAdminLogin == false && store.state.authen.isUserLogin == false && to.path.includes("/admin")&&to.path!=("/admin/login"))
       next({ name: 'admin.login' })
   else 
     next()

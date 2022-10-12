@@ -25,7 +25,7 @@ import { mapActions } from 'vuex'
 export default {
   name: "HeaderView",
   methods: {
-    ...mapActions(['logout'])
+    ...mapActions("authen",['logout'])
   }
 }
 </script>

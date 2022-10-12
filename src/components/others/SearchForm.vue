@@ -8,6 +8,11 @@
 </template>
 <script>
 export default {
+    data(){
+        return {
+            searchValue:undefined
+        }
+    },
     name:"SearchForm",
     methods:{
         submit(){

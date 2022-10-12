@@ -1,10 +1,9 @@
 <template>
   <!-- <router-view></router-view> -->
-  <div class="crud admin-courses-edit">
+  <div class="wrapper">
     <h2 class="fw-bold">Course#{{ course.id }}</h2>
-    <!-- COURSES INFORMATION -->
     <h4 class="fw-bold text-start">Information</h4>
-    <div class="mb-4">
+    <div class="form-wrapper mb-4">
       <form class="course-form" @submit.prevent="updateInfo" v-if="load">
         <label class="w-100 mb-4">
           <span class="mb-2">Name:</span>
@@ -14,8 +13,7 @@
           <div class="col-7 d-flex flex-column justify-content-between">
             <div class="d-flex mb-4">
               <div class="col-6">
-                <label><span>Publish:</span></label
-                ><br />
+                <label ><span>Publish:</span></label><br>
                 <label class="fw-normal"
                   >Yes:
                   <input type="radio" :value="1" v-model="course.is_publish"
@@ -30,7 +28,8 @@
               </div>
               <div class="col-6">
                 <label
-                  ><span>Date Published: </span><br /><input
+                  ><span>Date Published: </span
+                  ><br><input
                     type="text"
                     disabled
                     :value="
@@ -43,32 +42,33 @@
             </div>
             <div class="d-flex mb-4">
               <label class="col-6"
-                ><span>Date Created: </span><br /><input
+                ><span>Date Created: </span
+                ><br><input
                   type="text"
                   disabled
                   :value="course.created_at.split('T')[0]"
               /></label>
               <label class="col-6"
-                ><span>Date Modified: </span><br /><input
+                ><span>Date Modified: </span
+                ><br><input
                   type="text"
                   disabled
                   :value="course.updated_at.split('T')[0]" /></label
               ><br />
             </div>
             <div class="d-flex mb-4">
-              <label><span>Description:</span> </label>
-              <textarea
-                type="text"
-                rows="5"
-                v-model="course.description"
-              ></textarea>
-            </div>
+            <label><span>Description:</span> </label>
+            <textarea
+              type="text"
+              rows="5"
+              v-model="course.description"
+            ></textarea>
+          </div>
           </div>
           <div class="col-1"></div>
           <div class="col-4">
             <div class="cover-img mb-3">
-              <img
-                ref="image"
+              <img ref="image"
                 :src="
                   course.cover
                     ? course.cover.file_url
@@ -77,116 +77,87 @@
               />
             </div>
             <div class="text-center">
-              <label class="mb-4 btn btn-secondary p-1">
-                Change cover image
-                <input
-                  class="border-0 custom-file-input"
-                  ref="imgInput"
-                  @change="imagePreview"
-                  type="file"
-                />
-              </label>
+              <label class="mb-4 btn btn-secondary p-1"> Change cover image  <input class="border-0 custom-file-input" ref="imgInput" @change="imagePreview" type="file" /> </label>
             </div>
           </div>
         </div>
         <div class="text-center">
-          <button @click="modalShow = true" class="btn btn-primary">
-            Update
-          </button>
+          <button type="submit" class="btn btn-primary">Update</button>
         </div>
       </form>
     </div>
-    <!-- LESSONS IN COURSE -->
-    <div class="lessons-wrapper table-wrapper pt-3">
+
+    <div class="lessons-wrapper pt-3">
       <h4 class="fw-bold text-start mb-4">Lessons</h4>
       <div class="text-start mb-4">
-        <button class="btn btn-primary" @click="FormShow = true">
+        <button class="btn btn-primary" @click="poolShow = !poolShow">
           Add new lesson
         </button>
       </div>
-      <div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th colspan="4">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              @keydown.prevent="keyPos($event, index)"
-              v-for="(lesson, index) in lessons"
-              :key="index"
-              tabindex="0"
-            >
-              <td>{{ lesson.id }}</td>
-              <td>{{ lesson.name }}</td>
-              <td>{{ lesson.des }}</td>
-              <td>
-                <button
-                  class="btn btn-secondary"
-                  @click="up($event.target, index)"
-                >
-                  Up
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn btn-secondary"
-                  @click="down($event.target, index)"
-                >
-                  Down
-                </button>
-              </td>
-              <td><button class="btn btn-primary">Edit</button></td>
-              <td><button class="btn btn-danger">Remove</button></td>
-            </tr>
-          </tbody>
-        </table>
-        <button @click="modalShow = true" class="btn btn-primary mt-4 mb-3">
-          Update
-        </button>
-      </div>
-      <!-- ADD LESSONS FORM -->
-      <div class="overlay" v-if="FormShow && load">
-        <div class="form-wrapper">
-          <h3 class="fw-bold">Add new lesson</h3>
-          <form class="Course-form" @submit.prevent="add">
-            <label class="w-100">Name:</label>
-            <input class="w-100 mb-3" type="text" />
-            <label class="w-100">Video URL:</label>
-            <input class="w-100 mb-3" type="text" />
-            <label>Description: </label>
-            <textarea class="mb-2" type="text" col="5" rows="5"></textarea>
-            <div class="text-end">
-              <button class="btn btn-primary me-2" type="submit">Add</button>
-              <button class="btn btn-secondary" @click="FormShow = false">
-                Cancel
+      <div v-if="true" :class="{ shorten: poolShow }">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th colspan="4">Action</th>
+          </tr>
+          <tr
+            @keydown.prevent="keyPos($event, index)"
+            v-for="(lesson, index) in lessons"
+            :key="index"
+            tabindex="0"
+            class="lesson"
+          >
+            <td>{{ lesson.id }}</td>
+            <td>{{ lesson.name }}</td>
+            <td>{{ lesson.des }}</td>
+            <td>
+              <button
+                class="btn btn-secondary"
+                @click="up($event.target, index)"
+              >
+                Up
               </button>
-            </div>
-          </form>
-        </div>
+            </td>
+            <td>
+              <button
+                class="btn btn-secondary"
+                @click="down($event.target, index)"
+              >
+                Down
+              </button>
+            </td>
+            <td><button class="btn btn-primary">Edit</button></td>
+            <td><button class="btn btn-danger">Remove</button></td>
+          </tr>
+        </table>
       </div>
     </div>
-
-    <ModalComponent
-      v-if="modalShow"
-      @cancel="modalShow = false"
-      @process="updateCourse(currentId)"
-    />
+    <div class="lessons-pool" v-if="poolShow">
+      <div>
+        <label class="me-1 mb-2 py-1 btn btn-secondary fw-bold">Search</label
+        ><span @click="poolShow = !poolShow" class="close-pool">&times;</span
+        ><input class="mb-3" type="search" />
+      </div>
+      <ul>
+        <li v-for="(lesson, index) in lessonsPool" :key="index">
+          <p class="fw-bold">{{ lesson.name }}</p>
+          <p>ID: {{ lesson.id }}</p>
+          <button class="btn btn-primary" @click="addFromPool(index)">
+            Add
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
-import ModalComponent from "@/components/others/ModalComponent.vue";
-
 export default {
   data() {
     return {
-      modalShow: false,
       img: "",
-      FormShow: false,
+      poolShow: false,
       lessonsPool: [],
       course: {},
       currentIndex: 0,
@@ -246,6 +217,12 @@ export default {
       this.lessons[index + 1].position = temp;
       target.parentNode.parentNode.nextElementSibling.focus();
     },
+    // LESSON POOL INTERACTION
+    addFromPool(index) {
+      this.lessonsPool[index].position =
+        this.lessons[this.lessons.length - 1].position + 1;
+      this.rawLessons.push(this.lessonsPool[index]);
+    },
     // CALL API
     fetching() {
       // console.log(this.$route.params)
@@ -298,14 +275,11 @@ export default {
         });
     },
     // OTHERS
-    imagePreview() {
-      console.log(2);
-      let url = URL.createObjectURL(this.$refs.imgInput.files[0]);
-      this.$refs.image.src = url;
-    },
-  },
-  components: {
-    ModalComponent,
+    imagePreview(){
+      console.log(2)
+      let url = URL.createObjectURL(this.$refs.imgInput.files[0])
+      this.$refs.image.src = url
+    }
   },
   created() {
     // const getId = this.$route.params.id;
@@ -338,8 +312,21 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "@/assets/styles/admin_crud.scss";
+<style scoped>
+label {
+  font-weight: 600;
+}
+.btn {
+  font-weight: 600;
+}
+.wrapper {
+  padding: 20px;
+  margin: auto;
+  background-color: #f3f6f9;
+  margin-top: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
 .cover-img {
   width: 100%;
   overflow: hidden;
@@ -352,9 +339,63 @@ export default {
 .lessons-wrapper {
   border-top: 1px solid #aaa;
 }
+input,
+textarea {
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  padding-left: 5px;
+}
+table {
+  margin: auto;
+  width: 100%;
+}
+td,
+th {
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  padding: 10px 5px;
+}
+/* table img {
+  width: 80px;
+}
+table img:hover {
+  display: block;
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  top: 0;
+  z-index: 2;
+} */
 .lesson:focus {
   outline: 2px solid #06bbcc;
   border-radius: 6px;
+}
+.lessons-pool {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: 300px;
+  background-color: white;
+  padding: 15px;
+  z-index: 2000;
+  overflow: scroll;
+}
+.lessons-pool input:focus {
+  outline: none;
+}
+.lessons-pool ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+}
+.lessons-pool ul img {
+  width: 100%;
+}
+.lessons-pool p {
+  margin: 0;
 }
 .course-form {
   text-align: justify;
@@ -366,11 +407,21 @@ label > span {
   display: inline-block;
   width: 150px;
 }
-.custom-file-input {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
+.close-pool {
+  font-size: 26px;
+  font-weight: bold;
+  display: block;
+  margin-left: auto;
   position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+.custom-file-input{
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
 }
 </style>

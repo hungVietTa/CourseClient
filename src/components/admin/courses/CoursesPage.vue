@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="crud">
     <!-- MAIN CONTENT -->
     <main class="mt-4">
       <div
@@ -214,60 +214,6 @@ export default {
   },
 };
 </script>
-<style scoped>
-main {
-  border-radius: 9px;
-}
-.overlay {
-  background-color: rgba(3, 3, 3, 0.2);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 2000;
-}
-tr {
-  border-top: 1px solid #e9e9e9;
-}
-td,
-th {
-  vertical-align: middle;
-  border: 1px solid #ddd;
-}
-table img {
-  width: 80px;
-  height: 40px;
-  display: block;
-}
-table img:hover {
-  position: absolute;
-  width: 300px;
-  height: 200px;
-  top: 0;
-  z-index: 2;
-}
-.page-link {
-  cursor: pointer;
-}
-.form-wrapper {
-  margin: auto;
-  left: 50%;
-  transform: translateX(-50%);
-  position: absolute;
-  width: 600px;
-  height: auto;
-  top: 30%;
-  border: 1px solid #aaa;
-  border-radius: 12px;
-  padding: 15px;
-  background-color: white;
-  text-align: left;
-}
-.lesson {
-  display: flex;
-}
-textarea {
-  width: 100%;
-}
+<style lang="scss">
+@import '@/assets/styles/admin_crud.scss';
 </style>
