@@ -49,21 +49,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/_id.vue')
       },
       {
-        path: 'blogs',
-        name: 'home.blogs',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/blogs/index.vue')
-      },
-      {
-        path: 'blogs/:id',
-        name: 'home.blogs.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/blogs/_id.vue')
-      },
-      {
-        path: 'blogs/draft',
-        name: 'home.blogs.draft',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/blogs/draft.vue')
-      },
-      {
         path: 'quizs',
         name: 'home.quizs',
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/quizs/index.vue')
@@ -173,16 +158,6 @@ const routes = [
         path: 'questions/:id',
         name: 'admin.questions.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/questions/_id.vue'),
-      },
-      {
-        path: 'blogs',
-        name: 'admin.blogs',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/blogs/index.vue'),
-      },
-      {
-        path: 'blogs/:id',
-        name: 'admin.blogs.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/blogs/_id.vue'),
       }
     ]
   },
@@ -218,16 +193,6 @@ const routes = [
         path: 'user.courses/:id',
         name: 'user.courses.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/courses/_id.vue'),
-      },
-      {
-        path: 'user.blogs',
-        name: 'user.blogs',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/user/blogs/index.vue'),
-      },
-      {
-        path: 'user.blogs',
-        name: 'user.blogs.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/user/blogs/_id.vue'),
       },
       {
         path: 'user.timetable',
