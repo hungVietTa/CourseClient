@@ -14,9 +14,6 @@
         <li>
           <router-link to="/user/timetable">Timetable</router-link>
         </li>
-        <li>
-          <router-link to="/user/blog">Blog</router-link>
-        </li>
       </ul>
     </div>
   </aside>

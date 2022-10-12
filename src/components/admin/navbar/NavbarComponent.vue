@@ -41,7 +41,7 @@
            Users</router-link
           >
           <router-link
-            to="/admin/users"
+            to="/admin/billboards"
             class="nav-item nav-link"
             :class="{ active: $route.path.includes('billboards') }"
             ><i><font-awesome-icon icon="fa-solid fa-solar-panel" /></i>
@@ -65,10 +65,6 @@
           <router-link to="/admin/quizs" class="nav-item nav-link" :class="{active:$route.path.includes('quizs')}"
             ><i> <font-awesome-icon icon="fa-solid fa-puzzle-piece" /></i>
             Quizs</router-link
-          >
-          <router-link to="/admin/blogs" class="nav-item nav-link" :class="{active:$route.path.includes('blogs')}"
-            ><i><font-awesome-icon icon="fa-solid fa-blog" /></i>
-            Blogs</router-link
           >
         </div>
       </nav>

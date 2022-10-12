@@ -11,17 +11,18 @@
       ></youtube>
       <section class="list">
         <ul
-          v-for="(lesson, index) in lessons"
+        >
+          <li  v-for="(lesson, index) in lessons"
           :key="lesson.id"
           @click="selection(index)"
           :class="{
             active: index == currentId,
             'bg-salmon': index >= currentQualified,
-          }"
-        >
-          <li>{{ lesson.name }}</li>
-          <li><img :src="lesson.img" alt="" /></li>
-          <li>{{ lesson.des }}</li>
+          }">
+          <h3>{{ lesson.name }}</h3>
+          <p>{{ lesson.des }}</p>
+          </li>
+          <li></li>
         </ul>
       </section>
     </main>

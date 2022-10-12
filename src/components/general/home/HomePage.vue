@@ -333,31 +333,6 @@
         </div>
       </div>
     </div>
-     <!-- Service Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h6 class="text-primary">Our Services</h6>
-                <h1 class="mb-4">We Are Pioneers In The World Of Renewable Energy</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4 wow fadeInUp" v-for="index in 3" :key="index" data-wow-delay="0.1s">
-                    <div class="blog-item rounded overflow-hidden">
-                        <img class="img-fluid" :src="require(`@/assets/img/blog/solar-${index}.jpg`)" alt="">
-                        <div class="position-relative p-4 pt-0">
-                            <div class="blog-icon">
-                                <font-awesome-icon icon="fa-solid fa-solar-panel" />
-                            </div>
-                            <h4 class="mb-3">Solar Panels</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                            <a class="small fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
-                        </div>
-                    </div>
-                </div>
-          </div>
-    </div>
-    </div>
-    <!-- Service End -->
   </main>
 </template>
 <script>
@@ -558,42 +533,5 @@ export default {
 .category a:hover img,
 .course-item:hover img {
   transform: scale(1.1);
-}
-/*** Service ***/
-.blog-item {
-  box-shadow: 0 0 45px rgba(0, 0, 0, 0.08);
-}
-
-.blog-icon {
-  position: relative;
-  margin: -50px 0 25px 0;
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary);
-  background: #ffffff;
-  border-radius: 100px;
-  box-shadow: 0 0 45px rgba(0, 0, 0, 0.08);
-  transition: 0.5s;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.blog-item:hover .blog-icon {
-  color: #ffffff;
-  background: var(--primary);
-}
-.blog-item {
-  text-align: left;
-}
-.blog-item a {
-  color: #06bbcc;
-  text-decoration: none;
-}
-.blog-item p {
-  color: #9b9b9b;
-  text-align: left;
 }
 </style>

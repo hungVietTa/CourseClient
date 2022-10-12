@@ -9,8 +9,8 @@
           <span class="mb-2">Name:</span>
           <input class="w-100" type="text" v-model="course.name"
         /></label>
-        <div class="form-body d-flex align-items-center gap-4">
-          <div class="col-8 d-flex flex-column justify-content-between gap-3">
+        <div class="form-body d-flex align-items-center">
+          <div class="col-7 d-flex flex-column justify-content-between">
             <div class="d-flex mb-4">
               <div class="col-6">
                 <label ><span>Publish:</span></label><br>
@@ -65,9 +65,10 @@
             ></textarea>
           </div>
           </div>
-          <div class="col-4 mt-2">
+          <div class="col-1"></div>
+          <div class="col-4">
             <div class="cover-img mb-3">
-              <img
+              <img ref="image"
                 :src="
                   course.cover
                     ? course.cover.file_url
@@ -76,7 +77,7 @@
               />
             </div>
             <div class="text-center">
-              <label class="mb-4 btn btn-secondary p-1"> Change cover image  <input class="border-0 custom-file-input" ref="imgInput" type="file" /> </label>
+              <label class="mb-4 btn btn-secondary p-1"> Change cover image  <input class="border-0 custom-file-input" ref="imgInput" @change="imagePreview" type="file" /> </label>
             </div>
           </div>
         </div>
@@ -90,10 +91,8 @@
       <h4 class="fw-bold text-start mb-4">Lessons</h4>
       <div class="text-start mb-4">
         <button class="btn btn-primary" @click="poolShow = !poolShow">
-          Add new lesson from pool
+          Add new lesson
         </button>
-        <button class="btn btn-primary ms-5">Add new lesson by ID</button>
-        <input type="text" class="py-1 ms-2" />
       </div>
       <div v-if="true" :class="{ shorten: poolShow }">
         <table>
@@ -101,7 +100,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Description</th>
-            <th colspan="3">Action</th>
+            <th colspan="4">Action</th>
           </tr>
           <tr
             @keydown.prevent="keyPos($event, index)"
@@ -129,6 +128,7 @@
                 Down
               </button>
             </td>
+            <td><button class="btn btn-primary">Edit</button></td>
             <td><button class="btn btn-danger">Remove</button></td>
           </tr>
         </table>
@@ -223,13 +223,6 @@ export default {
         this.lessons[this.lessons.length - 1].position + 1;
       this.rawLessons.push(this.lessonsPool[index]);
     },
-    // LESSON UNIT INTERACTION
-    modifyAction(index) {
-      this.courseFormShow = true;
-      this.currentIndex = index;
-      this.action = "Modify";
-      this.newCourse = this.courses[this.currentIndex];
-    },
     // CALL API
     fetching() {
       // console.log(this.$route.params)
@@ -281,6 +274,12 @@ export default {
           alert("something wrong happen !");
         });
     },
+    // OTHERS
+    imagePreview(){
+      console.log(2)
+      let url = URL.createObjectURL(this.$refs.imgInput.files[0])
+      this.$refs.image.src = url
+    }
   },
   created() {
     // const getId = this.$route.params.id;
@@ -329,9 +328,8 @@ label {
   margin-bottom: 20px;
 }
 .cover-img {
-  width: 400px;
-  height: 300px;
-  margin: auto;
+  width: 100%;
+  overflow: hidden;
 }
 .cover-img img {
   width: 100%;

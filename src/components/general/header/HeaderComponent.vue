@@ -102,12 +102,6 @@
           >
            Courses</router-link
           >
-          <router-link
-            to="/blogs"
-            class="nav-item nav-link"
-            :class="{active:$route.path.split('/')[1]== 'blogs' }"
-            >Blog </router-link
-          >
           <button type="button" @click="showModal=true" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></button>
         </div>
         <div class="nav-interact">
