@@ -27,7 +27,6 @@ import FooterComponent from "@/components/others/FooterComponent.vue";
 <style>
 main {
   margin: auto;
-  min-height: 400px;
 }
 .header-container {
   width: 100%;

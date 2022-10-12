@@ -9,16 +9,16 @@
           <span class="mb-2">Name:</span>
           <input class="w-100" type="text" v-model="course.name"
         /></label>
-        <div class="form-body d-flex align-items-center">
+        <div class="form-body d-flex align-items-center gap-4">
           <div class="col-8 d-flex flex-column justify-content-between gap-3">
             <div class="d-flex mb-4">
               <div class="col-6">
-                <label ><span>Publish:</span></label>
-                <label class="ms-3"
+                <label ><span>Publish:</span></label><br>
+                <label class="fw-normal"
                   >Yes:
                   <input type="radio" :value="1" v-model="course.is_publish"
                 /></label>
-                <label class="ms-3"
+                <label class="ms-3 fw-normal"
                   >No:
                   <input
                     type="radio"
@@ -29,7 +29,7 @@
               <div class="col-6">
                 <label
                   ><span>Date Published: </span
-                  ><input
+                  ><br><input
                     type="text"
                     disabled
                     :value="
@@ -43,14 +43,14 @@
             <div class="d-flex mb-4">
               <label class="col-6"
                 ><span>Date Created: </span
-                ><input
+                ><br><input
                   type="text"
                   disabled
                   :value="course.created_at.split('T')[0]"
               /></label>
               <label class="col-6"
                 ><span>Date Modified: </span
-                ><input
+                ><br><input
                   type="text"
                   disabled
                   :value="course.updated_at.split('T')[0]" /></label

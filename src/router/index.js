@@ -105,6 +105,26 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/login.vue'),
       },
       {
+        path: 'users',
+        name: 'admin.users',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/users/index.vue'),
+      },
+      {
+        path: 'users/:id',
+        name: 'admin.users.id',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/users/_id.vue'),
+      },
+      {
+        path: 'billboards',
+        name: 'admin.billboards',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/billboards/index.vue'),
+      },
+      {
+        path: 'billboards/:id',
+        name: 'admin.billboards.id',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/billboards/_id.vue'),
+      },
+      {
         path: 'schedules',
         name: 'admin.schedules',
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/schedules/index.vue'),

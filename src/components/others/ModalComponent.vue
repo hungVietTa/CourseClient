@@ -1,9 +1,10 @@
 <template>
-  <div class="modal" tabindex="-1">
+  <main>
+    <div class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ modaltitle }}</h5>
+          <h5 class="modal-title fw-bold">{{ modaltitle }}</h5>
           <button
             @click="cancel"
             type="button"
@@ -17,20 +18,23 @@
         </div>
         <div class="modal-footer">
           <button
-            @click="cancel"
+            @click="process"
             type="button"
-            class="btn btn-secondary"
+            class="btn btn-danger fw-bold"
             data-bs-dismiss="modal"
           >
             {{ modalcancel }}
           </button>
-          <button type="button" @click="process" class="btn btn-primary">
+          <button type="button" @click="cancel" class="btn btn-primary fw-bold">
             {{ modalconsent }}
           </button>
         </div>
       </div>
     </div>
-  </div>
+    </div>
+    <div class="overlay">
+    </div>
+  </main>
 </template>
 <script>
 export default {
@@ -45,24 +49,25 @@ export default {
     },
     process(){
       this.$emit('process')
+      this.cancel()
     }
   },
   props: {
     modaltitle: {
       type: String,
-      default: "",
+      default: "Warning !!!",
     },
     modalbody: {
       type: String,
-      default: "",
+      default: "Are you sure about that ?",
     },
     modalcancel: {
       type: String,
-      default: "",
+      default: "Yes",
     },
     modalconsent: {
       type: String,
-      default: "",
+      default: "No",
     },
   },
 };
@@ -70,5 +75,19 @@ export default {
 <style scoped>
 .modal {
   display: block;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%,-30%);
+  top: 50%;
+  z-index: 2001;
+}
+.overlay {
+  background-color: rgba(3,3,3,0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
 }
 </style>

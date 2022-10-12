@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <main>
+    <!-- MAIN CONTENT -->
+    <main class="mt-4">
       <div
         class="
           text-start
@@ -11,6 +12,7 @@
         "
       >
         <h4 class="fw-bold">Courses Management</h4>
+        <search-form @searching="search(value)"/>
         <div>
           <button
             class="btn btn-primary me-2"
@@ -28,19 +30,19 @@
         <table class="table">
         <thead>
           <tr>
-            <th><input type="checkbox" /></th>
-            <th class="text-nowrap">ID  <span><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
-            <th>Name <span><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
-            <th>Publish <span><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
-            <th>Date Published <span><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
-            <th>Date Created <span><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
-            <th>Date Updated <span><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
+            <!-- <th><input type="checkbox" /></th> -->
+            <th class="text-nowrap" role="button" @click="sortById">ID  <span class="ms-2"><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
+            <th>Name <span></span></th>
+            <th>Publish <span></span></th>
+            <th>Date Published <span></span></th>
+            <th>Date Created <span></span></th>
+            <th>Date Updated <span></span></th>
             <th colspan="2">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(course, index) in pagiCourses[page]" :key="index">
-            <td><input type="checkbox" /></td>
+            <!-- <td><input type="checkbox" /></td> -->
             <td>{{ course.id }}</td>
             <td>{{ course.name }} </td>
             <td>{{ course.is_publish == null ? "No" : "Yes" }} </td>
@@ -57,22 +59,11 @@
               </router-link>
             </td>
             <td>
-              <button @click="deleteCourse(course.id)" class="btn btn-danger">
+              <button @click="modalShow=true;currentId=course.id" class="btn btn-danger">
                 Delete
               </button>
             </td>
           </tr>
-          <!-- <tr>
-          <td rowspan="0">
-            <ul v-for="(lesson, index) in course.lessons" :key="index">
-              <li class="lesson">
-                <p>{{ lesson.id }}</p>
-                <p>{{ lesson.title }}</p>
-                <p>{{ lesson.category }}</p>
-              </li>
-            </ul>
-          </td>
-        </tr> -->
         </tbody>
       </table>
       </div>
@@ -87,9 +78,6 @@
           <form class="Course-form" @submit.prevent="add">
             <label class="w-100">Name:</label>
             <input class="w-100 mb-3" type="text" v-model="newCourse.name" />
-            <!-- <label class="mb-2">Publish:</label>
-          <label class="ms-3">Yes: <input type="radio" :value="1" v-model="newCourse.is_publish" /></label>
-          <label class="ms-3">No: <input type="radio" :value="0" v-model="newCourse.is_publish" /></label><br> -->
             <label>Description: </label>
             <textarea
               class="mb-2"
@@ -98,11 +86,6 @@
               rows="5"
               v-model="newCourse.description"
             ></textarea>
-            <!-- <label>Image: <input type="text" v-model="newCourse.img" /></label> -->
-            <!-- <label>Tag: <input type="text" v-model="newCourse.tag" /></label>
-          <label
-            >Category: <input type="text" v-model="newCourse.category"
-          /></label> -->
             <div class="text-end">
               <button class="btn btn-primary me-2" type="submit">
                 {{ action }}
@@ -115,20 +98,24 @@
         </div>
       </div>
     </main>
+    <ModalComponent v-if="modalShow" @cancel="modalShow=false" @process="deleteCourse(currentId)"/>
   </div>
 </template>
 <script>
-import { register } from 'jscodeshift/src/collections/JSXElement';
+import ModalComponent from "@/components/others/ModalComponent.vue"
+import SearchForm from "@/components/others/SearchForm.vue"
 
 export default {
   data() {
     return {
+      modalShow:false,
       sortBy:"id",
       sortState:true,
       page: 0,
       apiCourses: [],
       load: false,
       currentIndex: 0,
+      currentId:0,
       newCourse: {
         name: "",
         description: "",
@@ -146,21 +133,15 @@ export default {
           }
       return tmp
     },
-    sortedCourses(){
-      return this.courses.sort(function(a, b) {
-        if ( this.sortBy.includes('date') )
-          return a[this]
-     });
-    }
+    // sortedCourses(){
+    //   return this.courses.sort(function(a, b) {
+    //     if ( this.sortBy.includes('date') )
+    //       return a[this]
+    //  });
+    // }
 
   },
   methods: {
-    modifyAction(index) {
-      this.courseFormShow = true;
-      this.currentIndex = index;
-      this.action = "Modify";
-      this.newCourse = this.courses[this.currentIndex];
-    },
     fetching() {
       // this.$store.dispatch("loadingFinishedFunc", false);
       this.axios
@@ -173,6 +154,12 @@ export default {
           alert(res.response.data.error);
           // this.$router.push("/");
         });
+    },
+    search(value){
+      console.log(value)
+    },
+    sortById(){
+
     },
     add() {
       this.axios
@@ -188,8 +175,9 @@ export default {
           alert("something wrong happen !");
         });
     },
-    modify() {},
     deleteCourse(id) {
+    console.log(id)
+    if (id)
       this.axios
         .delete(`/api/v1/admin/courses/${id}`, this.newCourse)
         .then(() => {
@@ -199,6 +187,9 @@ export default {
           alert("something wrong happen !");
         });
     },
+  },
+  components:{
+    ModalComponent,SearchForm
   },
   created() {
     this.fetching();
@@ -226,7 +217,6 @@ export default {
 <style scoped>
 main {
   border-radius: 9px;
-  margin-top: 20px;
 }
 .overlay {
   background-color: rgba(3, 3, 3, 0.2);
