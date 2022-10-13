@@ -28,6 +28,9 @@ export default {
   mounted(){},
 };
 </script>
+<style lang="scss">
+@import "@/assets/styles/admin/admin_crud.scss";
+</style>
 <style lang="scss" scoped>
   main {
     padding-left: 20px;

@@ -1,15 +1,15 @@
 <template>
-  <!-- <router-view></router-view> -->
-  <div class="wrapper">
-    <h2 class="fw-bold">Course#{{ course.id }}</h2>
+  <div>
+    <h2 class="fw-bold text-center">Schedule#{{ course.id }}</h2>
+    <!-- SCHEDULE INFORMATION -->
     <h4 class="fw-bold text-start">Information</h4>
-    <div class="form-wrapper mb-4">
-      <form class="course-form" @submit.prevent="updateInfo" v-if="load">
+    <div class="mb-4">
+      <form  v-if="load">
         <label class="w-100 mb-4">
           <span class="mb-2">Name:</span>
           <input class="w-100" type="text" v-model="course.name"
         /></label>
-        <div class="form-body d-flex align-items-center">
+        <div class="d-flex align-items-center">
           <div class="col-7 d-flex flex-column justify-content-between">
             <div class="d-flex mb-4">
               <div class="col-6">
@@ -82,19 +82,19 @@
           </div>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-primary">Update</button>
+          <button @click.prevent="modalShow = true"  class="btn btn-primary">Update</button>
         </div>
       </form>
     </div>
-
-    <div class="lessons-wrapper pt-3">
-      <h4 class="fw-bold text-start mb-4">Lessons</h4>
+  <!-- COURSE IN SCHEDULE -->
+    <div class="table-wrapper pt-3">
+      <h4 class="fw-bold text-start mb-4">Courses</h4>
       <div class="text-start mb-4">
         <button class="btn btn-primary" @click="poolShow = !poolShow">
-          Add new lesson
+          Add new course
         </button>
       </div>
-      <div v-if="true" :class="{ shorten: poolShow }">
+      <div>
         <table>
           <tr>
             <th>ID</th>
@@ -132,30 +132,40 @@
             <td><button class="btn btn-danger">Remove</button></td>
           </tr>
         </table>
+        <div class="text-center">
+          <button @click="modalShow = true" class="btn btn-primary mt-4 mb-3">
+          Update
+        </button>
+        </div>
       </div>
     </div>
-    <div class="lessons-pool" v-if="poolShow">
-      <div>
+    <!-- CHILDREN POOL -->
+    <div class="children-pool" v-if="poolShow">
+      <div class="text-center px-3 py-2">
         <label class="me-1 mb-2 py-1 btn btn-secondary fw-bold">Search</label
         ><span @click="poolShow = !poolShow" class="close-pool">&times;</span
-        ><input class="mb-3" type="search" />
+        ><input class="mb-3 w-100" type="search" />
       </div>
       <ul>
-        <li v-for="(lesson, index) in lessonsPool" :key="index">
-          <p class="fw-bold">{{ lesson.name }}</p>
-          <p>ID: {{ lesson.id }}</p>
-          <button class="btn btn-primary" @click="addFromPool(index)">
+        <li v-for="(lesson, index) in lessonsPool" :key="index" class="px-3 pb-2 border-bottom">
+          <p class="fw-bold my-1">{{ lesson.name }}</p>
+          <p class="my-1">ID: {{ lesson.id }}</p>
+          <div class="text-center"><button class="btn btn-primary" @click="addFromPool(index)">
             Add
-          </button>
+          </button></div>
         </li>
       </ul>
     </div>
+    <ModalComponent v-if="modalShow" @cancel="modalShow=false" @process="deleteCourse(currentId)"/>
   </div>
 </template>
 <script>
+import ModalComponent from "@/components/others/ModalComponent.vue"
+
 export default {
   data() {
     return {
+      modalShow:false,
       img: "",
       poolShow: false,
       lessonsPool: [],
@@ -281,6 +291,9 @@ export default {
       this.$refs.image.src = url
     }
   },
+  components:{
+    ModalComponent
+  },
   created() {
     // const getId = this.$route.params.id;
     // this.getId = this.$route.params.id;
@@ -313,20 +326,6 @@ export default {
 };
 </script>
 <style scoped>
-label {
-  font-weight: 600;
-}
-.btn {
-  font-weight: 600;
-}
-.wrapper {
-  padding: 20px;
-  margin: auto;
-  background-color: #f3f6f9;
-  margin-top: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-}
 .cover-img {
   width: 100%;
   overflow: hidden;
@@ -336,92 +335,9 @@ label {
   object-fit: cover;
   height: 100%;
 }
-.lessons-wrapper {
-  border-top: 1px solid #aaa;
-}
-input,
-textarea {
-  border-radius: 6px;
-  border: 1px solid #aaa;
-  padding-left: 5px;
-}
-table {
-  margin: auto;
-  width: 100%;
-}
-td,
-th {
-  vertical-align: middle;
-  border: 1px solid #ddd;
-  padding: 10px 5px;
-}
-/* table img {
-  width: 80px;
-}
-table img:hover {
-  display: block;
-  position: absolute;
-  width: 300px;
-  height: 200px;
-  top: 0;
-  z-index: 2;
-} */
-.lesson:focus {
-  outline: 2px solid #06bbcc;
-  border-radius: 6px;
-}
-.lessons-pool {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  top: 0;
-  width: 300px;
-  background-color: white;
-  padding: 15px;
-  z-index: 2000;
-  overflow: scroll;
-}
-.lessons-pool input:focus {
-  outline: none;
-}
-.lessons-pool ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  list-style: none;
-  padding: 0;
-}
-.lessons-pool ul img {
-  width: 100%;
-}
-.lessons-pool p {
-  margin: 0;
-}
-.course-form {
-  text-align: justify;
-}
-textarea {
-  width: 100%;
-}
+
 label > span {
   display: inline-block;
   width: 150px;
-}
-.close-pool {
-  font-size: 26px;
-  font-weight: bold;
-  display: block;
-  margin-left: auto;
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-}
-.custom-file-input{
-  width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
 }
 </style>

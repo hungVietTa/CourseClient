@@ -60,7 +60,7 @@
         </tbody>
       </table>
       <div class ="overlay"  v-if="courseFormShow && load">
-        <div class="form-wrapper">
+        <div class="form-popup">
         <h3 class="fw-bold">Add new course</h3>
         <form class="Course-form" @submit.prevent="add">
           <label class="w-100">Name:</label>
@@ -195,7 +195,7 @@ table img:hover {
   top: 0;
   z-index: 2;
 }
-.form-wrapper {
+.form-popup {
   margin: auto;
   left: 50%;
   transform: translateX(-50%);
@@ -266,7 +266,7 @@ textarea {
         </tr>
       </tbody>
     </table>
-    <div class="form-wrapper" v-if="quizFormShow && load">
+    <div class="form-popup" v-if="quizFormShow && load">
       <p>{{ newQuiz.title }}</p>
       <form class="quiz-form" @submit.prevent="addquiz">
         <label
@@ -359,7 +359,7 @@ table img:hover {
   top: 0;
   z-index: 2;
 }
-.form-wrapper {
+.form-popup {
   position: fixed;
   width: 200px;
   right: 0;

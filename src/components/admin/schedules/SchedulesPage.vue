@@ -11,7 +11,7 @@
           align-items-center
         "
       >
-        <h4 class="fw-bold">Courses Management</h4>
+        <h4 class="fw-bold">Schedules Management</h4>
         <search-form @searching="search(value)"/>
         <div>
           <button
@@ -21,7 +21,7 @@
               action = 'Add';
             "
           >
-            Add new course
+            Add new schedule
           </button>
           <button class="btn btn-danger">Delete</button>
         </div>
@@ -75,9 +75,9 @@
       </nav>
       <!-- OVERLAY -->
       <div class="overlay" v-if="courseFormShow && load">
-        <!-- ADD NEW COURSES -->
+        <!-- ADD NEW SCHEDULE FORM -->
         <div class="form-popup">
-          <h3 class="fw-bold">Add new course</h3>
+          <h3 class="fw-bold">Add new schedule</h3>
           <form class="Course-form" @submit.prevent="add">
             <label class="w-100">Name:</label>
             <input class="w-100 mb-3" type="text" v-model="newCourse.name" />
@@ -108,6 +108,7 @@
 <script>
 import ModalComponent from "@/components/others/ModalComponent.vue"
 import SearchForm from "@/components/others/SearchForm.vue"
+
 export default {
   data() {
     return {
@@ -124,7 +125,7 @@ export default {
         description: "",
       },
       courseFormShow: false,
-      courses: 1,
+      courses: [],
       lessons: [],
     };
   },
@@ -145,7 +146,19 @@ export default {
 
   },
   methods: {
-    ...mapActions("crud",["fetching"]),
+    fetching() {
+      // this.$store.dispatch("loadingFinishedFunc", false);
+      this.axios
+        .get("/api/v1/admin/courses")
+        .then((res) => {
+          console.log(res.data)
+            this.courses = res.data
+        })
+        .catch((res) => {
+          alert(res.response.data.error);
+          // this.$router.push("/");
+        });
+    },
     search(value){
       console.log(value)
     },
@@ -183,11 +196,7 @@ export default {
     ModalComponent,SearchForm
   },
   created() {
-    let el= this
-    this.fetching(["/api/v1/admin/courses",this.courses]);
-    setTimeout(function(){
-      console.log(el.courses)
-    },2000)
+    this.fetching();
   },
   mounted() {
     this.load = true

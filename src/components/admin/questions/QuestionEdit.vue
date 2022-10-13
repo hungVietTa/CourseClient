@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <h1>questions</h1>
-    <div class="form-wrapper">
+    <div class="form-popup">
       <h4>Lesson {{ question.id }}</h4>
       <p>{{ question.title }}</p>
       <form class="question-form" @submit.prevent="show">
@@ -77,6 +77,6 @@ table img:hover {
   top: 0;
   z-index: 2;
 }
-.form-wrapper {
+.form-popup {
 }
 </style>

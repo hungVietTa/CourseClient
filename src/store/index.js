@@ -5,8 +5,8 @@ import createPersistedState from "vuex-persistedstate"
 
 
 // MODULES
-import adminStore from './modules/admin.js'
-import authenStore from './modules/authen.js'
+import adminStore from './modules/admin/index.js'
+import authenStore from './modules/general/authen.js'
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage

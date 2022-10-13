@@ -158,8 +158,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "@/assets/styles/admin_crud.scss";
+<style lang="scss" scoped>
 .form-normal {
     width: 800px;
     margin: auto;

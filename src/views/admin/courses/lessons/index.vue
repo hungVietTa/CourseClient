@@ -2,7 +2,7 @@
     <LessonsEdit />
 </template>
 <script>
-import LessonsEdit from "@/components/admin/courses/LessonsEdit.vue"
+import LessonsEdit from "@/components/admin/courses/lessons/LessonsEdit.vue"
 
 export default {
     name:"AdminCoursePage",

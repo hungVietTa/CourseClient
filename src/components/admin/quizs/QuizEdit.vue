@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <h1>quiz {{ quiz.title }}</h1>
-    <div class="form-wrapper">
+    <div class="form-popup">
       <p>{{ quiz.title }}</p>
       <form class="quiz-form" @submit.prevent="addQuestion">
         <label
@@ -239,7 +239,7 @@ table img:hover {
   top: 0;
   z-index: 2;
 }
-.form-wrapper {
+.form-popup {
 }
 .question:focus {
   border: 1px solid #333;

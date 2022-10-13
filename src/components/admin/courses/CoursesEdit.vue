@@ -1,7 +1,6 @@
 <template>
-  <!-- <router-view></router-view> -->
-  <div class="crud admin-courses-edit">
-    <h2 class="fw-bold">Course#{{ course.id }}</h2>
+  <div class="mt-3">
+    <h2 class="fw-bold text-center">Course#{{ course.id }}</h2>
     <!-- COURSES INFORMATION -->
     <h4 class="fw-bold text-start">Information</h4>
     <div class="mb-4">
@@ -97,7 +96,7 @@
       </form>
     </div>
     <!-- LESSONS IN COURSE -->
-    <div class="lessons-wrapper table-wrapper pt-3">
+    <div class="table-wrapper pt-3 border-top">
       <h4 class="fw-bold text-start mb-4">Lessons</h4>
       <div class="text-start mb-4">
         <button class="btn btn-primary" @click="FormShow = true">
@@ -145,18 +144,22 @@
             </tr>
           </tbody>
         </table>
-        <button @click="modalShow = true" class="btn btn-primary mt-4 mb-3">
+        <div class="text-center">
+          <button @click="modalShow = true" class="btn btn-primary mt-4 mb-3">
           Update
         </button>
+        </div>
       </div>
       <!-- ADD LESSONS FORM -->
       <div class="overlay" v-if="FormShow && load">
-        <div class="form-wrapper">
+        <div class="form-popup">
           <h3 class="fw-bold">Add new lesson</h3>
           <form class="Course-form" @submit.prevent="add">
             <label class="w-100">Name:</label>
             <input class="w-100 mb-3" type="text" />
-            <label class="w-100">Video URL:</label>
+            <label class="w-100">Youtube URL:</label>
+            <input class="w-100 mb-3" type="text" />
+            <label class="w-100">Duration:</label>
             <input class="w-100 mb-3" type="text" />
             <label>Description: </label>
             <textarea class="mb-2" type="text" col="5" rows="5"></textarea>
@@ -170,8 +173,88 @@
         </div>
       </div>
     </div>
-
-    <ModalComponent
+    <!-- QUIZS IN COURSE -->
+    <div class="table-wrapper pt-3 border-top">
+      <h4 class="fw-bold text-start mb-4">QUIZS</h4>
+      <div class="text-start mb-4">
+        <button class="btn btn-primary" @click="quiz_FormShow = true">
+          Add new quiz
+        </button>
+      </div>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th colspan="4">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              @keydown.prevent="keyPos($event, index)"
+              v-for="(lesson, index) in lessons"
+              :key="index"
+              tabindex="0"
+            >
+              <td>{{ lesson.id }}</td>
+              <td>{{ lesson.name }}</td>
+              <td>{{ lesson.des }}</td>
+              <td>
+                <button
+                  class="btn btn-secondary"
+                  @click="up($event.target, index)"
+                >
+                  Up
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn btn-secondary"
+                  @click="down($event.target, index)"
+                >
+                  Down
+                </button>
+              </td>
+              <td><button class="btn btn-primary">Edit</button></td>
+              <td><button class="btn btn-danger">Remove</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center">
+          <button @click="modalShow = true" class="btn btn-primary mt-4 mb-3">
+          Update
+        </button>
+        </div>
+      </div>
+      <!-- ADD QUIZS FORM -->
+      <div class="overlay" v-if="quiz_FormShow && load">
+        <div class="form-popup">
+          <h3 class="fw-bold">Add new quiz</h3>
+          <form  @submit.prevent="add">
+            <label class="w-100">Name:</label>
+            <input class="w-100 mb-3" type="text" />
+            <label>Description: </label>
+            <textarea class="mb-2" type="text" col="5" rows="5"></textarea>
+            <div class="text-end">
+              <button class="btn btn-primary me-2" type="submit">Add</button>
+              <button class="btn btn-secondary" @click="quiz_FormShow = false">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+     <!-- MODAL -->
+     <ModalComponent
+      v-if="modalShow"
+      @cancel="modalShow = false"
+      @process="updateCourse(currentId)"
+    />
+     <!-- MODAL -->
+     <ModalComponent
       v-if="modalShow"
       @cancel="modalShow = false"
       @process="updateCourse(currentId)"
@@ -187,6 +270,7 @@ export default {
       modalShow: false,
       img: "",
       FormShow: false,
+      quiz_FormShow: false,
       lessonsPool: [],
       course: {},
       currentIndex: 0,
@@ -248,9 +332,7 @@ export default {
     },
     // CALL API
     fetching() {
-      // console.log(this.$route.params)
-      // this.$store.dispatch("loadingFinishedFunc", false);
-      let initialData = this.axios
+    this.axios
         .get(`/api/v1/admin/courses/${this.$route.params.id}`)
         .then((res) => {
           this.course = res.data;
@@ -261,8 +343,8 @@ export default {
         .catch((res) => {
           alert(res.response.data.error);
         });
-      return initialData;
     },
+    // GET
     add() {
       this.axios
         .post("/api/v1/admin/courses", this.newCourse)
@@ -338,8 +420,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "@/assets/styles/admin_crud.scss";
+<style lang="scss" scoped>
 .cover-img {
   width: 100%;
   overflow: hidden;
@@ -349,28 +430,8 @@ export default {
   object-fit: cover;
   height: 100%;
 }
-.lessons-wrapper {
-  border-top: 1px solid #aaa;
-}
-.lesson:focus {
-  outline: 2px solid #06bbcc;
-  border-radius: 6px;
-}
-.course-form {
-  text-align: justify;
-}
-textarea {
-  width: 100%;
-}
 label > span {
   display: inline-block;
   width: 150px;
-}
-.custom-file-input {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
 }
 </style>

@@ -42,7 +42,7 @@
         <td><button>Delete</button></td>
       </tr>
     </table>
-    <div class="form-wrapper" v-if="questionFormShow && load">
+    <div class="form-popup" v-if="questionFormShow && load">
       <h4>Lesson {{ questions[currentIndex].id }}</h4>
       <p>{{ questions[currentIndex].title }}</p>
       <form class="question-form" @submit.prevent="show">
@@ -177,7 +177,7 @@ table img:hover {
   top: 0;
   z-index: 2;
 }
-.form-wrapper {
+.form-popup {
   border: 1px solid #333;
   padding-left: 20px;
   width: 300px;

@@ -1,5 +1,5 @@
 <template>
-    <div class="crud">
+    <div>
       <!-- MAIN CONTENT -->
       <main class="mt-4">
         <div

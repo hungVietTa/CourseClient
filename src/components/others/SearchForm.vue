@@ -1,9 +1,13 @@
 <template>
-    <form @submit.prevent="submit" class="d-flex align-items-center">
+    <form @submit.prevent="submit" class="">
+       <div class="field">
         <input type="search" placeholder="Search ..." v-model="searchValue">
+       </div>
+       <div class="search-button">
         <button class="btn btn-primary">
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
+       </div>
     </form>
 </template>
 <script>
@@ -23,18 +27,23 @@ export default {
 </script>
 <style scoped>
 form {
-    background-color: var(--primary);
-    border-radius: 6px;
-    border: 1px solid var(--primary);
-    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 input {
-    border: none;
-    line-height: 35px;
+    line-height: 34px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
     outline: none;
-    padding-left: 5px;
+    border-color:var(--primary);
+}
+input:focus {
+    outline: none;
+    border-color:var(--primary);
 }
 .btn {
-    padding: 5px 10px;
+    border-radius: 0;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 </style>

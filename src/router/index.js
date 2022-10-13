@@ -130,29 +130,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/_id.vue'),
       },
       {
-        path: 'courses/:id/lessons/:number',
+        path: 'courses/:id/lessons/:id_lesson',
         name: 'admin.lessons',
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/lessons/index.vue'),
       },
       {
-        path: 'quizs',
+        path: 'courses/:id/quizs/:id_quiz',
         name: 'admin.quizs',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/quizs/index.vue'),
-      },
-      {
-        path: 'quizs/:id',
-        name: 'admin.quizs.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/quizs/_id.vue'),
-      },
-      {
-        path: 'questions',
-        name: 'admin.questions',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/questions/index.vue'),
-      },
-      {
-        path: 'questions/:id',
-        name: 'admin.questions.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/questions/_id.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/quizs/index.vue'),
       }
     ]
   },
