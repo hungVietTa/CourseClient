@@ -16,7 +16,7 @@
   </div>
 </template>
 <style lang="scss">
-@import "@/assets/styles/global/global.scss";
+@import "@/assets/styles/general/global.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

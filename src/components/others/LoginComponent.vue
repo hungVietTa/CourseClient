@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login text-center">
     <section class="login-section mt-5">
       <h3>Đăng nhập</h3>
       <form @submit.prevent="submit(form)" class="login-form">

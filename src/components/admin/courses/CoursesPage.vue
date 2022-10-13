@@ -17,7 +17,7 @@
           <button
             class="btn btn-primary me-2"
             @click="
-              courseFormShow = true;
+              formShow = true;
               action = 'Add';
             "
           >
@@ -32,7 +32,7 @@
         <thead>
           <tr>
             <!-- <th><input type="checkbox" /></th> -->
-            <th class="text-nowrap" role="button" @click="sortById">ID  <span class="ms-2"><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
+            <th class="text-nowrap" role="button" >ID  <span class="ms-2"><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
             <th>Name <span></span></th>
             <th>Publish <span></span></th>
             <th>Date Published <span></span></th>
@@ -68,17 +68,19 @@
         </tbody>
       </table>
       </div>
-      <nav aria-label="..." class="d-inline-block">
+      <div class="text-center">
+        <nav aria-label="..." class="d-inline-block">
         <ul class="pagination">
-          <li v-for="(item,index) in pagiCourses" :key="index" class="page-item" :class="{active:index==page}"><a class="page-link" @click="page=index">{{index+1}}</a></li>
+          <li  v-for="(item,index) in pagiCourses" :key="index" class="page-item" :class="{active:index==page}"><a class="page-link" @click="page=index">{{index+1}}</a></li>
         </ul>
       </nav>
+      </div>
       <!-- OVERLAY -->
-      <div class="overlay" v-if="courseFormShow && load">
+      <div class="overlay" v-if="formShow && load">
         <!-- ADD NEW COURSES -->
         <div class="form-popup">
           <h3 class="fw-bold">Add new course</h3>
-          <form class="Course-form" @submit.prevent="add">
+          <form class="Course-form" @submit.prevent="createCourseHandlding(newCourse)">
             <label class="w-100">Name:</label>
             <input class="w-100 mb-3" type="text" v-model="newCourse.name" />
             <label>Description: </label>
@@ -93,7 +95,7 @@
               <button class="btn btn-primary me-2" type="submit">
                 {{ action }}
               </button>
-              <button class="btn btn-secondary" @click="courseFormShow = false">
+              <button class="btn btn-secondary" @click="formShow = false">
                 Cancel
               </button>
             </div>
@@ -108,6 +110,8 @@
 <script>
 import ModalComponent from "@/components/others/ModalComponent.vue"
 import SearchForm from "@/components/others/SearchForm.vue"
+import { mapActions,mapState } from 'vuex'
+
 export default {
   data() {
     return {
@@ -123,12 +127,13 @@ export default {
         name: "",
         description: "",
       },
-      courseFormShow: false,
-      courses: 1,
-      lessons: [],
+      formShow: false,
     };
   },
   computed:{
+    ...mapState("adminCourses",{
+      courses:state=>state.coursesData
+    }),
     pagiCourses(){
       let tmp = []
        for (let i = 0; i < this.courses.length; i += 5) {
@@ -136,6 +141,7 @@ export default {
           }
       return tmp
     },
+
     // sortedCourses(){
     //   return this.courses.sort(function(a, b) {
     //     if ( this.sortBy.includes('date') )
@@ -145,49 +151,22 @@ export default {
 
   },
   methods: {
-    ...mapActions("crud",["fetching"]),
+    ...mapActions("adminCourses",["createCourse","getCourses","deleteCourse"]),
+    createCourseHandlding(newCourse){
+      this.createCourse(newCourse)
+      newCourse.name = ""
+      newCourse.description = ""
+      this.formShow = false
+    },
     search(value){
       console.log(value)
-    },
-    sortById(){
-
-    },
-    add() {
-      this.axios
-        .post("/api/v1/admin/courses", this.newCourse)
-        .then(() => {
-          console.log(this.newCourse);
-          this.newCourse.name = "";
-          this.newCourse.description = "";
-          this.courseFormShow = false;
-          this.fetching()
-        })
-        .catch(() => {
-          alert("something wrong happen !");
-        });
-    },
-    deleteCourse(id) {
-    console.log(id)
-    if (id)
-      this.axios
-        .delete(`/api/v1/admin/courses/${id}`, this.newCourse)
-        .then(() => {
-          this.fetching();
-        })
-        .catch(() => {
-          alert("something wrong happen !");
-        });
-    },
+    }
   },
   components:{
     ModalComponent,SearchForm
   },
   created() {
-    let el= this
-    this.fetching(["/api/v1/admin/courses",this.courses]);
-    setTimeout(function(){
-      console.log(el.courses)
-    },2000)
+    this.getCourses()
   },
   mounted() {
     this.load = true

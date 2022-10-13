@@ -5,8 +5,13 @@ import createPersistedState from "vuex-persistedstate"
 
 
 // MODULES
-import adminStore from './modules/admin/index.js'
+// GENERAL
 import authenStore from './modules/general/authen.js'
+// ADMIN
+import adminStore from './modules/admin/index.js'
+// import adminBillboardsStore from './modules/admin/billboards/index.js'
+import adminCoursesStore from './modules/admin/courses/index.js'
+import adminCourseIdStore from './modules/admin/courses/_id.js'
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage
@@ -24,8 +29,12 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-      admin: adminStore,
-      authen: authenStore
+    // GENERAL
+    authen: authenStore,
+    // ADMIN
+    admin: adminStore,
+    adminCourses:adminCoursesStore ,
+    adminCourseId:adminCourseIdStore
   },
   plugins: [vuexLocal.plugin, 
     createPersistedState({

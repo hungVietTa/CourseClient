@@ -1,10 +1,10 @@
 <template>
-  <div class="mt-3">
+  <div class="mt-3" v-if="course">
     <h2 class="fw-bold text-center">Course#{{ course.id }}</h2>
     <!-- COURSES INFORMATION -->
     <h4 class="fw-bold text-start">Information</h4>
     <div class="mb-4">
-      <form class="course-form" @submit.prevent="updateInfo" v-if="load">
+      <form class="course-form" @submit.prevent="modalUpdateShow=true">
         <label class="w-100 mb-4">
           <span class="mb-2">Name:</span>
           <input class="w-100" type="text" v-model="course.name"
@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="text-center">
-          <button @click="modalShow = true" class="btn btn-primary">
+          <button @click="modalUpdateShow = true" class="btn btn-primary">
             Update
           </button>
         </div>
@@ -145,7 +145,7 @@
           </tbody>
         </table>
         <div class="text-center">
-          <button @click="modalShow = true" class="btn btn-primary mt-4 mb-3">
+          <button @click="modalUpdateShow = true" class="btn btn-primary mt-4 mb-3">
           Update
         </button>
         </div>
@@ -223,7 +223,7 @@
           </tbody>
         </table>
         <div class="text-center">
-          <button @click="modalShow = true" class="btn btn-primary mt-4 mb-3">
+          <button @click="modalUpdateShow = true" class="btn btn-primary mt-4 mb-3">
           Update
         </button>
         </div>
@@ -249,30 +249,31 @@
     </div>
      <!-- MODAL -->
      <ModalComponent
-      v-if="modalShow"
-      @cancel="modalShow = false"
-      @process="updateCourse(currentId)"
+      v-if="modalUpdateShow"
+      @cancel="modalUpdateShow = false"
+      @process="updateCourseHandling"
     />
      <!-- MODAL -->
      <ModalComponent
-      v-if="modalShow"
-      @cancel="modalShow = false"
-      @process="updateCourse(currentId)"
+      v-if="modalRemoveShow"
+      @cancel="modalRemoveShow = false"
+      @process="updateCourseHandling"
     />
   </div>
 </template>
 <script>
 import ModalComponent from "@/components/others/ModalComponent.vue";
+import { mapActions,mapState } from 'vuex'
 
 export default {
   data() {
     return {
-      modalShow: false,
-      img: "",
+      modalUpdateShow: false,
+      modalRemoveShow: false,
       FormShow: false,
+      img: "",
       quiz_FormShow: false,
       lessonsPool: [],
-      course: {},
       currentIndex: 0,
       newLesson: {
         name: "",
@@ -287,12 +288,27 @@ export default {
     };
   },
   computed: {
+    ...mapState("adminCourseId",{
+      course:state=>state.courseData
+    }),
     lessons() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.rawLessons.sort((a, b) => a.position - b.position);
     },
   },
   methods: {
+    // CALL API
+    ...mapActions("adminCourseId",["getCourse","updateCourse"]),
+    updateCourseHandling() {
+      let formData = new FormData();
+      formData.append("name", this.course.name);
+      formData.append("description", this.course.description);
+      formData.append("is_publish", this.course.is_publish);
+      if (this.$refs.imgInput.files[0])
+        formData.append("cover_file", this.$refs.imgInput.files[0]);
+      this.updateCourse([this.$route.params.id,formData])
+      this.$refs.imgInput.value = "";
+    },
     // LESSONS ARRANGEMENT
     keyPos(event, index) {
       if (event.keyCode == 38) {
@@ -330,55 +346,6 @@ export default {
       this.lessons[index + 1].position = temp;
       target.parentNode.parentNode.nextElementSibling.focus();
     },
-    // CALL API
-    fetching() {
-    this.axios
-        .get(`/api/v1/admin/courses/${this.$route.params.id}`)
-        .then((res) => {
-          this.course = res.data;
-          this.load = true;
-          console.log(res.data);
-          // this.$store.dispatch("loadingFinishedFunc", true);
-        })
-        .catch((res) => {
-          alert(res.response.data.error);
-        });
-    },
-    // GET
-    add() {
-      this.axios
-        .post("/api/v1/admin/courses", this.newCourse)
-        .then(() => {
-          this.newCourse.name = "";
-          this.newCourse.description = "";
-          this.fetching();
-        })
-        .catch(() => {
-          alert("something wrong happen !");
-        });
-    },
-    updateInfo() {
-      console.log(this.$refs.imgInput.files);
-      let formData = new FormData();
-      formData.append("name", this.course.name);
-      formData.append("description", this.course.description);
-      formData.append("is_publish", this.course.is_publish);
-      if (this.$refs.imgInput.files[0])
-        formData.append("cover_file", this.$refs.imgInput.files[0]);
-      this.axios
-        .put(`/api/v1/admin/courses/${this.course.id}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(() => {
-          this.$refs.imgInput.value = "";
-          this.fetching();
-        })
-        .catch(() => {
-          alert("something wrong happen !");
-        });
-    },
     // OTHERS
     imagePreview() {
       console.log(2);
@@ -390,10 +357,7 @@ export default {
     ModalComponent,
   },
   created() {
-    // const getId = this.$route.params.id;
-    // this.getId = this.$route.params.id;
-
-    this.fetching();
+    this.getCourse(this.$route.params.id);
   },
   mounted() {
     for (let i = 0; i < 10; i++) {

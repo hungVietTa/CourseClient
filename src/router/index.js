@@ -132,12 +132,12 @@ const routes = [
       {
         path: 'courses/:id/lessons/:id_lesson',
         name: 'admin.lessons',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/lessons/index.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/lessons/_id.vue'),
       },
       {
         path: 'courses/:id/quizs/:id_quiz',
         name: 'admin.quizs',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/quizs/index.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/quizs/_id.vue'),
       }
     ]
   },
