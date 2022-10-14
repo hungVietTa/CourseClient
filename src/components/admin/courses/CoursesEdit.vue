@@ -343,7 +343,7 @@ export default {
       let temp;
       temp = this.lessons[index].position;
       this.lessons[index].position = this.lessons[index + 1].position;
-      this.lessons[index + 1].position = temp;
+       this.lessons[index + 1].position = temp;
       target.parentNode.parentNode.nextElementSibling.focus();
     },
     // OTHERS

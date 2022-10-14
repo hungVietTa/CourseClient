@@ -7,6 +7,8 @@ import createPersistedState from "vuex-persistedstate"
 // MODULES
 // GENERAL
 import authenStore from './modules/general/authen.js'
+import homepageStore from './modules/general/home.js'
+import homeCoursesStore from './modules/general/courses/_id.js'
 // ADMIN
 import adminStore from './modules/admin/index.js'
 // import adminBillboardsStore from './modules/admin/billboards/index.js'
@@ -34,7 +36,9 @@ export default new Vuex.Store({
     // ADMIN
     admin: adminStore,
     adminCourses:adminCoursesStore ,
-    adminCourseId:adminCourseIdStore
+    adminCourseId:adminCourseIdStore,
+    homepage:homepageStore,
+    homeCourses:homeCoursesStore
   },
   plugins: [vuexLocal.plugin, 
     createPersistedState({

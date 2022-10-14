@@ -122,6 +122,7 @@ export default {
             // CHECK ROLE
           if (context.state.isAdminLogin == true) {
             context.commit('toggleAdminLogin')
+            context.commit('toggleUserLogin')
             context.commit('setToken', '')
           }
           else {

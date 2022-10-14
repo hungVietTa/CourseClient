@@ -2,6 +2,7 @@
 // VARIABLE
 :root {
   --primary: #06bbcc;
+  --primary-blur: #06bbcc3d;
   --light: #f0fbfc;
   --dark: #181d38;
 }
@@ -60,7 +61,6 @@ div .text-primary {
 // UL,LI
 ul {
   list-style: none;
-  padding: 0;
 }
 // LOADING 
 .waiting {
@@ -77,4 +77,30 @@ ul {
     margin: auto;
     margin-top: 300px;
   }
+}
+// CURSOR
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-pointer:hover {
+  background-color: rgba(9,9,9,0.1);
+  background-color: var(--primary-blur);
+}
+// BORDER 
+.border-radius-9 {
+  border-radius: 9px;
+}
+.border-primary-blur {
+  border: 1px solid var(--primary-blur)
+}
+// BACKGROUND
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+.bg-primary-blur {
+  background-color: var(--primary-blur);
+}
+// TEXT
+.text-primary {
+  color: var(--primary);
 }

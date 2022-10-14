@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="register text-center">
     <section class="register-section mt-5">
       <h2 class="mb-5">
         Start your journey

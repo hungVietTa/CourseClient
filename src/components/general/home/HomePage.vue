@@ -2,6 +2,7 @@
   <main>
     <!-- CAROUSEL -->
     <carousel
+      v-if = "billboards"
       class="home-carousel"
       ref="carousel"
       :per-page="1"
@@ -11,11 +12,11 @@
       :loop="true"
       :mouse-drag="false"
     >
-      <slide>
+      <slide v-for="(billboard,index) in billboards" :key="index">
         <div class="owl-carousel-item position-relative">
           <img
             class="img-fluid w-100"
-            src="@/assets/img/carousel/carousel-1.jpg"
+            :src="billboard.img"
             alt=""
           />
           <div
@@ -41,76 +42,13 @@
                       slideInDown
                     "
                   >
-                    Best Online Courses
+                   {{billboard.name}}
                   </h5>
                   <h1 class="display-3 text-white animated slideInDown">
-                    The Best Online Learning Platform
+                    {{billboard.title}}
                   </h1>
                   <p class="fs-5 text-white mb-4 pb-2">
-                    Learners around the world are launching new careers,
-                    advancing in their fields, and enriching their lives.
-                  </p>
-                  <router-link
-                    to="/about"
-                    class="
-                      btn btn-primary
-                      py-md-3
-                      px-md-5
-                      me-3
-                      animated
-                      slideInLeft
-                    "
-                    >Read More</router-link
-                  >
-                  <router-link
-                    to="/register"
-                    class="btn btn-light py-md-3 px-md-5 animated slideInRight"
-                    >Join Now</router-link
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </slide>
-      <slide>
-        <div class="owl-carousel-item position-relative">
-          <img
-            class="img-fluid w-100"
-            src="@/assets/img/carousel/carousel-2.jpg"
-            alt=""
-          />
-          <div
-            class="
-              position-absolute
-              top-0
-              start-0
-              w-100
-              h-100
-              d-flex
-              align-items-center
-            "
-            style="background: rgba(24, 29, 56, 0.7)"
-          >
-            <div class="container slide-caption">
-              <div class="row justify-content-start">
-                <div class="col-sm-10 col-lg-8 text-start">
-                  <h5
-                    class="
-                      text-primary text-uppercase
-                      mb-3
-                      animated
-                      slideInDown
-                    "
-                  >
-                    Best Online Courses
-                  </h5>
-                  <h1 class="display-3 text-white animated slideInDown">
-                    Get Educated Online From Your Home
-                  </h1>
-                  <p class="fs-5 text-white mb-4 pb-2">
-                    Learners around the world are launching new careers,
-                    advancing in their fields, and enriching their lives.
+                    {{billboard.description}}
                   </p>
                   <router-link
                     to="/about"
@@ -266,12 +204,12 @@
           <h1 class="mb-5">Popular Courses</h1>
         </div>
         <div class="row g-4 justify-content-center" >
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" v-for="index in 3" :key="index">
+          <div v-for="(course,index) in courses.slice(0,3)" :key="index" class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="course-item bg-light">
               <div class="position-relative overflow-hidden">
                 <img
                   class="img-fluid"
-                  :src="require(`@/assets/img/courses/course-${index}.jpg`)"
+                  :src="course.cover.file_url"
                   alt=""
                 />
                 <div
@@ -310,9 +248,11 @@
                   <br />
                   <small>(123)</small>
                 </div>
-                <h5 class="mb-4">
-                  Web Design & Development Course for Beginners
+                <div class="course-title">
+                  <h5 class="mb-4">
+                  {{course.name}}
                 </h5>
+                </div>
               </div>
               <div class="d-flex border-top">
                 <small class="flex-fill text-center border-end py-2"
@@ -337,6 +277,7 @@
 </template>
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import {mapActions,mapState} from "vuex"
 
 export default {
   name: "HomeView",
@@ -348,75 +289,20 @@ export default {
       nextLabel: `<svg class="svg-icon" viewBox="0 0 20 20">
 							<path fill="currentColor" d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
 						</svg>`,
-      // news: [],
-      // schedules: [],
-      // courses: [],
-      // tiptricks: [],
-      // blogs: [],
     };
   },
-  methods: {
-    // modifyCarouselNavigation(buttons) {
-    //   buttons[0].innerHTML = '<font-awesome-icon icon="fa-solid fa-greater-than" />'
-
-    // },
-    getCourses: async function () {
-      this.courses = await this.axios
-        .get("http://localhost:3000/courses")
-        .then((res) => res.data);
-    },
-    getTip: async function () {
-      this.tiptrick = await this.axios
-        .get("http://localhost:3000/tiptrick")
-        .then((res) => res.data);
-    },
+  computed:{
+    ...mapState("homepage",{
+      billboards:state=>state.billboardsData,
+      courses:state=>state.coursesData
+    })
   },
-  mounted() {
-    // setTimeout(() => {
-    //   this.modifyCarouselNavigation(
-    //     this.$refs.carousel.$el.getElementsByClassName(
-    //       "VueCarousel-navigation-button"
-    //     )
-    //   );
-    // }, 0);
-    // for (let i = 0; i < 5; i++) {
-    //   this.news.push({
-    //     id: 315 + i,
-    //     title: "new" + i,
-    //     description: "content" + i,
-    //   });
-    //   this.schedules.push({
-    //     id: 215 + i,
-    //     title: "new" + i,
-    //     img: "link",
-    //     subscribes: 445,
-    //     views: 464,
-    //     description: "content" + i,
-    //   });
-    //   this.courses.push({
-    //     id: 315 + i,
-    //     title: "new" + i,
-    //     img: "link",
-    //     subscribes: 445,
-    //     views: 464,
-    //     description: "content" + i,
-    //   });
-    //   this.tiptricks.push({
-    //     id: 215 + i,
-    //     title: "new" + i,
-    //     img: "link",
-    //     views: 264,
-    //     description: "content" + i,
-    //   });
-    //   this.blogs.push({
-    //     id: 215 + i,
-    //     title: "new" + i,
-    //     img: "link",
-    //     views: 264,
-    //     user: 55,
-    //     description: "content" + i,
-    //   });
-    // }
+  methods: {
+    ...mapActions("homepage",["getBillboards","getCourses"])
+  },
+  created() {
+    this.getBillboards()
+    this.getCourses()
   },
   components: {
     Carousel,
@@ -533,5 +419,8 @@ export default {
 .category a:hover img,
 .course-item:hover img {
   transform: scale(1.1);
+}
+.course-title {
+  min-height: 75px;
 }
 </style>
