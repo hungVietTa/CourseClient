@@ -5,6 +5,7 @@
   --primary-blur: #06bbcc3d;
   --light: #f0fbfc;
   --dark: #181d38;
+  --star:#df9f38;
 }
 // BTN
 .btn {
@@ -82,13 +83,15 @@ ul {
 .cursor-pointer {
   cursor: pointer;
 }
-.cursor-pointer:hover {
-  background-color: rgba(9,9,9,0.1);
+.hover-primary:hover {
   background-color: var(--primary-blur);
 }
 // BORDER 
 .border-radius-9 {
   border-radius: 9px;
+}
+.border-radius-6 {
+  border-radius: 6px;
 }
 .border-primary-blur {
   border: 1px solid var(--primary-blur)
@@ -103,4 +106,7 @@ ul {
 // TEXT
 .text-primary {
   color: var(--primary);
+}
+.text-star {
+  color: #df9f38;
 }

@@ -60,9 +60,9 @@ export default {
   data() {
     return {
         new:{}
-    //   newReply: "",
-    //   newComment: "",
-    //   comments: [],
+      newReply: "",
+      newComment: "",
+      comments: [],
     //   textEditor: {},
     //   content: "",
     //   node: {},
@@ -83,48 +83,48 @@ export default {
     VueEditor
   },
   methods: {
-    // resize(target) {
-    //   console.log(target.value);
-    //   this.img.width = this.size;
-    // },
-    // showSubComment(target) {
-    //   let element = target.parentNode.querySelector(".sub-comment");
-    //   element.style.display =
-    //     element.style.display == "block" ? "none" : "block";
-    // },
-    // showReply(target) {
-    //   let element = target.parentNode.querySelector(".reply");
-    //   element.style.display = "block";
-    // },
-    // postComment() {
-    //   this.axios
-    //     .post("http://localhost:3000/comments", {
-    //       content: this.newComment,
-    //       children: [],
-    //     })
-    //     .then(() => {
-    //       this.newComment = "";
-    //       this.axios
-    //         .get("http://localhost:3000/comments")
-    //         .then((res) => (this.comments = res.data));
-    //     });
-    // },
-    // reply(id) {
-    //   this.axios.put(`http://localhost:3000/comments/${id}`, {
-    //     children: [{}],
-    //   });
-    // },
-    // addSaveBtn() {
-    //   let el = this;
-    //   let temp = this.textEditor.$el.querySelector(".ql-toolbar");
-    //   temp.appendChild(this.$refs.save);
-    //   this.textEditor.$el.querySelector(".mfs-save-btn").onclick = function () {
-    //     localStorage.setItem(
-    //       "main",
-    //       JSON.stringify(el.textEditor.quill.getContents())
-    //     );
-    //   };
-    // },
+    resize(target) {
+      console.log(target.value);
+      this.img.width = this.size;
+    },
+    showSubComment(target) {
+      let element = target.parentNode.querySelector(".sub-comment");
+      element.style.display =
+        element.style.display == "block" ? "none" : "block";
+    },
+    showReply(target) {
+      let element = target.parentNode.querySelector(".reply");
+      element.style.display = "block";
+    },
+    postComment() {
+      this.axios
+        .post("http://localhost:3000/comments", {
+          content: this.newComment,
+          children: [],
+        })
+        .then(() => {
+          this.newComment = "";
+          this.axios
+            .get("http://localhost:3000/comments")
+            .then((res) => (this.comments = res.data));
+        });
+    },
+    reply(id) {
+      this.axios.put(`http://localhost:3000/comments/${id}`, {
+        children: [{}],
+      });
+    },
+    addSaveBtn() {
+      let el = this;
+      let temp = this.textEditor.$el.querySelector(".ql-toolbar");
+      temp.appendChild(this.$refs.save);
+      this.textEditor.$el.querySelector(".mfs-save-btn").onclick = function () {
+        localStorage.setItem(
+          "main",
+          JSON.stringify(el.textEditor.quill.getContents())
+        );
+      };
+    },
   },
   mounted() {
     this.$refs.textEditor.quill.disable();
