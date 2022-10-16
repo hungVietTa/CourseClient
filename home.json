@@ -1,46 +1,111 @@
 {
-    "billboards":[
-        {
-            "name":"Best Online Courses",
-            "title":"The Best Online Learning Platform",
-            "description":"Learners around the world are launching new careers, advancing in their fields, and enriching their lives.",
-            "img":"https://technext.github.io/elearning/img/carousel-1.jpg"
-        },
-        {
-            "name":"Best Online Courses 2",
-            "title":"The Best Online Learning Platform 2",
-            "description":"Learners around the world are launching new careers, advancing in their fields, and enriching their lives.",
-            "img":"https://technext.github.io/elearning/img/carousel-2.jpg"
-        }
-    ],
-    "lessons":[
-        {
-            "id": 1,
-            "name": "Ruby - Part 1",
-            "description": "This is description",
-            "url": "wkNR1hG4yOk",
-            "duration":240
-          },
-          {
-            "id": 2,
-            "name": "Ruby - Part 2",
-            "description": "This is description",
-            "url": "4PLg-Oe3MfA",
-            "duration":240
-          },
-          {
-            "id": 3,
-            "name": "Ruby - Part 3",
-            "description": "This is description",
-            "url": "Bx2mFSsrucM",
-            "duration":240
-          },
-          {
-            "id": 4,
-            "name": "Ruby - Part 3",
-            "description": "This is description",
-            "url": "lKUR4mu1M-U",
-            "duration":240
-          }
-    ]
+  "billboards": [
+    {
+      "name": "Best Online Courses",
+      "title": "The Best Online Learning Platform",
+      "description": "Learners around the world are launching new careers, advancing in their fields, and enriching their lives.",
+      "img": "https://technext.github.io/elearning/img/carousel-1.jpg"
+    },
+    {
+      "name": "Best Online Courses 2",
+      "title": "The Best Online Learning Platform 2",
+      "description": "Learners around the world are launching new careers, advancing in their fields, and enriching their lives.",
+      "img": "https://technext.github.io/elearning/img/carousel-2.jpg"
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "name": "Ruby - Part 1",
+      "description": "This is description",
+      "url": "wkNR1hG4yOk",
+      "duration": 230,
+      "done":true
+    },
+    {
+      "id": 2,
+      "name": "Ruby - Part 2",
+      "description": "This is description",
+      "url": "4PLg-Oe3MfA",
+      "duration": 450,
+      "done":true
+    },
+    {
+      "id": 3,
+      "name": "Ruby - Part 3",
+      "description": "This is description",
+      "url": "Bx2mFSsrucM",
+      "duration": 387,
+      "done":false
+    },
+    {
+      "id": 4,
+      "name": "Ruby - Part 3",
+      "description": "This is description",
+      "url": "lKUR4mu1M-U",
+      "duration": 123,
+      "done":false
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "rating": 4,
+      "content": "The video's explanation was outstanding"
+    },
+    {
+      "id": 2,
+      "rating": 5,
+      "content": "This is measured doses of discreet steps needed "
+    },
+    {
+      "rating": 4,
+      "content": "I have already seen few but really cool !!!",
+      "id": 3
+    },
+    {
+      "rating": 3,
+      "content": "Wow",
+      "id": 4
+    },
+    {
+      "rating": 4,
+      "content": "Wow",
+      "id": 5
+    },
+    {
+      "rating": 3,
+      "content": "Good",
+      "id": 6
+    },
+    {
+      "rating": 5,
+      "content": "Oh my lord",
+      "id": 7
+    },
+    {
+      "rating": 4,
+      "content": "Oh NO no",
+      "id": 8
+    },
+    {
+      "rating": 5,
+      "content": "Oh NO no !!! HAH",
+      "id": 9
+    },
+    {
+      "rating": 4,
+      "content": "Congratulation !!!",
+      "id": 10
+    },
+    {
+      "rating": 4,
+      "content": "Congratulation !!!",
+      "id": 11
+    }
+  ],
+  "stats":{
+    "average":2.7,
+    "percent":[20,16,29,40,10]
+  }
 }

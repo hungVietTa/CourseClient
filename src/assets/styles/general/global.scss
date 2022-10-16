@@ -96,6 +96,9 @@ ul {
 .border-primary-blur {
   border: 1px solid var(--primary-blur)
 }
+.border-bottom-primary-blur {
+  border-bottom: 1px solid var(--primary-blur)
+}
 // BACKGROUND
 .bg-primary {
   background-color: var(--primary) !important;

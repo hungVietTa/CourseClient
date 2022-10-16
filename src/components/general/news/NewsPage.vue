@@ -59,8 +59,7 @@ import { VueEditor } from "vue2-editor";
 export default {
   data() {
     return {
-        new:{}
-      newReply: "",
+        new:{},
       newComment: "",
       comments: [],
     //   textEditor: {},
