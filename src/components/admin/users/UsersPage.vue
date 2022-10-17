@@ -62,7 +62,8 @@
   <script>
   import ModalComponent from "@/components/others/ModalComponent.vue"
   import SearchForm from "@/components/others/SearchForm.vue"
-  
+  import API from "@/api/admin/users/index"
+
   export default {
     data() {
       return {
@@ -79,7 +80,7 @@
           description: "",
         },
         FormShow: false,
-        users: [],
+        users:false,
       };
     },
     computed:{
@@ -99,18 +100,9 @@
   
     },
     methods: {
-      fetching() {
-        // this.$store.dispatch("loadingFinishedFunc", false);
-        this.axios
-          .get("/api/v1/admin/users")
-          .then((res) => {
-            console.log(res.data)
-              this.users = res.data
-          })
-          .catch((res) => {
-            alert(res.response.data.error);
-            // this.$router.push("/");
-          });
+      async getUsers() {
+        this.users = await API.getUsers()
+        console.log(this.users)
       },
       search(value){
         console.log(value)
@@ -149,7 +141,7 @@
       ModalComponent,SearchForm
     },
     created() {
-      this.fetching();
+      this.getUsers();
     },
     mounted() {
       this.load = true

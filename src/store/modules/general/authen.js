@@ -8,7 +8,7 @@ export default {
         userEmail:undefined,
         isUserLogin: false,
         isAdminLogin: false,
-        token: ""
+        token: "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjY3Mjk3Nzc3fQ.off8Ql18HJMEM3yA6LB7GdheW9K2rkO7wH-wveuAJQI"
       },
       getters: {
       },

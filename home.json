@@ -20,7 +20,7 @@
       "description": "This is description",
       "url": "wkNR1hG4yOk",
       "duration": 230,
-      "done":true
+      "done": true
     },
     {
       "id": 2,
@@ -28,7 +28,7 @@
       "description": "This is description",
       "url": "4PLg-Oe3MfA",
       "duration": 450,
-      "done":true
+      "done": true
     },
     {
       "id": 3,
@@ -36,7 +36,7 @@
       "description": "This is description",
       "url": "Bx2mFSsrucM",
       "duration": 387,
-      "done":false
+      "done": false
     },
     {
       "id": 4,
@@ -44,7 +44,7 @@
       "description": "This is description",
       "url": "lKUR4mu1M-U",
       "duration": 123,
-      "done":false
+      "done": false
     }
   ],
   "reviews": [
@@ -100,12 +100,23 @@
     },
     {
       "rating": 4,
-      "content": "Congratulation !!!",
+      "content": "Congratulation !!! ",
       "id": 11
     }
   ],
-  "stats":{
-    "average":2.7,
-    "percent":[20,16,29,40,10]
-  }
+  "stats": {
+    "average": 2.7,
+    "percent": [
+      20,
+      16,
+      29,
+      40,
+      10
+    ]
+  },
+  "categories": [
+    "Web development",
+    "Data analysis",
+    "UI/UX Design"
+  ]
 }

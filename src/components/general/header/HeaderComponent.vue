@@ -46,7 +46,7 @@
     </div>
     <!-- Navbar -->
     <nav
-      class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top px-5"
+      class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-5"
     >
       <router-link to="/" class="navbar-brand d-flex align-items-center">
         <svg
@@ -308,6 +308,7 @@ export default {
 
 /*** Navbar ***/
 .navbar {
+  box-shadow: 0 1px 2px rgb(0 0 0 / 15%) !important;
   .btn-primary {
     background-color: #06bbcc;
     border: none;

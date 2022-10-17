@@ -41,10 +41,11 @@ const routes = [
       {
         path: 'courses',
         name: 'home.courses',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue')
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue'),
+        children
       },
       {
-        path: 'courses/:id',
+        path: 'courses/learning/:id',
         name: 'home.courses.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/_id.vue')
       },

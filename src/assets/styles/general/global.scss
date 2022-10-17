@@ -1,6 +1,7 @@
 
 // VARIABLE
 :root {
+  --bs-primary: #06bbcc !important;
   --primary: #06bbcc;
   --primary-blur: #06bbcc3d;
   --light: #f0fbfc;
@@ -112,4 +113,8 @@ ul {
 }
 .text-star {
   color: #df9f38;
+}
+// LINK
+a {
+  text-decoration: none;
 }

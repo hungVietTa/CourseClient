@@ -3,7 +3,14 @@ import axios from "axios";
 export default {
   courses:1,
   // GET ALL COURSES
-
+  
+  // GET CATEGORIES
+  async getCategories(){
+    return await axios
+      .get(`http://localhost:4000/categories`)
+      .then(res => res.data)
+      .catch((res) => console.log(res));
+  },
   // GET SPECIFIC COURSE
   getCourses(){
     axios

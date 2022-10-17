@@ -5,7 +5,7 @@
       <section class="video">
         <div class="border-radius-9 overflow-hidden">
           <youtube
-            @cued="setPlayer"
+            @ready="setPlayer"
             :width="'100%'"
             :height="'100%'"
             :video-id="lessons[currentIndex].url"
@@ -106,12 +106,12 @@
                   class="btn btn-primary px-2 py-0 mx-1"
                   @click="updateReview(yourReview)"
                 >
-                  {{ yourReview ? "UPDATE" : "POST" }}
+                  UPDATE
                 </button>
                 <button
                   v-if="yourReview"
                   class="btn btn-secondary px-2 py-0 mx-1"
-                  @click="formShow = false"
+                  @click="yourReviewShow = true"
                 >
                   Cancel
                 </button>
@@ -124,7 +124,14 @@
           <ul class="review-list" v-show="yourReviewShow" v-if="yourReview">
             <h5 class="fw-bold mb-0">Your review</h5>
             <li
-              class="text-start d-flex py-3 px-1 align-items-center border-bottom-primary-blur"
+              class="
+                text-start
+                d-flex
+                py-3
+                px-1
+                align-items-center
+                border-bottom-primary-blur
+              "
             >
               <div class="col-1">
                 <img src="https://i.pravatar.cc/150?img=21" alt="" />
@@ -236,7 +243,14 @@
             <li
               v-for="(review, idx) in reviews"
               :key="idx"
-              class="text-start d-flex py-3 px-1 align-items-center border-bottom"
+              class="
+                text-start
+                d-flex
+                py-3
+                px-1
+                align-items-center
+                border-bottom
+              "
             >
               <div class="col-1">
                 <img src="https://i.pravatar.cc/150?img=21" alt="" />
@@ -274,11 +288,20 @@
           :key="lesson.id"
           @click="currentIndex = index"
           :class="{ 'bg-primary-blur': index == currentIndex }"
-          class="d-flex align-items-center gap-3 border-primary-blur cursor-pointer hover-primary px-3 py-3"
+          class="
+            d-flex
+            align-items-center
+            gap-3
+            border-primary-blur
+            cursor-pointer
+            hover-primary
+            px-3
+            py-3
+          "
         >
           <div class="">
-            <label class="container">
-              <input type="checkbox" v-model="lesson.done" />
+            <label class="container" @click.stop="" >
+              <input type="checkbox" @change="updateLesson(lesson)" v-model="lesson.done"/>
               <span class="checkmark"></span>
             </label>
           </div>
@@ -331,37 +354,35 @@ export default {
   },
   methods: {
     // YOUTUBE API
-    async setPlayer(){
-      if( el.lessons[this.currentIndex].done=="true" )
-        return
-      let el = this
-      this.player =this.$refs.youtube.player
-      this.player.addEventListener('onStateChange',function(e){
-        if ( e.data ==1 )
-            el.tracking()
-        else
-            clearInterval(el.trackingInterval)
-      })
+    async setPlayer() {
+      let el = this;
+      this.player = this.$refs.youtube.player;
+      this.player.addEventListener("onStateChange", function (e) {
+        if (el.lessons[el.currentIndex].done == true){
+          clearInterval(el.trackingInterval);
+        } 
+        else if (e.data == 1) 
+          el.trackingInterval = setInterval(el.tracking,2000);
+        else clearInterval(el.trackingInterval);
+      });
     },
-    tracking(){
+    async tracking() {
       let el = this
-      this.trackingInterval = setInterval(async function(el){
-        el.currrentTime = await el.player.getCurrentTime()
-        if (el.currrentTime>100)
-          {
-            clearInterval(el.trackingInterval)
-            el.lessons[el.currentIndex].done="true"
-            el.updateLesson(el.lessons[el.currentIndex])
-          }
-      },2000)
-    },
+      el.currrentTime = await el.player.getCurrentTime();
+      console.log(10)
+      if (this.currrentTime > this.lessons[this.currentIndex].duration*0.75) {
+          clearInterval(el.trackingInterval);
+          el.lessons[el.currentIndex].done = true;
+          el.updateLesson(el.lessons[el.currentIndex]);
+        }
+      },
     // API CALL
     async getLessons() {
       this.lessons = await API.getLessons();
     },
     async updateLesson(data) {
-      await API.updateLesson(data,data.id);
-      this.getLessons()
+      await API.updateLesson(data, data.id);
+      this.getLessons();
     },
     async getReviews() {
       this.reviews = await API.getReviews();
@@ -402,7 +423,7 @@ export default {
       }
     },
   },
-  mixins:[timeString],
+  mixins: [timeString],
   created() {
     this.getLessons();
     this.getReviews();
@@ -410,9 +431,9 @@ export default {
     this.getStats();
   },
   mounted() {
-    setTimeout(function(){
-      console.log(document.getElementsByTagName('video'))
-    },5000)
+    setTimeout(function () {
+      console.log(document.getElementsByTagName("video"));
+    }, 5000);
   },
 };
 </script>
@@ -469,7 +490,7 @@ ul {
   left: 50%;
   height: 18px;
   width: 18px;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border: 1px solid #999;
 }
 
