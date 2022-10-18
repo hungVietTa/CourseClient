@@ -1,11 +1,10 @@
 <template>
     <div>
-        <CategoriesBar/>
-        <router-view></router-view>
+        <CoursesPage/>
     </div>
 </template>
 <script>
-import CategoriesBar from "@/components/general/categories/CategoriesBar.vue"
+import CoursesPage from "@/components/general/courses/CoursesPage.vue"
 
 export default {
     name:"HomeCoursesPage",
@@ -14,7 +13,7 @@ export default {
         }
     },
     components:{
-        CategoriesBar
+        CoursesPage
     }
 }
 </script>

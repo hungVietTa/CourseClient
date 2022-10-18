@@ -118,3 +118,20 @@ ul {
 a {
   text-decoration: none;
 }
+// PAGINATION
+.page-link.active, .active > .page-link {
+  z-index: 3;
+  color: var(--bs-pagination-active-color);
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+.page-link.active:hover, .active > .page-link:hover {
+  color: white;
+}
+.page-link {
+  color: var(--primary);
+  cursor: pointer;
+}
+.page-link:hover {
+  color: var(--primary);
+}

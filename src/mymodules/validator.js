@@ -24,7 +24,7 @@ export default {
         }
     },
     password(field) {
-        if (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/.test(field.value)) //eslint-disable-line
+        if (/^[a-zA-Z0-9_.-]*$/.test(field.value)) //eslint-disable-line
             return true
         else {
             field.message = "Mật khẩu là chuỗi có độ dài từ 7-15 ký tự và chứa ít nhất 1 ký tự đặc biệt:!@#$%^*"

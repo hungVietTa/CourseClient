@@ -1,6 +1,5 @@
 <template>
   <header>
-    <FadedNotifyComp v-if="fadedMessage != ''" :fadedMessage="fadedMessage" />
     <!-- Topbar start -->
     <div class="container-fluid px-5 d-none d-lg-block top-bar">
       <div class="row gx-0">
@@ -176,7 +175,6 @@
 
 <script>
 import { mapActions,mapState } from "vuex";
-import FadedNotifyComp from "@/components/others/FadedNotifyComponent.vue";
 export default {
   name: "HeaderComponent",
   data() {
@@ -194,9 +192,6 @@ export default {
     ...mapState('authen', {
     isUserLogin: state => state.isUserLogin,
   }),
-  },
-  components: {
-    FadedNotifyComp,
   },
   mounted() {},
 };

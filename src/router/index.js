@@ -42,7 +42,13 @@ const routes = [
         path: 'courses',
         name: 'home.courses',
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue'),
-        children
+        children:[
+          {
+            path: ':categories',
+            name: 'home.courses.categories',
+            component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/categories/index.vue'),
+          }
+        ]
       },
       {
         path: 'courses/learning/:id',

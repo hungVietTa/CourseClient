@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- CATEGORIES START -->
         <nav class="categories-bar">
             <ul class="d-flex align-items-center px-5 bg-primary border-primary-blur">
                 <li class="px-4 py-1" v-for="(category,index) in categories" :key="index">
@@ -9,33 +10,15 @@
                 </li>
             </ul>
         </nav>
+        <!-- CATEGORIES END -->
     </div>
 </template>
 <script>
-import API from "@/api/general/courses/index"
-
 export default {
-    name:"HomeCoursesView",
-    props:['type'],
-    data(){
-        return {
-            categories:false
-        }
-    },
-    methods:{
-        async getCategories(){
-            this.categories = await API.getCategories()
-            // NAVIGATE TO FIRST CATEGORY
-            if (this.$route.path == " course")
-            this.$router.push(this.$route.path +'/' + this.categories[0].split(" ").join("-").toLowerCase())
-        }
-    },
-    created(){
-        this.getCategories()
-    }
+    
 }
 </script>
-<style scoped lang="scss">
+<style scoped>
 ul {
     box-shadow: 0 1px 1px rgb(0 0 0 / 15%)
 }

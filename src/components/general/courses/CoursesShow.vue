@@ -4,13 +4,13 @@
       <!-- YOUTUBE IFRAME -->
       <section class="video">
         <div class="border-radius-9 overflow-hidden">
-          <youtube
+          <!-- <youtube
             @ready="setPlayer"
             :width="'100%'"
             :height="'100%'"
             :video-id="lessons[currentIndex].url"
             ref="youtube"
-          ></youtube>
+          ></youtube> -->
         </div>
       </section>
       <!-- INTERACTION -->

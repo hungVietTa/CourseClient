@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="waiting" v-if="false">
+    <!-- <div class="waiting" v-if="false">
       <button class="btn btn-primary" type="button" disabled>
         <span
           class="spinner-border spinner-border-sm"
@@ -9,12 +9,22 @@
         ></span>
         Loading...
       </button>
-    </div>
+    </div> -->
+    <SuccessAlert/>
     <main>
       <router-view />
     </main>
   </div>
 </template>
+<script>
+import SuccessAlert from "@/components/others/SuccessAlert.vue"
+
+  export default {
+    components:{
+      SuccessAlert
+    }
+  }
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

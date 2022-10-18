@@ -17,7 +17,7 @@
           <button
             class="btn btn-primary me-2"
             @click="
-              formShow = true;
+              newFormShow = true;
               action = 'Add';
             "
           >
@@ -75,9 +75,9 @@
         </ul>
       </nav>
       </div>
-      <!-- OVERLAY -->
-      <div class="overlay" v-if="formShow && load">
-        <!-- ADD NEW COURSES -->
+      <!-- OVERLAY START-->
+      <div class="overlay" v-if="newFormShow && load">
+        <!-- NEW COURSES FORM START-->
         <div class="form-popup">
           <h3 class="fw-bold">Add new course</h3>
           <form class="Course-form" @submit.prevent="createCourseHandlding(newCourse)">
@@ -95,16 +95,19 @@
               <button class="btn btn-primary me-2" type="submit">
                 {{ action }}
               </button>
-              <button class="btn btn-secondary" @click="formShow = false">
+              <button class="btn btn-secondary" @click="newFormShow = false">
                 Cancel
               </button>
             </div>
           </form>
         </div>
+         <!-- NEW COURSES FORM END-->
       </div>
+      <!-- OVERLAY END-->
     </main>
     <!-- MODAL -->
     <ModalComponent v-if="modalShow" @cancel="modalShow=false" @process="deleteCourse(currentId)"/>
+    <!-- MODAL -->
   </div>
 </template>
 <script>
@@ -115,19 +118,22 @@ import { mapActions,mapState } from 'vuex'
 export default {
   data() {
     return {
+      // modal
       modalShow:false,
+      // pagination
       sortBy:"id",
       sortState:true,
       page: 0,
-      apiCourses: [],
-      load: false,
+      // courses list
       currentIndex: 0,
       currentId:0,
+      // new course
       newCourse: {
         name: "",
         description: "",
       },
-      formShow: false,
+      //new form
+      newFormShow: false,
     };
   },
   computed:{
@@ -156,7 +162,7 @@ export default {
       this.createCourse(newCourse)
       newCourse.name = ""
       newCourse.description = ""
-      this.formShow = false
+      this.newFormShow = false
     },
     search(value){
       console.log(value)
