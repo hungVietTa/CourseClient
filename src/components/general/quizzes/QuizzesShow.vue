@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="pt-5">
+    <main class="pt-5 text-center">
       <div v-if="enrolling">
         <h1>{{ examTitle }}</h1>
         <p>
@@ -11,7 +11,7 @@
         <p>Are you ready</p>
         <button class="btn btn-primary" @click="start">Ready</button>
       </div>
-      <ul v-show="processing || reviewing">
+      <ul class="text-center" v-show="processing || reviewing">
         <div class="btn-group">
           <button
             @click="currentId = currentId - 1"
@@ -67,16 +67,19 @@
             </p>
           </div>
         </li>
-        <p v-show="!reviewing && processing">{{ countDown }}</p>
-        <button 
-          @click="unfinishedCheck"
-          v-if="!reviewing && processing"
-          class="btn btn-primary mt-4"
-        >
-          Submit
-        </button>
+        <div class="text-center">
+          <p v-show="!reviewing && processing">{{ countDown }}</p>
+          <button
+            @click="unfinishedCheck"
+            v-if="!reviewing && processing"
+            class="btn btn-primary mt-4"
+          >
+            Submit
+          </button>
+        </div>
       </ul>
-      <button class="btn btn-primary"
+      <button
+        class="btn btn-primary"
         v-if="reviewing && !done"
         @click="
           reviewing = false;
@@ -120,8 +123,8 @@
   </div>
 </template>
 <script>
-import ModalComp from "./ModalComp.vue";
-import { startTimer } from "../../../mfsmodule/timer.js";
+import ModalComp from "@/components/others/ModalComponent.vue";
+import { startTimer } from "@/mymodules/timer.js";
 
 export default {
   data() {
@@ -222,18 +225,6 @@ export default {
         item.choice = "";
       });
     });
-
-    // this.quiz = {
-    //   id: 12,
-    //   name: "Final test",
-    //   questions: [
-    //     {
-    //       id: 12,
-    //       question: "How are links defined in an <a> tag?",
-    //       answers: [{ id: 1, content: "Href", is_correct: true }],
-    //     },
-    //   ],
-    // };
   },
 };
 </script>

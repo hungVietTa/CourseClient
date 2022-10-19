@@ -22,17 +22,7 @@ export default {
             categories:false
         }
     },
-    methods:{
-        async getCategories(){
-            this.categories = await API.getCategories()
-            // NAVIGATE TO FIRST CATEGORY
-            if (this.$route.path == " course")
-            this.$router.push(this.$route.path +'/' + this.categories[0].split(" ").join("-").toLowerCase())
-        }
-    },
-    created(){
-        this.getCategories()
-    }
+    
 }
 </script>
 <style scoped lang="scss">

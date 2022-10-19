@@ -7,7 +7,7 @@ import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import VueYoutube from 'vue-youtube'
 import VueCarousel from 'vue-carousel';
-
+import Paginate from 'vuejs-paginate'
 // import the fontawesome core 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -23,6 +23,7 @@ library.add(faUserSecret,faUserGraduate,faEye,faEyeSlash,faReply,faTwitter,faFac
 
 // add font awesome icon component
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('paginate', Paginate)
 Vue.use(VueAxios, axios)
 Vue.use(VueCarousel);
 Vue.config.productionTip = false

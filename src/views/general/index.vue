@@ -24,7 +24,8 @@ import FooterComponent from "@/components/others/FooterComponent.vue";
 
   }
 </script>
-<style>
+<style lang="scss">
+@import "@/assets/styles/general/course_item.scss";
 main {
   margin: auto;
 }

@@ -118,5 +118,427 @@
     "Web development",
     "Data analysis",
     "UI/UX Design"
+  ],
+  "course1": [
+    {
+      "name": "HTML tutorials 1",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+    },
+    {
+      "name": "CSS tutorials 1",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
+    },
+    {
+      "name": "JS tutorials 1",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
+    },
+    {
+      "name": "Vue tutorials 1",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"
+    }
+  ],
+  "course2": [
+    {
+      "name": "HTML tutorials 2",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+    },
+    {
+      "name": "CSS tutorials 2",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
+    },
+    {
+      "name": "JS tutorials 2",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
+    },
+    {
+      "name": "Vue tutorials 2",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"
+    }
+  ],
+  "course3": [
+    {
+      "name": "HTML tutorials 3",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+    },
+    {
+      "name": "CSS tutorials 3",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
+    },
+    {
+      "name": "JS tutorials 3",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
+    },
+    {
+      "name": "Vue tutorials 3",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"
+    }
+  ],
+  "course4": [
+    {
+      "name": "HTML tutorials 4",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+    },
+    {
+      "name": "CSS tutorials 4",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
+    },
+    {
+      "name": "JS tutorials 4",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
+    },
+    {
+      "name": "Vue tutorials 4",
+      "desscription": "Hello world",
+      "viewcount": 234,
+      "rating": 4.5,
+      "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "How are links defined in an <a> tag?",
+      "answers": {
+        "answer_a": "Href",
+        "answer_b": "Src-link",
+        "answer_c": "Src",
+        "answer_d": "Hlink",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "true",
+        "answer_b_correct": "false",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 1
+    },
+    {
+      "question": "There are ____ different heading tags in HTML",
+      "answers": {
+        "answer_a": "4",
+        "answer_b": "7",
+        "answer_c": "6",
+        "answer_d": "5",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_c",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 2
+    },
+    {
+      "question": "All elements are identified by their __________ and are marked up using either start tags and end tags or self-closing tags",
+      "answers": {
+        "answer_a": "Attribute Names",
+        "answer_b": "Tag Names",
+        "answer_c": "Class Names",
+        "answer_d": "None of the mentioned",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "true",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_b",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 3
+    },
+    {
+      "question": "Which of the following is not a style tag?",
+      "answers": {
+        "answer_a": "<b>",
+        "answer_b": "All are style tags",
+        "answer_c": "<i>",
+        "answer_d": "<tt>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "true",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_b",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 4
+    },
+    {
+      "question": "Which of the following is true about HTML 5?",
+      "answers": {
+        "answer_a": "HTML5 is the next major revision of the HTML standard superseding HTML 4.01, XHTML 1.0, and XHTML 1.1.",
+        "answer_b": "HTML5 is a cooperation between the World Wide Web Consortium (W3C) and the Web Hypertext Application Technology Working Group (WHATWG).",
+        "answer_c": "HTML5 is a standard for structuring and presenting content on the World Wide Web",
+        "answer_d": "All of These",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "false",
+        "answer_d_correct": "true",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_c",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 5
+    },
+    {
+      "question": "A homepage is __________",
+      "answers": {
+        "answer_a": "an index of encyclopedia articles",
+        "answer_b": "the first page of a website",
+        "answer_c": "required for access to the Internet",
+        "answer_d": "where all Internet data is stored",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "true",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_b",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 6
+    },
+    {
+      "question": "How can you make A bulleted list with numbers?",
+      "answers": {
+        "answer_a": "<dl>",
+        "answer_b": "<ul>",
+        "answer_c": "<ol>",
+        "answer_d": "<list>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_c",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 7
+    },
+    {
+      "question": "Which tag inserts a line horizontally on your web page?",
+      "answers": {
+        "answer_a": "<hr>",
+        "answer_b": "<line direction=\"horizontal\">",
+        "answer_c": "<tr>",
+        "answer_d": "<line>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "true",
+        "answer_b_correct": "false",
+        "answer_c_correct": "false",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_a",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 8
+    },
+    {
+      "question": "What is cite tag in HTML5?",
+      "answers": {
+        "answer_a": "<cite title\"value\">Some Text Here</cite>",
+        "answer_b": "<cite title:\"value\">Some Text Here</cite>",
+        "answer_c": "<cite title=\"value\">Some Text Here</cite>",
+        "answer_d": null,
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_c",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 9
+    },
+    {
+      "question": "What is the HTML Tag for the largest heading",
+      "answers": {
+        "answer_a": "<h6>",
+        "answer_b": "<head>",
+        "answer_c": "<h1>",
+        "answer_d": "<heading>",
+        "answer_e": null,
+        "answer_f": null
+      },
+      "multiple_correct_answers": "false",
+      "correct_answers": {
+        "answer_a_correct": "false",
+        "answer_b_correct": "false",
+        "answer_c_correct": "true",
+        "answer_d_correct": "false",
+        "answer_e_correct": "false",
+        "answer_f_correct": "false"
+      },
+      "correct_answer": "answer_c",
+      "explanation": null,
+      "tags": [
+        {
+          "name": "HTML"
+        }
+      ],
+      "category": "Code",
+      "difficulty": "Easy",
+      "id": 10
+    }
   ]
 }

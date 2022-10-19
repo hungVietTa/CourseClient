@@ -4,19 +4,19 @@
       <!-- YOUTUBE IFRAME -->
       <section class="video">
         <div class="border-radius-9 overflow-hidden">
-          <!-- <youtube
+          <youtube
             @ready="setPlayer"
             :width="'100%'"
             :height="'100%'"
             :video-id="lessons[currentIndex].url"
             ref="youtube"
-          ></youtube> -->
+          ></youtube>
         </div>
       </section>
       <!-- INTERACTION -->
       <div>
         <!-- NAV-BUTTON -->
-        <ul class="d-flex nav-buttons">
+        <ul class="d-flex secondary-style-nav">
           <li
             @click="navButton = 'overview'"
             :class="{ active: navButton == 'overview' }"
@@ -541,21 +541,6 @@ ul {
   left: 0;
   top: 0;
 }
-/* NAV BUTTON */
-.nav-buttons li {
-  cursor: pointer;
-}
-.nav-buttons li:hover h4 {
-  color: #333 !important;
-}
-.nav-buttons li.active {
-  border-bottom: 1px solid #ccc;
-  color: #333 !important;
-}
-.nav-buttons li.active h4 {
-  color: #333 !important;
-}
-
 ::-webkit-scrollbar {
   width: 5px;
   background-color: var(--primary);

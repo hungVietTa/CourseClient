@@ -40,15 +40,9 @@ const routes = [
       },
       {
         path: 'courses',
+        alias:'courses/:category',
         name: 'home.courses',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue'),
-        children:[
-          {
-            path: ':categories',
-            name: 'home.courses.categories',
-            component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/categories/index.vue'),
-          }
-        ]
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue')
       },
       {
         path: 'courses/learning/:id',
@@ -56,14 +50,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/_id.vue')
       },
       {
-        path: 'quizs',
-        name: 'home.quizs',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/quizs/index.vue')
+        path: 'quizzes',
+        name: 'home.quizzes',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/quizzes/index.vue')
       },
       {
-        path: 'quizs/:id',
-        name: 'home.quizs.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/quizs/_id.vue')
+        path: 'quizzes/:id',
+        name: 'home.quizzes.id',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/quizzes/_id.vue')
       }
     ]
   },
@@ -137,14 +131,19 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/_id.vue'),
       },
       {
-        path: 'courses/:id/lessons/:id_lesson',
+        path: 'courses/:id/lessons/new',
+        name: 'admin.lessons.new',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/lessons/new.vue'),
+      },
+      {
+        path: 'courses/:id/lessons/:lesson_id',
         name: 'admin.lessons',
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/lessons/_id.vue'),
       },
       {
-        path: 'courses/:id/quizs/:id_quiz',
-        name: 'admin.quizs',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/quizs/_id.vue'),
+        path: 'courses/:id/quizzes/:quiz_id',
+        name: 'admin.quizzes.id',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/courses/quizzes/_id.vue'),
       }
     ]
   },
@@ -197,6 +196,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0)
   if (store.state.authen.isUserLogin == true && ( to.name == 'login' || to.name == 'register' ))
     {
       next({ name: 'home' })
