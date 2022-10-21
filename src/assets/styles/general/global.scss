@@ -48,6 +48,129 @@ input[type="radio"]:focus {
   overflow: hidden;
   position: absolute;
 }
+
+/* INPUT CUSTOM CHECKBOX css */
+/* Customize the label (the container) */
+.container-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark-checkbox {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  height: 17px;
+  width: 17px;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark-checkbox {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark-checkbox {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark-checkbox:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark-checkbox:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+// INPUT CUSTOM RADIO
+/* The container */
+.container-radio {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container-radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark-radio {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  height: 15px;
+  width: 15px;
+  outline: 1px solid #bbb;
+  border: 5px solid white;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container-radio:hover input ~ .checkmark-radio {
+  background-color: #eee;
+}
+
+/* When the radio button is checked, add a blue background */
+.container-radio input:checked ~ .checkmark-radio {
+  border-color: #06bbcc;
+  outline-color: #06bbcc;
+}
+
 // LABEL  
 label {
   font-weight: bold;
@@ -59,6 +182,9 @@ div .text-primary {
 }
 .router-view-css {
   min-height: 500px;
+}
+.text-666 {
+  color: #444 !important;
 }
 // UL,LI
 ul {
@@ -99,6 +225,9 @@ ul {
 }
 .border-bottom-primary-blur {
   border-bottom: 1px solid var(--primary-blur)
+}
+.border-top-secondary-blur {
+  border-top: 1px solid #ddd;
 }
 // BACKGROUND
 .bg-primary {
@@ -182,4 +311,78 @@ a {
 // container 
 .w-1300 {
   width: 1300px;
+}
+// CUSTOM SELECTED
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+// DROPDOWN MENU
+.dropdown-menu {
+  display: block;
+}
+/* REVIEW STARS */
+.star-icon path {
+  stroke-width: 30;
+  stroke: var(--star);
+}
+.click-filled {
+  color: var(--star) !important;
+}
+.hover-filled {
+  color: var(--star) !important;
 }

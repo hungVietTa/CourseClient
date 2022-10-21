@@ -45,7 +45,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue')
       },
       {
-        path: 'courses/learning/:id',
+        path: 'courses/:id/learning',
         name: 'home.courses.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/_id.vue')
       },
@@ -156,17 +156,17 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/user/index.vue'),
     children: [
       {
-        path: 'user.profile',
+        path: 'profile',
         name: 'user.profile.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/profile/index.vue'),
       },
       {
-        path: 'user.schedules',
+        path: 'schedules',
         name: 'user.schedule.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/schedules/index.vue'),
       },
       {
-        path: 'user.schedules/:id',
+        path: 'schedules/:id',
         name: 'user.schedules.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/schedules/_id.vue'),
       },
@@ -176,12 +176,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/courses/index.vue'),
       },
       {
-        path: 'user.courses/:id',
+        path: 'courses/:id',
         name: 'user.courses.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/courses/_id.vue'),
       },
       {
-        path: 'user.timetable',
+        path: 'timetable',
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/timetable/index.vue'),
       },
     ]

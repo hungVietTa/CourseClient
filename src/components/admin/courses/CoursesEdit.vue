@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3">
+  <div class="mt-3" v-if="course">
     <h2 class="fw-bold text-center">Course #{{ course.id }}</h2>
     <!-- COURSES INFORMATION START-->
     <h4 class="fw-bold text-start">Information</h4>
@@ -97,9 +97,9 @@
     <!-- COURSES INFROMATION END -->
 
     <!-- LESSONS LIST STARTS-->
-    <div class="table-wrapper pt-3 border-top mb-4" v-if="lessonsData">
+    <div class="table-wrapper pt-3 border-top mb-4">
       <h4 class="fw-bold text-start mb-3">
-        Lessons ({{lessonsData.meta.total}})
+        Lessons ({{course.lessons.length}})
       </h4>
       <div class="text-start mb-3">
         <router-link class="btn btn-primary" :to="$route.path + '/lessons/new'"
@@ -127,7 +127,7 @@
               <td>{{ lesson.id }}</td>
               <td>{{ lesson.name }}</td>
               <td>{{ lesson.description }}</td>
-              <td>{{ lesson.duration }}</td>
+              <td>{{ secondsToHms(parseInt(lesson.duration)) }}</td>
               <td>{{ lesson.view_count }}</td>
               <td>
                 <router-link
@@ -285,7 +285,7 @@ import { mapActions } from "vuex";
 import coursesAPI from "@/api/admin/courses/index";
 import lessonsAPI from "@/api/admin/lessons/index";
 import quizzesAPI from "@/api/admin/quizzes/index";
-// import quizsAPI from "@/api/admin/quizs/index";
+import timeString from "@/mixin/timeString";
 
 export default {
   data() {
@@ -406,6 +406,7 @@ export default {
   components: {
     ModalComponent,
   },
+  mixins:[timeString],
   created() {
     this.getCourse();
     this.getLessons(1);

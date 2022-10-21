@@ -1,8 +1,8 @@
 <template>
   <div>
     <main class="pt-5 text-center">
+      <h1 class="mb-3">HTML Basics</h1>
       <div v-if="enrolling">
-        <h1>{{ examTitle }}</h1>
         <p>
           The exam including {{ list.length }} questions with the time limit of
           15 minutes. You will pass the test by correcting at least
@@ -116,8 +116,8 @@
         remains +
         ' .Bạn xác nhận vẫn muốn nộp bài ?'
       "
-      :modalcancel="'Hủy'"
-      :modalconsent="'Nộp bài'"
+      :modalcancel="'Submit'"
+      :modalconsent="'Cancel'"
       v-if="modal"
     />
   </div>
@@ -165,6 +165,7 @@ export default {
   methods: {
     startTimer() {},
     start() {
+      this.solutions=[];
       this.processing = true;
       this.enrolling = false;
       this.interval = this.startTimer(this.time, this.submit, this);
@@ -191,6 +192,7 @@ export default {
       this.modal = false;
     },
     showResult() {
+      this.currentId = 1;
       this.reviewing = true;
       this.done = false;
       this.timeout = false;
@@ -203,6 +205,10 @@ export default {
       this.modal = false;
     },
     tryAgain() {
+      this.list.forEach((item) => {
+        item.choice = "";
+      });
+      this.currentId=1
       this.enrolling = true;
       this.done = false;
       this.timeout = false;

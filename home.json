@@ -49,65 +49,38 @@
   ],
   "reviews": [
     {
+      "username": "Ivana",
       "id": 1,
       "rating": 4,
+      "avatar": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/87/87f98fe9840343e909e1a96b7441a01ab7a0ba70.jpg",
       "content": "The video's explanation was outstanding"
     },
     {
+      "username": "Danail",
       "id": 2,
       "rating": 5,
+      "avatar": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/dc/dc8ff1eb5ac6612d33809a118dae667064bd386f_full.jpg",
       "content": "This is measured doses of discreet steps needed "
     },
     {
+      "username": "Anastacio",
       "rating": 4,
+      "avatar": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/e6/e6921d4dc75a4c7abb79ce56d64d3342fdb9e03f_full.jpg",
       "content": "I have already seen few but really cool !!!",
       "id": 3
-    },
-    {
-      "rating": 3,
-      "content": "Wow",
-      "id": 4
-    },
-    {
-      "rating": 4,
-      "content": "Wow",
-      "id": 5
-    },
-    {
-      "rating": 3,
-      "content": "Good",
-      "id": 6
-    },
-    {
-      "rating": 5,
-      "content": "Oh my lord",
-      "id": 7
-    },
-    {
-      "rating": 4,
-      "content": "Oh NO no",
-      "id": 8
-    },
-    {
-      "rating": 5,
-      "content": "Oh NO no !!! HAH",
-      "id": 9
-    },
-    {
-      "rating": 4,
-      "content": "Congratulation !!!",
-      "id": 10
-    },
-    {
-      "rating": 4,
-      "content": "Congratulation !!! ",
-      "id": 11
     }
   ],
+  "yourReview": {
+    "username": "Beatrice",
+    "rating": 5,
+    "content": "It was fun introduction to basic digital painting. I want to learn more. Thank you Hardy.",
+    "avatar": "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/09/09cf8ddb803f0d10e6a93cbc7f70a36fb51aa19a_full.jpg",
+    "id": 4
+  },
   "stats": {
-    "average": 2.7,
+    "average": 3.6,
     "percent": [
-      20,
+      90,
       16,
       29,
       40,
@@ -117,33 +90,33 @@
   "categories": [
     "Web development",
     "Data analysis",
-    "UI/UX Design"
+    "Data Science"
   ],
   "course1": [
     {
       "name": "HTML tutorials 1",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
-      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+      "cover_file": "https://i.ytimg.com/vi/yKNxeF4KMsY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC6cwBse6xhHEeiEzdadIsABYG4Xg"
     },
     {
       "name": "CSS tutorials 1",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
     },
     {
       "name": "JS tutorials 1",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
     },
     {
       "name": "Vue tutorials 1",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"
@@ -152,28 +125,28 @@
   "course2": [
     {
       "name": "HTML tutorials 2",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
-      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+      "cover_file": "https://i.ytimg.com/vi/yKNxeF4KMsY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC6cwBse6xhHEeiEzdadIsABYG4Xg"
     },
     {
       "name": "CSS tutorials 2",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
     },
     {
       "name": "JS tutorials 2",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
     },
     {
       "name": "Vue tutorials 2",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"
@@ -182,28 +155,28 @@
   "course3": [
     {
       "name": "HTML tutorials 3",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
-      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+      "cover_file": "https://i.ytimg.com/vi/yKNxeF4KMsY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC6cwBse6xhHEeiEzdadIsABYG4Xg"
     },
     {
       "name": "CSS tutorials 3",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
     },
     {
       "name": "JS tutorials 3",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
     },
     {
       "name": "Vue tutorials 3",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"
@@ -212,28 +185,28 @@
   "course4": [
     {
       "name": "HTML tutorials 4",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
-      "cover_file": "http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhZMkkwYkRWMU5tRndOMk0xY1hSbWNIUTBaR1JtY21ScWVtZ3dNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpTzJsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW5aMVpUTXVhbkJuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkMmRXVXpMbXB3WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraUQybHRZV2RsTDJwd1pXY0dPd1pVT2hGelpYSjJhV05sWDI1aGJXVTZDbXh2WTJGcyIsImV4cCI6IjIwMjItMTAtMTlUMTI6NTU6MjguODk2WiIsInB1ciI6ImJsb2Jfa2V5In19--c4105ef946602bb87810c0db1156e911827e6931/vue3.jpg"
+      "cover_file": "https://i.ytimg.com/vi/yKNxeF4KMsY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC6cwBse6xhHEeiEzdadIsABYG4Xg"
     },
     {
       "name": "CSS tutorials 4",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/DVVIKctYZ68/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAki60_celd5d5Ae96Po8uo_1eF_w"
     },
     {
       "name": "JS tutorials 4",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/qgeaoW55Pks/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCu6lVVAEBqNeYyIqGCglYqFa3cYw"
     },
     {
       "name": "Vue tutorials 4",
-      "desscription": "Hello world",
+      "description": "Hello world",
       "viewcount": 234,
       "rating": 4.5,
       "cover_file": "https://i.ytimg.com/vi/L47IIq5EmkA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLChUPQUcEAFRhURyGMKFWNOWVttDg"

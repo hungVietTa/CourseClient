@@ -5,7 +5,7 @@ export default {
   // GET COURSES LIST
   async getCoursesList(id){
     return await axios
-    .get(`http://localhost:4000/courses${id}`)
+    .get(`http://localhost:4000/course${id}`)
     .then(res => res.data)
     .catch((res) => console.log(res));
   },
@@ -26,8 +26,8 @@ export default {
   // Lessons
   async getLessons() {
     return await axios
-      .get(`http://localhost:4000/lessons`)
-      .then(res => res.data)
+      .get(`api/v1/admin/courses/17`)
+      .then(res => res.data.lessons)
       .catch((res) => console.log(res));
   },
   async updateLesson(data,id){
@@ -53,13 +53,13 @@ export default {
   // YourReviews
   async getYourReview() {
     return await axios
-      .get(`http://localhost:4000/reviews/11`)
+      .get(`http://localhost:4000/yourReview`)
       .then(res => res.data)
       .catch((res) => console.log(res));
   },
   async updateReview(data, id) {
     await axios
-      .put(`http://localhost:4000/reviews/${id}`, data)
+      .put(`http://localhost:4000/yourReview`, data)
       .then(() => false)
       .catch((res) => console.log(res));
   },

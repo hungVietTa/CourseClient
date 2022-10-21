@@ -34,6 +34,7 @@
             <!-- <th><input type="checkbox" /></th> -->
             <th class="text-nowrap" role="button" >ID  <span class="ms-2"><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
             <th>Name <span></span></th>
+            <th>Lessons</th>
             <th>Date Created <span></span></th>
             <th>Date Updated <span></span></th>
             <th colspan="2">Action</th>
@@ -44,6 +45,7 @@
             <!-- <td><input type="checkbox" /></td> -->
             <td>{{ course.id }}</td>
             <td>{{ course.name }} </td>
+            <td>{{course.lessons.length}}</td>
             <td>{{ course.created_at.split("T")[0] }} </td>
             <td>{{ course.updated_at.split("T")[0] }} </td>
             <td>
@@ -112,6 +114,7 @@ import SearchForm from "@/components/others/SearchForm.vue"
 import { mapActions } from 'vuex'
 import API from "@/api/admin/courses/index";
 import formHandling from "@/mixin/formHandling";
+import timeString from '@/mixin/timeString';
 
 export default {
   data() {
@@ -139,7 +142,7 @@ export default {
     ...mapActions("alert",["showSuccess"]),
     // CALL API
     async getCourses(page) {
-      this.data = await API.getCourses(page);
+      this.data = await API.getCourses(7,page);
       console.log(this.data)
       this.currentPage = page
       this.coursesCount = this.data.courses.length
@@ -164,7 +167,7 @@ export default {
       this.getCourses(page)
     }
   },
-  mixins: [formHandling],
+  mixins: [formHandling,timeString],
   components:{
     ModalComponent,SearchForm
   },
