@@ -29,15 +29,12 @@
               </div>
               <div class="col-6">
                 <label
-                  ><span>Date Published: </span><br /><input
-                    type="text"
-                    disabled
-                    :value="
-                      course.published_at
-                        ? course.published_at.split('T')[0]
-                        : 'N/A'
-                    "
-                /></label>
+                  ><span>Category: </span><br/>
+                  <select class="px-1 py-1 border-radius-6">
+                    <option selected="true" disabled="disabled" hidden></option>
+                    <option  v-for="category in categoriesData.categories" :key="category.id" >{{category.name}}</option>
+                  </select>
+                </label>
               </div>
             </div>
             <div class="d-flex mb-4">
@@ -285,6 +282,8 @@ import { mapActions } from "vuex";
 import coursesAPI from "@/api/admin/courses/index";
 import lessonsAPI from "@/api/admin/lessons/index";
 import quizzesAPI from "@/api/admin/quizzes/index";
+import categoriesAPI from "@/api/admin/categories/index";
+import course_categoriesAPI from "@/api/admin/course_categories/index";
 import timeString from "@/mixin/timeString";
 
 export default {
@@ -297,6 +296,9 @@ export default {
       img: "",
       // warning modal course update
       modalCourseUpdate: false,
+
+      // CATEGORY
+      categoriesData:false,
 
       // LESSON
       // data
@@ -359,6 +361,16 @@ export default {
       let url = URL.createObjectURL(this.$refs.imgInput.files[0]);
       this.$refs.image.src = url;
     },
+    // CATEGORIES
+    async getCategories(page) {
+      this.categoriesData = await categoriesAPI.getCategories(5,page);
+      console.log(this.categoriesData)
+    },
+    // COURSE_CATEGORY
+    async showCourseCategory() {
+      this.course_category  = await course_categoriesAPI.showCourseCategory(this.course_id);
+      console.log(this.course_category )
+    },
 
     // LESSONS
     // call api
@@ -411,6 +423,8 @@ export default {
     this.getCourse();
     this.getLessons(1);
     this.getQuizzes(1);
+    this.getCategories(1);
+    this.showCourseCategory();
   },
   mounted() {
     // let i = 0

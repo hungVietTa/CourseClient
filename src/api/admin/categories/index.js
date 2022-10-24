@@ -1,45 +1,37 @@
 import axios from "axios";
 
 export default {
-    // GET COURSES LIST
-    async getCourses(limit,page) {
+    // GET CATEGORY LIST
+    async getCategories(limit,page) {
         return await axios
-            .get(`api/v1/admin/courses?limit=${limit}&page=${page}`)
+            .get(`api/v1/admin/categories?limit=${limit}&page=${page}`)
             .then(res => res.data)
             .catch((res) => console.log(res));
     },
     // CREATE NEW COURSE
-    async createCourse(data) {
+    async createCategory(data) {
         await axios
-            .post(`api/v1/admin/courses`, data)
+            .post(`api/v1/admin/categories`, data)
             .then(() => false)
             .catch((res) => console.log(res));
     },
     // SHOW COURSE
-    async showCourse(id) {
+    async showCategory(id) {
         return await axios
-            .get(`api/v1/admin/courses/${id}`)
+            .get(`api/v1/admin/categories/${id}`)
             .then(res => res.data)
             .catch((res) => console.log(res));
     },
     // UPDATE COURSE
-    async updateCourse(data,id) {
-        console.log(data)
-        await axios({
-            method: 'put',
-            url: `api/v1/admin/courses/${id}`,
-            data: data,
-            headers: {
-                'Content-Type': `multipart/form-data`,
-            },
-        })
+    async updateCategory(data) {
+        await axios.put(`api/v1/admin/categories/${data.id}`,data)
             .then(() => false)
             .catch((res) => console.log(res));
     },
     // DELETE COURSE
-    async deleteCourse(id) {
+    async deleteCategory(id) {
         await axios
-            .delete(`api/v1/admin/courses/${id}`)
+            .delete(`api/v1/admin/categories/${id}`)
             .then(() => false)
             .catch((res) => console.log(res));
     }
