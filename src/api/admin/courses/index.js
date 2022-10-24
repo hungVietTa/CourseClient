@@ -4,7 +4,7 @@ export default {
     // GET COURSES LIST
     async getCourses(limit,page) {
         return await axios
-            .get(`api/v1/admin/courses?limit=${limit}&page=${page}`)
+            .get(`api/v1/users/courses?limit=${limit}&page=${page}`)
             .then(res => res.data)
             .catch((res) => console.log(res));
     },

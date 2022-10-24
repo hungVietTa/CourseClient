@@ -1,7 +1,7 @@
 <template>
-  <div v-if="categories">
+  <div >
     <!-- CATEGORIES START -->
-    <nav class="categories-bar mb-5">
+    <nav class="categories-bar mb-5" v-if="categories">
       <ul class="d-flex align-items-center px-5 bg-primary border-primary-blur">
         <li
           class="me-5 py-1"
@@ -102,6 +102,7 @@
                           /></small>
                           <br />
                           <small>(1.064)</small>
+                          <p>{{course.is_subscribe}}</p>
                         </div>
                         <div class="course-title">
                           <h6 class="mb-2 fw-bold text-primary">
@@ -126,6 +127,7 @@
                       </div>
                     </div>
                     </router-link>
+                    <button v-if="!course.is_subscribe" @click.stop="subscribe(course.id)" class="btn btn-primary">Subscribe</button>
                   </div>
                 </div>
               </div>
@@ -376,12 +378,6 @@ export default {
   methods: {
     // CATEGORY
     async getCategories() {
-      this.categories = await API.getCategories();
-      // NAVIGATE TO FIRST CATEGORY IF FIRST TIME
-      if (this.$route.path == "/courses")
-        this.$router.push(
-          `courses/${this.categories[0].split(" ").join("-").toLowerCase()}`
-        );
       await this.getCourses();
     },
     // GET COURSES POPULAR TRENDING NEW
@@ -391,6 +387,7 @@ export default {
         return res.courses
       }));
       this.coursesSlides.push(await coursesAPI.getCourses(4,2).then(res=>res.courses));
+      console.log(this.coursesSlides)
     },
     // carousel
     async play(direction) {
@@ -407,6 +404,10 @@ export default {
       }
       console.log(this.data.pages.length);
     },
+    // Subscribe
+    subscribe(id){
+      this.axios.post(`api/v1/users/courses/${id}/subscribes`).then(res=>console.log(res.data))
+    }
   },
   created() {
     this.getCategories();
