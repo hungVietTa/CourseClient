@@ -39,8 +39,7 @@
                 /></span>
               </th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Date of Birth</th>
+
               <th colspan="2">Action</th>
             </tr>
           </thead>
@@ -56,8 +55,6 @@
               <!-- <td><input type="checkbox" /></td> -->
               <td>{{ category.id }}</td>
               <td>{{ category.name }}</td>
-              <td>{{ category.email }}</td>
-              <td>{{category.date_of_birth?category.date_of_birth.split("-").reverse().join("-"):'' }}</td>
               <td>
                 <button
                   @click.stop="

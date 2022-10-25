@@ -1,81 +1,25 @@
 <template>
   <div>
     <div class="bg-primary pt-3">
-      <div class="my-courses-list-heading m-auto px-3">
+      <div class="my-courses-list-heading m-auto">
         <h1 class="fw-bold text-white">My Learning</h1>
-        <!-- NAV-BUTTON -->
-        <ul class="d-inline-flex secondary-style-nav p-0">
-            <li
-              @click="navButton = 'all'"
-              :class="{ active: navButton == 'all' }"
-              class="py-1 text-center"
-            >
-              <h4 class="fw-bold text-secondary mb-0">All</h4>
-            </li>
-            <li
-              @click="navButton = 'on progress'"
-              :class="{ active: navButton == 'on progress' }"
-              class="py-1 text-center"
-            >
-              <h4 class="fw-bold text-secondary mb-0">On progress</h4>
-            </li>
-            <li
-              @click="navButton = 'finished'"
-              :class="{ active: navButton == 'finished' }"
-              class="py-1 text-center"
-            >
-              <h4 class="fw-bold text-secondary mb-0">Finished</h4>
-            </li>
-          </ul>
+        <!-- NAV-BUTTON START-->
+        <nav-buttons :nav-options="navOptions" @nav-select="navSelect"/>
+         <!-- NAV-BUTTON END-->
       </div>
     </div>
-    <div class="my-courses-list">
-      <div class="container-xxl">
-        <div class="row g-4 justify-content-center">
-          <div
-            v-for="(course, index) in courses"
-            :key="index"
-            class="col-lg-3 col-md-6 wow fadeInUp"
-            data-wow-delay="0.1s"
-          >
-            <router-link class="d-block" :to="`/courses/${course.id}/learning`">
-              <div class="course-item bg-light">
-                <div class="position-relative overflow-hidden">
-                  <img class="img-fluid" :src="course.cover.file_url" alt="" />
-                </div>
-                <div class="text-start p-2 pb-0">
-                  <div class="course-title">
-                    <h6 class="mb-2 fw-bold text-primary">
-                      {{ course.name }}
-                    </h6>
-                  </div>
-                  <div>
-                    <p class="text-primary">{{ course.description }}</p>
-                  </div>
-                </div>
-                <div class="px-2">
-                  <div class="progress mb-2">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 25%"
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                  <span class="text-primary progress-text">18% completed</span>
-                </div>
-              </div>
-            </router-link>
+    <div class="my-courses-list m-auto">
+          <div class="row mt-4">
+            <courses-item v-for="course in courses" :key="course.id" :course="course" />
           </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
   <script>
-export default {
+  import NavButtons from "@/components/general/my_courses/childs/NavButtonsPrimary.vue"
+  import CoursesItem from "@/components/general/my_courses/childs/CoursesItem.vue"
+  export default {
+  components: { NavButtons,CoursesItem },
   data() {
     return {
       courses: [
@@ -913,8 +857,15 @@ export default {
           ],
         },
       ],
+      navOptions:["All courses","Progressing","Finished"]
     };
   },
+  methods:{
+    // NAV-BUTTON-PRIMARY
+    navSelect(index){
+      console.log(index)
+    }
+  }
 };
 </script>
   <style lang="scss">
@@ -923,20 +874,5 @@ export default {
 }
 .my-courses-list {
   width: 1200px;
-  margin: auto;
-  .course-title {
-    min-height: 50px;
-  }
-  .progress {
-    background-color: #ddd;
-    height: 3px;
-  }
-  .progress-bar {
-    background-color: var(--primary);
-  }
-  .progress-text {
-    font-size: 14px;
-    opacity: 0.9;
-  }
 }
 </style>

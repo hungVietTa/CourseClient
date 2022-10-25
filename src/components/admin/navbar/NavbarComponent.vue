@@ -53,6 +53,13 @@
             ><i> <font-awesome-icon icon="fa-solid fa-calendar" /></i>
             Schedules</router-link
           >
+          <router-link :class="{active:$route.path.includes('categories')}"
+            to="/admin/categories"
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            ><i> <font-awesome-icon icon="fa-solid fa-calendar" /></i>
+            Categories</router-link
+          >
           <router-link to="/admin/courses" class="nav-item nav-link" :class="{active:$route.path.includes('courses')}"
             ><i> <font-awesome-icon icon="fa-solid fa-person-chalkboard" /></i>
             Courses</router-link

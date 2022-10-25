@@ -300,21 +300,6 @@ a {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
 }
-// NAVBAR 
-// secondary navbar
-.secondary-style-nav li {
-  cursor: pointer;
-}
-.secondary-style-nav li:hover h4 {
-  color: #333 !important;
-}
-.secondary-style-nav li.active {
-  border-bottom: 2px solid #666;
-  color: #333 !important;
-}
-.secondary-style-nav li.active h4 {
-  color: #333 !important;
-}
 // container 
 .w-1300 {
   width: 1300px;

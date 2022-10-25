@@ -45,8 +45,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue')
       },
       {
-        path: 'course',
-        alias:'course/:id',
+        path: 'course/:id',
         name: 'home.course.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/course/_id.vue')
       },
@@ -106,11 +105,6 @@ const routes = [
         path: 'users',
         name: 'admin.users',
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/users/index.vue'),
-      },
-      {
-        path: 'users/:id',
-        name: 'admin.users.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/users/_id.vue'),
       },
       {
         path: 'categories',

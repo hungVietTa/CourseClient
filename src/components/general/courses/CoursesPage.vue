@@ -1,20 +1,5 @@
 <template>
   <div >
-    <!-- CATEGORIES START -->
-    <nav class="categories-bar mb-5" v-if="categories">
-      <ul class="d-flex align-items-center px-5 bg-primary border-primary-blur">
-        <li
-          class="me-5 py-1"
-          v-for="(category, index) in categories"
-          :key="index"
-        >
-          <router-link class="text-white" :to='"/courses/"+category.split(" ").join("-").toLowerCase()' :key="category">
-            {{ category }}
-          </router-link>
-        </li>
-      </ul>
-    </nav>
-    <!-- CATEGORIES END -->
 
     <!-- COURES POOL -->
     <div class="courses-pool px-3 w-1300 m-auto ">
@@ -346,10 +331,8 @@ import coursesAPI from "@/api/admin/courses/index";
 export default {
   data() {
     return {
-      // CATEGORY
-      // data
+      // CaTEGORIES
       categories: false,
-
       // COURSES - POPULAR-TRENDING-NEW
       // nav button
       navButton: 'Most popular',
@@ -376,18 +359,14 @@ export default {
     };
   },
   methods: {
-    // CATEGORY
-    async getCategories() {
-      await this.getCourses();
-    },
     // GET COURSES POPULAR TRENDING NEW
     async getCourses() {
+      this.categories =await API.getCategories()
       this.coursesSlides.push(await coursesAPI.getCourses(4,1).then(res=>{
         this.totalPage = res.meta.pages
         return res.courses
       }));
       this.coursesSlides.push(await coursesAPI.getCourses(4,2).then(res=>res.courses));
-      console.log(this.coursesSlides)
     },
     // carousel
     async play(direction) {
@@ -415,7 +394,7 @@ export default {
   mounted() {
     console.log(this.$refs.carousel);
   },
-};
+}
 </script>
 <style lang="scss">
 @import "@/assets/styles/general/course_item.scss";
