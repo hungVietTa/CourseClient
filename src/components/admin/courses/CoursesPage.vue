@@ -48,14 +48,13 @@
 </template>
 <script>
 // COMPONENT
-import NewForm from "@/components/admin/courses/childs/NewForm.vue"
-import CoursesList from "@/components/admin/courses/childs/CoursesList.vue"
+import NewForm from "@/components/admin/courses/courses_page_childs/NewForm.vue"
+import CoursesList from "@/components/admin/courses/courses_page_childs/CoursesList.vue"
 import ModalComponent from "@/components/others/ModalComponent.vue"
 import SearchForm from "@/components/others/SearchForm.vue"
 // JS
 import { mapActions } from 'vuex'
 import API from "@/api/admin/courses/index";
-import timeString from '@/mixin/timeString';
 
 export default {
   data() {
