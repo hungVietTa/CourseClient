@@ -126,7 +126,7 @@
             </button>
             <ul class="dropdown-menu" v-if="userToggle">
               <li class="text-center">
-                <strong>Hi, {{ $store.state.username }}</strong>
+                <strong>Hi, {{ username }}</strong>
               </li>
               <li>
                 <router-link class="dropdown-item" to="/user"
@@ -190,6 +190,7 @@ export default {
   },
   computed:{
     ...mapState('authen', {
+    username:state=>state.username,
     isUserLogin: state => state.isUserLogin,
   }),
   },

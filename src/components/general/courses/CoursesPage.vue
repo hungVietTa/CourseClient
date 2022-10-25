@@ -391,6 +391,7 @@ export default {
         return res.courses
       }));
       this.coursesSlides.push(await coursesAPI.getCourses(4,2).then(res=>res.courses));
+      console.log(this.coursesSlides)
     },
     // carousel
     async play(direction) {

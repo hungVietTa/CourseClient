@@ -45,9 +45,15 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue')
       },
       {
-        path: 'courses/:id/learning',
-        name: 'home.courses.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/_id.vue')
+        path: 'course',
+        alias:'course/:id',
+        name: 'home.course.id',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/course/_id.vue')
+      },
+      {
+        path: 'course/:id/learning',
+        name: 'home.course.learning',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/course/learning/index.vue')
       },
       {
         path: 'quizzes',
@@ -58,6 +64,12 @@ const routes = [
         path: 'quizzes/:id',
         name: 'home.quizzes.id',
         component: () => import(/* webpackChunkName: "about" */ '@/views/general/quizzes/_id.vue')
+      },
+      // MY COURSES
+      {
+        path: 'my-courses',
+        name: 'home.mycourses',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/my_courses/index.vue')
       }
     ]
   },
@@ -174,11 +186,6 @@ const routes = [
         path: 'user.courses',
         name: 'user.courses',
         component: () => import(/* webpackChunkName: "about" */ '@/views/user/courses/index.vue'),
-      },
-      {
-        path: 'courses/:id',
-        name: 'user.courses.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/user/courses/_id.vue'),
       },
       {
         path: 'timetable',

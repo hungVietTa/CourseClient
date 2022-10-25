@@ -49,6 +49,7 @@
                     solutions.length,
                   correct: key == solutions[index],
                 }"
+                class="cursor-pointer py-1"
               >
                 <input
                   type="radio"
@@ -56,7 +57,7 @@
                   :name="item.id"
                   v-model="item.choice"
                 />
-                {{ value }}</label
+                <span class="ms-2">{{ value }}</span></label
               >
             </div>
             <p v-show="reviewing">
@@ -96,14 +97,13 @@
           You are finished with score {{ score }}/{{ 10 * list.length }}
           {{ processing }}
         </h2>
-        <button class="btn btn-primary" @click="showResult">Show result</button>
+        <button class="btn btn-primary mb-4" @click="showResult">Show result</button>
         <div v-if="pass">
           <p>Congratulation !</p>
           <button>Explore next lesson</button>
         </div>
         <div v-if="!pass">
-          <p>We was so sorry but ...</p>
-          <button class="btn btn-primary" @click="tryAgain">Try again</button>
+          <button class="btn btn-secondary" @click="tryAgain">Try again</button>
         </div>
       </div>
     </main>
@@ -238,6 +238,7 @@ export default {
 ul {
   list-style: none;
   padding: 0;
+  box-shadow: none;
 }
 li {
   text-align: left;
