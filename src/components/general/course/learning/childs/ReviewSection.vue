@@ -136,23 +136,8 @@
       <div class="d-flex align-items-center">
         <div class="col-2 text-center">
           <h1 class="fw-bold">{{ stats.average }}</h1>
-          <span class="text-star ps-1">
-            <i
-              v-for="index in 5"
-              :key="index"
-              class="pe-1 cursor-pointer star-icon"
-            >
-              <!-- select the star icon according to the rating number -->
-              <font-awesome-icon
-                :icon="
-                  stats.average - index > 0
-                    ? 'fa-solid fa-star'
-                    : stats.average - index > -1
-                    ? 'fa-solid fa-star-half-stroke'
-                    : 'fa-regular fa-star'
-                "
-              />
-            </i>
+          <span class="ps-1">
+            <RatingStars :score="5" />
           </span>
         </div>
         <div class="col-10">
@@ -171,20 +156,7 @@
             </div>
             <div class="col-3 text-star">
               <span class="ms-4">
-                <i
-                  v-for="index in 5"
-                  :key="index"
-                  class="pe-1 cursor-pointer star-icon"
-                >
-                  <!-- select the star icon according to the rating number -->
-                  <font-awesome-icon
-                    :icon="
-                      6 - row >= index
-                        ? 'fa-solid fa-star'
-                        : 'fa-regular fa-star'
-                    "
-                  />
-                </i>
+                <RatingStars :score="5" />
               </span>
             </div>
             <div class="col-1">
@@ -231,6 +203,7 @@
 </template>
 <script>
 import API from "@/api/general/courses/index";
+import RatingStars from "@/components/others/RatingStars.vue";
 
 export default {
   data() {
@@ -298,6 +271,9 @@ export default {
     course_id() {
       return this.$route.params.id;
     },
+  },
+  components:{
+    RatingStars
   },
   created() {
     this.getReviews();

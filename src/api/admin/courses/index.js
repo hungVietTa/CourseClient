@@ -1,6 +1,15 @@
 import axios from "axios";
 
 export default {
+    // SEARCH COURSES
+    async searchCourses(limit,page,data) {
+        return await axios
+            .get(`api/v1/admin/courses/search?limit=${limit}&page=${page}`,{
+                params:data
+            })
+            .then(res => res.data)
+            .catch((res) => console.log(res));
+    },
     // GET COURSES LIST
     async getCourses(limit,page) {
         return await axios
