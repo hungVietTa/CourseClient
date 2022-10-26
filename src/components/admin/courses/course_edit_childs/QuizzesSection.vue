@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <div class="table-wrapper pt-3 border-top" v-if="false">
+  <div v-if="quizzesData">
+    <div class="table-wrapper pt-3 border-top" >
       <h4 class="fw-bold text-start mb-4">
         QUIZS ({{ quizzesData.meta.total }})
       </h4>
       <div class="text-start mb-4">
-        <button class="btn btn-primary" @click="quizNewFormShow = true">
+        <button class="btn btn-primary" @click="newForm = true">
           Add new quiz
         </button>
       </div>
@@ -22,10 +22,8 @@
           </thead>
           <tbody>
             <tr
-              @keydown.prevent="keyPos($event, index)"
               v-for="(quiz, index) in quizzesData.quizzes"
               :key="index"
-              tabindex="0"
             >
               <td>{{ quiz.id }}</td>
               <td>{{ quiz.name }}</td>
@@ -42,7 +40,7 @@
                 <button
                   class="btn btn-danger"
                   @click="
-                    modalQuizDelete = true;
+                    deleteWarning = true;
                     currentQuiz = quiz;
                   "
                 >
@@ -66,8 +64,8 @@
       </div>
       <!-- PAGINATION END -->
 
-      <!-- ADD QUIZS FORM -->
-      <div class="overlay" v-if="quizNewFormShow">
+      <!-- NEW FORM -->
+      <div class="overlay" v-if="newForm">
         <div class="form-popup">
           <h3 class="fw-bold">Add new quiz</h3>
           <form @submit.prevent="createQuiz()">
@@ -93,7 +91,7 @@
               <button class="btn btn-primary me-2" type="submit">Add</button>
               <button
                 class="btn btn-secondary"
-                @click="quizNewFormShow = false"
+                @click="newForm = false"
               >
                 Cancel
               </button>
@@ -106,11 +104,77 @@
 
     <!-- MODAL QUIZ DELETE-->
     <ModalComponent
-      v-if="modalQuizDelete"
-      @cancel="modalQuizDelete = false"
+      v-if="deleteWarning"
+      @cancel="deleteWarning = false"
       @process="deleteQuiz()"
     />
   </div>
 </template>
 <script>
+import quizzesAPI from "@/api/admin/quizzes/index";
+import { mapActions } from "vuex";
+import ModalComponent from "@/components/others/ModalComponent.vue";
+import formHandling from "@/mixin/formHandling";
+
+export default {
+  data(){
+    return {
+      // QUIZ
+      // quizzes
+      quizzesData: false,
+      currentQuiz: false,
+      // pagination quiz
+      currentQuizPage: 1,
+      quizzesCount: false,
+      // FORM AND WARNING
+      newForm:false,
+      deleteWarning:false,
+      newQuiz: {
+        name: "",
+        description: "",
+        lesson_id: "",
+        time: "",
+      },
+    }
+  },
+  props:["courseId"],
+  methods:{
+    // STORE
+    ...mapActions("alert", ["showSuccess","showFailure"]),
+    // QUIZ
+  async getQuizzes(page) {
+      this.quizzesData = await quizzesAPI.getQuizzes(this.courseId, page);
+      this.currentQuizPage = page;
+      this.quizzesCount = this.quizzesData.quizzes.length;
+    },
+    async createQuiz() {
+      let res = await quizzesAPI.createQuiz(this.courseId, this.newQuiz);
+      if (!res.status)
+          this.showFailure();
+      else 
+          this.showSuccess();
+      this.clearForm(this.newQuiz)
+      this.newForm = false
+      this.getQuizzes(1);
+    },
+    async deleteQuiz() {
+      await quizzesAPI.deleteQuiz(this.courseId, this.currentQuiz.id);
+      this.showSuccess();
+      if (this.quizzesCount == 1 && this.currentQuizPage !=1)
+        this.getQuizzes(this.currentQuizPage - 1);
+      else this.getQuizzes(this.currentQuizPage);
+    },
+    // clickPagin
+    quizPaging(page) {
+      this.getQuizzes(page);
+    },
+  },
+  mixins:[formHandling],
+  components:{
+    ModalComponent
+  },
+  created(){
+    this.getQuizzes(1)
+  }
+}
 </script>

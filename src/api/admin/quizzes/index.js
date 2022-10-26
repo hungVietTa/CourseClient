@@ -10,10 +10,10 @@ export default {
   },
   // CREATE NEW QUIZ
   async createQuiz(course_id,data){
-    await axios
+    return await axios
       .post(`api/v1/admin/courses/${course_id}/quizzes`,data)
-      .then(()=>false)
-      .catch((res) => console.log(res));
+      .then(res => res)
+      .catch(error => error.response.data.message);
   },
    // SHOW QUIZ
    async showQuiz(course_id,id) {

@@ -1,18 +1,4 @@
 {
-  "billboards": [
-    {
-      "name": "Best Online Courses",
-      "title": "The Best Online Learning Platform",
-      "description": "Learners around the world are launching new careers, advancing in their fields, and enriching their lives.",
-      "img": "https://technext.github.io/elearning/img/carousel-1.jpg"
-    },
-    {
-      "name": "Best Online Courses 2",
-      "title": "The Best Online Learning Platform 2",
-      "description": "Learners around the world are launching new careers, advancing in their fields, and enriching their lives.",
-      "img": "https://technext.github.io/elearning/img/carousel-2.jpg"
-    }
-  ],
   "lessons": [
     {
       "id": 1,

@@ -10,7 +10,8 @@
         Loading...
       </button>
     </div> -->
-    <SuccessAlert/>
+    <FailureAlert />
+    <SuccessAlert />
     <main>
       <router-view />
     </main>
@@ -18,10 +19,12 @@
 </template>
 <script>
 import SuccessAlert from "@/components/others/SuccessAlert.vue"
+import FailureAlert from "@/components/others/FailureAlert.vue"
 
   export default {
     components:{
-      SuccessAlert
+      SuccessAlert,
+      FailureAlert
     }
   }
 </script>

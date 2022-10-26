@@ -6,9 +6,8 @@
             <!-- <th><input type="checkbox" /></th> -->
             <th class="text-nowrap" role="button" >ID  <span class="ms-2"><font-awesome-icon icon="fa-solid fa-sort" /></span></th>
             <th>Name <span></span></th>
+            <th>Category</th>
             <th>Lessons</th>
-            <th>Date Created <span></span></th>
-            <th>Date Updated <span></span></th>
             <th colspan="2">Action</th>
           </tr>
         </thead>
@@ -17,9 +16,8 @@
             <!-- <td><input type="checkbox" /></td> -->
             <td>{{ course.id }}</td>
             <td>{{ course.name }} </td>
+            <td>{{course.category}}</td>
             <td>{{course.lessons.length}}</td>
-            <td>{{ course.created_at.split("T")[0] }} </td>
-            <td>{{ course.updated_at.split("T")[0] }} </td>
             <td>
               <router-link
                 class="btn btn-primary"

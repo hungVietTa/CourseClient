@@ -1,28 +1,28 @@
 import axios from "axios";
 
 export default {
-    // GET CATEGORY LIST
-    async getCategories(page) {
+    // GET BILLBOARD LIST
+    async getBillboards(page) {
         return await axios
-            .get(`api/v1/admin/categories?limit=7&page=${page}`)
+            .get(`api/v1/admin/billboards?limit=7&page=${page}`)
             .then(res => res.data)
             .catch((res) => console.log(res));
     },
-    async createCategory(data) {
+    async createBillboard(data) {
         await axios
-            .post(`api/v1/admin/categories`,data)
+            .post(`api/v1/admin/billboards`,data)
             .then(res => res.data)
             .catch((res) => console.log(res));
     },
-    async updateCategory(data) {
+    async updateBillboard(data) {
         await axios
-            .put(`api/v1/admin/categories/${data.id}`,data)
+            .put(`api/v1/admin/billboards/${data.id}`,data)
             .then(res => res.data)
             .catch((res) => console.log(res));
     },
-    async deleteCategory(id) {
+    async deleteBillboard(id) {
         await axios
-            .delete(`api/v1/admin/categories/${id}`)
+            .delete(`api/v1/admin/billboards/${id}`)
             .then(res => res.data)
             .catch((res) => console.log(res));
     },

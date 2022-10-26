@@ -1,160 +1,87 @@
 <template>
-  <div>
-    <!-- MAIN CONTENT -->
-    <main class="mt-4">
-      <div
-        class="
-          text-start
-          mb-3
-          d-flex
-          justify-content-between
-          align-items-center
-        "
-      >
-        <h4 class="fw-bold">Categories Management</h4>
-        <search-form @searching="search(value)" />
-        <div>
-          <button
-            class="btn btn-primary me-2"
-            @click="
-              newFormShow = true;
-              action = 'Add';
-            "
-          >
-            Add new category
-          </button>
-          <button class="btn btn-danger">Delete</button>
-        </div>
+  <div class="mt-4" v-if="data">
+    <div
+      class="text-start mb-3 d-flex justify-content-between align-items-center"
+    >
+      <h4 class="fw-bold">Categories Management</h4>
+      <search-form @searching="search(value)" />
+      <div>
+        <button
+          class="btn btn-primary me-2"
+          @click="
+            newForm = true;
+            action = 'Add';
+          "
+        >
+          Add new category
+        </button>
+        <button class="btn btn-danger">Delete</button>
       </div>
-      <!-- USER LIST START-->
-      <div class="table-wrapper" v-if="data">
-        <table class="table">
-          <thead>
-            <tr>
-              <!-- <th><input type="checkbox" /></th> -->
-              <th class="text-nowrap" role="button">
-                ID
-                <span class="ms-2"
-                  ><font-awesome-icon icon="fa-solid fa-sort"
-                /></span>
-              </th>
-              <th>Name</th>
+    </div>
+    <!-- CATEGORY LIST START-->
+    <CategoriesList
+      @showCategory="showCategory"
+      @requestUpdateCategory="requestUpdateCategory"
+      @requestDeleteCategory="requestDeleteCategory"
+      :categories="data.categories"
+    />
+    <!-- CATEGORY LIST END-->
 
-              <th colspan="2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(category, index) in categories"
-              :key="index"
-              @click="
-                cardShow = true;
-                currentCategory = category;
-              "
-            >
-              <!-- <td><input type="checkbox" /></td> -->
-              <td>{{ category.id }}</td>
-              <td>{{ category.name }}</td>
-              <td>
-                <button
-                  @click.stop="
-                    updateFormShow = true;
-                    currentCategory = category;
-                  "
-                  class="btn btn-primary"
-                >
-                  Edit
-                </button>
-              </td>
-              <td>
-                <button
-                  @click.stop="
-                    modalShow = true;
-                    currentCategory = category;
-                  "
-                  class="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- USER LIST END-->
+    <!-- PAGINATION START -->
+    <div class="vue-pagination mb-4" v-if="data && data.meta.pages > 1">
+      <paginate
+        v-model="currentPage"
+        :pageCount="data.meta.pages"
+        :click-handler="categoryPaging"
+      />
+    </div>
+    <!-- PAGINATION END -->
 
-      <!-- OVERLAY START-->
-      <div class="overlay" v-if="newFormShow || updateFormShow || cardShow">
-        <!--  USER CARD START-->
-        <div class="form-popup" v-if="cardShow">
-          <h3 class="fw-bold">Category #{{ currentCategory.id }}</h3>
-          <form class="Course-form">
-            <label class="w-100">Name:</label>
-            <input
-              class="w-100 mb-3 border-0"
-              type="text"
-              v-model="currentCategory.name"
-              disabled
-            />
-            <div class="text-end">
-              <button class="btn btn-secondary" @click="cardShow = false">
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-        <!-- NEW CARD END-->
+    <!-- OVERLAY START-->
+    <div class="overlay" v-if="showForm || updateForm || newForm">
+      <!-- SHOW CATEGORY  START-->
+      <ShowForm
+        @cancel="showForm = false"
+        :category="currentCategory"
+        v-if="showForm"
+      />
+      <!-- SHOW CATEGORY END-->
 
-        <!-- NEW USER FORM START-->
-        <div class="form-popup" v-if="newFormShow">
-          <h3 class="fw-bold">Add new category</h3>
-          <form class="Course-form" @submit.prevent="createCategory(newCategory)">
-            <label class="w-100">Name:</label>
-            <input class="w-100 mb-3" type="text" v-model="newCategory.name" />
-            <div class="text-end">
-              <button class="btn btn-primary me-2" type="submit">Add</button>
-              <button class="btn btn-secondary" @click="newFormShow = false">
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-        <!-- NEW USER FORM END-->
+      <!-- NEW CATEGORY FORM START-->
+      <NewForm
+        @createCategory="createCategory"
+        @cancel="newForm = false"
+        v-if="newForm"
+      />
+      <!-- NEW CATEGORY FORM END-->
 
-        <!-- UPDATE USER FORM START-->
-        <div class="form-popup" v-if="updateFormShow">
-          <h3 class="fw-bold">Update category #{{ currentCategory.id }}</h3>
-          <form class="Course-form" @submit.prevent="updateCategory(currentCategory)">
-            <label class="w-100">Name:</label>
-            <input class="w-100 mb-3" type="text" v-model="currentCategory.name" />
-            <div class="text-end">
-              <button class="btn btn-primary me-2" type="submit">Update</button>
-              <button class="btn btn-secondary" @click="updateFormShow = false">
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-        <!-- UPDATE USER FORM END-->
-      </div>
-      <!-- OVERLAY END-->
+      <!-- UPDATE CATEGORY FORM START-->
+      <UpdateForm
+        @updateCategory="updateCategory"
+        @cancel="updateForm = false"
+        :currentCategory="currentCategory"
+        v-show="updateForm"
+      />
+      <!-- UPDATE CATEGORY FORM END-->
+    </div>
+    <!-- OVERLAY END-->
 
-      <!-- PAGINATION START -->
-      <div class="vue-pagination mb-4" v-if="data&&meta.pages>1">
-        <paginate v-model="currentPage" :pageCount="meta.pages" :click-handler="categoryPaging"/>
-      </div>
-      <!-- PAGINATION END -->
-    </main>
-    <!-- MODAL DELETE-->
+    <!-- DELETE WARNING -->
     <ModalComponent
-      v-if="modalShow"
-      @cancel="modalShow = false"
+      v-if="deleteWarning"
+      @cancel="deleteWarning = false"
       @process="deleteCategory(currentCategory.id)"
     />
-    <!-- MODAL DELETE-->
+    <!-- DELETE WARNING -->
   </div>
 </template>
   <script>
+// COMPONENT
+import CategoriesList from "@/components/admin/categories/childs/CategoriesList.vue";
+import NewForm from "@/components/admin/categories/childs/NewForm.vue";
+import ShowForm from "@/components/admin/categories/childs/ShowForm.vue";
+import UpdateForm from "@/components/admin/categories/childs/UpdateForm.vue";
+// JS
 import ModalComponent from "@/components/others/ModalComponent.vue";
 import SearchForm from "@/components/others/SearchForm.vue";
 import API from "@/api/admin/categories/index";
@@ -165,34 +92,17 @@ export default {
   data() {
     return {
       // DATA
-      limit:5,
-      data: {},
-      meta: {},
-      categories: false,
-      // modal
-      modalShow: false,
-      // pagination
+      data:false,
+      currentCategory: false,
+      // PAGING
       currentPage: 1,
       categoriesCount: false,
       remainsCount: false,
-      // courses list
-      currentCategory: false,
-      currentId: 0,
-      // show category
-      category: false,
-      // new category
-      newCategory: {
-        name: "",
-        email: "",
-        date_of_birth: "",
-        password: "",
-      },
-      //  category card
-      cardShow: false,
-      // new form
-      newFormShow: false,
-      // update form
-      updateFormShow: false,
+      // FORM
+      newForm:false,
+      showForm: false,
+      updateForm: false,
+      deleteWarning: false,
     };
   },
   methods: {
@@ -201,18 +111,17 @@ export default {
     // API CALL
     // get category list
     async getCategories(page) {
-      this.data = await API.getCategories(this.limit,page);
+      this.data = await API.getCategories(page);
       this.categories = this.data.categories;
       this.meta = this.data.meta;
       this.currentPage = page;
       this.categoriesCount = this.categories.length;
-      console.log(this.categories)
+      console.log(this.data);
     },
     // create category
     async createCategory(data) {
       await API.createCategory(data);
-      this.clearForm(this.newCategory);
-      this.newFormShow = false;
+      this.newForm = false;
       this.showSuccess();
       this.getCategories(1);
     },
@@ -221,6 +130,7 @@ export default {
       await API.updateCategory(data);
       this.updateFormShow = false;
       this.showSuccess();
+      this.updateForm = false
       this.getCategories(this.currentPage);
     },
     // delete category
@@ -231,23 +141,37 @@ export default {
       else this.getCategories(this.currentPage);
     },
     // clickPagin
-    categoryPaging(page){
-      this.getCategories(page)
+    categoryPaging(page) {
+      this.getCategories(page);
     },
     search(value) {
       console.log(value);
     },
+     // FORM POPUP
+     showCategory(category) {
+      this.currentCategory = category;
+      this.showForm = true;
+    },
+    requestUpdateCategory(category) {
+      this.currentCategory = category;
+      this.updateForm = true;
+    },
+    requestDeleteCategory(category) {
+      this.currentCategory = category;
+      this.deleteWarning = true;
+    }
   },
   components: {
     ModalComponent,
     SearchForm,
+    CategoriesList,
+    ShowForm,
+    NewForm,
+    UpdateForm
   },
   mixins: [formHandling],
   created() {
     this.getCategories(1);
-  },
-  mounted() {
-
-  },
+  }
 };
 </script>

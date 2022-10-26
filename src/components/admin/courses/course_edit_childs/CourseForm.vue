@@ -29,12 +29,12 @@
               <div class="col-6">
                 <label
                   ><span>Category: </span><br />
-                  <select v-model="course.category" class="px-1 py-1 border-radius-6">
+                  <select v-model="course.category_id" class="px-1 py-1 border-radius-6">
                     <option selected="true" disabled="disabled" hidden></option>
                     <option
                       v-for="category in categories"
                       :key="category.id"
-                    :value="category.name"> 
+                    :value="category.id"> 
                       {{ category.name }}
                     </option>
                   </select>
@@ -122,13 +122,12 @@ export default {
     // COURSE
     async getCourse() {
       this.course = await coursesAPI.showCourse(this.courseId);
-      console.log(this.course);
     },
     async updateCourse() {
       let formData = new FormData();
       formData.append("name", this.course.name);
       formData.append("description", this.course.description);
-      formData.append("category", this.course.category);
+      formData.append("category_id", this.course.category_id);
       formData.append("is_publish", this.course.is_publish);
       if (this.$refs.imgInput.files[0])
         formData.append("cover_file", this.$refs.imgInput.files[0]);
@@ -144,7 +143,7 @@ export default {
 
     // CATEGORIES
     async getCategories(page) {
-       let tmp = await categoriesAPI.getCategories(5, page)
+       let tmp = await categoriesAPI.getCategories(page)
        this.categories = tmp.categories
     }
   },

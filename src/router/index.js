@@ -117,11 +117,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/billboards/index.vue'),
       },
       {
-        path: 'billboards/:id',
-        name: 'admin.billboards.id',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/admin/billboards/_id.vue'),
-      },
-      {
         path: 'schedules',
         name: 'admin.schedules',
         component: () => import(/* webpackChunkName: "about" */ '@/views/admin/schedules/index.vue'),

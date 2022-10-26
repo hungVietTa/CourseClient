@@ -154,9 +154,6 @@ export default {
   },
   created() {
     this.getUsers(1);
-  },
-  mounted() {
-    this.load = true;
-  },
+  }
 };
 </script>

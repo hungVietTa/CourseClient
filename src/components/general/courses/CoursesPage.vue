@@ -1,8 +1,11 @@
 <template>
-  <div >
+  <div v-if="categoriesData">
+    <!-- CATEGORIES START -->
+    <CatergoriesBar :categories="categoriesData.categories"/>
+     <!-- CATEGORIES END -->
 
     <!-- COURES POOL -->
-    <div class="courses-pool px-3 w-1300 m-auto ">
+    <div v-if="false" class="courses-pool px-3 w-1300 m-auto ">
       <!-- heading start-->
       <div>
         <h3 class="fw-bold mb-5">{{ categories[0] }}</h3>
@@ -325,14 +328,15 @@
   </div>
 </template>
 <script>
-import API from "@/api/general/courses/index";
+import CatergoriesBar from "@/components/general/courses/childs/CategoriesBar.vue"
+import categoriesAPI from "@/api/admin/categories/index"
 import coursesAPI from "@/api/admin/courses/index";
 
 export default {
   data() {
     return {
       // CaTEGORIES
-      categories: false,
+      categoriesData:false,
       // COURSES - POPULAR-TRENDING-NEW
       // nav button
       navButton: 'Most popular',
@@ -359,9 +363,13 @@ export default {
     };
   },
   methods: {
+    async getCategories(){
+      this.categoriesData =await categoriesAPI.getCategories(1)
+      console.log(this.categoriesData)
+    },
     // GET COURSES POPULAR TRENDING NEW
     async getCourses() {
-      this.categories =await API.getCategories()
+      this.categories =await categoriesAPI.getCategories(1)
       this.coursesSlides.push(await coursesAPI.getCourses(4,1).then(res=>{
         this.totalPage = res.meta.pages
         return res.courses
@@ -379,7 +387,7 @@ export default {
         this.$refs.carousel.currentPage == this.coursesSlides.length - 1 &&
         this.slides != 4
       ) {
-        this.coursesSlides.push(await API.getCoursesList(++this.slides));
+        this.coursesSlides.push(await coursesAPI.getCoursesList(++this.slides));
       }
       console.log(this.data.pages.length);
     },
@@ -388,7 +396,10 @@ export default {
       this.axios.post(`api/v1/users/courses/${id}/subscribes`).then(res=>console.log(res.data))
     }
   },
-  created() {
+  components:{
+    CatergoriesBar
+  },
+  created(){
     this.getCategories();
   },
   mounted() {
