@@ -2,7 +2,7 @@
   <div class="mb-3 position-relative" v-show="coursesPages">
     <!-- HEADING -->
     <div class="heading">
-      <h3 class="fw-bold mb-5">{{category}}</h3>
+      <h3 class="fw-bold mb-5">{{ category }}</h3>
       <h5 class="fw-bold mb-3">Courses to get you started</h5>
     </div>
     <!-- HEADING -->
@@ -34,9 +34,12 @@
                       />
                     </div>
                     <div class="text-center">
-                      <div class="mb-2">
-                        <RatingStars :score="5" />
-                        <small class="ms-2">(1.064)</small>
+                      <div v-if="course.reviews" class="mb-2">
+                        <RatingStars :score="course.rating" />
+                        <small class="ms-2">({{ course.reviews }})</small>
+                      </div>
+                      <div v-if="!course.reviews" class="mb-2 text-primary">
+                        <span>No review</span>
                       </div>
                       <div class="course-title">
                         <h6 class="mb-2 fw-bold text-primary px-1">
@@ -51,11 +54,11 @@
                       >
                       <small class="flex-fill text-center border-end py-2"
                         ><font-awesome-icon icon="fa-solid fa-clock" />&nbsp;
-                        {{secondsToHours(course.duration)}} Hrs</small
+                        {{ secondsToHours(course.duration) }} Hrs</small
                       >
                       <small class="flex-fill text-center py-2"
                         ><font-awesome-icon icon="fa-solid fa-user" />&nbsp;
-                       {{course.subscribes}} Students</small
+                        {{ course.subscribes }} Students</small
                       >
                     </div>
                   </div>
@@ -93,7 +96,7 @@
 <script>
 import SmallNavbar from "@/components/general/courses/childs/childs/SmallNavbar.vue";
 import RatingStars from "@/components/others/RatingStars.vue";
-import coursesAPI from "@/api/admin/courses/index";
+import coursesAPI from "@/api/users/courses/index";
 import timeString from "@/mixin/timeString";
 
 export default {
@@ -106,14 +109,14 @@ export default {
       currentPage: 0,
       // DATA
       criteria: false,
-      category:false
+      category: false,
     };
   },
   computed: {
     searchObject() {
       return {
         category: this.$route.params.category,
-        criteria: this.criteria 
+        criteria: this.criteria,
       };
     },
   },
@@ -140,9 +143,10 @@ export default {
         this.page++,
         this.searchObject
       );
-      this.category = tmp.courses[0].category
+      this.category = tmp.courses[0].category;
       this.total = tmp.meta.pages;
       this.coursesPages.push(tmp.courses);
+      console.log(this.coursesPages);
     },
     // SELECT CRITERIA
     selectCriteria(criteria) {
@@ -155,25 +159,25 @@ export default {
     coursesPages(newValue) {
       let el = this;
       this.currentPage = newValue.length - 1;
-      this.$nextTick(function (){
+      this.$nextTick(function () {
         el.$refs.carousel.goToPage(el.currentPage);
       });
     },
-    "$route"(newValue) {
-      console.log(1)
+    $route(newValue) {
+      console.log(1);
       this.coursesPages = [];
       this.page = 1;
-      this.searchCourses()
+      this.searchCourses();
     },
   },
-  mixins:[timeString],
+  mixins: [timeString],
   components: {
     SmallNavbar,
-    RatingStars
+    RatingStars,
   },
-  mounted(){
+  mounted() {
     this.searchCourses();
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

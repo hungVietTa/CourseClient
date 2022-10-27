@@ -170,7 +170,7 @@
 </template>
 <script>
 import RatingStars from "@/components/others/RatingStars.vue";
-import coursesAPI from "@/api/admin/courses/index";
+import coursesAPI from "@/api/users/courses/index";
 
 export default {
   data() {

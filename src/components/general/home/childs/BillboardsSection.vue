@@ -73,7 +73,7 @@
 </template>
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import billboardsAPI from "@/api/admin/billboards/index";
+import billboardsAPI from "@/api/users/billboards/index";
 
 export default {
   data() {

@@ -13,6 +13,11 @@ export default {
     },
     secondsToHours(num){
       return (num/3600).toFixed(2)
+    },
+    primaryDate(str){
+      str = str.split("T")[0]
+      const [year, month, day] = str.split('-');
+      return [month, day, year].join('/')
     }
   }
 }

@@ -370,11 +370,11 @@ a {
 /* REVIEW STARS */
 .star-icon path {
   stroke-width: 30;
-  stroke: var(--star);
+  stroke: var(--primary);
 }
 .click-filled {
-  color: var(--star) !important;
+  color: var(--primary) !important;
 }
 .hover-filled {
-  color: var(--star) !important;
+  color: var(--primary) !important;
 }

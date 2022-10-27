@@ -21,7 +21,7 @@
 </template>
 <script>
 import stringCase from "@/mixin/stringCase";
-import categoriesAPI from "@/api/admin/categories/index";
+import categoriesAPI from "@/api/users/categories/index";
 
 export default {
   data() {

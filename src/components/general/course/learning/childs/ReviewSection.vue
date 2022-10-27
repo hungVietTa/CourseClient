@@ -1,5 +1,5 @@
 <template>
-  <section v-if="reviews">
+  <section v-if="reviewsData && course">
     <!-- NEW REVIEW START-->
     <div class="mb-3" v-if="!yourReview">
       <h5 class="fw-bold">Rate this course</h5>
@@ -7,11 +7,11 @@
         <i
           v-for="(e, index) in 5"
           :key="index"
-          :class="{ 'click-filled': index < newReview.rating }"
+          :class="{ 'click-filled': index < newReview.stars }"
           class="pe-1 cursor-pointer star-icon"
           @mouseover="hoverStar($event.currentTarget, index)"
           @mouseout="emptyStar($event.currentTarget)"
-          @click="newReview.rating = index + 1"
+          @click="newReview.stars = index + 1"
           ><font-awesome-icon icon="fa-solid fa-star" />
         </i>
       </h3>
@@ -44,11 +44,11 @@
         <i
           v-for="(e, index) in 5"
           :key="index"
-          :class="{ 'click-filled': index < yourReview.rating }"
+          :class="{ 'click-filled': index < yourReview.stars }"
           class="pe-1 cursor-pointer star-icon"
           @mouseover="hoverStar($event.currentTarget, index)"
           @mouseout="emptyStar($event.currentTarget)"
-          @click="yourReview.rating = index + 1"
+          @click="yourReview.stars = index + 1"
           ><font-awesome-icon icon="fa-solid fa-star" />
         </i>
       </h3>
@@ -63,10 +63,7 @@
           ></textarea>
         </div>
         <div class="text-center">
-          <button
-            class="btn btn-primary px-2 py-0 mx-1"
-            @click="updateReview(yourReview)"
-          >
+          <button class="btn btn-primary px-2 py-0 mx-1" @click="updateReview">
             UPDATE
           </button>
           <button
@@ -87,28 +84,19 @@
     <!-- YOUR REVIEW START-->
     <ul class="review-list" v-show="yourReviewShow" v-if="yourReview">
       <h5 class="fw-bold mb-0">Your review</h5>
-      <li
-        class="
-          text-start
-          d-flex
-          py-3
-          px-1
-          align-items-center
-          border-bottom-primary-blur
-        "
-      >
-        <div class="col-1">
-          <img :src="yourReview.avatar" alt="" />
+      <li class="text-start d-flex py-3 px-1 border-bottom-primary-blur">
+        <div class="col-1 mt-2">
+          <img :src="yourReview.user.image" alt="" />
         </div>
         <div class="col-11">
-          <h6 class="fw-bold mb-1">{{ yourReview.username }}</h6>
+          <h6 class="fw-bold mb-1">{{ yourReview.user.name }}</h6>
           <p class="mb-1">
             <span class="text-white me-2">
               <i
                 v-for="(e, index) in 5"
                 :key="index"
                 :class="{
-                  'click-filled': index <= yourReview.rating - 1,
+                  'click-filled': index <= yourReview.stars - 1,
                 }"
                 class="pe-1 cursor-pointer star-icon"
                 ><font-awesome-icon icon="fa-solid fa-star" />
@@ -130,24 +118,28 @@
     </ul>
     <!-- YOUR REVIEW END -->
     <!-- REVIEW STATISTIC START -->
-    <div v-if="stats" class="mb-3 border-bottom-primary-blur pb-4">
+    <div class="mb-3 border-bottom-primary-blur pb-4">
       <h5 class="fw-bold mb-3">Student feedback</h5>
 
       <div class="d-flex align-items-center">
         <div class="col-2 text-center">
-          <h1 class="fw-bold">{{ stats.average }}</h1>
+          <h1 class="fw-bold">{{ course.rating }}</h1>
           <span class="ps-1">
-            <RatingStars :score="5" />
+            <RatingStars :score="course.rating" />
           </span>
         </div>
         <div class="col-10">
-          <div v-for="row in 5" :key="row" class="row g-0 align-items-center">
+          <div
+            v-for="(item, index) in course.stats"
+            :key="index"
+            class="row g-0 align-items-center"
+          >
             <div class="col-8 ps-2">
               <div class="progress">
                 <div
                   class="progress-bar bg-primary"
-                  :style="{ width: stats.percent[row - 1] + '%' }"
                   role="progressbar"
+                  :style="{width:item+'%'}"
                   aria-valuenow="0"
                   aria-valuemin="0"
                   aria-valuemax="100"
@@ -156,13 +148,11 @@
             </div>
             <div class="col-3 text-star">
               <span class="ms-4">
-                <RatingStars :score="5" />
+                <RatingStars :score="5-index" />
               </span>
             </div>
             <div class="col-1">
-              <span class="text-secondary">
-                {{ stats.percent[row - 1] }}%
-              </span>
+              <span class="text-secondary"> {{item}}% </span>
             </div>
           </div>
         </div>
@@ -173,26 +163,25 @@
     <ul class="review-list">
       <h4 class="fw-bold">Others</h4>
       <li
-        v-for="(review, idx) in reviews"
+        v-for="(review, idx) in reviewsData.reviews"
         :key="idx"
         class="text-start d-flex py-3 px-1 align-items-center border-bottom"
       >
         <div class="col-1">
-          <img :src="review.avatar" alt="" />
+          <img :src="review.user.image" alt="" />
         </div>
         <div class="col-11">
-          <h6 class="fw-bold mb-1">{{ review.username }}</h6>
+          <h6 class="fw-bold mb-1">{{ review.user.name }}</h6>
           <p class="mb-1">
             <span class="text-white me-2">
               <i
                 v-for="(e, index) in 5"
                 :key="index"
-                :class="{ 'click-filled': index <= review.rating - 1 }"
+                :class="{ 'click-filled': index <= review.stars - 1 }"
                 class="pe-1 cursor-pointer star-icon"
                 ><font-awesome-icon icon="fa-solid fa-star" />
               </i>
             </span>
-            <span class="text-secondary">2 weeks ago</span>
           </p>
           <span>{{ review.content }}</span>
         </div>
@@ -209,12 +198,10 @@ export default {
   data() {
     return {
       // reviews
-      reviews: false,
-      // stats
-      stats: false,
+      reviewsData: false,
       // new review
       newReview: {
-        rating: -1,
+        stars: -1,
         content: "",
       },
       // your review
@@ -246,44 +233,40 @@ export default {
     },
     // CALL API
     async getReviews() {
-      this.reviews = await API.getReviews();
+      this.reviewsData = await API.getReviews(this.courseId);
+      console.log(this.reviews);
     },
     async getYourReview() {
-      this.yourReview = await API.getYourReview();
+      this.yourReview = await API.getYourReview(this.courseId);
       Object.assign(this.yourReviewBeforeEdit, this.yourReview);
     },
-    async getStats() {
-      this.stats = await API.getStats();
-    },
-    async postReview(data) {
-      await API.postReview(data);
+    async postReview(){
+      await API.postReview(this.newReview,this.courseId);
       this.getReviews();
       this.getYourReview();
     },
-    async updateReview(data) {
-      await API.updateReview(data, data.id);
+    async updateReview() {
+      await API.updateReview(this.yourReview, this.courseId);
       this.getReviews();
       this.getYourReview();
       this.yourReviewShow = true;
     },
   },
-  computed: {
-    course_id() {
-      return this.$route.params.id;
-    },
-  },
-  components:{
-    RatingStars
+  props: ["courseId", "course"],
+  components: {
+    RatingStars,
   },
   created() {
     this.getReviews();
     this.getYourReview();
-    this.getStats();
   },
 };
 </script>
 <style scoped>
 /* REVIEW */
+ul {
+  padding: 0;
+}
 .review-list li img {
   border-radius: 50%;
   width: 50px;

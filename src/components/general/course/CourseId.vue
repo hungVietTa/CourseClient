@@ -15,18 +15,21 @@
           <div class="d-flex flex-column justify-content-between h-100">
             <h3 class="fw-bold">{{course.name}}</h3>
             <h5 class="mb-5">{{course.description}}</h5>
-            <div class="mb-2">
-              <span>4.5</span>
-              <RatingStars class="ms-2" :score="5" />
-              <span class="ms-2">(1,149 ratings)</span><br>
-              <span>9,069 students</span>
+            <div v-if="course.reviews" class="mb-2">
+              <span>{{course.rating}}</span>
+              <RatingStars class="ms-2" :score="course.rating" />
+              <span class="ms-2">({{course.reviews}} ratings)</span><br>
+              <span>{{course.subscribes}} students</span>
             </div>
+            <div v-if="!course.reviews" class="mb-2 text-primary">
+                        <span>No review</span>
+                      </div>
             <div class="mb-2">
-              <span>Last updated 8/2019</span>
+              <span>Last updated {{primaryDate(course.updated_at)}}</span>
             </div>
             <div class="text-center">
-              <router-link v-if="!course.is_subscribed" :to="$route.path+'/learning'" class="btn w-100 btn-primary   text-white">Try it now</router-link>
-              <button v-if="course.is_subscribed" class="btn w-100 btn-primary   text-white">Continue</button>
+              <button @click="subscribe" v-if="!course.is_subscribed"  class="btn w-100 btn-primary   text-white">Try it now</button>
+              <router-link  v-if="course.is_subscribed" :to="$route.path+'/learning'" class="btn w-100 btn-primary  text-white">Continue</router-link>
             </div>  
           </div>
         </div>
@@ -37,6 +40,7 @@
 <script>
 import coursesAPI from "@/api/users/courses/index";
 import RatingStars from "@/components/others/RatingStars.vue";
+import timeString from "@/mixin/timeString";
 
 export default {
   data() {
@@ -54,7 +58,12 @@ export default {
       this.course = await coursesAPI.showCourse(this.course_id);
       console.log(this.course);
     },
+    async subscribe(){
+      await coursesAPI.subscribeCourse(this.course_id)
+      this.$router.push(this.$route.path+'/learning')
+    }
   },
+  mixins:[timeString],
   components:{
     RatingStars
   },

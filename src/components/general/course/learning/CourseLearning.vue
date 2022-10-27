@@ -28,7 +28,7 @@
           <!-- OVERVIEW SECTION -->
           <OverviewSection v-show="currentNavOptions=='Overview'"  :lesson="lessons[currentIndex]"/>
           <!-- REVIEW SECTION -->
-          <ReviewSection v-show="currentNavOptions=='Review'"/>
+          <ReviewSection :courseId="course_id" :course="course" v-show="currentNavOptions=='Review'"/>
         </div>
       </div>
       <!-- TRACK SECTION -->
@@ -43,7 +43,7 @@ import ReviewSection from "@/components/general/course/learning/childs/ReviewSec
 import OverviewSection from "@/components/general/course/learning/childs/OverviewSection.vue"
 import NavButtons from "@/components/general/course/learning/childs/NavButtons.vue"
 // JS
-import adminCourseAPI from "@/api/admin/courses/index";
+import adminCourseAPI from "@/api/users/courses/index";
 import lessonsAPI from "@/api/users/lessons/index";
 import youtubeId from "@/mixin/youtube_id";
 

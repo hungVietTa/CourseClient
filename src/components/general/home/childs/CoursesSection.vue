@@ -48,10 +48,14 @@
                 </div>
               </div>
               <div class="text-center p-4 pb-0">
-                <div class="mb-3">
-                  <RatingStars :score="5" />
+                <div v-if="course.reviews" class="mb-3">
+                  <RatingStars :score="course.rating" />
                   <br />
-                  <small>(123)</small>
+                  <small>({{course.reviews}})</small>
+                </div>
+                <div v-if="!course.reviews" class="mb-3 text-primary">
+                  <br>
+                  <h5>No review</h5>
                 </div>
                 <div class="course-title">
                   <h5 class="mb-4 text-666">
@@ -65,7 +69,7 @@
                   {{ course.description }}</small
                 >
                 <small class="flex-fill text-center border-end py-2"
-                  ><font-awesome-icon icon="fa-solid fa-clock" />&nbsp; 1.49
+                  ><font-awesome-icon icon="fa-solid fa-clock" />&nbsp; {{secondsToHours(course.duration)}}
                   Hrs</small
                 >
                 <small class="flex-fill text-center py-2"
@@ -82,8 +86,9 @@
 </template>
 
 <script>
-import coursesAPI from "@/api/admin/courses/index";
+import coursesAPI from "@/api/users/courses/index";
 import RatingStars from "@/components/others/RatingStars.vue";
+import timeString from "@/mixin/timeString";
 
 export default {
   data() {
@@ -95,8 +100,10 @@ export default {
     async getCourses() {
       this.courses = await coursesAPI.getCourses(7, 1);
       this.courses = this.courses.courses;
+      console.log(this.courses)
     },
   },
+  mixins:[timeString],
   components:{
     RatingStars
   },

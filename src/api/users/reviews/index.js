@@ -1,51 +1,36 @@
 import axios from "axios";
 
 export default {
-  // GET CATEGORIES
-  async getCategories(){
-    return await axios
-      .get(`http://localhost:4000/categories`)
-      .then(res => res.data)
-      .catch((res) => console.log(res));
-  },
   // Reviews
-  async getReviews() {
+  async getReviews(id) {
     return await axios
-      .get(`http://localhost:4000/reviews`)
+      .get(`api/v1/users/courses/${id}/reviews`)
       .then(res => res.data)
       .catch((res) => console.log(res));
   },
-  async postReview(data) {
-    console.log(data);
+  async postReview(data,id){
     axios
-      .post(`http://localhost:4000/reviews`, data)
+      .post(`api/v1/users/courses/${id}/reviews`, data)
       .then(() => false)
       .catch((res) => console.log(res));
   },
   // YourReviews
-  async getYourReview() {
+  async getYourReview(id) {
     return await axios
-      .get(`http://localhost:4000/yourReview`)
+      .get(`api/v1/users/courses/${id}/reviews/1`)
       .then(res => res.data)
       .catch((res) => console.log(res));
   },
-  async updateReview(data, id) {
+  async updateReview(data,id) {
     await axios
-      .put(`http://localhost:4000/yourReview`, data)
+      .put(`api/v1/users/courses/${id}/reviews`, data)
       .then(() => false)
       .catch((res) => console.log(res));
   },
-  deleteReview() {
+  deleteReview(id) {
     axios
-      .get(`http://localhost:4000/lessons`)
+      .get(`api/v1/users/courses/${id}/reviews`)
       .then(() => false)
       .catch((res) => console.log(res));
-  },
-  // Get rating stats
-  async getStats() {
-    return await axios
-      .get(`http://localhost:4000/stats`)
-      .then(res => res.data)
-      .catch((res) => console.log(res));
-  },
+  }
 };
