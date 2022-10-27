@@ -40,9 +40,15 @@ const routes = [
       },
       {
         path: 'courses',
-        alias:'courses/:category',
         name: 'home.courses',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue')
+        component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/index.vue'),
+        children:[
+          {
+            path: ':category',
+            name: 'home.courses.category',
+            component: () => import(/* webpackChunkName: "about" */ '@/views/general/courses/_category.vue'),
+          }
+        ]
       },
       {
         path: 'course/:id',

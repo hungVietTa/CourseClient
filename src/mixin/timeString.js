@@ -10,6 +10,9 @@ export default {
         var mDisplay = m > 0 ? m > 9 ? m + ":" : "0"+ m +":" : "";
         var sDisplay = s > 0 ? s > 9 ? s : "0"+ s : "00";
         return hDisplay + mDisplay + sDisplay; 
+    },
+    secondsToHours(num){
+      return (num/3600).toFixed(2)
     }
   }
 }

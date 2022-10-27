@@ -202,7 +202,7 @@
   </section>
 </template>
 <script>
-import API from "@/api/general/courses/index";
+import API from "@/api/users/reviews/index";
 import RatingStars from "@/components/others/RatingStars.vue";
 
 export default {

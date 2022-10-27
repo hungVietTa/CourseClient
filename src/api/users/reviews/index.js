@@ -1,39 +1,11 @@
 import axios from "axios";
 
 export default {
-  courses:1,
-  // GET COURSES LIST
-  async getCoursesList(id){
-    return await axios
-    .get(`http://localhost:4000/course${id}`)
-    .then(res => res.data)
-    .catch((res) => console.log(res));
-  },
   // GET CATEGORIES
   async getCategories(){
     return await axios
       .get(`http://localhost:4000/categories`)
       .then(res => res.data)
-      .catch((res) => console.log(res));
-  },
-  // GET SPECIFIC COURSE
-  getCourse(){
-    axios
-      .get(`http://localhost:4000/courses`)
-      .then(() => false)
-      .catch((res) => console.log(res));
-  },
-  // Lessons
-  async getLessons() {
-    return await axios
-      .get(`api/v1/admin/courses/17`)
-      .then(res => res.data.lessons)
-      .catch((res) => console.log(res));
-  },
-  async updateLesson(data,id){
-    await axios
-      .put(`http://localhost:4000/lessons/${id}`, data)
-      .then(() => false)
       .catch((res) => console.log(res));
   },
   // Reviews

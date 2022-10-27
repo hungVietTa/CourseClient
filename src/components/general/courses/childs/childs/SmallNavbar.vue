@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      criterias: ["Most popular","New","Trending"],
+      criterias: ["New","Most popular","Trending"],
       currentIndex:0
     };
   },
@@ -24,6 +24,9 @@ export default {
         this.currentIndex = index
         this.$emit('selectCriteria',item)
     }
+  },
+  created(){
+    this.$emit('selectCriteria',this.criterias[0])
   }
 };
 </script>

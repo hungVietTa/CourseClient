@@ -49,11 +49,7 @@
               </div>
               <div class="text-center p-4 pb-0">
                 <div class="mb-3">
-                  <small><font-awesome-icon icon="fa-solid fa-star" /></small>
-                  <small><font-awesome-icon icon="fa-solid fa-star" /></small>
-                  <small><font-awesome-icon icon="fa-solid fa-star" /></small>
-                  <small><font-awesome-icon icon="fa-solid fa-star" /></small>
-                  <small><font-awesome-icon icon="fa-solid fa-star" /></small>
+                  <RatingStars :score="5" />
                   <br />
                   <small>(123)</small>
                 </div>
@@ -74,7 +70,7 @@
                 >
                 <small class="flex-fill text-center py-2"
                   ><font-awesome-icon icon="fa-solid fa-user" />&nbsp;
-                  Students</small
+                  {{course.subscribes}} Students</small
                 >
               </div>
             </div>
@@ -87,6 +83,7 @@
 
 <script>
 import coursesAPI from "@/api/admin/courses/index";
+import RatingStars from "@/components/others/RatingStars.vue";
 
 export default {
   data() {
@@ -98,8 +95,10 @@ export default {
     async getCourses() {
       this.courses = await coursesAPI.getCourses(7, 1);
       this.courses = this.courses.courses;
-      console.log(this.courses);
     },
+  },
+  components:{
+    RatingStars
   },
   created() {
     this.getCourses();

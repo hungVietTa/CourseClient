@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="all-courses border-top-secondary-blur pt-4"
-  >
+  <div class="all-courses border-top-secondary-blur pt-4" v-if="coursesData">
     <h3 class="mb-4 fw-bold">All Development courses</h3>
     <div>
       <div class="row mb-3 g-4 align-items-center">
@@ -9,7 +7,13 @@
           <div class="row g-1">
             <div class="col-4">
               <div
-                class="border border-secondary h-100 d-flex align-items-center justify-content-center"
+                class="
+                  border border-secondary
+                  h-100
+                  d-flex
+                  align-items-center
+                  justify-content-center
+                "
               >
                 <i class="me-2"
                   ><font-awesome-icon icon="fa-solid fa-bars"
@@ -48,7 +52,15 @@
           <section class="mb-3 border-top-secondary-blur">
             <div
               @click="ratingOptions = !ratingOptions"
-              class="d-flex align-items-center justify-content-between px-3 py-2 mb-3 cursor-pointer"
+              class="
+                d-flex
+                align-items-center
+                justify-content-between
+                px-3
+                py-2
+                mb-3
+                cursor-pointer
+              "
             >
               <h4 class="m-0">Ratings</h4>
               <span><font-awesome-icon icon="fa-solid fa-caret-down" /></span>
@@ -57,7 +69,7 @@
               <div v-for="i in 5" :key="i">
                 <label class="container-radio">
                   <input type="radio" name="rate" class="me-2" />
-                  <RatingStars :score="6-i" />
+                  <RatingStars :score="6 - i" />
                   <span class="ms-2 text-secondary"
                     >{{ 6 - i }} stars {{ i == 1 ? "" : "& up" }}</span
                   >
@@ -72,7 +84,15 @@
           <section class="border-top-secondary-blur">
             <div
               @click="durationOptions = !durationOptions"
-              class="d-flex align-items-center justify-content-between px-3 py-2 mb-3 cursor-pointer"
+              class="
+                d-flex
+                align-items-center
+                justify-content-between
+                px-3
+                py-2
+                mb-3
+                cursor-pointer
+              "
             >
               <h4 class="m-0">Duration</h4>
               <span><font-awesome-icon icon="fa-solid fa-caret-down" /></span>
@@ -93,7 +113,7 @@
         <div class="col-9">
           <div class="container-xxl">
             <div
-              v-for="(course, index) in coursesPages[0]"
+              v-for="(course, index) in coursesData.courses"
               :key="index"
               class="row g-4 justify-content-center"
             >
@@ -149,21 +169,71 @@
   </div>
 </template>
 <script>
-import RatingStars from "@/components/others/RatingStars.vue"
-
+import RatingStars from "@/components/others/RatingStars.vue";
+import coursesAPI from "@/api/admin/courses/index";
 
 export default {
   data() {
     return {
+      coursesData: false,
       // sort criteria
       durations: ["0-1", "1-3", "3-6", "6+"],
       ratingOptions: false,
       durationOptions: false,
     };
   },
-  props:["coursesPages"],
-  components:{
-    RatingStars
-  }
+  methods: {
+    async searchCourses() {
+      this.coursesData = await coursesAPI.searchCourses(
+        6,
+        1,
+        this.searchObject
+      );
+    },
+  },
+  computed: {
+    searchObject() {
+      return {
+        category: this.$route.params.category,
+      };
+    },
+  },
+  components: {
+    RatingStars,
+  },
+  mounted() {
+    this.searchCourses();
+  },
 };
 </script>
+<style scoped lang="scss">
+.all-courses .course-item:hover img {
+  transform: scale(1);
+}
+select {
+  padding: 10px;
+  border-radius: 9px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+select {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+/* For IE10 */
+select::-ms-expand {
+  display: none;
+}
+.select-arrow {
+  position: absolute;
+  display: block;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 30px;
+  z-index: -1;
+}
+</style>

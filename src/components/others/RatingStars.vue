@@ -5,7 +5,7 @@
         :icon="
           score - j > -1
             ? 'fa-solid fa-star'
-            : score - j > -2
+            : score - j > 0
             ? 'fa-solid fa-star-half-stroke'
             : 'fa-regular fa-star'
         "

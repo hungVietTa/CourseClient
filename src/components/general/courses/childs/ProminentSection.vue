@@ -1,7 +1,18 @@
 <template>
   <div class="mb-3 position-relative" v-show="coursesPages">
+    <!-- HEADING -->
+    <div class="heading">
+      <h3 class="fw-bold mb-5">{{category}}</h3>
+      <h5 class="fw-bold mb-3">Courses to get you started</h5>
+    </div>
+    <!-- HEADING -->
+
+    <!-- SMALL NAVBAR -->
+    <SmallNavbar @selectCriteria="selectCriteria" />
+    <!-- SMALL NAVBAR -->
+
     <!-- carousel start-->
-    <div class="courses-carousel">
+    <div class="courses-carousel position-relative">
       <carousel ref="carousel" :per-page="1" :paginationEnabled="false">
         <!-- courses slide start-->
         <slide v-for="(page, index) in coursesPages" :key="index">
@@ -13,10 +24,7 @@
                 class="col-lg-3 col-md-6 wow fadeInUp"
                 data-wow-delay="0.1s"
               >
-                <router-link
-                  class="d-block"
-                  :to="`/courses/${course.id}/learning`"
-                >
+                <router-link class="d-block" :to="`/course/${course.id}`">
                   <div class="course-item bg-light">
                     <div class="position-relative overflow-hidden mb-2">
                       <img
@@ -31,7 +39,7 @@
                         <small class="ms-2">(1.064)</small>
                       </div>
                       <div class="course-title">
-                        <h6 class="mb-2 fw-bold text-primary">
+                        <h6 class="mb-2 fw-bold text-primary px-1">
                           {{ course.name }}
                         </h6>
                       </div>
@@ -43,11 +51,11 @@
                       >
                       <small class="flex-fill text-center border-end py-2"
                         ><font-awesome-icon icon="fa-solid fa-clock" />&nbsp;
-                        1.49 Hrs</small
+                        {{secondsToHours(course.duration)}} Hrs</small
                       >
                       <small class="flex-fill text-center py-2"
                         ><font-awesome-icon icon="fa-solid fa-user" />&nbsp;
-                        Students</small
+                       {{course.subscribes}} Students</small
                       >
                     </div>
                   </div>
@@ -83,45 +91,89 @@
   </div>
 </template>
 <script>
+import SmallNavbar from "@/components/general/courses/childs/childs/SmallNavbar.vue";
 import RatingStars from "@/components/others/RatingStars.vue";
+import coursesAPI from "@/api/admin/courses/index";
+import timeString from "@/mixin/timeString";
 
 export default {
   data() {
     return {
+      // CAROUSEL
+      coursesPages: [],
+      page: 1,
+      total: 2,
       currentPage: 0,
+      // DATA
+      criteria: false,
+      category:false
     };
   },
+  computed: {
+    searchObject() {
+      return {
+        category: this.$route.params.category,
+        criteria: this.criteria 
+      };
+    },
+  },
   methods: {
+    // CAROUSEL
     prev() {
       this.currentPage =
         this.currentPage == 0 ? this.currentPage : this.currentPage - 1;
       this.$refs.carousel.goToPage(this.currentPage);
     },
     next() {
-      this.currentPage =
-        this.currentPage == this.coursesPages.length - 1
-          ? this.currentPage
-          : this.currentPage + 1;
-      this.$refs.carousel.goToPage(this.currentPage);
-      this.$emit("getMoreSlide");
+      if (this.currentPage == this.coursesPages.length - 1)
+        this.searchCourses();
+      else {
+        this.currentPage++;
+        this.$refs.carousel.goToPage(this.currentPage);
+      }
+    },
+    // GET COURSES API
+    async searchCourses() {
+      if (this.page > this.total) return;
+      let tmp = await coursesAPI.searchCourses(
+        4,
+        this.page++,
+        this.searchObject
+      );
+      this.category = tmp.courses[0].category
+      this.total = tmp.meta.pages;
+      this.coursesPages.push(tmp.courses);
+    },
+    // SELECT CRITERIA
+    selectCriteria(criteria) {
+      this.coursesPages = [];
+      this.page = 1;
+      this.criteria = criteria;
     },
   },
   watch: {
     coursesPages(newValue) {
       let el = this;
       this.currentPage = newValue.length - 1;
-      this.$nextTick(function () {
+      this.$nextTick(function (){
         el.$refs.carousel.goToPage(el.currentPage);
       });
     },
+    "$route"(newValue) {
+      console.log(1)
+      this.coursesPages = [];
+      this.page = 1;
+      this.searchCourses()
+    },
   },
+  mixins:[timeString],
   components: {
+    SmallNavbar,
     RatingStars
   },
-  props: ["coursesPages"],
-  mounted() {
-    console.log(this.$refs.carousel);
-  },
+  mounted(){
+    this.searchCourses();
+  }
 };
 </script>
 <style lang="scss" scoped>

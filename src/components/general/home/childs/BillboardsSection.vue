@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="billboards">
     <carousel
       v-if="data"
       class="home-carousel over-flow-hidden"
@@ -102,10 +102,13 @@ export default {
 };
 </script>
 <style lang="scss">
+.billboards {
+  min-height: 500px;
+}
 /* CAROUSEL */
 .home-carousel{
   .VueCarousel-wrapper{
-    overflow: visible;
+    overflow: hidden;
   }
   .VueCarousel-inner {
     height: auto;

@@ -44,7 +44,7 @@ import OverviewSection from "@/components/general/course/learning/childs/Overvie
 import NavButtons from "@/components/general/course/learning/childs/NavButtons.vue"
 // JS
 import adminCourseAPI from "@/api/admin/courses/index";
-import API from "@/api/general/courses/index";
+import lessonsAPI from "@/api/users/lessons/index";
 import youtubeId from "@/mixin/youtube_id";
 
 export default {
@@ -106,7 +106,7 @@ export default {
     },
     async updateLesson(data) {
       console.log(2)
-      await API.updateLesson(data);
+      await lessonsAPI.updateLesson(data);
       this.getLessons();
     },
     // SELECT LESSON
