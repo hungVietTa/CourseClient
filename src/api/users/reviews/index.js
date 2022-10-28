@@ -32,5 +32,12 @@ export default {
       .get(`api/v1/users/courses/${id}/reviews`)
       .then(() => false)
       .catch((res) => console.log(res));
-  }
+  },
+  // GET STATISTICS
+  async getStatistics(id) {
+    return await axios
+      .get(`api/v1/users/courses/${id}/reviews/statistics`)
+      .then(res => res.data)
+      .catch((res) => console.log(res));
+  },
 };

@@ -16,9 +16,8 @@
             <h3 class="fw-bold">{{course.name}}</h3>
             <h5 class="mb-5">{{course.description}}</h5>
             <div v-if="course.reviews" class="mb-2">
-              <span>{{course.rating}}</span>
-              <RatingStars class="ms-2" :score="course.rating" />
-              <span class="ms-2">({{course.reviews}} ratings)</span><br>
+              <RatingStars  :score="course.rating" />
+              <span class="ms-2">({{course.reviews}} ratings)</span><br/>
               <span>{{course.subscribes}} students</span>
             </div>
             <div v-if="!course.reviews" class="mb-2 text-primary">

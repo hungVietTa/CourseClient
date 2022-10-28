@@ -1,5 +1,5 @@
 <template>
-  <section v-if="reviewsData && course">
+  <section v-if="reviewsData">
     <!-- NEW REVIEW START-->
     <div class="mb-3" v-if="!yourReview">
       <h5 class="fw-bold">Rate this course</h5>
@@ -118,19 +118,19 @@
     </ul>
     <!-- YOUR REVIEW END -->
     <!-- REVIEW STATISTIC START -->
-    <div class="mb-3 border-bottom-primary-blur pb-4">
+    <div v-if="statisticsData" class="mb-3 border-bottom-primary-blur pb-4">
       <h5 class="fw-bold mb-3">Student feedback</h5>
 
       <div class="d-flex align-items-center">
         <div class="col-2 text-center">
-          <h1 class="fw-bold">{{ course.rating }}</h1>
+          <h1 class="fw-bold">{{ statisticsData.rating }}</h1>
           <span class="ps-1">
-            <RatingStars :score="course.rating" />
+            <RatingStars :score="statisticsData.rating" />
           </span>
         </div>
         <div class="col-10">
           <div
-            v-for="(item, index) in course.stats"
+            v-for="(item, index) in statisticsData.stats"
             :key="index"
             class="row g-0 align-items-center"
           >
@@ -199,6 +199,7 @@ export default {
     return {
       // reviews
       reviewsData: false,
+      statisticsData:false,
       // new review
       newReview: {
         stars: -1,
@@ -244,21 +245,28 @@ export default {
       await API.postReview(this.newReview,this.courseId);
       this.getReviews();
       this.getYourReview();
+      this.getStatistics();
     },
     async updateReview() {
       await API.updateReview(this.yourReview, this.courseId);
       this.getReviews();
       this.getYourReview();
       this.yourReviewShow = true;
+      this.getStatistics();
     },
+    async getStatistics() {
+      this.statisticsData = await API.getStatistics(this.courseId);
+      console.log(this.statisticsData);
+    }
   },
   props: ["courseId", "course"],
   components: {
     RatingStars,
   },
-  created() {
+  created(){
     this.getReviews();
     this.getYourReview();
+    this.getStatistics();
   },
 };
 </script>
