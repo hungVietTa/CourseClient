@@ -58,4 +58,18 @@ export default {
           .then(() => false)
           .catch((res) => console.log(res));
     },
+    // LESSON SUBSCRIBE
+    async updateLesson(data,id) {
+        await axios.put(`api/v1/users/courses/${id}/subscribes/1`,{
+            lessons_learned:data
+        })
+            .then(() => false)
+            .catch((res) => console.log(res));
+    },
+    // LESSON INCREASE VIEW
+    async updateLessonView(id) {
+        await axios.put(`api/v1/users/lessons/${id}/view`)
+            .then(() => false)
+            .catch((res) => console.log(res));
+    },  
 };

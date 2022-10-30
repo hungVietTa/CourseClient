@@ -2,6 +2,7 @@
   <div class="track-section text-start border-radius-9">
     <div class="">
       <div class="">
+        <h1>{{lessonsLearned}}</h1>
         <h3 class="px-3 py-3 mb-0 text-center">Course content</h3>
       </div>
       <ul>
@@ -17,8 +18,8 @@
               <label class="container" @click.stop="">
                 <input
                   type="checkbox"
-                  @change="$emit('updateLesson',lesson)"
-                  v-model="lesson.done"
+                  @change="$emit('updateLesson',lesson.id)"
+                  :checked="lessonsLearned.includes(lesson.id)"
                 />
                 <span class="checkmark"></span>
               </label>
@@ -26,9 +27,7 @@
             <div class="col-10">
               <p class="fw-bold mb-2">
                 {{
-                  (index + 1 > 9 ? index + 1 : "0" + (index + 1)) +
-                  " - " +
-                  lesson.name
+                  toOrdinal(index+1)+' - '+lesson.name
                 }}
               </p>
               <p class="mb-0">
@@ -55,6 +54,7 @@
 </template>
 <script>
 import timeString from "@/mixin/timeString";
+import stringCase from "@/mixin/stringCase"
 
 export default {
   data() {
@@ -62,14 +62,14 @@ export default {
     currentIndex:0
     };
   },
-  props:["lessons","quizzes"],
+  props:["lessons","quizzes","lessonsLearned"],
   methods:{
     selectLesson(index){
         this.currentIndex = index
         this.$emit("selectLesson",index)
     }
   },
-  mixins: [timeString]
+  mixins: [timeString,stringCase]
 };
 </script>
 <style scoped>

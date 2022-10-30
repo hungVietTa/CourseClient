@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-function startTimer(duration, callback, obj) {
+function startTimer(duration,obj) {
   var timer = duration,
 minutes,
 seconds;
@@ -15,11 +15,7 @@ seconds;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
     obj.countDown = minutes + ":" + seconds;
-
-    if (--timer < 0) {
-        obj.timeout=true
-      callback();
-    }
+    --timer
   }, 1000);
   return interval
 }

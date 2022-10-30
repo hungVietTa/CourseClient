@@ -12,6 +12,7 @@
         <section class="video">
           <div class="border-radius-9 overflow-hidden">
             <youtube
+              @cued="increaseView"
               @ready="setPlayer"
               :width="'100%'"
               :height="'100%'"
@@ -23,28 +24,41 @@
         <!-- INTERACTION -->
         <div>
           <!-- NAV-BUTTON -->
-          <nav-buttons :nav-options="navOptions" @nav-select="navSelect"/>
+          <nav-buttons :nav-options="navOptions" @nav-select="navSelect" />
           <!-- NAV-BUTTON -->
           <!-- OVERVIEW SECTION -->
-          <OverviewSection v-show="currentNavOptions=='Overview'"  :lesson="lessons[currentIndex]"/>
+          <OverviewSection
+            v-show="currentNavOptions == 'Overview'"
+            :lesson="lessons[currentIndex]"
+          />
           <!-- REVIEW SECTION -->
-          <ReviewSection :courseId="course_id" :course="course" v-show="currentNavOptions=='Review'"/>
+          <ReviewSection
+            @updateLesson="updateLesson"
+            :courseId="course_id"
+            :course="course"
+            v-show="currentNavOptions == 'Review'"
+          />
         </div>
       </div>
       <!-- TRACK SECTION -->
-      <TrackSection @selectLesson="selectLesson" @updateLesson="updateLesson" :lessons="lessons" :quizzes="quizzes"/>
+      <TrackSection
+        :lessons-learned="lessons_learned"
+        @selectLesson="selectLesson"
+        @updateLesson="updateLesson"
+        :lessons="lessons"
+        :quizzes="quizzes"
+      />
     </div>
   </div>
 </template>
 <script>
 // COMPONENT
-import TrackSection from "@/components/general/course/learning/childs/TrackSection.vue"
-import ReviewSection from "@/components/general/course/learning/childs/ReviewSection.vue"
-import OverviewSection from "@/components/general/course/learning/childs/OverviewSection.vue"
-import NavButtons from "@/components/general/course/learning/childs/NavButtons.vue"
+import TrackSection from "@/components/general/course/learning/childs/TrackSection.vue";
+import ReviewSection from "@/components/general/course/learning/childs/ReviewSection.vue";
+import OverviewSection from "@/components/general/course/learning/childs/OverviewSection.vue";
+import NavButtons from "@/components/general/course/learning/childs/NavButtons.vue";
 // JS
-import adminCourseAPI from "@/api/users/courses/index";
-import lessonsAPI from "@/api/users/lessons/index";
+import courseAPI from "@/api/users/courses/index";
 import youtubeId from "@/mixin/youtube_id";
 
 export default {
@@ -56,9 +70,10 @@ export default {
       currrentTime: 0,
       trackingInterval: 2,
       currentIndex: 0,
+      lessons_learned: false,
       // NAVBUTTON
-      navOptions:["Overview","Review"],
-      currentNavOptions:"Overview",
+      navOptions: ["Overview", "Review"],
+      currentNavOptions: "Overview",
       // LESSONS
       lessons: false,
       // QUiZS
@@ -70,9 +85,9 @@ export default {
     course_id() {
       return this.$route.params.id;
     },
-    video_id(){
-      return this.getId(this.lessons[this.currentIndex].url)
-    }
+    video_id() {
+      return this.getId(this.lessons[this.currentIndex].url);
+    },
   },
   methods: {
     // YOUTUBE API
@@ -80,7 +95,7 @@ export default {
       let el = this;
       this.player = this.$refs.youtube.player;
       this.player.addEventListener("onStateChange", function (e) {
-        if (el.lessons[el.currentIndex].done == true) {
+        if (el.lessons_learned.includes(el.lessons[el.currentIndex].id)) {
           clearInterval(el.trackingInterval);
         } else if (e.data == 1)
           el.trackingInterval = setInterval(el.tracking, 2000);
@@ -94,38 +109,48 @@ export default {
       if (this.currrentTime > this.lessons[this.currentIndex].duration * 0.75) {
         clearInterval(el.trackingInterval);
         el.lessons[el.currentIndex].done = true;
-        el.updateLesson(el.lessons[el.currentIndex]);
+        el.updateLesson(el.lessons[el.currentIndex].id);
       }
     },
     // API CALL
     async getCourse() {
-      this.course = await adminCourseAPI.showCourse(this.course_id);
+      this.course = await courseAPI.showCourse(this.course_id);
       this.lessons = this.course.lessons;
       this.quizzes = this.course.quizzes;
+      this.lessons_learned = JSON.parse(this.course.lessons_learned);
       console.log(this.course);
     },
-    async updateLesson(data) {
-      console.log(2)
-      await lessonsAPI.updateLesson(data);
-      this.getLessons();
+    async updateLesson(id) {
+      if (this.lessons_learned.includes(id)) {
+        let index = this.lessons_learned.indexOf(id);
+        this.lessons_learned.splice(index, 1);
+      } else this.lessons_learned.push(id);
+      await courseAPI.updateLesson(this.lessons_learned, this.course_id);
+    },
+    // update view of lesson
+    increaseView(id) {
+      courseAPI.updateLessonView(this.lessons[this.currentIndex].id);
     },
     // SELECT LESSON
-    selectLesson(index){
-      this.currentIndex = index
+    selectLesson(index) {
+      this.currentIndex = index;
     },
-   
+
     // NAV-BUTTON-PRIMARY
-    navSelect(item){
-      this.currentNavOptions = item
-    }
+    navSelect(item) {
+      this.currentNavOptions = item;
+    },
   },
-  components:{
-    NavButtons,OverviewSection,ReviewSection,TrackSection
+  components: {
+    NavButtons,
+    OverviewSection,
+    ReviewSection,
+    TrackSection,
   },
   mixins: [youtubeId],
   created() {
     this.getCourse();
-  }
+  },
 };
 </script>
 

@@ -1,64 +1,47 @@
 <template>
   <div>
     <main class="pt-5 text-center">
-      <h1 class="mb-3">HTML Basics</h1>
-      <div v-if="enrolling">
+      <h1>Score:{{time}}</h1>
+
+      <!-- INTRODUCTION START-->
+
+      <div v-if="buffering">
         <p>
-          The exam including {{ list.length }} questions with the time limit of
-          15 minutes. You will pass the test by correcting at least
-          {{ minimum }}/{{ list.length }} of them
+          The exam including {{ questions.length }} questions with the time limit of
+          {{quiz.time}} minutes. You will pass the test by correcting at least
+          {{ minimum }}/{{ questions.length }} of them
         </p>
         <p>Are you ready</p>
         <button class="btn btn-primary" @click="start">Ready</button>
       </div>
+
+      <!-- INTRODUCTION END -->
+
       <ul class="text-center" v-show="processing || reviewing">
+
+        <!-- NAVIGATION START -->
         <div class="btn-group">
-          <button
-            @click="currentId = currentId - 1"
-            :style="{ visibility: prevVisibility }"
-            class="btn btn-primary"
-          >
+          <button @click="currentIndex = currentIndex - 1" :style="{ visibility: prevVisibility }" class="btn btn-primary">
             Previous question
           </button>
-          <span
-            class="btn btn-danger me-2 ms-2"
-            :class="{ active: currentId == item.id }"
-            @click="currentId = item.id"
-            v-for="(item, index) in list"
-            :key="index"
-            >{{ item.id }}</span
-          >
-          <button
-            @click="currentId = currentId + 1"
-            :style="{ visibility: nextVisibility }"
-            class="btn btn-primary"
-          >
+          <span class="btn btn-danger me-2 ms-2" :class="{ active: currentIndex == index }" @click="currentIndex = index"
+            v-for="(question, index) in questions" :key="index">{{ index+1 }}</span>
+          <button @click="currentIndex = currentIndex + 1" :style="{ visibility: nextVisibility }" class="btn btn-primary">
             Next question
           </button>
         </div>
-        <li v-for="(item, index) in list" :key="index">
-          <div class="content" v-show="currentId == item.id">
-            <p>{{ item.question }}</p>
-            <div v-for="(value, key) in item.answers" :key="key" class="mt-2">
-              <label
-                v-if="value != null"
-                :class="{
-                  incorrect:
-                    key == item.choice &&
-                    key != solutions[index] &&
-                    solutions.length,
-                  correct: key == solutions[index],
-                }"
-                class="cursor-pointer py-1"
-              >
-                <input
-                  type="radio"
-                  :value="key"
-                  :name="item.id"
-                  v-model="item.choice"
-                />
-                <span class="ms-2">{{ value }}</span></label
-              >
+
+        <!-- NAVIGATION END -->
+
+        <!-- QUESTIONS LIST START-->
+
+        <li v-for="(question, index) in questions" :key="index">
+          <div class="content" v-show="currentIndex == index">
+            <p>{{ question.content }}</p>
+            <div v-for="answer in question.answers" :key="answer.id" class="mt-2">
+              <label class="cursor-pointer py-1" :class="{correct:isCorrect(answer.id,index),incorrect:isIncorrect(answer.id,index)}">
+                <input type="radio" :name="question.id" :value="answer.id" v-model="solutions[index]" />
+                <span class="ms-2">{{ answer.content }} {{ solutions }}</span></label>
             </div>
             <p v-show="reviewing">
               The solution for this question should be found in the lesson :
@@ -68,33 +51,31 @@
             </p>
           </div>
         </li>
+
+        <!-- QUESTION LIST END -->
+
         <div class="text-center">
           <p v-show="!reviewing && processing">{{ countDown }}</p>
-          <button
-            @click="unfinishedCheck"
-            v-if="!reviewing && processing"
-            class="btn btn-primary mt-4"
-          >
+          <button @click="submit" v-if="!reviewing && processing" class="btn btn-primary mt-4">
             Submit
           </button>
         </div>
       </ul>
-      <button
-        class="btn btn-primary"
-        v-if="reviewing && !done"
-        @click="
-          reviewing = false;
-          done = true;
-        "
-      >
+      <!-- NAVAGATION END -->
+
+      <!-- FINISHED THEME START -->
+      <button class="btn btn-primary" v-if="reviewing && !done" @click="
+        reviewing = false;
+      done = true;
+      ">
         Quay lại
       </button>
       <div v-if="done">
-        <p v-if="timeout">
+        <p>
           Thời gian làm bài đã kết thúc, kết quả của bạn đã tự động được nộp
         </p>
         <h2>
-          You are finished with score {{ score }}/{{ 10 * list.length }}
+          You are finished with score {{ score }}/{{ 10 * questions.length }}
           {{ processing }}
         </h2>
         <button class="btn btn-primary mb-4" @click="showResult">Show result</button>
@@ -106,131 +87,118 @@
           <button class="btn btn-secondary" @click="tryAgain">Try again</button>
         </div>
       </div>
+      <!-- FINISHED THEME END -->
     </main>
-    <modal-comp
-      @cancel="callOf"
-      @process="keepUp"
-      :modaltitle="''"
-      :modalbody="
-        'Bạn vẫn chưa chọn đáp án cho các câu : ' +
-        remains +
-        ' .Bạn xác nhận vẫn muốn nộp bài ?'
-      "
-      :modalcancel="'Submit'"
-      :modalconsent="'Cancel'"
-      v-if="modal"
-    />
+
+    <!-- SUBMIT WARNING START-->
+    <modal-comp @cancel="submitWarning=false" @process="keepUp" :modaltitle="''" :modalbody="
+      'Bạn vẫn chưa chọn đáp án cho các câu : ' +
+      remains +
+      ' .Bạn xác nhận vẫn muốn nộp bài ?'
+    " :modalcancel="'Submit'" :modalconsent="'Cancel'" v-if="submitWarning" />
+    <!-- SUBMIT WARNING END-->
   </div>
 </template>
 <script>
 import ModalComp from "@/components/others/ModalComponent.vue";
 import { startTimer } from "@/mymodules/timer.js";
+import quizAPI from "@/api/users/quizzes/index.js"
 
 export default {
   data() {
     return {
+      // BUFFERING
+      buffering: true,
+      // PROCESSING
+      quiz:false,
+      submission:false,
       hintLesson: ["Basic Javascript"],
       solutions: [],
-      timeout: false,
+      serverSolutions:[],
       interval: 0,
       countDown: "",
-      examTitle: "Challenger",
       pass: false,
-      enrolling: true,
       done: false,
       processing: false,
       reviewing: false,
-      time: 15 * 60,
-      minimum: 5,
-      list: [],
-      currentId: 1,
+      questions: [],
+      currentIndex: 0,
       score: 0,
-      modal: false,
-      remains: "",
+      // SUBMIT WARNING
+      submitWarning: false
     };
   },
   computed: {
     prevVisibility() {
-      if (this.currentId <= 1) return "hidden";
+      if (this.currentIndex <= 0) return "hidden";
       else return "visible";
     },
     nextVisibility() {
-      if (this.currentId >= this.list.length) return "hidden";
+      if (this.currentIndex >= this.questions.length-1) return "hidden";
       else return "visible";
     },
+    minimum(){
+      return Math.floor(this.questions.length/2)
+    },
+    time(){
+      return 60*this.quiz.time
+    },
+    submission_id(){
+      return this.submission.id
+    }
   },
   components: {
     ModalComp,
   },
   methods: {
-    startTimer() {},
-    start() {
-      this.solutions=[];
-      this.processing = true;
-      this.enrolling = false;
-      this.interval = this.startTimer(this.time, this.submit, this);
+    // START THE QUIZ
+    async start() {
+      this.solutions = Array(this.questions.length).fill(0)
+      this.currentIndex = 0
+      this.serverSolutions = []
+      this.processing = true
+      this.buffering = false
+      this.score = 0
+      this.interval = this.startTimer(this.time,this);
+      setTimeout(this.submit,this.time*1000)
+      this.submission = await quizAPI.startQuiz(9,1) 
     },
-    unfinishedCheck() {
-      this.list.forEach((item) => {
-        if (item.choice == "") this.remains += item.id + " ";
-      });
-      if (this.remains == "") this.submit();
-      else this.modal = true;
-    },
-    submit() {
-      if (this.interval) clearInterval(this.interval);
-      this.list.forEach((item) => {
-        this.solutions.push(item.correct_answer);
-      });
-      this.list.forEach((item) => {
-        if (item.choice == item.correct_answer) this.score += 10;
-      });
-      if (this.score >= 10 * this.minimum) this.pass = true;
-      else this.pass = false;
-      this.done = true;
-      this.processing = false;
+    // SUBMIT THE QUIZ
+    async submit() {
+      if (this.interval) 
+        clearInterval(this.interval);
       this.modal = false;
+      this.processing = false
+      this.done = true
+      let data = await quizAPI.submitQuiz(9,1,this.submission_id,this.solutions)
+      this.score = data.score
+      this.serverSolutions = data.solutions
     },
+    // SHOW RESULT
     showResult() {
-      this.currentId = 1;
+      this.currentIndex = 0;
       this.reviewing = true;
       this.done = false;
-      this.timeout = false;
-    },
-    keepUp() {
-      this.submit();
-      this.modal = false;
-    },
-    callOf() {
-      this.modal = false;
     },
     tryAgain() {
-      this.list.forEach((item) => {
-        item.choice = "";
-      });
-      this.currentId=1
-      this.enrolling = true;
+      this.currentIndex = 0
+      this.buffering = true;
       this.done = false;
-      this.timeout = false;
     },
-    async post(list) {
-      for (let i = 0; i < this.list.length; i++) {
-        delete list[i].description;
-        delete list[i].explaination;
-        delete list[i].tip;
-        delete list[i].id;
-        await this.axios.post("http://localhost:4000/quiz", list[i]);
-      }
+    async testAPI() {
+      this.quiz = await quizAPI.getQuiz(9, 1)
+      this.questions = this.quiz.questions
     },
+    isCorrect(id,index){
+      return this.reviewing && id == this.serverSolutions[index]
+    },
+    isIncorrect(id,index){
+      return this.reviewing && id != this.serverSolutions[index] && id == this.solutions[index]
+    }
   },
   mounted() {
     this.startTimer = startTimer;
-    this.axios.get("http://localhost:4000/quiz").then((res) => {
-      this.list = res.data;
-      this.list.forEach((item) => {
-        item.choice = "";
-      });
-    });
+    this.testAPI()
   },
 };
 </script>
@@ -240,12 +208,14 @@ ul {
   padding: 0;
   box-shadow: none;
 }
+
 li {
   text-align: left;
   max-width: 800px;
   margin: auto;
   margin-top: 20px;
 }
+
 .btn-danger {
   background-color: #fff;
   border: 1px solid #888;
@@ -253,16 +223,20 @@ li {
   border-radius: 9px !important;
   outline: none;
 }
+
 .btn-danger:hover {
   background-color: #bbb;
   border: 1px solid #888;
 }
+
 .btn.active {
   background-color: #bbb;
 }
+
 .correct {
   color: green;
 }
+
 .incorrect {
   color: salmon;
 }

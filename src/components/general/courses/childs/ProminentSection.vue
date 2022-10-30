@@ -34,6 +34,7 @@
                       />
                     </div>
                     <div class="text-center">
+                      <h2>view_count {{course.view_count}}</h2>
                       <div v-if="course.reviews" class="mb-2">
                         <RatingStars :score="course.rating" />
                         <small class="ms-2">({{ course.reviews }})</small>
@@ -153,6 +154,7 @@ export default {
       this.coursesPages = [];
       this.page = 1;
       this.criteria = criteria;
+      this.searchCourses()
     },
   },
   watch: {
@@ -174,10 +176,7 @@ export default {
   components: {
     SmallNavbar,
     RatingStars,
-  },
-  mounted() {
-    this.searchCourses();
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
